@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C · Screen Room — 이진희 포트폴리오 시안</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600&family=Archivo:wdth,wght@75..125,400;75..125,600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0A; --fg:#F2F0EC; --fg-55:rgba(242,240,236,.55); --fg-28:rgba(242,240,236,.28);
+    --line:rgba(242,240,236,.13); --accent:#00E5C0;
+    --disp:'Fraunces',ui-serif,Georgia,serif;
+    --grot:'Archivo',system-ui,sans-serif;
+    --sans:'Pretendard Variable',Pretendard,-apple-system,sans-serif;
+    --ease:cubic-bezier(.19,1,.22,1);
+  }
+  @media (prefers-color-scheme:light){
+    :root{--bg:#FAFAF8;--fg:#0D0D0C;--fg-55:rgba(13,13,12,.58);--fg-28:rgba(13,13,12,.32);
+      --line:rgba(13,13,12,.14);--accent:#00776A;}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.6;
+    overflow-x:hidden}
+  a{color:inherit}
+  .wrap{max-width:1500px;margin:0 auto;padding:0 clamp(16px,4vw,56px)}
+
+  header{position:fixed;top:0;left:0;right:0;z-index:30;mix-blend-mode:difference;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:18px clamp(16px,4vw,56px);color:#fff;pointer-events:none}
+  header *{pointer-events:auto}
+  .mark{font-family:var(--disp);font-weight:600;font-size:17px;letter-spacing:-.01em}
+  header nav{display:flex;gap:6px;align-items:center}
+  header a,header button{font-family:var(--grot);font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+    text-decoration:none;color:#fff;background:none;border:0;cursor:pointer;padding:6px 9px;opacity:.7}
+  header a:hover,header button:hover{opacity:1}
+  header button[aria-pressed=true]{opacity:1;text-decoration:underline;text-underline-offset:4px}
+  header a:focus-visible,header button:focus-visible{outline:2px solid #fff;outline-offset:2px;opacity:1}
+
+  /* 히어로 — 화면이 주인공, 타입은 위에 얹힌다 */
+  .open{min-height:92svh;display:flex;flex-direction:column;justify-content:flex-end;
+    padding:120px 0 clamp(28px,4vw,56px);position:relative}
+  .kick{font-family:var(--grot);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);margin:0 0 18px}
+  h1{font-family:var(--disp);font-weight:300;font-variation-settings:'opsz' 120;
+    font-size:clamp(2.5rem,8.4vw,7.2rem);line-height:.94;letter-spacing:-.028em;margin:0;max-width:16ch;
+    text-wrap:balance;word-break:keep-all;overflow-wrap:break-word}
+  /* 한글은 라틴 디스플레이 서체에 글리프가 없어 명조로 폴백된다 — 본문 서체로 되돌리고 무게로 대비를 만든다 */
+  :lang(ko) h1{font-family:var(--sans);font-weight:600;letter-spacing:-.035em;line-height:1.02;
+    font-size:clamp(2.2rem,7.2vw,5.9rem)}
+  :lang(ko) h1 i{font-weight:800}
+  :lang(ko) .info h2,:lang(ko) .band h2{font-family:var(--sans);font-weight:600;letter-spacing:-.028em;
+    word-break:keep-all}
+  :lang(ko) .counts dd{font-family:var(--sans);font-weight:600}
+  :lang(ko) .mark{font-family:var(--sans);font-weight:700}
+  h1 i{font-weight:600;font-style:normal;color:var(--accent)}
+  .openfoot{display:flex;flex-wrap:wrap;gap:20px 48px;align-items:end;justify-content:space-between;
+    margin-top:clamp(28px,4vw,52px);border-top:1px solid var(--line);padding-top:20px}
+  .openfoot p{margin:0;max-width:42ch;color:var(--fg-55);font-size:.96rem}
+  .counts{display:flex;gap:clamp(20px,3vw,44px)}
+  .counts div{white-space:nowrap}
+  .counts dt{font-family:var(--grot);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--fg-28);margin:0 0 4px}
+  .counts dd{margin:0;font-family:var(--disp);font-size:clamp(1.6rem,3vw,2.4rem);line-height:1;
+    font-variant-numeric:tabular-nums}
+
+  /* 작업 — 전면 스크린샷 스택, 홀짝 어긋나게 */
+  .room{padding:clamp(40px,7vw,90px) 0}
+  .piece{display:grid;gap:clamp(14px,2vw,28px);margin-bottom:clamp(46px,8vw,120px);
+    grid-template-columns:1fr;text-decoration:none;position:relative}
+  @media(min-width:920px){
+    .piece{grid-template-columns:repeat(12,1fr);align-items:center}
+    .piece .shot{grid-column:1/9}
+    .piece .info{grid-column:9/13}
+    .piece:nth-child(even) .shot{grid-column:5/13;grid-row:1}
+    .piece:nth-child(even) .info{grid-column:1/5;grid-row:1}
+    .piece:nth-child(3n) .shot{grid-column:2/12}
+    .piece:nth-child(3n) .info{grid-column:2/8;grid-row:auto}
+  }
+  .shot{position:relative;overflow:hidden;background:var(--line);border:1px solid var(--line)}
+  .shot img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top center;
+    transform:scale(1.01);transition:transform .8s var(--ease),filter .6s var(--ease);filter:saturate(.9)}
+  .piece:hover .shot img{transform:scale(1.045);filter:saturate(1.05)}
+  .shot::after{content:attr(data-open);position:absolute;left:14px;bottom:14px;
+    font-family:var(--grot);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    background:var(--accent);color:#04120F;padding:6px 11px;opacity:0;transform:translateY(6px);
+    transition:opacity .3s var(--ease),transform .3s var(--ease)}
+  .piece:hover .shot::after,.piece:focus-visible .shot::after{opacity:1;transform:translateY(0)}
+  .piece:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
+  .piece:active .shot img{transform:scale(1.02)}
+  .n{font-family:var(--grot);font-size:10.5px;letter-spacing:.15em;color:var(--fg-28);
+    display:block;margin-bottom:10px;font-variant-numeric:tabular-nums}
+  .info h2{font-family:var(--disp);font-weight:300;font-variation-settings:'opsz' 90;
+    font-size:clamp(1.5rem,3.4vw,2.5rem);line-height:1.06;letter-spacing:-.02em;margin:0 0 .45em;text-wrap:balance}
+  .piece:hover .info h2{color:var(--accent)}
+  .info p{margin:0;color:var(--fg-55);font-size:.93rem;max-width:46ch}
+  .info .role{font-family:var(--grot);font-size:11px;letter-spacing:.06em;color:var(--fg-28);
+    margin-top:12px;display:block}
+  .chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px}
+  .chips span{font-family:var(--grot);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--fg-55);border:1px solid var(--line);padding:3px 8px;border-radius:999px}
+
+  .band{border-top:1px solid var(--line);padding:clamp(48px,8vw,100px) 0}
+  .band h2{font-family:var(--disp);font-weight:300;font-size:clamp(1.6rem,4vw,2.8rem);
+    letter-spacing:-.02em;margin:0 0 clamp(24px,3vw,44px);max-width:20ch}
+  .prin{display:grid;gap:clamp(22px,3vw,44px)}
+  @media(min-width:900px){.prin{grid-template-columns:repeat(2,1fr)}}
+  .prin article{border-top:1px solid var(--line);padding-top:14px}
+  .prin h3{font-family:var(--grot);font-weight:600;font-size:.95rem;letter-spacing:.01em;margin:0 0 8px}
+  .prin p{margin:0;color:var(--fg-55);font-size:.92rem}
+  footer{border-top:1px solid var(--line);padding:30px 0 64px;color:var(--fg-28);font-size:12.5px;
+    display:flex;flex-wrap:wrap;gap:14px 36px;justify-content:space-between;align-items:baseline}
+  footer .colo{max-width:56ch;line-height:1.65}
+  .skip{position:absolute;left:-9999px}
+  .skip:focus{left:12px;top:12px;z-index:99;background:var(--accent);color:#04120F;padding:10px 14px}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#room">본문으로 건너뛰기</a>
+<header>
+  <span class="mark">이진희 · Jinhee Lee</span>
+  <nav>
+    <a href="#room" id="nav-work">WORK</a>
+    <a href="#principles" id="nav-prin">PRINCIPLES</a>
+    <a href="https://github.com/jinilee-hue">GITHUB</a>
+    <button type="button" data-lang="ko" aria-pressed="true">KO</button>
+    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+  </nav>
+</header>
+
+<main>
+<div class="wrap">
+  <section class="open">
+    <p class="kick" id="kick"></p>
+    <h1 id="h1"></h1>
+    <div class="openfoot">
+      <p id="lede"></p>
+      <dl class="counts" id="counts"></dl>
+    </div>
+  </section>
+</div>
+
+<div class="wrap"><div class="room" id="room"></div></div>
+
+<div class="wrap"><section class="band" id="principles">
+  <h2 id="prin-h"></h2>
+  <div class="prin" id="prin"></div>
+</section></div>
+</main>
+
+<div class="wrap"><footer>
+  <p class="colo" id="colophon"></p>
+  <a href="https://github.com/jinilee-hue">github.com/jinilee-hue</a>
+</footer></div>
+
+<script type="module">
+import { loadProjects, pick, lang, setLang, onRender, fmtDate } from './shared.js';
+
+const COPY={
+  ko:{
+    kick:'AI Product Designer · EduPoly · Seoul',
+    h1:'만든 걸 <i>보여주는</i> 게 제일 빠르다.',
+    lede:'교육 제품을 설계하고, 프로토타입은 직접 만들어 배포한다. 아래 화면은 목업이 아니라 실제 배포된 페이지를 그대로 캡처한 것이고, 누르면 그 주소로 열린다.',
+    counts:[['배포','{n}'],['라이브','{live}'],['최근','{last}']],
+    open:'열기',
+    prinH:'같이 일할 때 알아두면 좋은 것들',
+    prin:[
+      ['AI는 초안을 늘리는 도구다','한 방향을 빨리 뽑으려고 쓰지 않는다. 같은 시간에 검토할 방향의 수를 늘리려고 쓴다. 고르는 일은 위임하지 않는다.'],
+      ['판단이 필요하면 눌러볼 수 있게 만든다','정지 이미지는 클릭했을 때 뭐가 되는지 말해주지 못한다. 결정이 필요한 화면은 동작하는 프로토타입으로 회의에 올린다.'],
+      ['토큰이 먼저, 화면은 그다음','대시보드 두 개가 브랜드만 바꿔 같은 뼈대를 재사용할 수 있었던 이유. 색과 타입이 화면이 아니라 토큰에 적혀 있었다.'],
+      ['AI를 쓰지 않는 선을 정해둔다','최종 카피, 브랜드 판단, 접근성 검증은 직접 한다. 생성물이 90% 맞을 때 남은 10%를 알아보는 게 디자이너의 일이다.'],
+    ],
+    colophon:'이 사이트는 Claude Code로 만들었다. 처음 제안받은 기본값(Inter · 인디고 그래디언트 · 3단 카드 그리드)은 전부 버렸다. 프로젝트 목록과 썸네일은 GitHub Actions가 매일 자동으로 다시 채운다.',
+  },
+  en:{
+    kick:'AI Product Designer · EduPoly · Seoul',
+    h1:'The fastest answer is <i>showing</i> the thing.',
+    lede:'I design education products and build the prototypes myself. These are screenshots of pages actually deployed — not mockups. Click one and it opens.',
+    counts:[['Shipped','{n}'],['Live','{live}'],['Latest','{last}']],
+    open:'Open',
+    prinH:'Worth knowing before we work together',
+    prin:[
+      ['AI widens the draft, not the shortcut','I don\'t use it to reach one direction faster. I use it to review more directions in the same hour. Choosing is never delegated.'],
+      ['If it needs a decision, make it pressable','A still image can\'t answer what happens on click. Decision-bearing screens enter the room as working prototypes.'],
+      ['Tokens first, screens second','Why two dashboards reused one skeleton across brands: color and type lived in tokens, not in the screens.'],
+      ['Know where AI stops','Final copy, brand judgment and accessibility checks stay manual. When a generation is 90% right, catching the last 10% is the job.'],
+    ],
+    colophon:'Built with Claude Code. Its first defaults — Inter, an indigo gradient, a three-card grid — were all discarded. The project list and thumbnails are refilled daily by GitHub Actions.',
+  }
+};
+let DATA=null;
+
+function draw(){
+  const L=lang(),c=COPY[L];
+  document.documentElement.lang=L;
+  document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===L)));
+  kick.textContent=c.kick; h1.innerHTML=c.h1; lede.textContent=c.lede;
+
+  const ps=DATA.projects.map(pick);
+  const live=ps.filter(p=>p.live).length;
+  const last=fmtDate(DATA.projects.map(p=>p.auto.pushed_at).sort().at(-1),L);
+  counts.innerHTML=c.counts.map(([k,v])=>`<div><dt>${k}</dt><dd>${
+    v.replace('{n}',ps.length).replace('{live}',live+'/'+ps.length).replace('{last}',last)}</dd></div>`).join('');
+
+  room.innerHTML=ps.map((p,i)=>`
+    <a class="piece" href="${p.live||p.repo}" target="_blank" rel="noopener">
+      <div class="shot" data-open="${c.open} ↗">
+        <img src="../${p.shot}" alt="${p.title} 실제 배포 화면" loading="${i<2?'eager':'lazy'}"
+             ${i===0?'fetchpriority="high"':''} width="1440" height="900">
+      </div>
+      <div class="info">
+        <span class="n">${String(i+1).padStart(2,'0')} / ${String(ps.length).padStart(2,'0')}${p.kicker?' · '+p.kicker:''}</span>
+        <h2>${p.title}</h2>
+        <p>${p.summary}</p>
+        ${p.role?`<span class="role">${p.role}</span>`:''}
+        <div class="chips">${p.tags.slice(0,4).map(x=>`<span>${x}</span>`).join('')}</div>
+      </div>
+    </a>`).join('');
+
+  document.getElementById('prin-h').textContent=c.prinH;
+  prin.innerHTML=c.prin.map(([h,b])=>`<article><h3>${h}</h3><p>${b}</p></article>`).join('');
+  colophon.textContent=c.colophon;
+}
+onRender(draw);
+document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+loadProjects().then(d=>{DATA=d;draw();}).catch(e=>{room.textContent='데이터 로드 실패: '+e.message;});
+</script>
+</body>
+</html>

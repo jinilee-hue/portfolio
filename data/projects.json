@@ -1,0 +1,638 @@
+{
+  "generated_at": "2026-09-14T05:16:16+00:00",
+  "owner": "jinilee-hue",
+  "count": 14,
+  "projects": [
+    {
+      "id": "eBOOK",
+      "auto": {
+        "repo": "https://github.com/jinilee-hue/eBOOK",
+        "live": "https://jinilee-hue.github.io/eBOOK/",
+        "description": "",
+        "readme_title": "Millions of Cats — 인터랙티브 eBook",
+        "readme_summary": "Wanda Gág의 『Millions of Cats』(1928)를 배경 영상 위에서 읽는 영어 학습 eBook 프로토타입. 태블릿 가로 화면이 주 사용 환경이다.",
+        "languages": [
+          "JavaScript",
+          "Python",
+          "HTML",
+          "CSS",
+          "Shell"
+        ],
+        "topics": [],
+        "pushed_at": "2026-09-09T10:31:41Z",
+        "created_at": "2026-09-04T06:46:59Z",
+        "size_kb": 164561,
+        "has_pages": true,
+        "last_commit": "영상을 갈아 끼웠으면 ?v= 도 올린다"
+      },
+      "order": 1,
+      "featured": true,
+      "title": {
+        "ko": "Millions of Cats 인터랙티브 eBook",
+        "en": "Millions of Cats — Interactive eBook"
+      },
+      "kicker": {
+        "ko": "영어 학습 · 태블릿 프로토타입",
+        "en": "EFL reading · tablet prototype"
+      },
+      "summary": {
+        "ko": "1928년 퍼블릭 도메인 그림책을 배경 영상 위에서 읽는 태블릿 eBook. 11쪽 조판을 자동 감사하는 검증 패널을 붙여, 해상도 3종에서 글줄이 깨지지 않는 것을 눈이 아니라 스크립트로 확인했다.",
+        "en": "A public-domain picture book re-read over ambient video on tablets. Ships with a typographic audit panel that verifies line-breaking across three resolutions by script, not by eye."
+      },
+      "role": {
+        "ko": "기획 · 화면 설계 · 구현 · 조판 검증",
+        "en": "Concept, UI design, implementation, typographic QA"
+      },
+      "tags": [
+        "Interactive",
+        "Typography",
+        "Tablet",
+        "Claude Code"
+      ],
+      "entry": "",
+      "shot": "assets/shots/eBOOK.jpg"
+    },
+    {
+      "id": "KCMS",
+      "auto": {
+        "repo": "https://github.com/jinilee-hue/KCMS",
+        "live": "https://jinilee-hue.github.io/KCMS/",
+        "description": "",
+        "readme_title": "POLY KCMS — 학생 등록 화면 리디자인 시안",
+        "readme_summary": "KCMS(학원관리시스템) 전면 개편에 앞서 레이아웃 방향을 선택하기 위한 비교·검토용 시안 모음입니다. 대표 화면인 학생 등록을 두 가지 디자인 방향(A형/B형)으로 제작했고, 각각 데이터 가독성을 높인 변형본을 함께 둡니다.",
+        "languages": [
+          "HTML",
+          "JavaScript",
+          "CSS",
+          "Python"
+        ],
+        "topics": [],
+        "pushed_at": "2026-08-31T01:29:54Z",
+        "created_at": "2026-06-26T10:07:27Z",
+        "size_kb": 112467,
+        "has_pages": true,
+        "last_commit": "Kit 버전 스탬프 갱신 (zip 포함)"
+      },
+      "order": 2,
+      "featured": true,
+      "title": {
+        "ko": "POLY KCMS 학생 등록 화면 리디자인",
+        "en": "POLY KCMS — Student Registration Redesign"
+      },
+      "kicker": {
+        "ko": "사내 운영 시스템 · 방향 결정용 시안",
+        "en": "Internal ops system · direction-setting study"
+      },
+      "summary": {
+        "ko": "학원관리시스템 전면 개편에 앞서 레이아웃 방향을 고르기 위한 A/B 시안. 대표 화면 하나를 두 방향으로 만들고 각각 가독성 변형을 붙여, 논쟁을 취향 대신 비교 가능한 화면으로 옮겼다.",
+        "en": "An A/B layout study made before a full rebuild of an academy management system. One representative screen, two directions, each with a readability variant — moving the argument from taste to comparable screens."
+      },
+      "role": {
+        "ko": "리디자인 방향 설계 · 시안 4종 제작 · 비교 문서화",
+        "en": "Direction design, four prototypes, comparison writeup"
+      },
+      "tags": [
+        "Enterprise UI",
+        "Design Direction",
+        "A/B Study"
+      ],
+      "entry": "",
+      "shot": "assets/shots/KCMS.jpg"
+    },
+    {
+      "id": "LIO_DESIGN",
+      "auto": {
+        "repo": "https://github.com/jinilee-hue/LIO_DESIGN",
+        "live": "https://jinilee-hue.github.io/LIO_DESIGN/",
+        "description": "",
+        "readme_title": "LIO_DESIGN — Step 2 · Skill Core Flow 프로토타입",
+        "readme_summary": "화면정의서 LIOStep2FlowWireframev1.1.pptx (49슬라이드)의 전체 학습 Flow를 클릭 가능한 HTML 프로토타입으로 구현한 것입니다. 같은 Flow를 두 가지 디자인으로 제공합니다.",
+        "languages": [
+          "CSS",
+          "JavaScript",
+          "HTML"
+        ],
+        "topics": [],
+        "pushed_at": "2026-08-21T03:29:00Z",
+        "created_at": "2026-07-30T07:13:29Z",
+        "size_kb": 144763,
+        "has_pages": true,
+        "last_commit": "DESIGN C : 토픽 명칭을 확정 목록에 맞춤 (and → &)"
+      },
+      "order": 3,
+      "featured": true,
+      "title": {
+        "ko": "LIO Step 2 학습 Flow 프로토타입",
+        "en": "LIO Step 2 — Learning Flow Prototype"
+      },
+      "kicker": {
+        "ko": "49슬라이드 화면정의서 → 클릭 가능한 화면",
+        "en": "49-slide spec → clickable screens"
+      },
+      "summary": {
+        "ko": "PPTX 화면정의서 49슬라이드를 클릭 가능한 48화면 프로토타입으로 옮기고, 같은 Flow를 두 디자인(Storybook / App UI)으로 병렬 제작했다. 슬라이드 번호로 바로 진입하는 주소 규칙을 둬서 리뷰 중 화면을 찾는 시간을 없앴다.",
+        "en": "A 49-slide PPTX spec rebuilt as 48 clickable screens, with the same flow rendered in two design directions. Deep links by slide number removed the hunt for a screen during review."
+      },
+      "role": {
+        "ko": "프로토타입 설계 · 디자인 2종 · 구현",
+        "en": "Prototype architecture, two visual directions, implementation"
+      },
+      "tags": [
+        "Prototype",
+        "Design System",
+        "EdTech"
+      ],
+      "entry": "",
+      "shot": "assets/shots/LIO_DESIGN.jpg"
+    },
+    {
+      "id": "AI-Studio",
+      "auto": {
+        "repo": "https://github.com/jinilee-hue/AI-Studio",
+        "live": "https://jinilee-hue.github.io/AI-Studio/",
+        "description": "",
+        "readme_title": "Wonder Story Lab",
+        "readme_summary": "An AI story-writing lesson for seven-year-olds, in two classes.",
+        "languages": [
+          "HTML",
+          "CSS",
+          "JavaScript"
+        ],
+        "topics": [],
+        "pushed_at": "2026-08-19T09:03:19Z",
+        "created_at": "2026-08-05T06:48:34Z",
+        "size_kb": 47461,
+        "has_pages": true,
+        "last_commit": "Put each picture and the words about it in one box on the story card"
+      },
+      "order": 4,
+      "featured": true,
+      "title": {
+        "ko": "Wonder Story Lab",
+        "en": "Wonder Story Lab"
+      },
+      "kicker": {
+        "ko": "7세 대상 AI 스토리 수업",
+        "en": "An AI story-writing lesson for seven-year-olds"
+      },
+      "summary": {
+        "ko": "아이가 장면을 고르고 다섯 가지를 답하면 AI가 그림을 그리는 수업용 도구. 스크롤을 아예 없애고 주어진 높이를 나누는 레이아웃으로, 태블릿에서 활동 전체가 한 화면에 들어온다.",
+        "en": "A classroom tool where a child answers five questions and an AI draws the scene. No screen scrolls: every layout divides the height it is given so the whole activity stays visible."
+      },
+      "role": {
+        "ko": "수업 흐름 설계 · UI · 구현",
+        "en": "Lesson flow, UI, implementation"
+      },
+      "tags": [
+        "Generative AI",
+        "Kids UX",
+        "No-scroll Layout"
+      ],
+      "entry": "",
+      "shot": "assets/shots/AI-Studio.jpg"
+    },
+    {
+      "id": "Phonics-Studio",
+      "auto": {
+        "repo": "https://github.com/jinilee-hue/Phonics-Studio",
+        "live": "https://jinilee-hue.github.io/Phonics-Studio/",
+        "description": "",
+        "readme_title": "Phonics Studio — Frontend",
+        "readme_summary": "파닉스 콘텐츠 제작·검수·운영을 위한 웹 애플리케이션의 프런트엔드입니다. 역할(creator / reviewer / ops)에 따라 접근할 수 있는 화면이 나뉘며, 인증·권한 판정은 항상 백엔드가 담당합니다.",
+        "languages": [
+          "TypeScript",
+          "CSS",
+          "HTML"
+        ],
+        "topics": [],
+        "pushed_at": "2026-07-15T03:18:23Z",
+        "created_at": "2026-07-15T02:46:49Z",
+        "size_kb": 89325,
+        "has_pages": true,
+        "last_commit": "ci: GitHub Pages 배포 재실행 트리거"
+      },
+      "order": 5,
+      "title": {
+        "ko": "Phonics Studio",
+        "en": "Phonics Studio"
+      },
+      "kicker": {
+        "ko": "콘텐츠 제작·검수·운영 도구",
+        "en": "Authoring, review and ops console"
+      },
+      "summary": {
+        "ko": "파닉스 콘텐츠를 만들고 검수하고 운영하는 웹 앱의 프런트엔드. creator / reviewer / ops 세 역할로 화면을 나누되 권한 판정은 백엔드에 맡기는 구조로 설계했다.",
+        "en": "The front end of a phonics content pipeline, split across creator / reviewer / ops roles while authorization stays server-side."
+      },
+      "role": {
+        "ko": "역할별 화면 설계 · 프런트엔드",
+        "en": "Role-based UI design, front end"
+      },
+      "tags": [
+        "React",
+        "Workflow UI",
+        "Role-based"
+      ],
+      "entry": "",
+      "shot": "assets/shots/Phonics-Studio.jpg"
+    },
+    {
+      "id": "Phonics-Playground",
+      "auto": {
+        "repo": "https://github.com/jinilee-hue/Phonics-Playground",
+        "live": "https://jinilee-hue.github.io/Phonics-Playground/",
+        "description": "",
+        "readme_title": "🎪 PHONICS PLAYGROUND — Frontend",
+        "readme_summary": "학생용 Phonics Playground의 웹 클라이언트입니다. React SPA(Vite)로, 발행된 포닉스 게임을 둘러보고(gallery) 직접 플레이하며(play) 관리자는 통계(stats)를 확인합니다. 게임은 격리된 iframe 안에서 실행되고, 게임 이벤트는 postMessage로 부모(SPA)에 전달됩니다.",
+        "languages": [
+          "TypeScript",
+          "CSS",
+          "HTML"
+        ],
+        "topics": [],
+        "pushed_at": "2026-07-10T06:49:14Z",
+        "created_at": "2026-07-09T11:19:07Z",
+        "size_kb": 174415,
+        "has_pages": true,
+        "last_commit": "fix(responsive): 태블릿 세로 카드형 세로스크롤 전환 + 헤더 아이콘 그룹 분리"
+      },
+      "order": 6,
+      "title": {
+        "ko": "Phonics Playground",
+        "en": "Phonics Playground"
+      },
+      "kicker": {
+        "ko": "학생용 게임 클라이언트",
+        "en": "Student-facing game client"
+      },
+      "summary": {
+        "ko": "발행된 파닉스 게임을 둘러보고 플레이하는 학생용 SPA. 게임은 iframe 안에 격리하고 이벤트만 postMessage로 받아, 게임과 셸을 따로 배포할 수 있게 했다.",
+        "en": "A student SPA for browsing and playing published phonics games. Games run sandboxed in an iframe and report through postMessage, so shell and content ship separately."
+      },
+      "role": {
+        "ko": "화면 설계 · 프런트엔드",
+        "en": "UI design, front end"
+      },
+      "tags": [
+        "React",
+        "Games",
+        "Sandbox"
+      ],
+      "entry": "",
+      "shot": "assets/shots/Phonics-Playground.jpg"
+    },
+    {
+      "id": "Sound-Safari",
+      "auto": {
+        "repo": "https://github.com/jinilee-hue/Sound-Safari",
+        "live": "https://jinilee-hue.github.io/Sound-Safari/",
+        "description": "",
+        "readme_title": "",
+        "readme_summary": "",
+        "languages": [
+          "HTML",
+          "JavaScript"
+        ],
+        "topics": [],
+        "pushed_at": "2026-07-14T10:25:42Z",
+        "created_at": "2026-07-03T03:42:34Z",
+        "size_kb": 36816,
+        "has_pages": true,
+        "last_commit": "설정에서 마이크 테스트 제거 (마이크 정상 확인 완료)"
+      },
+      "order": 7,
+      "title": {
+        "ko": "Sound Safari",
+        "en": "Sound Safari"
+      },
+      "kicker": {
+        "ko": "소리 인식 학습 게임",
+        "en": "Sound recognition game"
+      },
+      "summary": {
+        "ko": "",
+        "en": ""
+      },
+      "role": {
+        "ko": "",
+        "en": ""
+      },
+      "tags": [
+        "Game",
+        "Phonics"
+      ],
+      "entry": "",
+      "shot": "assets/shots/Sound-Safari.jpg"
+    },
+    {
+      "id": "phonics-wordmashup",
+      "auto": {
+        "repo": "https://github.com/jinilee-hue/phonics-wordmashup",
+        "live": "https://jinilee-hue.github.io/phonics-wordmashup/",
+        "description": "",
+        "readme_title": "",
+        "readme_summary": "",
+        "languages": [
+          "TypeScript",
+          "HTML",
+          "CSS"
+        ],
+        "topics": [],
+        "pushed_at": "2026-07-06T09:22:03Z",
+        "created_at": "2026-06-12T01:59:41Z",
+        "size_kb": 75227,
+        "has_pages": true,
+        "last_commit": "버그점검: card_left_cake 404 제거 + wordmashup.md 최신 수정사항 반영"
+      },
+      "order": 8,
+      "title": {
+        "ko": "Prompt Crash — 합성어 게임",
+        "en": "Prompt Crash — Compound Word Game"
+      },
+      "kicker": {
+        "ko": "합성어 학습 게임",
+        "en": "Compound word game"
+      },
+      "summary": {
+        "ko": "",
+        "en": ""
+      },
+      "role": {
+        "ko": "",
+        "en": ""
+      },
+      "tags": [
+        "Game",
+        "TypeScript"
+      ],
+      "entry": "",
+      "shot": "assets/shots/phonics-wordmashup.jpg"
+    },
+    {
+      "id": "poly-dashboard",
+      "auto": {
+        "repo": "https://github.com/jinilee-hue/poly-dashboard",
+        "live": "https://jinilee-hue.github.io/poly-dashboard/",
+        "description": "",
+        "readme_title": "",
+        "readme_summary": "",
+        "languages": [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "PowerShell"
+        ],
+        "topics": [],
+        "pushed_at": "2026-06-24T07:14:00Z",
+        "created_at": "2026-05-21T05:59:31Z",
+        "size_kb": 27546,
+        "has_pages": true,
+        "last_commit": "chore: rebuild poly-dashboard-kit.zip with updated common.css"
+      },
+      "order": 9,
+      "title": {
+        "ko": "EduPoly 캠퍼스 대시보드",
+        "en": "EduPoly Campus Dashboard"
+      },
+      "kicker": {
+        "ko": "운영 지표 대시보드 · 디자인 시스템",
+        "en": "Ops dashboard · design system"
+      },
+      "summary": {
+        "ko": "캠퍼스 운영 지표를 한 화면에서 보는 대시보드. 색·타입·차트 팔레트를 토큰으로 정의해 CANB 대시보드와 같은 뼈대를 브랜드만 갈아끼워 재사용했다.",
+        "en": "A campus operations dashboard whose color, type and chart palette live as tokens — the same skeleton reused for a second brand by swapping the token layer."
+      },
+      "role": {
+        "ko": "디자인 시스템 정의 · 화면 설계 · 구현",
+        "en": "Design tokens, UI design, implementation"
+      },
+      "tags": [
+        "Dashboard",
+        "Design Tokens",
+        "Data Viz"
+      ],
+      "entry": "",
+      "shot": "assets/shots/poly-dashboard.jpg"
+    },
+    {
+      "id": "canb-dashboard",
+      "auto": {
+        "repo": "https://github.com/jinilee-hue/canb-dashboard",
+        "live": "https://jinilee-hue.github.io/canb-dashboard/",
+        "description": "",
+        "readme_title": "",
+        "readme_summary": "",
+        "languages": [
+          "HTML",
+          "JavaScript",
+          "CSS"
+        ],
+        "topics": [],
+        "pushed_at": "2026-06-24T07:14:03Z",
+        "created_at": "2026-05-19T07:03:18Z",
+        "size_kb": 1358,
+        "has_pages": true,
+        "last_commit": "chore: rebuild canb-dashboard-kit.zip with updated common.css"
+      },
+      "order": 10,
+      "title": {
+        "ko": "CANB 캠퍼스 대시보드",
+        "en": "CANB Campus Dashboard"
+      },
+      "kicker": {
+        "ko": "같은 뼈대, 다른 브랜드",
+        "en": "Same skeleton, different brand"
+      },
+      "summary": {
+        "ko": "EduPoly 대시보드와 구조를 공유하되 토큰만 교체한 자매 제품. 브랜드가 늘어날 때 화면을 다시 그리지 않아도 되는지 실제로 검증한 사례다.",
+        "en": "A sibling of the EduPoly dashboard sharing structure but swapping the token layer — a real test of whether adding a brand requires redrawing screens."
+      },
+      "role": {
+        "ko": "토큰 재정의 · 화면 적용",
+        "en": "Token re-definition, UI application"
+      },
+      "tags": [
+        "Dashboard",
+        "Design Tokens",
+        "Multi-brand"
+      ],
+      "entry": "",
+      "shot": "assets/shots/canb-dashboard.jpg"
+    },
+    {
+      "id": "poly-ai-agent",
+      "auto": {
+        "repo": "https://github.com/jinilee-hue/poly-ai-agent",
+        "live": "https://jinilee-hue.github.io/poly-ai-agent/",
+        "description": "",
+        "readme_title": "",
+        "readme_summary": "",
+        "languages": [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "PowerShell"
+        ],
+        "topics": [],
+        "pushed_at": "2026-06-19T09:40:46Z",
+        "created_at": "2026-05-28T09:10:44Z",
+        "size_kb": 33296,
+        "has_pages": true,
+        "last_commit": "revert: 마스코트 물음표 아이콘 제거"
+      },
+      "order": 11,
+      "title": {
+        "ko": "Poly AI Agent",
+        "en": "Poly AI Agent"
+      },
+      "kicker": {
+        "ko": "사내 AI 에이전트 콘솔",
+        "en": "Internal AI agent console"
+      },
+      "summary": {
+        "ko": "",
+        "en": ""
+      },
+      "role": {
+        "ko": "",
+        "en": ""
+      },
+      "tags": [
+        "AI Agent",
+        "Console"
+      ],
+      "entry": "",
+      "shot": "assets/shots/poly-ai-agent.jpg"
+    },
+    {
+      "id": "design-extractor",
+      "auto": {
+        "repo": "https://github.com/jinilee-hue/design-extractor",
+        "live": "https://jinilee-hue.github.io/design-extractor/",
+        "description": "",
+        "readme_title": "",
+        "readme_summary": "",
+        "languages": [
+          "HTML",
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "topics": [],
+        "pushed_at": "2026-04-15T07:00:31Z",
+        "created_at": "2026-04-14T07:17:58Z",
+        "size_kb": 104,
+        "has_pages": true,
+        "last_commit": "Update Dockerfile"
+      },
+      "order": 12,
+      "title": {
+        "ko": "Design System Hub & Exporter",
+        "en": "Design System Hub & Exporter"
+      },
+      "kicker": {
+        "ko": "디자인 토큰 추출 도구",
+        "en": "Design token extraction tool"
+      },
+      "summary": {
+        "ko": "기존 화면에서 색·타입·간격을 뽑아 토큰 문서로 내보내는 도구. 디자인 시스템을 문서로 먼저 쓰지 않고 이미 만든 화면에서 역으로 정리하는 접근을 실험했다.",
+        "en": "A tool that extracts color, type and spacing from existing screens into a token document — deriving a design system backwards from shipped UI instead of writing the spec first."
+      },
+      "role": {
+        "ko": "도구 기획 · UI · 구현",
+        "en": "Tool concept, UI, implementation"
+      },
+      "tags": [
+        "Design Tokens",
+        "Tooling"
+      ],
+      "entry": "",
+      "shot": "assets/shots/design-extractor.jpg"
+    },
+    {
+      "id": "polyscoop",
+      "auto": {
+        "repo": "https://github.com/jinilee-hue/polyscoop",
+        "live": "https://jinilee-hue.github.io/polyscoop/",
+        "description": "",
+        "readme_title": "",
+        "readme_summary": "",
+        "languages": [
+          "HTML"
+        ],
+        "topics": [],
+        "pushed_at": "2026-04-08T08:51:19Z",
+        "created_at": "2026-03-05T03:31:26Z",
+        "size_kb": 8191,
+        "has_pages": true,
+        "last_commit": "Add files via upload"
+      },
+      "order": 13,
+      "title": {
+        "ko": "Poly Scoop",
+        "en": "Poly Scoop"
+      },
+      "kicker": {
+        "ko": "사내 소식 페이지",
+        "en": "Internal news page"
+      },
+      "summary": {
+        "ko": "",
+        "en": ""
+      },
+      "role": {
+        "ko": "",
+        "en": ""
+      },
+      "tags": [
+        "Content",
+        "Web"
+      ],
+      "entry": "",
+      "shot": "assets/shots/polyscoop.jpg"
+    },
+    {
+      "id": "LIO",
+      "auto": {
+        "repo": "https://github.com/jinilee-hue/LIO",
+        "live": "https://jinilee-hue.github.io/LIO/lio-design-system.html",
+        "description": "",
+        "readme_title": "",
+        "readme_summary": "",
+        "languages": [
+          "HTML",
+          "JavaScript",
+          "CSS"
+        ],
+        "topics": [],
+        "pushed_at": "2026-08-28T08:56:40Z",
+        "created_at": "2026-05-12T08:47:53Z",
+        "size_kb": 3885,
+        "has_pages": true,
+        "last_commit": "mt-review(demo-auto): stack the quiz under the passage in the right column"
+      },
+      "order": 14,
+      "title": {
+        "ko": "LIO 디자인 시스템",
+        "en": "LIO Design System"
+      },
+      "kicker": {
+        "ko": "브랜드 · 컴포넌트 정의",
+        "en": "Brand and component definitions"
+      },
+      "summary": {
+        "ko": "LIO 프로덕트의 색·타입·컴포넌트를 한 문서에 모은 디자인 시스템 페이지.",
+        "en": "A single-page design system collecting LIO's color, type and component definitions."
+      },
+      "role": {
+        "ko": "디자인 시스템 정의",
+        "en": "Design system definition"
+      },
+      "tags": [
+        "Design System",
+        "Brand"
+      ],
+      "entry": "lio-design-system.html",
+      "shot": "assets/shots/LIO.jpg"
+    }
+  ]
+}

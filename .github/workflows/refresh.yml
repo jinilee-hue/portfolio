@@ -1,0 +1,63 @@
+name: refresh
+
+# 포트폴리오 데이터 자동 갱신
+#  1) GitHub API 에서 공개 저장소 메타를 다시 긁어 data/projects.json 갱신
+#  2) 배포된 페이지를 실제로 열어 썸네일 재촬영
+#  3) 변경이 있을 때만 커밋 → Pages 배포
+on:
+  schedule:
+    - cron: '0 21 * * *'        # 매일 06:00 KST (UTC 21:00)
+  workflow_dispatch:             # 수동 실행
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 저장소 메타 수집
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/build_data.py
+
+      - name: Playwright 설치
+        run: |
+          pip install --quiet playwright
+          python3 -m playwright install --with-deps chromium
+
+      - name: 배포 화면 썸네일 촬영
+        run: python3 scripts/shoot.py
+
+      - name: 변경분 커밋
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/projects.json assets/shots
+          if git diff --staged --quiet; then
+            echo "변경 없음 — 커밋 생략"
+          else
+            git commit -m "chore: 포트폴리오 데이터·썸네일 자동 갱신 ($(date -u +%Y-%m-%d))"
+            git push
+          fi
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4
