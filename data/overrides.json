@@ -10,274 +10,646 @@
     "flow": "사용자/작업 흐름 단계 배열 [{step,ko,en}]",
     "stack": "기술 스택 그룹 [{group, items[]}] — 자동 수집 언어보다 우선",
     "decisions": "핵심 설계 결정 [{ko,en}] — 무엇을 택했고 무엇을 버렸나",
-    "period": "작업 기간 수동 표기. 없으면 커밋 이력에서 자동 산출"
+    "period": "작업 기간 수동 표기. 없으면 커밋 이력에서 자동 산출",
+    "shot_path": "썸네일로 촬영할 화면 경로(라이브 URL 뒤에 붙는다). 비우면 첫 화면. 인트로/로그인 대신 실제 작업이 보이는 화면을 고른다.",
+    "shot_wait": "촬영 전 추가 대기 ms (애니메이션·차트가 그려질 시간)"
   },
-
   "eBOOK": {
     "order": 1,
     "featured": true,
-    "title": { "ko": "Millions of Cats 인터랙티브 eBook", "en": "Millions of Cats — Interactive eBook" },
-    "kicker": { "ko": "영어 학습 · 태블릿 프로토타입", "en": "EFL reading · tablet prototype" },
+    "title": {
+      "ko": "Millions of Cats 인터랙티브 eBook",
+      "en": "Millions of Cats — Interactive eBook"
+    },
+    "kicker": {
+      "ko": "영어 학습 · 태블릿 프로토타입",
+      "en": "EFL reading · tablet prototype"
+    },
     "summary": {
       "ko": "1928년 퍼블릭 도메인 그림책을 배경 영상 위에서 읽는 태블릿 eBook. 11쪽 조판을 자동 감사하는 검증 패널을 붙여, 해상도 3종에서 글줄이 깨지지 않는 것을 눈이 아니라 스크립트로 확인했다.",
       "en": "A public-domain picture book re-read over ambient video on tablets. Ships with a typographic audit panel that verifies line-breaking across three resolutions by script, not by eye."
     },
-    "role": { "ko": "기획 · 화면 설계 · 구현 · 조판 검증", "en": "Concept, UI design, implementation, typographic QA" },
-    "tags": ["Interactive", "Typography", "Tablet", "Claude Code"],
+    "role": {
+      "ko": "기획 · 화면 설계 · 구현 · 조판 검증",
+      "en": "Concept, UI design, implementation, typographic QA"
+    },
+    "tags": [
+      "Interactive",
+      "Typography",
+      "Tablet",
+      "Claude Code"
+    ],
     "entry": "",
     "intent": {
       "ko": "영어 그림책을 읽히려면 보통 종이책에 음원 파일을 붙인다. 아이는 소리를 따라갈 뿐 화면을 보지 않는다. 그림이 움직이고 문장이 소리와 같이 흐르면 시선이 글에 머물지 않을까 — 이 가정을 확인하려고 만들었다. 퍼블릭 도메인 원문을 골라 저작권 협의 없이 바로 검증에 들어갈 수 있게 했다.",
       "en": "The usual way to teach picture books is paper plus an audio file: the child follows the sound and never looks at the page. This prototype tests one assumption — that if the scene moves and the sentence flows with the voice, the eye stays on the text. A public-domain source let the test start without rights negotiation."
     },
     "flow": [
-      { "step": "01", "ko": "표지 — 배경 영상 위에서 시작", "en": "Cover over ambient video" },
-      { "step": "02", "ko": "본문 11쪽 — 문장을 읽어주고 단어를 누르면 사전", "en": "11 pages — read-aloud with tap-to-define" },
-      { "step": "03", "ko": "쪽마다 이해 문제 띠", "en": "Comprehension strip per page" },
-      { "step": "04", "ko": "단어장 카드로 마무리", "en": "Closing vocabulary cards" }
+      {
+        "step": "01",
+        "ko": "표지 — 배경 영상 위에서 시작",
+        "en": "Cover over ambient video"
+      },
+      {
+        "step": "02",
+        "ko": "본문 11쪽 — 문장을 읽어주고 단어를 누르면 사전",
+        "en": "11 pages — read-aloud with tap-to-define"
+      },
+      {
+        "step": "03",
+        "ko": "쪽마다 이해 문제 띠",
+        "en": "Comprehension strip per page"
+      },
+      {
+        "step": "04",
+        "ko": "단어장 카드로 마무리",
+        "en": "Closing vocabulary cards"
+      }
     ],
     "stack": [
-      { "group": "구현", "items": ["Vanilla JS", "CSS Custom Properties", "빌드 없음"] },
-      { "group": "음성·미디어", "items": ["Web Speech API", "AI 생성 배경 영상(mp4)"] },
-      { "group": "검증", "items": ["Headless Chrome smoke test", "조판 자동 감사 스크립트"] },
-      { "group": "서체", "items": ["SIL Andika (OFL)"] }
+      {
+        "group": "구현",
+        "items": [
+          "Vanilla JS",
+          "CSS Custom Properties",
+          "빌드 없음"
+        ]
+      },
+      {
+        "group": "음성·미디어",
+        "items": [
+          "Web Speech API",
+          "AI 생성 배경 영상(mp4)"
+        ]
+      },
+      {
+        "group": "검증",
+        "items": [
+          "Headless Chrome smoke test",
+          "조판 자동 감사 스크립트"
+        ]
+      },
+      {
+        "group": "서체",
+        "items": [
+          "SIL Andika (OFL)"
+        ]
+      }
     ],
     "decisions": [
-      { "ko": "태블릿 가로 3종 해상도(1194×834 / 1180×820 / 1024×768)를 고정 타깃으로 잡고, 11쪽 전부가 스크롤 없이 한 화면에 들어가는 것을 조건으로 걸었다.", "en": "Fixed three landscape tablet resolutions as the target and made 'all 11 pages fit one screen without scrolling' a hard condition." },
-      { "ko": "조판을 눈으로 확인하지 않는다. 헤드리스 크롬으로 실제 페이지를 띄워 문장이 그려지는지·쪽이 넘치지 않는지 검사하는 스크립트를 붙였다. 구문 검사로는 안 잡히는 종류를 잡는다.", "en": "Typography isn't checked by eye. A headless-Chrome script loads the real page and verifies that sentences render and pages don't overflow — the class of bug a syntax check never catches." },
-      { "ko": "배경 영상은 AI로 생성했고 README에 그렇게 적었다. 원문은 퍼블릭 도메인, 번역과 문제는 직접 썼다.", "en": "Background video was AI-generated and labeled as such in the README. Source text is public domain; translation and questions are original." }
+      {
+        "ko": "태블릿 가로 3종 해상도(1194×834 / 1180×820 / 1024×768)를 고정 타깃으로 잡고, 11쪽 전부가 스크롤 없이 한 화면에 들어가는 것을 조건으로 걸었다.",
+        "en": "Fixed three landscape tablet resolutions as the target and made 'all 11 pages fit one screen without scrolling' a hard condition."
+      },
+      {
+        "ko": "조판을 눈으로 확인하지 않는다. 헤드리스 크롬으로 실제 페이지를 띄워 문장이 그려지는지·쪽이 넘치지 않는지 검사하는 스크립트를 붙였다. 구문 검사로는 안 잡히는 종류를 잡는다.",
+        "en": "Typography isn't checked by eye. A headless-Chrome script loads the real page and verifies that sentences render and pages don't overflow — the class of bug a syntax check never catches."
+      },
+      {
+        "ko": "배경 영상은 AI로 생성했고 README에 그렇게 적었다. 원문은 퍼블릭 도메인, 번역과 문제는 직접 썼다.",
+        "en": "Background video was AI-generated and labeled as such in the README. Source text is public domain; translation and questions are original."
+      }
     ]
   },
-
   "KCMS": {
     "order": 2,
     "featured": true,
-    "title": { "ko": "POLY KCMS 학생 등록 화면 리디자인", "en": "POLY KCMS — Student Registration Redesign" },
-    "kicker": { "ko": "사내 운영 시스템 · 방향 결정용 시안", "en": "Internal ops system · direction-setting study" },
+    "title": {
+      "ko": "POLY KCMS 학생 등록 화면 리디자인",
+      "en": "POLY KCMS — Student Registration Redesign"
+    },
+    "kicker": {
+      "ko": "사내 운영 시스템 · 방향 결정용 시안",
+      "en": "Internal ops system · direction-setting study"
+    },
     "summary": {
       "ko": "학원관리시스템 전면 개편에 앞서 레이아웃 방향을 고르기 위한 A/B 시안. 대표 화면 하나를 두 방향으로 만들고 각각 가독성 변형을 붙여, 논쟁을 취향 대신 비교 가능한 화면으로 옮겼다.",
       "en": "An A/B layout study made before a full rebuild of an academy management system. One representative screen, two directions, each with a readability variant — moving the argument from taste to comparable screens."
     },
-    "role": { "ko": "리디자인 방향 설계 · 시안 4종 제작 · 비교 문서화", "en": "Direction design, four prototypes, comparison writeup" },
-    "tags": ["Enterprise UI", "Design Direction", "A/B Study"],
+    "role": {
+      "ko": "리디자인 방향 설계 · 시안 4종 제작 · 비교 문서화",
+      "en": "Direction design, four prototypes, comparison writeup"
+    },
+    "tags": [
+      "Enterprise UI",
+      "Design Direction",
+      "A/B Study"
+    ],
     "entry": "",
     "intent": {
       "ko": "시스템 전면 개편 앞에서 회의는 늘 취향 대결이 된다. '이게 더 낫다'는 말은 근거를 만들지 못한다. 그래서 대표 화면 하나를 골라 방향별로 실제로 만들었다. 말로 하던 논쟁을 나란히 놓고 눌러보는 비교로 바꾸는 게 목적이었다.",
       "en": "Before a full system rebuild, meetings default to a contest of taste — 'this one's better' produces no evidence. So one representative screen was actually built in each direction, turning a verbal argument into a side-by-side you can click."
     },
     "flow": [
-      { "step": "01", "ko": "인트로 — 썸네일·비교표로 진입", "en": "Intro: thumbnails and comparison table" },
-      { "step": "02", "ko": "A형 Teal Workbench — 상단 탭, 높은 정보 밀도", "en": "Type A — top tabs, high density" },
-      { "step": "03", "ko": "B형 Horizon — 좌측 내비, 카드 정돈형", "en": "Type B — left nav, card-organized" },
-      { "step": "04", "ko": "C안 — 기존 레이아웃 유지, 색만 교체", "en": "Type C — legacy layout, recolor only" },
-      { "step": "05", "ko": "각 안의 가독성 변형본 비교", "en": "Readability variants of each" }
+      {
+        "step": "01",
+        "ko": "인트로 — 썸네일·비교표로 진입",
+        "en": "Intro: thumbnails and comparison table"
+      },
+      {
+        "step": "02",
+        "ko": "A형 Teal Workbench — 상단 탭, 높은 정보 밀도",
+        "en": "Type A — top tabs, high density"
+      },
+      {
+        "step": "03",
+        "ko": "B형 Horizon — 좌측 내비, 카드 정돈형",
+        "en": "Type B — left nav, card-organized"
+      },
+      {
+        "step": "04",
+        "ko": "C안 — 기존 레이아웃 유지, 색만 교체",
+        "en": "Type C — legacy layout, recolor only"
+      },
+      {
+        "step": "05",
+        "ko": "각 안의 가독성 변형본 비교",
+        "en": "Readability variants of each"
+      }
     ],
     "stack": [
-      { "group": "구현", "items": ["HTML", "CSS", "Vanilla JS"] },
-      { "group": "디자인 시스템", "items": ["poly-dashboard 토큰 재사용", "Poly Blue #0066FF"] },
-      { "group": "도구", "items": ["Claude Code", "Python (자료 정리)"] }
+      {
+        "group": "구현",
+        "items": [
+          "HTML",
+          "CSS",
+          "Vanilla JS"
+        ]
+      },
+      {
+        "group": "디자인 시스템",
+        "items": [
+          "poly-dashboard 토큰 재사용",
+          "Poly Blue #0066FF"
+        ]
+      },
+      {
+        "group": "도구",
+        "items": [
+          "Claude Code",
+          "Python (자료 정리)"
+        ]
+      }
     ],
     "decisions": [
-      { "ko": "방향을 두 개가 아니라 세 개로 늘렸다. 전면 개편안 두 개(A·B)만 두면 '개편 여부' 자체가 논점에서 빠진다. 기존 레이아웃을 유지하고 색만 바꾼 C안을 넣어 전환 비용이 낮은 선택지를 테이블에 올렸다.", "en": "Three directions, not two. With only two redesigns on the table, 'should we redesign at all' quietly disappears — so a low-transition-cost option (legacy layout, recolor only) was added." },
-      { "ko": "각 방향마다 가독성 변형을 따로 만들었다. 레이아웃 선호와 가독성 문제가 한 화면에 섞이면 무엇 때문에 좋다고 말하는지 구분되지 않는다.", "en": "Each direction got a separate readability variant, so layout preference and legibility couldn't be confused for one another in feedback." },
-      { "ko": "결정은 내가 하지 않았다. 비교 가능한 재료를 만들어 의사결정자에게 넘기는 것까지가 이 작업의 범위였다.", "en": "The decision wasn't mine. The scope was producing comparable material and handing it to the decision-makers." }
-    ]
+      {
+        "ko": "방향을 두 개가 아니라 세 개로 늘렸다. 전면 개편안 두 개(A·B)만 두면 '개편 여부' 자체가 논점에서 빠진다. 기존 레이아웃을 유지하고 색만 바꾼 C안을 넣어 전환 비용이 낮은 선택지를 테이블에 올렸다.",
+        "en": "Three directions, not two. With only two redesigns on the table, 'should we redesign at all' quietly disappears — so a low-transition-cost option (legacy layout, recolor only) was added."
+      },
+      {
+        "ko": "각 방향마다 가독성 변형을 따로 만들었다. 레이아웃 선호와 가독성 문제가 한 화면에 섞이면 무엇 때문에 좋다고 말하는지 구분되지 않는다.",
+        "en": "Each direction got a separate readability variant, so layout preference and legibility couldn't be confused for one another in feedback."
+      },
+      {
+        "ko": "결정은 내가 하지 않았다. 비교 가능한 재료를 만들어 의사결정자에게 넘기는 것까지가 이 작업의 범위였다.",
+        "en": "The decision wasn't mine. The scope was producing comparable material and handing it to the decision-makers."
+      }
+    ],
+    "shot_path": "A타입/학생 등록.dc.html",
+    "shot_wait": 3000
   },
-
   "LIO_DESIGN": {
     "order": 3,
     "featured": true,
-    "title": { "ko": "LIO Step 2 학습 Flow 프로토타입", "en": "LIO Step 2 — Learning Flow Prototype" },
-    "kicker": { "ko": "49슬라이드 화면정의서 → 클릭 가능한 화면", "en": "49-slide spec → clickable screens" },
+    "title": {
+      "ko": "LIO Step 2 학습 Flow 프로토타입",
+      "en": "LIO Step 2 — Learning Flow Prototype"
+    },
+    "kicker": {
+      "ko": "49슬라이드 화면정의서 → 클릭 가능한 화면",
+      "en": "49-slide spec → clickable screens"
+    },
     "summary": {
       "ko": "PPTX 화면정의서 49슬라이드를 클릭 가능한 48화면 프로토타입으로 옮기고, 같은 Flow를 두 디자인(Storybook / App UI)으로 병렬 제작했다. 슬라이드 번호로 바로 진입하는 주소 규칙을 둬서 리뷰 중 화면을 찾는 시간을 없앴다.",
       "en": "A 49-slide PPTX spec rebuilt as 48 clickable screens, with the same flow rendered in two design directions. Deep links by slide number removed the hunt for a screen during review."
     },
-    "role": { "ko": "프로토타입 설계 · 디자인 2종 · 구현", "en": "Prototype architecture, two visual directions, implementation" },
-    "tags": ["Prototype", "Design System", "EdTech"],
+    "role": {
+      "ko": "프로토타입 설계 · 디자인 2종 · 구현",
+      "en": "Prototype architecture, two visual directions, implementation"
+    },
+    "tags": [
+      "Prototype",
+      "Design System",
+      "EdTech"
+    ],
     "entry": "",
     "intent": {
       "ko": "49슬라이드짜리 화면정의서는 아무도 끝까지 읽지 않는다. 슬라이드는 화면 사이의 연결을 보여주지 못해서, 리뷰가 늘 '이 다음에 뭐가 뜨죠?'에서 멈춘다. 흐름 자체를 눌러볼 수 있게 만들면 그 질문이 사라진다고 봤다.",
       "en": "Nobody reads a 49-slide screen spec to the end, and slides can't show what connects to what — reviews stall on 'so what comes after this one?'. Making the flow itself clickable removes the question."
     },
     "flow": [
-      { "step": "01", "ko": "PPTX 49슬라이드를 화면 단위로 분해", "en": "Decompose 49 PPTX slides into screens" },
-      { "step": "02", "ko": "48화면을 클릭 가능한 흐름으로 재구성", "en": "Rebuild as 48 clickable screens" },
-      { "step": "03", "ko": "같은 흐름을 Design A / B 두 벌로 제작", "en": "Render the same flow in two designs" },
-      { "step": "04", "ko": "슬라이드 번호·화면 id 로 바로 진입", "en": "Deep-link by slide number or screen id" }
+      {
+        "step": "01",
+        "ko": "PPTX 49슬라이드를 화면 단위로 분해",
+        "en": "Decompose 49 PPTX slides into screens"
+      },
+      {
+        "step": "02",
+        "ko": "48화면을 클릭 가능한 흐름으로 재구성",
+        "en": "Rebuild as 48 clickable screens"
+      },
+      {
+        "step": "03",
+        "ko": "같은 흐름을 Design A / B 두 벌로 제작",
+        "en": "Render the same flow in two designs"
+      },
+      {
+        "step": "04",
+        "ko": "슬라이드 번호·화면 id 로 바로 진입",
+        "en": "Deep-link by slide number or screen id"
+      }
     ],
     "stack": [
-      { "group": "구현", "items": ["HTML", "CSS", "Vanilla JS"] },
-      { "group": "내비게이션", "items": ["키보드 ←/→", "URL 쿼리 딥링크 (?s= / ?id=)", "48화면 인덱스"] },
-      { "group": "원본", "items": ["PPTX 화면정의서 49슬라이드"] }
+      {
+        "group": "구현",
+        "items": [
+          "HTML",
+          "CSS",
+          "Vanilla JS"
+        ]
+      },
+      {
+        "group": "내비게이션",
+        "items": [
+          "키보드 ←/→",
+          "URL 쿼리 딥링크 (?s= / ?id=)",
+          "48화면 인덱스"
+        ]
+      },
+      {
+        "group": "원본",
+        "items": [
+          "PPTX 화면정의서 49슬라이드"
+        ]
+      }
     ],
     "decisions": [
-      { "ko": "PPTX 슬라이드 번호를 URL에 그대로 노출했다(?s=46). 리뷰 중 '46번 슬라이드요'라는 말이 그대로 주소가 되어, 화면을 찾는 시간이 사라졌다.", "en": "PPTX slide numbers were exposed directly in the URL (?s=46), so 'slide 46' in a review becomes an address — the hunt for a screen disappears." },
-      { "ko": "같은 흐름을 두 디자인으로 병렬 제작했다. 흐름 검증과 비주얼 결정을 한 번에 끝내려고 했지만, 실제로는 두 논의가 섞여 리뷰가 길어지기도 했다.", "en": "The same flow was built in two designs to settle flow and visuals at once — though in practice the two discussions sometimes tangled and lengthened review." }
-    ]
+      {
+        "ko": "PPTX 슬라이드 번호를 URL에 그대로 노출했다(?s=46). 리뷰 중 '46번 슬라이드요'라는 말이 그대로 주소가 되어, 화면을 찾는 시간이 사라졌다.",
+        "en": "PPTX slide numbers were exposed directly in the URL (?s=46), so 'slide 46' in a review becomes an address — the hunt for a screen disappears."
+      },
+      {
+        "ko": "같은 흐름을 두 디자인으로 병렬 제작했다. 흐름 검증과 비주얼 결정을 한 번에 끝내려고 했지만, 실제로는 두 논의가 섞여 리뷰가 길어지기도 했다.",
+        "en": "The same flow was built in two designs to settle flow and visuals at once — though in practice the two discussions sometimes tangled and lengthened review."
+      }
+    ],
+    "shot_path": "designA/index.html",
+    "shot_wait": 3000
   },
-
   "AI-Studio": {
     "order": 4,
     "featured": true,
-    "title": { "ko": "Wonder Story Lab", "en": "Wonder Story Lab" },
-    "kicker": { "ko": "7세 대상 AI 스토리 수업", "en": "An AI story-writing lesson for seven-year-olds" },
+    "title": {
+      "ko": "Wonder Story Lab",
+      "en": "Wonder Story Lab"
+    },
+    "kicker": {
+      "ko": "7세 대상 AI 스토리 수업",
+      "en": "An AI story-writing lesson for seven-year-olds"
+    },
     "summary": {
       "ko": "아이가 장면을 고르고 다섯 가지를 답하면 AI가 그림을 그리는 수업용 도구. 스크롤을 아예 없애고 주어진 높이를 나누는 레이아웃으로, 태블릿에서 활동 전체가 한 화면에 들어온다.",
       "en": "A classroom tool where a child answers five questions and an AI draws the scene. No screen scrolls: every layout divides the height it is given so the whole activity stays visible."
     },
-    "role": { "ko": "수업 흐름 설계 · UI · 구현", "en": "Lesson flow, UI, implementation" },
-    "tags": ["Generative AI", "Kids UX", "No-scroll Layout"],
+    "role": {
+      "ko": "수업 흐름 설계 · UI · 구현",
+      "en": "Lesson flow, UI, implementation"
+    },
+    "tags": [
+      "Generative AI",
+      "Kids UX",
+      "No-scroll Layout"
+    ],
     "entry": "",
     "intent": {
       "ko": "7세에게 '이야기를 써보자'고 하면 아무것도 안 나온다. 쓸 말이 없어서가 아니라 빈 화면이 막막해서다. 아이가 먼저 그림을 갖게 하면 말이 붙는다고 보고, 장면을 고르고 다섯 가지만 답하면 AI가 그려주는 순서로 수업을 뒤집었다. 그림이 먼저, 문장은 그다음이다.",
       "en": "Ask a seven-year-old to write a story and you get nothing — not for lack of words, but because a blank screen is paralysing. Give the child a picture first and sentences follow, so the lesson was inverted: pick a scene, answer five questions, the AI draws it. Image first, text second."
     },
     "flow": [
-      { "step": "01", "ko": "두 장면을 보고 순서를 정한다", "en": "Order two scenes" },
-      { "step": "02", "ko": "원하는 장면에 다섯 가지를 답한다", "en": "Answer five questions about the chosen scene" },
-      { "step": "03", "ko": "AI가 그 장면을 그린다", "en": "AI draws the scene" },
-      { "step": "04", "ko": "장면마다 한 문장씩 소리내어 말한다", "en": "Narrate each scene aloud, one sentence at a time" },
-      { "step": "05", "ko": "완성한 이야기 카드를 제출한다", "en": "Hand in the finished story card" }
+      {
+        "step": "01",
+        "ko": "두 장면을 보고 순서를 정한다",
+        "en": "Order two scenes"
+      },
+      {
+        "step": "02",
+        "ko": "원하는 장면에 다섯 가지를 답한다",
+        "en": "Answer five questions about the chosen scene"
+      },
+      {
+        "step": "03",
+        "ko": "AI가 그 장면을 그린다",
+        "en": "AI draws the scene"
+      },
+      {
+        "step": "04",
+        "ko": "장면마다 한 문장씩 소리내어 말한다",
+        "en": "Narrate each scene aloud, one sentence at a time"
+      },
+      {
+        "step": "05",
+        "ko": "완성한 이야기 카드를 제출한다",
+        "en": "Hand in the finished story card"
+      }
     ],
     "stack": [
-      { "group": "구현", "items": ["HTML", "CSS", "Vanilla JS", "빌드 없음"] },
-      { "group": "레이아웃", "items": ["주어진 높이를 분할하는 무스크롤 구조"] },
-      { "group": "AI", "items": ["이미지 생성 API"] },
-      { "group": "환경", "items": ["태블릿 · PC", "정적 서버 필요"] }
+      {
+        "group": "구현",
+        "items": [
+          "HTML",
+          "CSS",
+          "Vanilla JS",
+          "빌드 없음"
+        ]
+      },
+      {
+        "group": "레이아웃",
+        "items": [
+          "주어진 높이를 분할하는 무스크롤 구조"
+        ]
+      },
+      {
+        "group": "AI",
+        "items": [
+          "이미지 생성 API"
+        ]
+      },
+      {
+        "group": "환경",
+        "items": [
+          "태블릿 · PC",
+          "정적 서버 필요"
+        ]
+      }
     ],
     "decisions": [
-      { "ko": "스크롤을 아예 없앴다. 교실에서 아이가 화면을 밀면 활동의 절반이 시야에서 사라지고 교사가 통제를 잃는다. 모든 레이아웃이 주어진 높이를 나누도록 짜서 활동 전체가 항상 한 화면에 있다.", "en": "Scrolling was removed entirely. In a classroom, a child who scrolls loses half the activity off-screen and the teacher loses control — so every layout divides the height it is given and the whole activity stays visible." },
-      { "ko": "수업을 두 차시로 쪼갰다. 그리기와 말하기를 한 차시에 넣으면 7세의 집중이 끝까지 가지 않는다.", "en": "Split into two classes: drawing and speaking in one session outruns a seven-year-old's attention." }
-    ]
+      {
+        "ko": "스크롤을 아예 없앴다. 교실에서 아이가 화면을 밀면 활동의 절반이 시야에서 사라지고 교사가 통제를 잃는다. 모든 레이아웃이 주어진 높이를 나누도록 짜서 활동 전체가 항상 한 화면에 있다.",
+        "en": "Scrolling was removed entirely. In a classroom, a child who scrolls loses half the activity off-screen and the teacher loses control — so every layout divides the height it is given and the whole activity stays visible."
+      },
+      {
+        "ko": "수업을 두 차시로 쪼갰다. 그리기와 말하기를 한 차시에 넣으면 7세의 집중이 끝까지 가지 않는다.",
+        "en": "Split into two classes: drawing and speaking in one session outruns a seven-year-old's attention."
+      }
+    ],
+    "shot_path": "student.html",
+    "shot_wait": 3500
   },
-
   "Phonics-Studio": {
     "order": 5,
-    "title": { "ko": "Phonics Studio", "en": "Phonics Studio" },
-    "kicker": { "ko": "콘텐츠 제작·검수·운영 도구", "en": "Authoring, review and ops console" },
+    "title": {
+      "ko": "Phonics Studio",
+      "en": "Phonics Studio"
+    },
+    "kicker": {
+      "ko": "콘텐츠 제작·검수·운영 도구",
+      "en": "Authoring, review and ops console"
+    },
     "summary": {
       "ko": "파닉스 콘텐츠를 만들고 검수하고 운영하는 웹 앱의 프런트엔드. creator / reviewer / ops 세 역할로 화면을 나누되 권한 판정은 백엔드에 맡기는 구조로 설계했다.",
       "en": "The front end of a phonics content pipeline, split across creator / reviewer / ops roles while authorization stays server-side."
     },
-    "role": { "ko": "역할별 화면 설계 · 프런트엔드", "en": "Role-based UI design, front end" },
-    "tags": ["React", "Workflow UI", "Role-based"],
-    "entry": ""
+    "role": {
+      "ko": "역할별 화면 설계 · 프런트엔드",
+      "en": "Role-based UI design, front end"
+    },
+    "tags": [
+      "React",
+      "Workflow UI",
+      "Role-based"
+    ],
+    "entry": "",
+    "shot_path": "studio/mine",
+    "shot_wait": 3500
   },
-
   "Phonics-Playground": {
     "order": 6,
-    "title": { "ko": "Phonics Playground", "en": "Phonics Playground" },
-    "kicker": { "ko": "학생용 게임 클라이언트", "en": "Student-facing game client" },
+    "title": {
+      "ko": "Phonics Playground",
+      "en": "Phonics Playground"
+    },
+    "kicker": {
+      "ko": "학생용 게임 클라이언트",
+      "en": "Student-facing game client"
+    },
     "summary": {
       "ko": "발행된 파닉스 게임을 둘러보고 플레이하는 학생용 SPA. 게임은 iframe 안에 격리하고 이벤트만 postMessage로 받아, 게임과 셸을 따로 배포할 수 있게 했다.",
       "en": "A student SPA for browsing and playing published phonics games. Games run sandboxed in an iframe and report through postMessage, so shell and content ship separately."
     },
-    "role": { "ko": "화면 설계 · 프런트엔드", "en": "UI design, front end" },
-    "tags": ["React", "Games", "Sandbox"],
+    "role": {
+      "ko": "화면 설계 · 프런트엔드",
+      "en": "UI design, front end"
+    },
+    "tags": [
+      "React",
+      "Games",
+      "Sandbox"
+    ],
     "entry": ""
   },
-
   "Sound-Safari": {
     "order": 7,
-    "title": { "ko": "Sound Safari", "en": "Sound Safari" },
-    "kicker": { "ko": "발음 연습 게임 · 음성 인식", "en": "Pronunciation game · speech recognition" },
+    "title": {
+      "ko": "Sound Safari",
+      "en": "Sound Safari"
+    },
+    "kicker": {
+      "ko": "발음 연습 게임 · 음성 인식",
+      "en": "Pronunciation game · speech recognition"
+    },
     "summary": {
       "ko": "한국 아이들이 자주 헷갈리는 소리쌍(f↔p, v↔b, r↔l)만 골라 만든 정글 테마 단어 게임. 글자 카드를 순서대로 끌어 단어를 맞추고, 마이크로 직접 발음해야 다음 문제로 넘어간다. 듣기에서 끝내지 않고 발음을 게이트로 걸어 아이가 소리를 내도록 강제했다.",
       "en": "A jungle-themed word game built around the sound pairs Korean learners confuse most (f↔p, v↔b, r↔l). Children drag letter cards into order, then must say the word aloud — pronunciation gates the next round, so listening alone never counts as done."
     },
-    "role": { "ko": "게임 설계 · 아트 디렉션 · 구현", "en": "Game design, art direction, implementation" },
-    "tags": ["Game", "Speech Recognition", "Phonics"],
+    "role": {
+      "ko": "게임 설계 · 아트 디렉션 · 구현",
+      "en": "Game design, art direction, implementation"
+    },
+    "tags": [
+      "Game",
+      "Speech Recognition",
+      "Phonics"
+    ],
     "entry": ""
   },
-
   "phonics-wordmashup": {
     "order": 8,
-    "title": { "ko": "Prompt Crash — 합성어 게임", "en": "Prompt Crash — Compound Word Game" },
-    "kicker": { "ko": "5~7세 복합어 퍼즐 게임", "en": "Compound word puzzle, ages 5–7" },
+    "title": {
+      "ko": "Prompt Crash — 합성어 게임",
+      "en": "Prompt Crash — Compound Word Game"
+    },
+    "kicker": {
+      "ko": "5~7세 복합어 퍼즐 게임",
+      "en": "Compound word puzzle, ages 5–7"
+    },
     "summary": {
       "ko": "영어 복합어를 설명 없이 두 조각을 직접 합쳐보며 익히는 퍼즐 게임. 성공 기준을 '5세 아이가 어른 도움 없이 혼자 6라운드를 완주하는 것'으로 잡고, 그 기준에 맞춰 규칙 설명과 텍스트를 계속 덜어냈다.",
       "en": "A puzzle game that teaches English compound words by having children fuse two halves — no instructions. Success was defined as a five-year-old finishing six rounds unaided, and text was stripped back until that held."
     },
-    "role": { "ko": "게임 기획 · 화면 설계 · 구현", "en": "Game concept, UI design, implementation" },
-    "tags": ["Game", "Kids UX", "TypeScript"],
+    "role": {
+      "ko": "게임 기획 · 화면 설계 · 구현",
+      "en": "Game concept, UI design, implementation"
+    },
+    "tags": [
+      "Game",
+      "Kids UX",
+      "TypeScript"
+    ],
     "entry": ""
   },
-
   "poly-dashboard": {
     "order": 9,
-    "title": { "ko": "EduPoly 캠퍼스 대시보드", "en": "EduPoly Campus Dashboard" },
-    "kicker": { "ko": "운영 지표 대시보드 · 디자인 시스템", "en": "Ops dashboard · design system" },
+    "title": {
+      "ko": "EduPoly 캠퍼스 대시보드",
+      "en": "EduPoly Campus Dashboard"
+    },
+    "kicker": {
+      "ko": "운영 지표 대시보드 · 디자인 시스템",
+      "en": "Ops dashboard · design system"
+    },
     "summary": {
       "ko": "캠퍼스 운영 지표를 한 화면에서 보는 대시보드. 색·타입·차트 팔레트를 토큰으로 정의해 CANB 대시보드와 같은 뼈대를 브랜드만 갈아끼워 재사용했다.",
       "en": "A campus operations dashboard whose color, type and chart palette live as tokens — the same skeleton reused for a second brand by swapping the token layer."
     },
-    "role": { "ko": "디자인 시스템 정의 · 화면 설계 · 구현", "en": "Design tokens, UI design, implementation" },
-    "tags": ["Dashboard", "Design Tokens", "Data Viz"],
-    "entry": ""
+    "role": {
+      "ko": "디자인 시스템 정의 · 화면 설계 · 구현",
+      "en": "Design tokens, UI design, implementation"
+    },
+    "tags": [
+      "Dashboard",
+      "Design Tokens",
+      "Data Viz"
+    ],
+    "entry": "",
+    "shot_path": "index.html",
+    "shot_wait": 4000
   },
-
   "canb-dashboard": {
     "order": 10,
-    "title": { "ko": "CANB 캠퍼스 대시보드", "en": "CANB Campus Dashboard" },
-    "kicker": { "ko": "같은 뼈대, 다른 브랜드", "en": "Same skeleton, different brand" },
+    "title": {
+      "ko": "CANB 캠퍼스 대시보드",
+      "en": "CANB Campus Dashboard"
+    },
+    "kicker": {
+      "ko": "같은 뼈대, 다른 브랜드",
+      "en": "Same skeleton, different brand"
+    },
     "summary": {
       "ko": "EduPoly 대시보드와 구조를 공유하되 토큰만 교체한 자매 제품. 브랜드가 늘어날 때 화면을 다시 그리지 않아도 되는지 실제로 검증한 사례다.",
       "en": "A sibling of the EduPoly dashboard sharing structure but swapping the token layer — a real test of whether adding a brand requires redrawing screens."
     },
-    "role": { "ko": "토큰 재정의 · 화면 적용", "en": "Token re-definition, UI application" },
-    "tags": ["Dashboard", "Design Tokens", "Multi-brand"],
-    "entry": ""
+    "role": {
+      "ko": "토큰 재정의 · 화면 적용",
+      "en": "Token re-definition, UI application"
+    },
+    "tags": [
+      "Dashboard",
+      "Design Tokens",
+      "Multi-brand"
+    ],
+    "entry": "",
+    "shot_path": "index.html",
+    "shot_wait": 4000
   },
-
   "poly-ai-agent": {
     "order": 11,
-    "title": { "ko": "Poly AI Agent", "en": "Poly AI Agent" },
-    "kicker": { "ko": "AI 경영 분석 플랫폼 UI 프로토타입", "en": "AI business-analytics platform prototype" },
+    "title": {
+      "ko": "Poly AI Agent",
+      "en": "Poly AI Agent"
+    },
+    "kicker": {
+      "ko": "AI 경영 분석 플랫폼 UI 프로토타입",
+      "en": "AI business-analytics platform prototype"
+    },
     "summary": {
       "ko": "학원 운영 데이터를 자연어로 묻고 리포트로 받는 플랫폼의 UI 프로토타입. 로그인부터 채팅·프로젝트·리포트 뷰어까지 12개 화면을 이어 붙였고, 색은 전부 토큰으로만 써서 LNB 스위처로 POLY와 CANB 브랜드가 런타임에 교체된다.",
       "en": "A UI prototype for a platform where academy operations data is queried in natural language and returned as reports. Twelve screens from login to report viewer, with every color drawn from tokens so a switcher swaps the POLY and CANB brands at runtime."
     },
-    "role": { "ko": "화면 설계 · 디자인 토큰 · 프로토타입 구현", "en": "UI design, design tokens, prototype implementation" },
-    "tags": ["AI Agent", "Design Tokens", "Multi-brand", "Prototype"],
-    "entry": ""
+    "role": {
+      "ko": "화면 설계 · 디자인 토큰 · 프로토타입 구현",
+      "en": "UI design, design tokens, prototype implementation"
+    },
+    "tags": [
+      "AI Agent",
+      "Design Tokens",
+      "Multi-brand",
+      "Prototype"
+    ],
+    "entry": "",
+    "shot_path": "home.html",
+    "shot_wait": 3500
   },
-
   "design-extractor": {
     "order": 12,
-    "title": { "ko": "Design System Hub & Exporter", "en": "Design System Hub & Exporter" },
-    "kicker": { "ko": "디자인 토큰 추출 도구", "en": "Design token extraction tool" },
+    "title": {
+      "ko": "Design System Hub & Exporter",
+      "en": "Design System Hub & Exporter"
+    },
+    "kicker": {
+      "ko": "디자인 토큰 추출 도구",
+      "en": "Design token extraction tool"
+    },
     "summary": {
       "ko": "기존 화면에서 색·타입·간격을 뽑아 토큰 문서로 내보내는 도구. 디자인 시스템을 문서로 먼저 쓰지 않고 이미 만든 화면에서 역으로 정리하는 접근을 실험했다.",
       "en": "A tool that extracts color, type and spacing from existing screens into a token document — deriving a design system backwards from shipped UI instead of writing the spec first."
     },
-    "role": { "ko": "도구 기획 · UI · 구현", "en": "Tool concept, UI, implementation" },
-    "tags": ["Design Tokens", "Tooling"],
+    "role": {
+      "ko": "도구 기획 · UI · 구현",
+      "en": "Tool concept, UI, implementation"
+    },
+    "tags": [
+      "Design Tokens",
+      "Tooling"
+    ],
     "entry": ""
   },
-
   "polyscoop": {
     "order": 13,
-    "title": { "ko": "Poly Scoop", "en": "Poly Scoop" },
-    "kicker": { "ko": "학생 기자단 웹진", "en": "Student reporters' web magazine" },
+    "title": {
+      "ko": "Poly Scoop",
+      "en": "Poly Scoop"
+    },
+    "kicker": {
+      "ko": "학생 기자단 웹진",
+      "en": "Student reporters' web magazine"
+    },
     "summary": {
       "ko": "폴리 학생 기자단이 직접 취재한 기사를 싣는 웹진. 심층탐구·일상기록·세상 속으로 네 개 섹션으로 나누고 영상 기사를 함께 다루며, 지난 호를 계속 쌓아가는 구조로 만들었다.",
       "en": "A web magazine carrying articles reported by Poly's student journalists — four sections, video pieces alongside text, and a back-issue archive that keeps accumulating."
     },
-    "role": { "ko": "웹진 구조 설계 · 화면 디자인 · 구현", "en": "Editorial structure, visual design, implementation" },
-    "tags": ["Editorial", "Content", "Web"],
+    "role": {
+      "ko": "웹진 구조 설계 · 화면 디자인 · 구현",
+      "en": "Editorial structure, visual design, implementation"
+    },
+    "tags": [
+      "Editorial",
+      "Content",
+      "Web"
+    ],
     "entry": ""
   },
-
   "LIO": {
     "order": 14,
-    "title": { "ko": "LIO 디자인 시스템", "en": "LIO Design System" },
-    "kicker": { "ko": "브랜드 · 컴포넌트 정의", "en": "Brand and component definitions" },
+    "title": {
+      "ko": "LIO 디자인 시스템",
+      "en": "LIO Design System"
+    },
+    "kicker": {
+      "ko": "브랜드 · 컴포넌트 정의",
+      "en": "Brand and component definitions"
+    },
     "summary": {
       "ko": "LIO 프로덕트의 색·타입·컴포넌트를 한 문서에 모은 디자인 시스템 페이지.",
       "en": "A single-page design system collecting LIO's color, type and component definitions."
     },
-    "role": { "ko": "디자인 시스템 정의", "en": "Design system definition" },
-    "tags": ["Design System", "Brand"],
+    "role": {
+      "ko": "디자인 시스템 정의",
+      "en": "Design system definition"
+    },
+    "tags": [
+      "Design System",
+      "Brand"
+    ],
     "entry": "lio-design-system.html"
   }
 }

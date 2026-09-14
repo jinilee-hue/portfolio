@@ -23,6 +23,8 @@
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.6;
     overflow-x:hidden}
+  /* 고정 헤더가 스크롤 목적지를 가리지 않도록 (WCAG 2.4.11 Focus Not Obscured) */
+  :where(h2,h3,.case,.band,[id]){scroll-margin-top:72px}
   a{color:inherit}
   .wrap{max-width:1500px;margin:0 auto;padding:0 clamp(16px,4vw,56px)}
 
@@ -119,12 +121,16 @@
   .meta{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:12px;
     font-family:var(--grot);font-size:11px;letter-spacing:.06em;color:var(--fg-28)}
   .meta b{color:var(--fg-55);font-weight:400;font-variant-numeric:tabular-nums}
-  .more{margin-top:16px;font-family:var(--grot);font-size:11px;letter-spacing:.12em;
-    text-transform:uppercase;background:none;border:1px solid var(--line);color:var(--fg-55);
-    padding:7px 13px;cursor:pointer;transition:all .2s var(--ease)}
-  .more:hover{border-color:var(--accent);color:var(--accent)}
-  .more:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-  .more[aria-expanded=true]{background:var(--accent);color:#04120F;border-color:var(--accent)}
+  .more{margin-top:20px;font-family:var(--grot);font-weight:600;font-size:13px;letter-spacing:.04em;
+    background:var(--accent);border:1px solid var(--accent);color:#04120F;
+    padding:12px 22px;cursor:pointer;transition:all .2s var(--ease);
+    display:inline-flex;align-items:center;gap:9px;min-height:44px}
+  .more::after{content:'↓';font-size:12px;transition:transform .25s var(--ease)}
+  .more:hover{filter:brightness(1.12)}
+  .more:active{transform:translateY(1px)}
+  .more:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+  .more[aria-expanded=true]{background:transparent;color:var(--accent)}
+  .more[aria-expanded=true]::after{transform:rotate(180deg)}
   .case{display:none;grid-column:1/-1;border-top:1px solid var(--line);margin-top:clamp(20px,3vw,34px);
     padding-top:clamp(22px,3vw,34px)}
   .case.open{display:grid;gap:clamp(22px,3vw,40px)}
@@ -132,11 +138,30 @@
   .case h3{font-family:var(--grot);font-weight:600;font-size:10.5px;letter-spacing:.16em;
     text-transform:uppercase;color:var(--accent);margin:0 0 10px}
   .case p{margin:0 0 18px;color:var(--fg-55);font-size:.92rem;max-width:60ch;word-break:keep-all}
-  .flow{list-style:none;margin:0 0 20px;padding:0;counter-reset:f}
-  .flow li{display:grid;grid-template-columns:2.2rem 1fr;gap:10px;padding:8px 0;
-    border-bottom:1px solid var(--line);font-size:.9rem;color:var(--fg-55)}
-  .flow li span{font-family:var(--grot);font-size:10.5px;color:var(--fg-28);letter-spacing:.08em;
-    padding-top:.2em;font-variant-numeric:tabular-nums}
+  /* 플로우 차트 — 단계 노드를 연결선으로 잇는다.
+     넓은 화면은 가로 흐름, 좁은 화면은 세로 흐름으로 자동 전환. */
+  .flow{list-style:none;margin:0 0 22px;padding:0;display:flex;flex-wrap:wrap;gap:0}
+  .flow li{position:relative;flex:1 1 128px;min-width:118px;
+    border:1px solid var(--line);padding:11px 12px 12px;margin:0 14px 14px 0;
+    background:color-mix(in oklab, var(--fg) 3%, transparent)}
+  .flow li .s{display:block;font-family:var(--grot);font-size:9.5px;letter-spacing:.14em;
+    color:var(--accent);font-variant-numeric:tabular-nums;margin-bottom:6px}
+  .flow li .t{display:block;font-size:.83rem;line-height:1.45;color:var(--fg-55);word-break:keep-all}
+  /* 노드 사이 연결선 + 화살촉 */
+  .flow li::after{content:'';position:absolute;top:50%;right:-14px;width:14px;height:1px;
+    background:var(--line)}
+  .flow li::before{content:'';position:absolute;top:50%;right:-14px;
+    border:3px solid transparent;border-left-color:var(--fg-28);
+    transform:translate(9px,-3px)}
+  .flow li:last-child::after,.flow li:last-child::before{display:none}
+  /* 줄바꿈된 노드의 연결선은 지운다(허공을 가리키게 되므로) */
+  @media(max-width:1100px){
+    .flow{flex-direction:column}
+    .flow li{flex:none;margin:0 0 16px}
+    .flow li::after{top:auto;bottom:-16px;right:auto;left:18px;width:1px;height:16px}
+    .flow li::before{top:auto;bottom:-16px;right:auto;left:18px;
+      border-left-color:transparent;border-top-color:var(--fg-28);transform:translate(-3px,10px)}
+  }
   .stack{margin:0 0 20px}
   .stack div{display:grid;grid-template-columns:5.5rem 1fr;gap:10px;padding:7px 0;
     border-bottom:1px solid var(--line);align-items:baseline}
@@ -200,7 +225,14 @@
     .case>div,.flow li,.stack div,.dec li,.info{break-inside:avoid}
     .info h2{break-after:avoid}
     .case h3{font-size:7.5pt;color:#00655a}
-    .case p,.flow li,.stack dd,.dec li{font-size:8.5pt;color:#333}
+    .case p,.stack dd,.dec li{font-size:8.5pt;color:#333}
+    .flow{flex-direction:row!important;flex-wrap:wrap}
+    .flow li{font-size:7.5pt;color:#333;background:#f7f7f7;border-color:#ddd;
+      padding:2mm 2.5mm;margin:0 3mm 3mm 0;flex:1 1 26mm;min-width:24mm}
+    .flow li .s{color:#00655a;font-size:6.5pt}
+    .flow li .t{font-size:7.5pt;color:#333}
+    .flow li::after{right:-3mm;width:3mm;background:#bbb}
+    .flow li::before{right:-3mm;border-left-color:#888}
     .band{page-break-before:auto}
     .band h2{font-size:15pt}
     .prin h3{font-size:10pt}.prin p{font-size:9pt}
@@ -267,7 +299,7 @@ const COPY={
     h1:'만든 걸 <i>보여주는</i> 게 제일 빠르다.',
     lede:'교육 제품을 설계하고, 프로토타입은 직접 만들어 배포한다. 아래 화면은 목업이 아니라 실제 배포된 페이지를 그대로 캡처한 것이고, 누르면 그 주소로 열린다.',
     counts:[['배포','{n}'],['라이브','{live}'],['최근','{last}']],
-    open:'열기', more:'과정 보기', less:'접기', pdf:'PDF로 저장',
+    open:'열기', more:'제작 과정 상세', less:'상세 접기', pdf:'PDF로 저장',
     mPeriod:'기간', mCommits:'커밋', mRole:'역할',
     cIntent:'기획 의도', cFlow:'흐름', cStack:'기술 스택', cDec:'설계 결정',
     prinH:'같이 일할 때 알아두면 좋은 것들',
@@ -284,7 +316,7 @@ const COPY={
     h1:'The fastest answer is <i>showing</i> the thing.',
     lede:'I design education products and build the prototypes myself. These are screenshots of pages actually deployed — not mockups. Click one and it opens.',
     counts:[['Shipped','{n}'],['Live','{live}'],['Latest','{last}']],
-    open:'Open', more:'Read the process', less:'Collapse', pdf:'Save as PDF',
+    open:'Open', more:'Full process', less:'Collapse', pdf:'Save as PDF',
     mPeriod:'Period', mCommits:'Commits', mRole:'Role',
     cIntent:'Intent', cFlow:'Flow', cStack:'Stack', cDec:'Decisions',
     prinH:'Worth knowing before we work together',
@@ -316,8 +348,8 @@ function draw(){
     <article class="piece">
       <a class="shot" data-open="${c.open} ↗" href="${p.live||p.repo}" target="_blank" rel="noopener"
          aria-label="${p.title} ${c.open}">
-        <img src="./${p.shot}" alt="${p.title} 실제 배포 화면" loading="${i<2?'eager':'lazy'}"
-             ${i===0?'fetchpriority="high"':''} width="1440" height="900">
+        <img src="./${p.shot}" alt="${p.title} 실제 배포 화면" decoding="async"
+             ${i===0?'fetchpriority="high"':'fetchpriority="low"'} width="1440" height="900">
       </a>
       <div class="info">
         <span class="n">${String(i+1).padStart(2,'0')} / ${String(ps.length).padStart(2,'0')}${p.kicker?' · '+p.kicker:''}</span>
@@ -336,7 +368,7 @@ function draw(){
         <div>
           ${p.intent?`<h3>${c.cIntent}</h3><p>${p.intent}</p>`:''}
           ${p.flow.length?`<h3>${c.cFlow}</h3><ol class="flow">${p.flow.map(f=>
-            `<li><span>${f.step}</span><span>${lang()==='ko'?f.ko:(f.en||f.ko)}</span></li>`).join('')}</ol>`:''}
+            `<li><span class="s">${f.step}</span><span class="t">${lang()==='ko'?f.ko:(f.en||f.ko)}</span></li>`).join('')}</ol>`:''}
         </div>
         <div>
           ${p.stack.length?`<h3>${c.cStack}</h3><dl class="stack">${p.stack.map(s=>
@@ -352,6 +384,9 @@ function draw(){
     const open=box.classList.toggle('open');
     b.setAttribute('aria-expanded',String(open));
     b.textContent=open?c.less:c.more;
+    if(open&&!window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+      box.scrollIntoView({block:'nearest',behavior:'smooth'});
+    }
   }));
 
   document.getElementById('prin-h').textContent=c.prinH;

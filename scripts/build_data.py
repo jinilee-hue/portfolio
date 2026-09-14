@@ -201,6 +201,11 @@ def main() -> int:
         if entry and p["auto"]["live"]:
             p["auto"]["live"] = p["auto"]["live"].rstrip("/") + "/" + entry.lstrip("/")
         p["shot"] = f"assets/shots/{p['id']}.jpg"
+        # 썸네일 촬영 대상: shot_path 가 있으면 그 화면, 없으면 라이브 첫 화면.
+        # 인트로·로그인 화면보다 실제 작업이 보이는 화면이 포트폴리오에서 훨씬 강하다.
+        base = p["auto"]["live"]
+        sp = (p.get("shot_path") or "").strip()
+        p["shot_url"] = (base.rstrip("/") + "/" + sp.lstrip("/")) if (base and sp) else base
         merged.append(p)
 
     # 정렬: overrides 의 order 우선(작을수록 앞), 없으면 최근 푸시순
