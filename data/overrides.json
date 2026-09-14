@@ -86,20 +86,26 @@
   "Sound-Safari": {
     "order": 7,
     "title": { "ko": "Sound Safari", "en": "Sound Safari" },
-    "kicker": { "ko": "소리 인식 학습 게임", "en": "Sound recognition game" },
-    "summary": { "ko": "", "en": "" },
-    "role": { "ko": "", "en": "" },
-    "tags": ["Game", "Phonics"],
+    "kicker": { "ko": "발음 연습 게임 · 음성 인식", "en": "Pronunciation game · speech recognition" },
+    "summary": {
+      "ko": "한국 아이들이 자주 헷갈리는 소리쌍(f↔p, v↔b, r↔l)만 골라 만든 정글 테마 단어 게임. 글자 카드를 순서대로 끌어 단어를 맞추고, 마이크로 직접 발음해야 다음 문제로 넘어간다. 듣기에서 끝내지 않고 발음을 게이트로 걸어 아이가 소리를 내도록 강제했다.",
+      "en": "A jungle-themed word game built around the sound pairs Korean learners confuse most (f↔p, v↔b, r↔l). Children drag letter cards into order, then must say the word aloud — pronunciation gates the next round, so listening alone never counts as done."
+    },
+    "role": { "ko": "게임 설계 · 아트 디렉션 · 구현", "en": "Game design, art direction, implementation" },
+    "tags": ["Game", "Speech Recognition", "Phonics"],
     "entry": ""
   },
 
   "phonics-wordmashup": {
     "order": 8,
     "title": { "ko": "Prompt Crash — 합성어 게임", "en": "Prompt Crash — Compound Word Game" },
-    "kicker": { "ko": "합성어 학습 게임", "en": "Compound word game" },
-    "summary": { "ko": "", "en": "" },
-    "role": { "ko": "", "en": "" },
-    "tags": ["Game", "TypeScript"],
+    "kicker": { "ko": "5~7세 복합어 퍼즐 게임", "en": "Compound word puzzle, ages 5–7" },
+    "summary": {
+      "ko": "영어 복합어를 설명 없이 두 조각을 직접 합쳐보며 익히는 퍼즐 게임. 성공 기준을 '5세 아이가 어른 도움 없이 혼자 6라운드를 완주하는 것'으로 잡고, 그 기준에 맞춰 규칙 설명과 텍스트를 계속 덜어냈다.",
+      "en": "A puzzle game that teaches English compound words by having children fuse two halves — no instructions. Success was defined as a five-year-old finishing six rounds unaided, and text was stripped back until that held."
+    },
+    "role": { "ko": "게임 기획 · 화면 설계 · 구현", "en": "Game concept, UI design, implementation" },
+    "tags": ["Game", "Kids UX", "TypeScript"],
     "entry": ""
   },
 
@@ -132,10 +138,13 @@
   "poly-ai-agent": {
     "order": 11,
     "title": { "ko": "Poly AI Agent", "en": "Poly AI Agent" },
-    "kicker": { "ko": "사내 AI 에이전트 콘솔", "en": "Internal AI agent console" },
-    "summary": { "ko": "", "en": "" },
-    "role": { "ko": "", "en": "" },
-    "tags": ["AI Agent", "Console"],
+    "kicker": { "ko": "AI 경영 분석 플랫폼 UI 프로토타입", "en": "AI business-analytics platform prototype" },
+    "summary": {
+      "ko": "학원 운영 데이터를 자연어로 묻고 리포트로 받는 플랫폼의 UI 프로토타입. 로그인부터 채팅·프로젝트·리포트 뷰어까지 12개 화면을 이어 붙였고, 색은 전부 토큰으로만 써서 LNB 스위처로 POLY와 CANB 브랜드가 런타임에 교체된다.",
+      "en": "A UI prototype for a platform where academy operations data is queried in natural language and returned as reports. Twelve screens from login to report viewer, with every color drawn from tokens so a switcher swaps the POLY and CANB brands at runtime."
+    },
+    "role": { "ko": "화면 설계 · 디자인 토큰 · 프로토타입 구현", "en": "UI design, design tokens, prototype implementation" },
+    "tags": ["AI Agent", "Design Tokens", "Multi-brand", "Prototype"],
     "entry": ""
   },
 
@@ -155,10 +164,13 @@
   "polyscoop": {
     "order": 13,
     "title": { "ko": "Poly Scoop", "en": "Poly Scoop" },
-    "kicker": { "ko": "사내 소식 페이지", "en": "Internal news page" },
-    "summary": { "ko": "", "en": "" },
-    "role": { "ko": "", "en": "" },
-    "tags": ["Content", "Web"],
+    "kicker": { "ko": "학생 기자단 웹진", "en": "Student reporters' web magazine" },
+    "summary": {
+      "ko": "폴리 학생 기자단이 직접 취재한 기사를 싣는 웹진. 심층탐구·일상기록·세상 속으로 네 개 섹션으로 나누고 영상 기사를 함께 다루며, 지난 호를 계속 쌓아가는 구조로 만들었다.",
+      "en": "A web magazine carrying articles reported by Poly's student journalists — four sections, video pieces alongside text, and a back-issue archive that keeps accumulating."
+    },
+    "role": { "ko": "웹진 구조 설계 · 화면 디자인 · 구현", "en": "Editorial structure, visual design, implementation" },
+    "tags": ["Editorial", "Content", "Web"],
     "entry": ""
   },
 
