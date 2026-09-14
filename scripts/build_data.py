@@ -235,6 +235,12 @@ def main() -> int:
         if entry and p["auto"]["live"]:
             p["auto"]["live"] = p["auto"]["live"].rstrip("/") + "/" + entry.lstrip("/")
         p["shot"] = f"assets/shots/{p['id']}.jpg"
+        # 기기별 컷 — 존재 여부는 렌더 단계에서 onerror 로 걸러진다
+        p["shots"] = {
+            "desktop": f"assets/shots/{p['id']}.jpg",
+            "tablet": f"assets/shots/{p['id']}--tablet.jpg",
+            "mobile": f"assets/shots/{p['id']}--mobile.jpg",
+        }
         # 썸네일 촬영 대상: shot_path 가 있으면 그 화면, 없으면 라이브 첫 화면.
         # 인트로·로그인 화면보다 실제 작업이 보이는 화면이 포트폴리오에서 훨씬 강하다.
         base = p["auto"]["live"]
@@ -242,8 +248,16 @@ def main() -> int:
         p["shot_url"] = (base.rstrip("/") + "/" + sp.lstrip("/")) if (base and sp) else base
         merged.append(p)
 
-    # 정렬: overrides 의 order 우선(작을수록 앞), 없으면 최근 푸시순
-    merged.sort(key=lambda p: (p.get("order", 999), p["auto"]["pushed_at"] or ""), reverse=False)
+    # 정렬: 기본은 마지막 커밋 최신순(= 마지막에 한 작업이 항상 맨 위).
+    # overrides 의 order 는 그 위를 덮는 수동 고정용이며, 지정하지 않는 것이 기본이다.
+    merged.sort(
+        key=lambda p: (
+            p.get("order", 10_000),
+            # 최신이 앞으로 오도록 날짜 문자열을 역순 정렬 키로 만든다
+            [-ord(c) for c in ((p["auto"].get("span") or {}).get("last")
+                               or (p["auto"].get("pushed_at") or "")[:10] or "0000-00-00")],
+        )
+    )
 
     out = {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),

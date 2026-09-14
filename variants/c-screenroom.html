@@ -83,26 +83,106 @@
     grid-template-columns:1fr;text-decoration:none;position:relative}
   @media(min-width:920px){
     .piece{grid-template-columns:repeat(12,1fr);align-items:center}
-    .piece .shot{grid-column:1/9}
+    .piece .shots{grid-column:1/9}
     .piece .info{grid-column:9/13}
-    .piece:nth-child(even) .shot{grid-column:5/13;grid-row:1}
+    .piece:nth-child(even) .shots{grid-column:5/13;grid-row:1}
     .piece:nth-child(even) .info{grid-column:1/5;grid-row:1}
     /* 3n 번째는 리듬을 위해 폭을 살짝 좁히되, shot 과 info 열이 겹치지 않게 한 행에 나눠 둔다
        (겹치면 스크린샷 위로 텍스트가 올라타 화면이 잘려 보인다). */
-    .piece:nth-child(3n) .shot{grid-column:1/8;grid-row:1}
+    .piece:nth-child(3n) .shots{grid-column:1/8;grid-row:1}
     .piece:nth-child(3n) .info{grid-column:8/13;grid-row:1}
   }
-  .shot{position:relative;overflow:hidden;aspect-ratio:1440/900;
-    background:color-mix(in oklab, var(--fg) 6%, transparent);border:1px solid var(--line)}
-  .shot img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;
+  /* 기기 프레임은 스톡 목업 이미지가 아니라 CSS 로 그린다.
+     이미지 요청 0, 테마 색을 그대로 따르고, 화면은 여전히 실제 캡처다.
+     베젤은 얇고 무채색으로 — 기기가 주인공이 되면 화면이 안 보인다. */
+  /* 기기들을 겹쳐 배치하고 3D 로 살짝 눕힌다. 평면 나열보다 볼륨이 산다.
+     프레임은 여전히 CSS 로만 그린다 — 이미지 요청 0, 화면은 실제 캡처. */
+  .shots{position:relative;display:block;perspective:2200px;
+    transform-style:preserve-3d;padding:0 0 4%}
+  /* desktop 은 흐름에 남겨 .shots 의 높이를 만들고, 나머지는 그 위에 겹친다 */
+  .frame{position:absolute;transform-style:preserve-3d;
+    transition:transform .75s var(--ease), filter .5s var(--ease)}
+  .shot{position:relative;overflow:hidden;display:block;
+    background:color-mix(in oklab, var(--fg) 6%, transparent)}
+
+  /* 데스크톱: 기준면. 살짝 왼쪽으로 돌려 깊이를 만든다 */
+  .frame--desktop{position:relative;width:82%;margin-left:0;z-index:1;
+    transform:rotateY(9deg) rotateX(3deg) rotateZ(-.8deg);
+    filter:drop-shadow(0 26px 44px rgba(0,0,0,.42));
+    padding:10px 10px 0;border-radius:10px 10px 3px 3px;
+    background:color-mix(in oklab, var(--fg) 12%, var(--bg));
+    box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--fg) 18%, transparent)}
+  .frame--desktop .shot{aspect-ratio:1440/900;border-radius:2px}
+  .frame--desktop::after{content:'';display:block;height:15px;
+    background:color-mix(in oklab, var(--fg) 12%, var(--bg));border-radius:0 0 3px 3px;
+    box-shadow:inset 0 -1px 0 color-mix(in oklab, var(--fg) 20%, transparent)}
+  .frame--desktop::before{content:'';position:absolute;left:50%;bottom:-13px;width:24%;height:13px;
+    transform:translateX(-50%);
+    background:linear-gradient(color-mix(in oklab,var(--fg) 14%,var(--bg)),
+                               color-mix(in oklab,var(--fg) 9%,var(--bg)));
+    clip-path:polygon(12% 0,88% 0,100% 100%,0 100%)}
+
+  /* 태블릿: 오른쪽 아래에 겹쳐 세운다 */
+  .frame--tablet{right:0;bottom:-2%;width:27%;z-index:2;
+    transform:rotateY(-13deg) rotateX(4deg) rotateZ(1.6deg);
+    filter:drop-shadow(0 20px 34px rgba(0,0,0,.5));
+    padding:9px;border-radius:14px;
+    background:color-mix(in oklab, var(--fg) 13%, var(--bg));
+    box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--fg) 20%, transparent)}
+  .frame--tablet .shot{aspect-ratio:834/1112;border-radius:5px}
+
+  /* 모바일: 가장 앞에, 가장 많이 기울여 */
+  .frame--mobile{right:4%;bottom:-5%;width:15%;z-index:3;
+    transform:rotateY(-16deg) rotateX(5deg) rotateZ(2.4deg);
+    filter:drop-shadow(0 16px 26px rgba(0,0,0,.55));
+    padding:6px;border-radius:16px;
+    background:color-mix(in oklab, var(--fg) 15%, var(--bg));
+    box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--fg) 22%, transparent)}
+  .frame--mobile .shot{aspect-ratio:390/844;border-radius:11px}
+  .frame--mobile::after{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);
+    width:32%;height:8px;border-radius:0 0 7px 7px;
+    background:color-mix(in oklab, var(--fg) 15%, var(--bg));z-index:2}
+
+  /* 컷이 하나뿐이면 전폭 + 각도만 약하게 */
+  .shots:has(.frame:only-child) .frame--desktop{width:100%;
+    transform:rotateY(5deg) rotateX(2deg)}
+
+  /* 호버에서 각도를 펴며 앞으로 — 눌러볼 수 있다는 신호 */
+  .piece:hover .frame--desktop{transform:rotateY(4deg) rotateX(1.5deg) translateZ(24px)}
+  .piece:hover .frame--tablet{transform:rotateY(-7deg) rotateX(2deg) translateZ(46px) translateY(-2%)}
+  .piece:hover .frame--mobile{transform:rotateY(-9deg) rotateX(2.5deg) translateZ(66px) translateY(-3%)}
+
+  .dev{position:absolute;left:0;bottom:-19px;font-family:var(--grot);font-size:9px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--fg-28);opacity:0;
+    transition:opacity .25s var(--ease)}
+  .frame--desktop .dev{bottom:-26px}
+  .piece:hover .dev{opacity:1}
+
+  @media(prefers-reduced-motion:reduce){
+    .frame,.piece:hover .frame--desktop,.piece:hover .frame--tablet,.piece:hover .frame--mobile{
+      transition:none}
+  }
+  @media(max-width:700px){
+    /* 좁은 화면에서 3D 로 겹치면 화면이 너무 작아진다 — 평면 나열로 되돌린다 */
+    .shots{display:flex;align-items:flex-end;gap:8px;perspective:none;padding:0}
+    .frame{position:relative;transform:none!important;filter:none;
+      right:auto;bottom:auto;flex:0 0 auto}
+    .frame--desktop{width:auto;flex:1 1 auto;padding:5px 5px 0;border-radius:6px}
+    .frame--desktop::after{height:8px}
+    .frame--desktop::before{bottom:-8px;height:8px}
+    .frame--tablet{width:24%;padding:5px;border-radius:9px}
+    .frame--mobile{width:15%;padding:4px;border-radius:10px}
+    .dev{display:none}
+  }
+  .shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;
     transform:scale(1.005);transition:transform .8s var(--ease),filter .6s var(--ease);
     filter:saturate(.9) brightness(1.06)}
-  .piece:hover .shot img{transform:scale(1.045);filter:saturate(1.05) brightness(1.12)}
-  .shot::after{content:attr(data-open);position:absolute;left:14px;bottom:14px;
+  .piece:hover .shot img{transform:scale(1.03);filter:saturate(1.05) brightness(1.12)}
+  .shots::after{content:attr(data-open);position:absolute;left:14px;bottom:14px;
     font-family:var(--grot);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
     background:var(--accent);color:#04120F;padding:6px 11px;opacity:0;transform:translateY(6px);
     transition:opacity .3s var(--ease),transform .3s var(--ease)}
-  .piece:hover .shot::after,.piece:focus-visible .shot::after{opacity:1;transform:translateY(0)}
+  .piece:hover .shots::after,.piece:focus-visible .shots::after{opacity:1;transform:translateY(0)}
   .piece:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
   .piece:active .shot img{transform:scale(1.02)}
   .n{font-family:var(--grot);font-size:10.5px;letter-spacing:.15em;color:var(--fg-28);
@@ -268,7 +348,10 @@
       border-bottom:1px solid #ddd;padding-bottom:6mm}
     .piece:nth-child(even) .shot,.piece:nth-child(3n) .shot{grid-column:1!important;grid-row:1!important}
     .piece:nth-child(even) .info,.piece:nth-child(3n) .info{grid-column:2!important;grid-row:1!important}
+    .frame{background:#eee;padding:1mm;border-radius:1mm}
+    .frame--desktop::after,.frame--desktop::before,.frame--mobile::after{display:none}
     .shot{border:1px solid #ddd}
+    .shots{gap:2mm}
     .shot img{filter:none!important;transform:none!important}
     .shot::after{display:none}
     .info h2{font-size:13pt!important;color:#000!important;margin-bottom:2mm}
@@ -492,10 +575,14 @@ function draw(){
 
   room.innerHTML=ps.map((p,i)=>`
     <article class="piece">
-      <a class="shot" data-open="${c.open} ↗" href="${p.live||p.repo}" target="_blank" rel="noopener"
+      <a class="shots" data-open="${c.open} ↗" href="${p.live||p.repo}" target="_blank" rel="noopener"
          aria-label="${p.title} ${c.open}">
-        <img src="${p.shot}" alt="${p.title} 실제 배포 화면" decoding="async"
-             ${i===0?'fetchpriority="high"':'fetchpriority="low"'} width="1440" height="900">
+        ${p.shots.map(s=>`<span class="frame frame--${s.device}">
+          <span class="shot"><img src="${s.src}" alt="${p.title} — ${s.device} 실제 배포 화면" decoding="async"
+               ${i===0&&s.device==='desktop'?'fetchpriority="high"':'fetchpriority="low"'}
+               onerror="this.closest('.frame').remove()"></span>
+          <span class="dev">${s.device}</span>
+        </span>`).join('')}
       </a>
       <div class="info">
         <span class="n">${String(i+1).padStart(2,'0')} / ${String(ps.length).padStart(2,'0')}${p.kicker?' · '+p.kicker:''}</span>

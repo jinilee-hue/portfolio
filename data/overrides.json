@@ -3,7 +3,7 @@
   "_schema": {
     "title/kicker/summary/role": "한/영 객체 {ko,en}",
     "tags": "문자열 배열",
-    "order": "정렬(작을수록 앞)",
+    "order": "선택. 지정하면 그 순서가 우선하고, 없으면 마지막 커밋 최신순으로 자동 정렬된다.",
     "featured": "케이스 스터디 상세를 펼칠 대상",
     "entry": "저장소 루트에 index.html 이 없을 때 진입 파일명",
     "intent": "기획의도 — 왜 만들었나, 무엇이 문제였나 {ko,en}",
@@ -14,10 +14,11 @@
     "shot_path": "썸네일로 촬영할 화면 경로(라이브 URL 뒤에 붙는다). 비우면 첫 화면. 인트로/로그인 대신 실제 작업이 보이는 화면을 고른다.",
     "shot_wait": "촬영 전 추가 대기 ms (애니메이션·차트가 그려질 시간)",
     "concept": "디자인 컨셉 — 어떤 시각 언어를 택했고 왜 그렇게 정했나 {ko,en}",
-    "merge_into": "이 저장소를 다른 프로젝트에 흡수시킨다(목록에서 사라지고 기간·언어·링크만 합쳐짐)"
+    "merge_into": "이 저장소를 다른 프로젝트에 흡수시킨다(목록에서 사라지고 기간·언어·링크만 합쳐짐)",
+    "shot_devices": "촬영할 기기 목록 ['desktop','tablet','mobile']. 비우면 3종 전부. 주 사용 환경을 반영한다.",
+    "shot_selector": "이 CSS 선택자에 해당하는 요소만 캡처한다. 프로토타입 뷰어 셸·여백을 제거할 때 쓴다."
   },
   "eBOOK": {
-    "order": 5,
     "featured": true,
     "title": {
       "ko": "Millions of Cats 인터랙티브 eBook",
@@ -131,10 +132,13 @@
     "concept": {
       "ko": "화면의 주인은 그림이고 글자는 그 위에 얹힌 자막이라는 원칙을 세웠다. 배경 영상이 계속 움직이므로 본문은 반투명 판 위에 올려 대비를 확보하고, 장식은 전부 뺐다. 서체는 어린이 학습용으로 설계된 SIL Andika — a·g 같은 글자가 손글씨 형태라 초기 학습자가 헷갈리지 않는다. 색은 쪽마다 배경 영상에서 뽑아 써서 화면과 글이 따로 놀지 않게 했다.",
       "en": "The picture owns the screen; text is a subtitle laid over it. Because the background video keeps moving, body copy sits on a translucent plate for contrast and every ornament was removed. The typeface is SIL Andika, drawn for early readers — its single-storey a and g match handwriting, so beginners don't misread them. Page colours are sampled from each scene so type and image never feel unrelated."
-    }
+    },
+    "shot_devices": [
+      "tablet",
+      "desktop"
+    ]
   },
   "KCMS": {
-    "order": 1,
     "featured": true,
     "title": {
       "ko": "POLY KCMS 리디자인 + 개발 킷",
@@ -258,10 +262,13 @@
     "concept": {
       "ko": "진단은 '기능이 부족하다'가 아니라 '위계·도구·시스템이 없다'였다. 검색폼·대용량 테이블·편집폼·메모가 같은 비중으로 한 화면에 있어 시선의 출발점이 없었다. 밀도는 파워유저 도구라 낮추지 않고, 행 높이·정렬·구분선·tabular 숫자로 '스캔 가능한 고밀도'를 만들었다. 색은 뿌리 7개만 hex 로 두고 나머지는 color-mix 로 파생시켜, 뿌리 하나를 바꾸면 계열 전체가 따라오게 했다.",
       "en": "The diagnosis wasn't missing features but missing hierarchy, tools and system: search form, bulk table, edit form and memos all carried equal weight, leaving the eye no entry point. Density stayed high — it's a power-user tool — but became scannable through row height, alignment, rules and tabular figures. Only seven root colours are written as hex; everything else derives via color-mix, so changing one root carries its whole family."
-    }
+    },
+    "shot_devices": [
+      "desktop",
+      "tablet"
+    ]
   },
   "LIO_DESIGN": {
-    "order": 3,
     "featured": true,
     "title": {
       "ko": "LIO — 브랜드부터 학습 흐름까지",
@@ -374,10 +381,14 @@
     "concept": {
       "ko": "채택된 B안은 파랑 단색 배경에 흰 워드마크, 오른쪽 위 sparkle 하나로 '깨달음의 순간'을 표시한다. 캐릭터는 사자 — 아이가 배우는 자리에서 평가받는 기분이 들지 않도록 위엄보다 친근함 쪽으로 비율을 잡고, 목에 LIO 밴드너를 둘러 브랜드와 캐릭터를 한 몸으로 묶었다. 화면은 같은 파랑을 배경으로 써서 캐릭터가 UI 위에 얹힌 스티커처럼 보이지 않게 했다.",
       "en": "The chosen direction pairs a solid blue field with a white wordmark and a single sparkle for the moment of understanding. The character is a lion, proportioned toward friendliness rather than majesty so a learning child never feels judged, with a LIO bandana tying character and brand into one object. Screens reuse the same blue so the character never reads as a sticker pasted onto the UI."
-    }
+    },
+    "shot_devices": [
+      "tablet",
+      "desktop"
+    ],
+    "shot_selector": "#stage"
   },
   "AI-Studio": {
-    "order": 6,
     "featured": true,
     "title": {
       "ko": "Wonder Story Lab",
@@ -477,10 +488,13 @@
     "concept": {
       "ko": "7세가 쓰는 화면이라 읽어야 하는 글자를 최대한 줄였다. 지시는 아이콘과 위치로 주고, 선택지는 항상 화면 같은 자리에 둔다. 스크롤이 없으니 '아래에 더 있다'는 신호를 만들 필요도 없다. 색은 아이가 고른 장면의 그림에서 끌어와, 화면이 아이의 결과물을 담는 액자처럼 보이게 했다.",
       "en": "Built for seven-year-olds, so the amount of text to read was cut to a minimum: instructions come from icons and position, and choices always sit in the same place. With no scrolling there's no need to signal 'more below'. Colour is pulled from the scene the child chose, so the screen reads as a frame around their own work."
-    }
+    },
+    "shot_devices": [
+      "tablet",
+      "desktop"
+    ]
   },
   "Phonics-Studio": {
-    "order": 8,
     "title": {
       "ko": "Phonics Studio",
       "en": "Phonics Studio"
@@ -504,10 +518,13 @@
     ],
     "entry": "",
     "shot_path": "studio/mine",
-    "shot_wait": 3500
+    "shot_wait": 3500,
+    "shot_devices": [
+      "desktop",
+      "tablet"
+    ]
   },
   "Phonics-Playground": {
-    "order": 9,
     "title": {
       "ko": "Phonics Playground",
       "en": "Phonics Playground"
@@ -529,10 +546,13 @@
       "Games",
       "Sandbox"
     ],
-    "entry": ""
+    "entry": "",
+    "shot_devices": [
+      "desktop",
+      "tablet"
+    ]
   },
   "Sound-Safari": {
-    "order": 7,
     "title": {
       "ko": "Sound Safari",
       "en": "Sound Safari"
@@ -645,10 +665,13 @@
         "ko": "틀린 소리를 IPA 발음기호로 보여준다. 아이가 읽지는 못하지만 옆에 있는 교사·부모가 무엇을 고쳐줘야 하는지 바로 안다.",
         "en": "Wrong sounds are shown in IPA. The child can't read it, but the teacher or parent beside them immediately knows what to correct."
       }
+    ],
+    "shot_devices": [
+      "tablet",
+      "desktop"
     ]
   },
   "phonics-wordmashup": {
-    "order": 10,
     "title": {
       "ko": "Prompt Crash — 합성어 게임",
       "en": "Prompt Crash — Compound Word Game"
@@ -670,10 +693,13 @@
       "Kids UX",
       "TypeScript"
     ],
-    "entry": ""
+    "entry": "",
+    "shot_devices": [
+      "tablet",
+      "desktop"
+    ]
   },
   "poly-dashboard": {
-    "order": 2,
     "title": {
       "ko": "Poly Dashboard Kit",
       "en": "Poly Dashboard Kit"
@@ -790,10 +816,13 @@
         "ko": "삭제 버튼에 빨강을 쓰지 않기로 했다. 톤온톤 시스템에 경고색이 하나 들어오면 그 색이 화면에서 가장 강해져 실제 중요한 지표를 이긴다.",
         "en": "Delete actions don't use red. In a tone-on-tone system a single alert colour becomes the loudest thing on screen and outshouts the metrics that actually matter."
       }
+    ],
+    "shot_devices": [
+      "desktop",
+      "mobile"
     ]
   },
   "canb-dashboard": {
-    "order": 4,
     "title": {
       "ko": "CANB Dashboard Kit",
       "en": "CANB Dashboard Kit"
@@ -878,10 +907,13 @@
         "ko": "두 번째 브랜드를 올리는 과정 자체가 감사였다. 색이 하드코딩된 자리는 브랜드를 바꾸는 순간 티가 나므로, 그때마다 토큰으로 회수했다.",
         "en": "Standing up the second brand was itself the audit: any hardcoded colour announces itself the moment the brand changes, and each one was reclaimed as a token."
       }
+    ],
+    "shot_devices": [
+      "desktop",
+      "mobile"
     ]
   },
   "poly-ai-agent": {
-    "order": 11,
     "title": {
       "ko": "Poly AI Agent",
       "en": "Poly AI Agent"
@@ -906,10 +938,13 @@
     ],
     "entry": "",
     "shot_path": "home.html",
-    "shot_wait": 3500
+    "shot_wait": 3500,
+    "shot_devices": [
+      "desktop",
+      "mobile"
+    ]
   },
   "design-extractor": {
-    "order": 12,
     "title": {
       "ko": "Design System Hub & Exporter",
       "en": "Design System Hub & Exporter"
@@ -930,10 +965,12 @@
       "Design Tokens",
       "Tooling"
     ],
-    "entry": ""
+    "entry": "",
+    "shot_devices": [
+      "desktop"
+    ]
   },
   "polyscoop": {
-    "order": 13,
     "title": {
       "ko": "Poly Scoop",
       "en": "Poly Scoop"
@@ -955,7 +992,11 @@
       "Content",
       "Web"
     ],
-    "entry": ""
+    "entry": "",
+    "shot_devices": [
+      "desktop",
+      "mobile"
+    ]
   },
   "LIO": {
     "merge_into": "LIO_DESIGN"

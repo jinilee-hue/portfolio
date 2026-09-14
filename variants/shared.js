@@ -40,6 +40,11 @@ export function pick(p) {
     live: a.live,
     repo: a.repo,
     shot: asset(p.shot),
+    // 기기별 컷. 파일이 없을 수 있으므로 렌더 쪽에서 onerror 로 제거한다.
+    shots: (p.shot_devices || ['desktop']).map(k => ({
+      device: k,
+      src: asset((p.shots || {})[k] || p.shot),
+    })),
     pushed: (a.pushed_at || '').slice(0, 10),
     langs: a.languages || [],
     featured: !!p.featured,
