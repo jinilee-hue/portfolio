@@ -9,20 +9,21 @@
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
 <style>
   :root{
-    --bg:#0A0A0A; --fg:#F2F0EC; --fg-55:rgba(242,240,236,.55); --fg-28:rgba(242,240,236,.28);
-    --line:rgba(242,240,236,.13); --accent:#00E5C0;
+    --bg:#0A0A0A; --fg:#F5F3EF; --fg-55:rgba(245,243,239,.78); --fg-28:rgba(245,243,239,.52);
+    --line:rgba(245,243,239,.16); --accent:#2AF0CE;
     --disp:'Fraunces',ui-serif,Georgia,serif;
     --grot:'Archivo',system-ui,sans-serif;
     --sans:'Pretendard Variable',Pretendard,-apple-system,sans-serif;
     --ease:cubic-bezier(.19,1,.22,1);
   }
   @media (prefers-color-scheme:light){
-    :root{--bg:#FAFAF8;--fg:#0D0D0C;--fg-55:rgba(13,13,12,.58);--fg-28:rgba(13,13,12,.32);
-      --line:rgba(13,13,12,.14);--accent:#00776A;}
+    :root{--bg:#FAFAF8;--fg:#0D0D0C;--fg-55:rgba(13,13,12,.76);--fg-28:rgba(13,13,12,.5);
+      --line:rgba(13,13,12,.16);--accent:#00655A;}
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.6;
-    overflow-x:hidden}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);
+    font-size:16px;line-height:1.7;letter-spacing:-.003em;overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
   /* 고정 헤더가 스크롤 목적지를 가리지 않도록 (WCAG 2.4.11 Focus Not Obscured) */
   :where(h2,h3,.case,.band,[id]){scroll-margin-top:72px}
   a{color:inherit}
@@ -44,8 +45,8 @@
   header *{pointer-events:auto}
   .mark{font-family:var(--disp);font-weight:600;font-size:17px;letter-spacing:-.01em}
   header nav{display:flex;gap:6px;align-items:center}
-  header a,header button{font-family:var(--grot);font-size:11px;letter-spacing:.13em;text-transform:uppercase;
-    text-decoration:none;color:#fff;background:none;border:0;cursor:pointer;padding:6px 9px;opacity:.7}
+  header a,header button{font-family:var(--grot);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    text-decoration:none;color:#fff;background:none;border:0;cursor:pointer;padding:7px 10px;opacity:.82}
   header a:hover,header button:hover{opacity:1}
   header button[aria-pressed=true]{opacity:1;text-decoration:underline;text-underline-offset:4px}
   header a:focus-visible,header button:focus-visible{outline:2px solid #fff;outline-offset:2px;opacity:1}
@@ -53,7 +54,7 @@
   /* 히어로 — 화면이 주인공, 타입은 위에 얹힌다 */
   .open{min-height:92svh;display:flex;flex-direction:column;justify-content:flex-end;
     padding:max(120px, 8vw) 0 clamp(28px,4vw,56px);position:relative}
-  .kick{font-family:var(--grot);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  .kick{font-family:var(--grot);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
     color:var(--accent);margin:0 0 18px}
   h1{font-family:var(--disp);font-weight:300;font-variation-settings:'opsz' 120;
     font-size:clamp(2.5rem,8.4vw,7.2rem);line-height:.94;letter-spacing:-.028em;margin:0;max-width:16ch;
@@ -69,7 +70,7 @@
   h1 i{font-weight:600;font-style:normal;color:var(--accent)}
   .openfoot{display:flex;flex-wrap:wrap;gap:20px 48px;align-items:end;justify-content:space-between;
     margin-top:clamp(28px,4vw,52px);border-top:1px solid var(--line);padding-top:20px}
-  .openfoot p{margin:0;max-width:42ch;color:var(--fg-55);font-size:.96rem}
+  .openfoot p{margin:0;max-width:44ch;color:var(--fg-55);font-size:1.05rem;line-height:1.72}
   .counts{display:flex;gap:clamp(20px,3vw,44px)}
   .counts div{white-space:nowrap}
   .counts dt{font-family:var(--grot);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
@@ -189,18 +190,19 @@
     .shot--long img{transition:none}
     .piece:hover .shot--long img{transform:none}
   }
-  .n{font-family:var(--grot);font-size:10.5px;letter-spacing:.15em;color:var(--fg-28);
-    display:block;margin-bottom:10px;font-variant-numeric:tabular-nums}
+  .n{font-family:var(--grot);font-size:11.5px;letter-spacing:.13em;color:var(--fg-28);
+    display:block;margin-bottom:11px;font-variant-numeric:tabular-nums}
   .info h2{font-family:var(--disp);font-weight:300;font-variation-settings:'opsz' 90;
     font-size:clamp(1.5rem,3.4vw,2.5rem);line-height:1.06;letter-spacing:-.02em;margin:0 0 .45em;text-wrap:balance}
   .piece:hover .info h2{color:var(--accent)}
-  .info p{margin:0;color:var(--fg-55);font-size:.93rem;max-width:46ch}
-  .info .role{font-family:var(--grot);font-size:11px;letter-spacing:.06em;color:var(--fg-28);
+  .info p{margin:0;color:var(--fg-55);font-size:1.0rem;line-height:1.7;max-width:48ch;
+    word-break:keep-all}
+  .info .role{font-family:var(--grot);font-size:12.5px;letter-spacing:.04em;color:var(--fg-28);
     margin-top:12px;display:block}
   .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
   .chips span{display:inline-flex;align-items:center;gap:6px;
-    font-family:var(--grot);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
-    color:var(--fg-55);border:1px solid var(--line);padding:5px 10px 5px 8px;border-radius:999px;
+    font-family:var(--grot);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--fg-55);border:1px solid var(--line);padding:6px 11px 6px 9px;border-radius:999px;
     transition:border-color .2s var(--ease),color .2s var(--ease)}
   .chips span:hover{border-color:var(--accent);color:var(--fg)}
   .chips .ic{width:12px;height:12px;opacity:.75;color:var(--accent)}
@@ -211,8 +213,8 @@
   .alsoLink:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
   /* ── 케이스 스터디 상세 ─────────────────────────── */
-  .meta{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:12px;
-    font-family:var(--grot);font-size:11px;letter-spacing:.06em;color:var(--fg-28)}
+  .meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:13px;
+    font-family:var(--grot);font-size:12.5px;letter-spacing:.02em;color:var(--fg-28)}
   .meta b{color:var(--fg-55);font-weight:400;font-variant-numeric:tabular-nums}
   .more{margin-top:20px;font-family:var(--grot);font-weight:600;font-size:13px;letter-spacing:.04em;
     background:var(--accent);border:1px solid var(--accent);color:#fff;
@@ -232,18 +234,19 @@
   .case.open{display:grid;gap:clamp(22px,3vw,40px);align-items:start}
   @media(min-width:900px){.case.open{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}}
   .case>div>*:last-child{margin-bottom:0}
-  .case h3{font-family:var(--grot);font-weight:600;font-size:10.5px;letter-spacing:.16em;
-    text-transform:uppercase;color:var(--accent);margin:0 0 10px}
-  .case p{margin:0 0 18px;color:var(--fg-55);font-size:.92rem;max-width:60ch;word-break:keep-all}
+  .case h3{font-family:var(--grot);font-weight:700;font-size:11.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+  .case p{margin:0 0 20px;color:var(--fg-55);font-size:.98rem;line-height:1.75;max-width:58ch;
+    word-break:keep-all}
   /* 플로우 차트 — 단계 노드를 연결선으로 잇는다.
      넓은 화면은 가로 흐름, 좁은 화면은 세로 흐름으로 자동 전환. */
   .flow{list-style:none;margin:0 0 22px;padding:0;display:flex;flex-wrap:wrap;gap:0}
   .flow li{position:relative;flex:1 1 128px;min-width:118px;
     border:1px solid var(--line);padding:11px 12px 12px;margin:0 14px 14px 0;
     background:color-mix(in oklab, var(--fg) 3%, transparent)}
-  .flow li .s{display:block;font-family:var(--grot);font-size:9.5px;letter-spacing:.14em;
-    color:var(--accent);font-variant-numeric:tabular-nums;margin-bottom:6px}
-  .flow li .t{display:block;font-size:.83rem;line-height:1.45;color:var(--fg-55);word-break:keep-all}
+  .flow li .s{display:block;font-family:var(--grot);font-size:10.5px;letter-spacing:.12em;
+    color:var(--accent);font-variant-numeric:tabular-nums;margin-bottom:7px}
+  .flow li .t{display:block;font-size:.89rem;line-height:1.55;color:var(--fg-55);word-break:keep-all}
   /* 노드 사이 연결선 + 화살촉 */
   .flow li::after{content:'';position:absolute;top:50%;right:-14px;width:14px;height:1px;
     background:var(--line)}
@@ -263,12 +266,12 @@
   .stack{margin:0 0 20px}
   .stack div{display:grid;grid-template-columns:5.5rem 1fr;gap:10px;padding:7px 0;
     border-bottom:1px solid var(--line);align-items:baseline}
-  .stack dt{font-family:var(--grot);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  .stack dt{font-family:var(--grot);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
     color:var(--fg-28);margin:0}
-  .stack dd{margin:0;font-size:.88rem;color:var(--fg-55)}
+  .stack dd{margin:0;font-size:.94rem;line-height:1.65;color:var(--fg-55)}
   .dec{list-style:none;margin:0;padding:0}
-  .dec li{position:relative;padding:0 0 14px 18px;color:var(--fg-55);font-size:.9rem;
-    max-width:58ch;word-break:keep-all}
+  .dec li{position:relative;padding:0 0 15px 18px;color:var(--fg-55);font-size:.95rem;
+    line-height:1.72;max-width:56ch;word-break:keep-all}
   .dec li::before{content:'';position:absolute;left:0;top:.62em;width:6px;height:1px;background:var(--accent)}
 
   /* ── 데이터 시각화 ────────────────────────────────
@@ -287,7 +290,7 @@
     padding-bottom:6px;margin-bottom:10px;font-variant-numeric:tabular-nums}
   .tl-row{display:grid;grid-template-columns:minmax(84px,1.1fr) minmax(0,4fr);gap:12px;
     align-items:center;padding:3px 0}
-  .tl-row b{font-size:10.5px;font-weight:400;color:var(--fg-55);white-space:nowrap;
+  .tl-row b{font-size:11.5px;font-weight:400;color:var(--fg-55);white-space:nowrap;
     overflow:hidden;text-overflow:ellipsis;font-family:var(--grot);letter-spacing:.02em}
   .tl-track{position:relative;height:11px;background:color-mix(in oklab,var(--fg) 5%,transparent)}
   .tl-bar{position:absolute;top:0;bottom:0;background:var(--accent);opacity:.5;
@@ -299,8 +302,8 @@
   .cbar{display:flex;height:7px;margin:14px 0 8px;overflow:hidden;gap:2px;
     background:color-mix(in oklab,var(--fg) 6%,transparent)}
   .cbar i{display:block;height:100%;background:var(--accent)}
-  .ckey{display:flex;flex-wrap:wrap;gap:5px 16px;font-family:var(--grot);font-size:10.5px;
-    letter-spacing:.06em;color:var(--fg-28)}
+  .ckey{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--grot);font-size:12px;
+    letter-spacing:.03em;color:var(--fg-28)}
   .ckey span{display:inline-flex;align-items:center;gap:6px}
   .ckey em{width:8px;height:8px;font-style:normal;flex:none;background:var(--accent)}
   .ckey b{color:var(--fg-55);font-weight:600;font-variant-numeric:tabular-nums}
@@ -315,11 +318,11 @@
   .prin{display:grid;gap:clamp(22px,3vw,44px)}
   @media(min-width:900px){.prin{grid-template-columns:repeat(2,1fr)}}
   .prin article{border-top:1px solid var(--line);padding-top:14px}
-  .prin h3{font-family:var(--grot);font-weight:600;font-size:.95rem;letter-spacing:.01em;margin:0 0 8px}
-  .prin p{margin:0;color:var(--fg-55);font-size:.92rem}
-  footer{border-top:1px solid var(--line);padding:30px 0 64px;color:var(--fg-28);font-size:12.5px;
+  .prin h3{font-family:var(--grot);font-weight:600;font-size:1.04rem;letter-spacing:.005em;margin:0 0 10px}
+  .prin p{margin:0;color:var(--fg-55);font-size:.99rem;line-height:1.72;word-break:keep-all}
+  footer{border-top:1px solid var(--line);padding:30px 0 64px;color:var(--fg-28);font-size:13.5px;
     display:flex;flex-wrap:wrap;gap:14px 36px;justify-content:space-between;align-items:baseline}
-  footer .colo{max-width:56ch;line-height:1.65}
+  footer .colo{max-width:58ch;line-height:1.72;word-break:keep-all}
   .skip{position:absolute;left:-9999px}
   .skip:focus{left:12px;top:12px;z-index:99;background:var(--accent);color:#04120F;padding:10px 14px}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
