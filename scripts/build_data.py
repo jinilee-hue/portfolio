@@ -176,6 +176,8 @@ def main() -> int:
                     "readme_summary": rm_body,
                     "languages": [k for k, _ in sorted(
                         langs.items(), key=lambda kv: kv[1], reverse=True)][:5],
+                    # 스택 구성 막대용 — 이름만으로는 비율을 그릴 수 없다
+                    "lang_bytes": dict(sorted(langs.items(), key=lambda kv: kv[1], reverse=True)[:6]),
                     "topics": r.get("topics") or [],
                     "pushed_at": r.get("pushed_at"),
                     "created_at": r.get("created_at"),

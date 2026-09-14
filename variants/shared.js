@@ -46,6 +46,9 @@ export function pick(p) {
     period: t(p.period) || periodLabel(span),
     commits: span.commits || 0,
     deps: a.deps || [],
+    langBytes: a.lang_bytes || {},
+    first: (a.span || {}).first || '',
+    last: (a.span || {}).last || '',
     hasCase: !!(p.intent || (p.flow || []).length || (p.decisions || []).length),
   };
 }
