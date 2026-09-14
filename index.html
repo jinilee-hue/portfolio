@@ -97,22 +97,26 @@
      베젤은 얇고 무채색으로 — 기기가 주인공이 되면 화면이 안 보인다. */
   /* 기기들을 겹쳐 배치하고 3D 로 살짝 눕힌다. 평면 나열보다 볼륨이 산다.
      프레임은 여전히 CSS 로만 그린다 — 이미지 요청 0, 화면은 실제 캡처. */
-  .shots{position:relative;display:block;perspective:2200px;
-    transform-style:preserve-3d;padding:0 0 4%}
+  /* 3D 회전은 레이아웃 박스를 바꾸지 않는다 — 회전한 만큼 시각적으로 밖으로 나가
+     그리드 경계에서 베젤이 잘린다. 회전 여유분만큼 안쪽 여백을 준다. */
+  .shots{position:relative;display:block;perspective:2600px;
+    transform-style:preserve-3d;padding:2% 2% 7% 1%}
   /* desktop 은 흐름에 남겨 .shots 의 높이를 만들고, 나머지는 그 위에 겹친다 */
+  /* padding 이 width 에 포함되지 않으면 화면이 베젤을 4px 씩 뚫고 나간다 */
+  .frame,.frame *{box-sizing:border-box}
   .frame{position:absolute;transform-style:preserve-3d;
     transition:transform .75s var(--ease), filter .5s var(--ease)}
-  .shot{position:relative;overflow:hidden;display:block;
+  .shot{position:relative;overflow:hidden;display:block;width:100%;
     background:color-mix(in oklab, var(--fg) 6%, transparent)}
 
   /* 데스크톱: 기준면. 살짝 왼쪽으로 돌려 깊이를 만든다 */
-  .frame--desktop{position:relative;width:82%;margin-left:0;z-index:1;
-    transform:rotateY(9deg) rotateX(3deg) rotateZ(-.8deg);
-    filter:drop-shadow(0 26px 44px rgba(0,0,0,.42));
+  .frame--desktop{position:relative;width:80%;margin-left:0;z-index:1;
+    transform:rotateY(2.5deg) rotateX(1.2deg);
+    filter:drop-shadow(0 30px 50px rgba(0,0,0,.5));
     padding:10px 10px 0;border-radius:10px 10px 3px 3px;
     background:color-mix(in oklab, var(--fg) 12%, var(--bg));
     box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--fg) 18%, transparent)}
-  .frame--desktop .shot{aspect-ratio:1440/900;border-radius:2px}
+  .frame--desktop .shot{aspect-ratio:1440/900;border-radius:2px;width:100%;max-width:100%}
   .frame--desktop::after{content:'';display:block;height:15px;
     background:color-mix(in oklab, var(--fg) 12%, var(--bg));border-radius:0 0 3px 3px;
     box-shadow:inset 0 -1px 0 color-mix(in oklab, var(--fg) 20%, transparent)}
@@ -123,34 +127,34 @@
     clip-path:polygon(12% 0,88% 0,100% 100%,0 100%)}
 
   /* 태블릿: 오른쪽 아래에 겹쳐 세운다 */
-  .frame--tablet{right:0;bottom:-2%;width:27%;z-index:2;
-    transform:rotateY(-13deg) rotateX(4deg) rotateZ(1.6deg);
-    filter:drop-shadow(0 20px 34px rgba(0,0,0,.5));
+  .frame--tablet{right:0;bottom:2%;width:25%;z-index:2;
+    transform:rotateY(-4deg) rotateX(1.5deg) rotateZ(1.2deg);
+    filter:drop-shadow(-14px 22px 36px rgba(0,0,0,.62));
     padding:9px;border-radius:14px;
     background:color-mix(in oklab, var(--fg) 13%, var(--bg));
     box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--fg) 20%, transparent)}
-  .frame--tablet .shot{aspect-ratio:834/1112;border-radius:5px}
+  .frame--tablet .shot{aspect-ratio:834/1112;border-radius:5px;width:100%}
 
   /* 모바일: 가장 앞에, 가장 많이 기울여 */
-  .frame--mobile{right:4%;bottom:-5%;width:15%;z-index:3;
-    transform:rotateY(-16deg) rotateX(5deg) rotateZ(2.4deg);
-    filter:drop-shadow(0 16px 26px rgba(0,0,0,.55));
+  .frame--mobile{right:2%;bottom:-3%;width:13.5%;z-index:3;
+    transform:rotateY(-5deg) rotateX(1.8deg) rotateZ(1.8deg);
+    filter:drop-shadow(-10px 16px 28px rgba(0,0,0,.7));
     padding:6px;border-radius:16px;
     background:color-mix(in oklab, var(--fg) 15%, var(--bg));
     box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--fg) 22%, transparent)}
-  .frame--mobile .shot{aspect-ratio:390/844;border-radius:11px}
+  .frame--mobile .shot{aspect-ratio:390/844;border-radius:11px;width:100%}
   .frame--mobile::after{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);
     width:32%;height:8px;border-radius:0 0 7px 7px;
     background:color-mix(in oklab, var(--fg) 15%, var(--bg));z-index:2}
 
   /* 컷이 하나뿐이면 전폭 + 각도만 약하게 */
   .shots:has(.frame:only-child) .frame--desktop{width:100%;
-    transform:rotateY(5deg) rotateX(2deg)}
+    transform:rotateY(1.5deg) rotateX(.8deg)}
 
   /* 호버에서 각도를 펴며 앞으로 — 눌러볼 수 있다는 신호 */
-  .piece:hover .frame--desktop{transform:rotateY(4deg) rotateX(1.5deg) translateZ(24px)}
-  .piece:hover .frame--tablet{transform:rotateY(-7deg) rotateX(2deg) translateZ(46px) translateY(-2%)}
-  .piece:hover .frame--mobile{transform:rotateY(-9deg) rotateX(2.5deg) translateZ(66px) translateY(-3%)}
+  .piece:hover .frame--desktop{transform:rotateY(1deg) rotateX(.5deg) translateZ(18px)}
+  .piece:hover .frame--tablet{transform:rotateY(-2deg) rotateX(.8deg) translateZ(40px) translateY(-2%)}
+  .piece:hover .frame--mobile{transform:rotateY(-2.5deg) rotateX(1deg) translateZ(58px) translateY(-4%)}
 
   .dev{position:absolute;left:0;bottom:-19px;font-family:var(--grot);font-size:9px;
     letter-spacing:.12em;text-transform:uppercase;color:var(--fg-28);opacity:0;
@@ -174,7 +178,7 @@
     .frame--mobile{width:15%;padding:4px;border-radius:10px}
     .dev{display:none}
   }
-  .shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;
+  .shot img{display:block;width:100%;height:100%;max-width:100%;object-fit:cover;object-position:top center;
     transform:scale(1.005);transition:transform .8s var(--ease),filter .6s var(--ease);
     filter:saturate(.9) brightness(1.06)}
   .piece:hover .shot img{transform:scale(1.03);filter:saturate(1.05) brightness(1.12)}
@@ -291,21 +295,15 @@
   .tl-row:hover .tl-bar{opacity:1}
   .tl-row:hover b{color:var(--fg)}
 
-  /* 2) 언어 구성 막대 — 저장소 바이트 비율 */
-  .langbar{display:flex;height:5px;margin:12px 0 8px;overflow:hidden;
+  /* 2) 기여 범위 — 기획 / 디자인 / 개발 / 검증 비중 */
+  .cbar{display:flex;height:7px;margin:14px 0 8px;overflow:hidden;gap:2px;
     background:color-mix(in oklab,var(--fg) 6%,transparent)}
-  .langbar i{display:block;height:100%}
-  .langkey{display:flex;flex-wrap:wrap;gap:4px 14px;font-family:var(--grot);font-size:10px;
-    letter-spacing:.05em;color:var(--fg-28)}
-  .langkey span{display:inline-flex;align-items:center;gap:5px}
-  .langkey em{width:7px;height:7px;font-style:normal;flex:none}
-
-  /* 3) 규모 지표 — 커밋 수를 막대로 */
-  .gauge{display:grid;grid-template-columns:auto 1fr auto;gap:9px;align-items:center;
-    font-family:var(--grot);font-size:10px;letter-spacing:.08em;color:var(--fg-28);margin-top:8px}
-  .gauge .g{height:4px;background:color-mix(in oklab,var(--fg) 8%,transparent);position:relative}
-  .gauge .g i{position:absolute;left:0;top:0;bottom:0;background:var(--accent);opacity:.75}
-  .gauge b{color:var(--fg-55);font-weight:400;font-variant-numeric:tabular-nums}
+  .cbar i{display:block;height:100%;background:var(--accent)}
+  .ckey{display:flex;flex-wrap:wrap;gap:5px 16px;font-family:var(--grot);font-size:10.5px;
+    letter-spacing:.06em;color:var(--fg-28)}
+  .ckey span{display:inline-flex;align-items:center;gap:6px}
+  .ckey em{width:8px;height:8px;font-style:normal;flex:none;background:var(--accent)}
+  .ckey b{color:var(--fg-55);font-weight:600;font-variant-numeric:tabular-nums}
 
   /* 4) 아이콘 — 메타 항목 식별용, 도형으로만 그린다 */
   .ic{width:11px;height:11px;flex:none;opacity:.5;stroke:currentColor;fill:none;stroke-width:1.6}
@@ -460,6 +458,7 @@ const COPY={
     mPeriod:'기간', mCommits:'커밋', mRole:'역할',
     cIntent:'기획 의도', cConcept:'디자인 컨셉', cFlow:'흐름', cStack:'기술 스택', cDec:'설계 결정',
     cAlso:'관련 저장소',
+    phase:{plan:'기획',design:'디자인',build:'개발',qa:'검증'}, cFiles:'파일 구성',
     tlH:'작업 타임라인', tlNote:'첫 커밋 – 마지막 커밋 · 프로젝트 {n}개',
     prinH:'같이 일할 때 알아두면 좋은 것들',
     prin:[
@@ -479,6 +478,7 @@ const COPY={
     mPeriod:'Period', mCommits:'Commits', mRole:'Role',
     cIntent:'Intent', cConcept:'Design concept', cFlow:'Flow', cStack:'Stack', cDec:'Decisions',
     cAlso:'Related repositories',
+    phase:{plan:'Planning',design:'Design',build:'Build',qa:'QA'}, cFiles:'Codebase',
     tlH:'Timeline', tlNote:'first – last commit · {n} projects',
     prinH:'Worth knowing before we work together',
     prin:[
@@ -525,23 +525,29 @@ function draw(){
     }).join('');
   } else { document.getElementById('tl').style.display='none'; }
 
-  // 언어 바이트 → 비율 막대. 색은 액센트 한 색의 투명도 단계로만(무지개 팔레트 금지).
-  const shades=['1','.72','.52','.36','.24','.15'];
-  const langBar=p=>{
+  // 기여 범위 — 언어 바이트나 커밋 수는 저장소 사정이지 디자이너의 기여가 아니다.
+  // 기획/디자인/개발/검증 비중은 GitHub 에서 알 수 없으므로 overrides.json 에 직접 적는다.
+  const shades={plan:'.34',design:'1',build:'.62',qa:'.2'};
+  const contribBar=p=>{
+    const cb=p.contribution; if(!cb) return '';
+    const keys=['plan','design','build','qa'].filter(k=>(cb[k]||0)>0);
+    const tot=keys.reduce((s,k)=>s+cb[k],0); if(!tot) return '';
+    return `<div class="cbar" role="img" aria-label="${keys.map(k=>c.phase[k]+' '+cb[k]+'%').join(', ')}">${
+      keys.map(k=>`<i style="width:${(cb[k]/tot*100).toFixed(1)}%;opacity:${shades[k]}"
+        title="${c.phase[k]} ${cb[k]}%"></i>`).join('')}</div>
+      <div class="ckey">${keys.map(k=>
+        `<span><em style="opacity:${shades[k]}"></em>${c.phase[k]} <b>${cb[k]}%</b></span>`).join('')}</div>`;
+  };
+  // 파일 구성은 별도 그래프 대신 기술 스택 표의 한 행으로. 저장소 바이트 기준.
+  const langRow=p=>{
     let e=Object.entries(p.langBytes||{}); if(!e.length) return '';
     let tot=e.reduce((s,[,v])=>s+v,0); if(!tot) return '';
-    // 1% 미만은 범례에서 뺀다 — 'Shell 0%' 같은 항목은 정보가 아니라 잡음이다
     e=e.filter(([,v])=>v/tot>=0.01);
     tot=e.reduce((s,[,v])=>s+v,0); if(!tot) return '';
-    return `<div class="langbar" role="img" aria-label="${e.map(([k,v])=>k+' '+Math.round(v/tot*100)+'%').join(', ')}">${
-      e.map(([,v],i)=>`<i style="width:${(v/tot*100).toFixed(1)}%;background:var(--accent);opacity:${shades[i]||'.12'}"></i>`).join('')
-    }</div><div class="langkey">${e.map(([k,v],i)=>
-      `<span><em style="background:var(--accent);opacity:${shades[i]||'.12'}"></em>${k} ${Math.round(v/tot*100)}%</span>`).join('')}</div>`;
+    return `<div><dt>${c.cFiles}</dt><dd>${e.map(([k,v])=>
+      `${k} ${Math.round(v/tot*100)}%`).join(' · ')}</dd></div>`;
   };
-  const maxCommits=Math.max(...ps.map(p=>p.commits||0),1);
-  const gauge=p=>p.commits?`<div class="gauge"><span>${c.mCommits}</span>
-     <span class="g"><i style="width:${Math.max(3,p.commits/maxCommits*100)}%"></i></span>
-     <b>${p.commits}</b></div>`:'';
+
   const IC={cal:'<svg class="ic" viewBox="0 0 16 16"><rect x="2" y="3.5" width="12" height="10"/><path d="M2 6.5h12M5.5 2v3M10.5 2v3"/></svg>',
             usr:'<svg class="ic" viewBox="0 0 16 16"><circle cx="8" cy="5.5" r="2.6"/><path d="M3 13.5c0-2.5 2.2-4 5-4s5 1.5 5 4"/></svg>'};
 
@@ -602,8 +608,7 @@ function draw(){
           ${p.period?`<span>${IC.cal}<b>${p.period}</b></span>`:''}
           ${p.role?`<span>${IC.usr}<b>${p.role}</b></span>`:''}
         </div>
-        ${langBar(p)}
-        ${gauge(p)}
+        ${contribBar(p)}
         <div class="chips">${p.tags.slice(0,4).map(x=>`<span>${tagIcon(x)}${x}</span>`).join('')}</div>
         ${p.hasCase?`<button class="more no-print" type="button" aria-expanded="false"
            aria-controls="case-${p.id}"><span class="lbl">${c.more}</span><i class="chev"></i></button>`:''}
@@ -616,8 +621,9 @@ function draw(){
             `<li><span class="s">${f.step}</span><span class="t">${lang()==='ko'?f.ko:(f.en||f.ko)}</span></li>`).join('')}</ol>`:''}
         </div>
         <div>
-          ${p.stack.length?`<h3>${c.cStack}</h3><dl class="stack">${p.stack.map(s=>
-            `<div><dt>${s.group}</dt><dd>${s.items.join(' · ')}</dd></div>`).join('')}</dl>`:''}
+          ${p.stack.length||Object.keys(p.langBytes||{}).length?`<h3>${c.cStack}</h3><dl class="stack">${
+            p.stack.map(s=>`<div><dt>${s.group}</dt><dd>${s.items.join(' · ')}</dd></div>`).join('')
+          }${langRow(p)}</dl>`:''}
           ${p.decisions.length?`<h3>${c.cDec}</h3><ul class="dec">${p.decisions.map(d=>
             `<li>${lang()==='ko'?d.ko:(d.en||d.ko)}</li>`).join('')}</ul>`:''}
           ${p.also.length?`<h3>${c.cAlso}</h3><div class="chips">${p.also.map(a=>
