@@ -92,69 +92,52 @@
     .piece:nth-child(3n) .shots{grid-column:1/8;grid-row:1}
     .piece:nth-child(3n) .info{grid-column:8/13;grid-row:1}
   }
-  /* 기기 프레임은 스톡 목업 이미지가 아니라 CSS 로 그린다.
-     이미지 요청 0, 테마 색을 그대로 따르고, 화면은 여전히 실제 캡처다.
-     베젤은 얇고 무채색으로 — 기기가 주인공이 되면 화면이 안 보인다. */
-  /* 기기들을 겹쳐 배치하고 3D 로 살짝 눕힌다. 평면 나열보다 볼륨이 산다.
-     프레임은 여전히 CSS 로만 그린다 — 이미지 요청 0, 화면은 실제 캡처. */
-  /* 3D 회전은 레이아웃 박스를 바꾸지 않는다 — 회전한 만큼 시각적으로 밖으로 나가
-     그리드 경계에서 베젤이 잘린다. 회전 여유분만큼 안쪽 여백을 준다. */
-  .shots{position:relative;display:block;perspective:2600px;
-    transform-style:preserve-3d;padding:2% 2% 7% 1%}
-  /* desktop 은 흐름에 남겨 .shots 의 높이를 만들고, 나머지는 그 위에 겹친다 */
-  /* padding 이 width 에 포함되지 않으면 화면이 베젤을 4px 씩 뚫고 나간다 */
+  /* 기기 프레임은 스톡 목업 이미지가 아니라 CSS 로 그린다 — 이미지 요청 0, 화면은 실제 캡처.
+     주의: filter(drop-shadow) 와 transform-style:preserve-3d 를 함께 쓰면 3D 평면이 평탄화되어
+     의사요소(스탠드·턱)가 떨어져 나간다. 그래서 preserve-3d 를 쓰지 않고
+     요소마다 transform:perspective(...) 로 각도를 준다. 스탠드는 아예 그리지 않는다. */
+  .shots{position:relative;display:block;padding:2% 3% 5% 1%}
   .frame,.frame *{box-sizing:border-box}
-  .frame{position:absolute;transform-style:preserve-3d;
-    transition:transform .75s var(--ease), filter .5s var(--ease)}
+  .frame{position:absolute;transition:transform .7s var(--ease), filter .5s var(--ease)}
   .shot{position:relative;overflow:hidden;display:block;width:100%;
     background:color-mix(in oklab, var(--fg) 6%, transparent)}
 
-  /* 데스크톱: 기준면. 살짝 왼쪽으로 돌려 깊이를 만든다 */
-  .frame--desktop{position:relative;width:80%;margin-left:0;z-index:1;
-    transform:rotateY(2.5deg) rotateX(1.2deg);
-    filter:drop-shadow(0 30px 50px rgba(0,0,0,.5));
-    padding:10px 10px 0;border-radius:10px 10px 3px 3px;
-    background:color-mix(in oklab, var(--fg) 12%, var(--bg));
-    box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--fg) 18%, transparent)}
-  .frame--desktop .shot{aspect-ratio:1440/900;border-radius:2px;width:100%;max-width:100%}
-  .frame--desktop::after{content:'';display:block;height:15px;
-    background:color-mix(in oklab, var(--fg) 12%, var(--bg));border-radius:0 0 3px 3px;
-    box-shadow:inset 0 -1px 0 color-mix(in oklab, var(--fg) 20%, transparent)}
-  .frame--desktop::before{content:'';position:absolute;left:50%;bottom:-13px;width:24%;height:13px;
-    transform:translateX(-50%);
-    background:linear-gradient(color-mix(in oklab,var(--fg) 14%,var(--bg)),
-                               color-mix(in oklab,var(--fg) 9%,var(--bg)));
-    clip-path:polygon(12% 0,88% 0,100% 100%,0 100%)}
 
-  /* 태블릿: 오른쪽 아래에 겹쳐 세운다 */
-  .frame--tablet{right:0;bottom:2%;width:25%;z-index:2;
-    transform:rotateY(-4deg) rotateX(1.5deg) rotateZ(1.2deg);
-    filter:drop-shadow(-14px 22px 36px rgba(0,0,0,.62));
-    padding:9px;border-radius:14px;
+  /* 모니터 — 흐름에 남아 .shots 의 높이를 만든다. 아래 베젤을 두껍게 해 턱을 표현 */
+  .frame--desktop{position:relative;width:80%;z-index:1;
+    transform:perspective(1800px) rotateY(3deg) rotateX(1deg);
+    filter:drop-shadow(0 28px 46px rgba(0,0,0,.5));
+    padding:11px 11px 26px;border-radius:12px;
     background:color-mix(in oklab, var(--fg) 13%, var(--bg));
     box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--fg) 20%, transparent)}
-  .frame--tablet .shot{aspect-ratio:834/1112;border-radius:5px;width:100%}
+  .frame--desktop .shot{aspect-ratio:1440/900;border-radius:3px}
 
-  /* 모바일: 가장 앞에, 가장 많이 기울여 */
-  .frame--mobile{right:2%;bottom:-3%;width:13.5%;z-index:3;
-    transform:rotateY(-5deg) rotateX(1.8deg) rotateZ(1.8deg);
-    filter:drop-shadow(-10px 16px 28px rgba(0,0,0,.7));
-    padding:6px;border-radius:16px;
-    background:color-mix(in oklab, var(--fg) 15%, var(--bg));
+  /* 태블릿 — 오른쪽 아래에 겹친다 */
+  .frame--tablet{right:1%;bottom:3%;width:25%;z-index:2;
+    transform:perspective(1400px) rotateY(-5deg) rotateZ(1.2deg);
+    filter:drop-shadow(-14px 22px 36px rgba(0,0,0,.64));
+    padding:9px;border-radius:15px;
+    background:color-mix(in oklab, var(--fg) 14%, var(--bg));
     box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--fg) 22%, transparent)}
-  .frame--mobile .shot{aspect-ratio:390/844;border-radius:11px;width:100%}
-  .frame--mobile::after{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);
-    width:32%;height:8px;border-radius:0 0 7px 7px;
-    background:color-mix(in oklab, var(--fg) 15%, var(--bg));z-index:2}
+  .frame--tablet .shot{aspect-ratio:834/1112;border-radius:6px}
 
-  /* 컷이 하나뿐이면 전폭 + 각도만 약하게 */
+  /* 모바일 — 가장 앞 */
+  .frame--mobile{right:3%;bottom:0;width:13.5%;z-index:3;
+    transform:perspective(1200px) rotateY(-6deg) rotateZ(1.8deg);
+    filter:drop-shadow(-10px 16px 28px rgba(0,0,0,.7));
+    padding:5px;border-radius:17px;
+    background:color-mix(in oklab, var(--fg) 16%, var(--bg));
+    box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--fg) 24%, transparent)}
+  .frame--mobile .shot{aspect-ratio:390/844;border-radius:13px}
+
+  /* 컷이 하나뿐이면 전폭 */
   .shots:has(.frame:only-child) .frame--desktop{width:100%;
-    transform:rotateY(1.5deg) rotateX(.8deg)}
+    transform:perspective(2000px) rotateY(1.5deg)}
 
-  /* 호버에서 각도를 펴며 앞으로 — 눌러볼 수 있다는 신호 */
-  .piece:hover .frame--desktop{transform:rotateY(1deg) rotateX(.5deg) translateZ(18px)}
-  .piece:hover .frame--tablet{transform:rotateY(-2deg) rotateX(.8deg) translateZ(40px) translateY(-2%)}
-  .piece:hover .frame--mobile{transform:rotateY(-2.5deg) rotateX(1deg) translateZ(58px) translateY(-4%)}
+  /* 호버 — 각도를 펴며 앞으로 */
+  .piece:hover .frame--desktop{transform:perspective(1800px) rotateY(1deg) scale(1.012)}
+  .piece:hover .frame--tablet{transform:perspective(1400px) rotateY(-2deg) rotateZ(.6deg) translateY(-2%) scale(1.03)}
+  .piece:hover .frame--mobile{transform:perspective(1200px) rotateY(-2.5deg) rotateZ(.8deg) translateY(-4%) scale(1.05)}
 
   .dev{position:absolute;left:0;bottom:-19px;font-family:var(--grot);font-size:9px;
     letter-spacing:.12em;text-transform:uppercase;color:var(--fg-28);opacity:0;
@@ -189,6 +172,23 @@
   .piece:hover .shots::after,.piece:focus-visible .shots::after{opacity:1;transform:translateY(0)}
   .piece:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
   .piece:active .shot img{transform:scale(1.02)}
+
+  /* ── 세로로 긴 캡처: 목업 안에서 흘려보낸다 ──────────────
+     전체 페이지를 찍은 이미지를 프레임 폭에 맞춰 늘려두고(height:auto),
+     호버하면 아래로 밀어 실제 스크롤처럼 보이게 한다.
+     .shot img 의 cover/scale 규칙보다 반드시 뒤에 와야 이긴다. */
+  .shot--long img{height:auto!important;object-fit:fill;will-change:transform;
+    transition:transform 9s cubic-bezier(.36,0,.28,1)}
+  .piece:hover .shot--long img,
+  .piece:active .shot--long img{transform:translateY(var(--scroll,0px))}
+  .shot--long::after{content:'';position:absolute;right:4px;top:4px;bottom:4px;width:2px;
+    border-radius:2px;background:color-mix(in oklab,var(--accent) 55%,transparent);
+    opacity:0;transition:opacity .3s var(--ease);z-index:2}
+  .piece:hover .shot--long::after{opacity:.8}
+  @media(prefers-reduced-motion:reduce){
+    .shot--long img{transition:none}
+    .piece:hover .shot--long img{transform:none}
+  }
   .n{font-family:var(--grot);font-size:10.5px;letter-spacing:.15em;color:var(--fg-28);
     display:block;margin-bottom:10px;font-variant-numeric:tabular-nums}
   .info h2{font-family:var(--disp);font-weight:300;font-variation-settings:'opsz' 90;
@@ -584,7 +584,7 @@ function draw(){
       <a class="shots" data-open="${c.open} ↗" href="${p.live||p.repo}" target="_blank" rel="noopener"
          aria-label="${p.title} ${c.open}">
         ${p.shots.map(s=>`<span class="frame frame--${s.device}">
-          <span class="shot"><img src="${s.src}" alt="${p.title} — ${s.device} 실제 배포 화면" decoding="async"
+          <span class="shot${s.long?' shot--long':''}"><img src="${s.src}" alt="${p.title} — ${s.device} 실제 배포 화면" decoding="async"
                ${i===0&&s.device==='desktop'?'fetchpriority="high"':'fetchpriority="low"'}
                onerror="this.closest('.frame').remove()"></span>
           <span class="dev">${s.device}</span>
@@ -621,6 +621,23 @@ function draw(){
         </div>
       </div>`:''}
     </article>`).join('');
+
+  // 긴 캡처의 스크롤 이동량을 실제 렌더 높이에서 계산한다.
+  // 이미지가 프레임보다 얼마나 긴지는 로드 후에야 알 수 있다.
+  const setScroll=()=>{
+    room.querySelectorAll('.shot--long').forEach(el=>{
+      const img=el.querySelector('img'); if(!img||!img.naturalWidth) return;
+      const rendered=el.clientWidth*(img.naturalHeight/img.naturalWidth);
+      const over=rendered-el.clientHeight;
+      // 끝까지 내리면 페이지 하단 여백만 남는다 — 70% 지점까지, 상한 1400px
+      const travel=Math.min(over*0.7, 1400);
+      el.style.setProperty('--scroll', travel>12 ? `-${Math.round(travel)}px` : '0px');
+    });
+  };
+  room.querySelectorAll('.shot--long img').forEach(img=>{
+    if(img.complete) setScroll(); else img.addEventListener('load', setScroll, {once:true});
+  });
+  window.addEventListener('resize', setScroll);
 
   // 줄바꿈된 플로우 노드의 연결선 정리 — 줄 끝 노드는 화살표를 감춘다
   const trimFlow=()=>{

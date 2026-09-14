@@ -236,6 +236,7 @@ def main() -> int:
             p["auto"]["live"] = p["auto"]["live"].rstrip("/") + "/" + entry.lstrip("/")
         p["shot"] = f"assets/shots/{p['id']}.jpg"
         # 기기별 컷 — 존재 여부는 렌더 단계에서 onerror 로 걸러진다
+        p["shot_long"] = bool(p.get("shot_full"))
         p["shots"] = {
             "desktop": f"assets/shots/{p['id']}.jpg",
             "tablet": f"assets/shots/{p['id']}--tablet.jpg",

@@ -44,6 +44,7 @@ export function pick(p) {
     shots: (p.shot_devices || ['desktop']).map(k => ({
       device: k,
       src: asset((p.shots || {})[k] || p.shot),
+      long: !!p.shot_long,   // 전체 페이지 캡처 → 목업 안에서 스크롤
     })),
     pushed: (a.pushed_at || '').slice(0, 10),
     langs: a.languages || [],

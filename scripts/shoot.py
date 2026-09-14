@@ -78,6 +78,8 @@ def main() -> int:
             "devices": [d for d in wanted if d in DEVICES],
             # 프로토타입 뷰어처럼 셸이 화면을 감싸는 경우, 실제 화면 요소만 잘라낸다
             "selector": (p.get("shot_selector") or "").strip(),
+            # 스크롤이 있는 페이지는 전체를 찍어 목업 안에서 흘려보낸다
+            "full": bool(p.get("shot_full")),
         })
 
     ok = changed = 0
@@ -111,8 +113,9 @@ def main() -> int:
                         el = page.query_selector(job["selector"])
                         if el:
                             target = el          # 요소만 캡처 — 뷰어 셸과 여백이 빠진다
-                    probe = target.screenshot(type="png")
-                    shot = target.screenshot(type="jpeg", quality=84)
+                    full = job["full"] and target is page
+                    probe = target.screenshot(type="png", full_page=full)
+                    shot = target.screenshot(type="jpeg", quality=84, full_page=full)
                 except Exception as e:
                     failed.append((f"{job['id']}/{dev}", str(e)[:70]))
                     ctx.close()
