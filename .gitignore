@@ -2,3 +2,7 @@
 # 커밋하면 CI 의 자동 갱신 커밋과 로컬 작업이 매번 rebase 충돌을 일으킨다.
 # 사이트에 배포되는 파일은 CI 워크스페이스에서 생성되어 Pages 아티팩트에 포함된다.
 data/projects.json
+
+# 검증용 임시 파일
+_tmp_print.pdf
+_pdfcheck.html

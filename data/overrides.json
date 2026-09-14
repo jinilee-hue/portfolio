@@ -1,5 +1,17 @@
 {
-  "_comment": "사람이 쓴 내용. build_data.py 가 GitHub 자동 수집값(auto) 위에 병합한다. 여기 있는 값은 자동 갱신에 덮이지 않는다. metrics 는 사실 확인된 숫자만 쓸 것 — 비어 있으면 사이트에서 해당 블록을 렌더하지 않는다.",
+  "_comment": "사람이 쓴 내용. build_data.py 가 GitHub 자동 수집값(auto) 위에 병합한다. 여기 값은 자동 갱신에 덮이지 않는다.",
+  "_schema": {
+    "title/kicker/summary/role": "한/영 객체 {ko,en}",
+    "tags": "문자열 배열",
+    "order": "정렬(작을수록 앞)",
+    "featured": "케이스 스터디 상세를 펼칠 대상",
+    "entry": "저장소 루트에 index.html 이 없을 때 진입 파일명",
+    "intent": "기획의도 — 왜 만들었나, 무엇이 문제였나 {ko,en}",
+    "flow": "사용자/작업 흐름 단계 배열 [{step,ko,en}]",
+    "stack": "기술 스택 그룹 [{group, items[]}] — 자동 수집 언어보다 우선",
+    "decisions": "핵심 설계 결정 [{ko,en}] — 무엇을 택했고 무엇을 버렸나",
+    "period": "작업 기간 수동 표기. 없으면 커밋 이력에서 자동 산출"
+  },
 
   "eBOOK": {
     "order": 1,
@@ -12,7 +24,28 @@
     },
     "role": { "ko": "기획 · 화면 설계 · 구현 · 조판 검증", "en": "Concept, UI design, implementation, typographic QA" },
     "tags": ["Interactive", "Typography", "Tablet", "Claude Code"],
-    "entry": ""
+    "entry": "",
+    "intent": {
+      "ko": "영어 그림책을 읽히려면 보통 종이책에 음원 파일을 붙인다. 아이는 소리를 따라갈 뿐 화면을 보지 않는다. 그림이 움직이고 문장이 소리와 같이 흐르면 시선이 글에 머물지 않을까 — 이 가정을 확인하려고 만들었다. 퍼블릭 도메인 원문을 골라 저작권 협의 없이 바로 검증에 들어갈 수 있게 했다.",
+      "en": "The usual way to teach picture books is paper plus an audio file: the child follows the sound and never looks at the page. This prototype tests one assumption — that if the scene moves and the sentence flows with the voice, the eye stays on the text. A public-domain source let the test start without rights negotiation."
+    },
+    "flow": [
+      { "step": "01", "ko": "표지 — 배경 영상 위에서 시작", "en": "Cover over ambient video" },
+      { "step": "02", "ko": "본문 11쪽 — 문장을 읽어주고 단어를 누르면 사전", "en": "11 pages — read-aloud with tap-to-define" },
+      { "step": "03", "ko": "쪽마다 이해 문제 띠", "en": "Comprehension strip per page" },
+      { "step": "04", "ko": "단어장 카드로 마무리", "en": "Closing vocabulary cards" }
+    ],
+    "stack": [
+      { "group": "구현", "items": ["Vanilla JS", "CSS Custom Properties", "빌드 없음"] },
+      { "group": "음성·미디어", "items": ["Web Speech API", "AI 생성 배경 영상(mp4)"] },
+      { "group": "검증", "items": ["Headless Chrome smoke test", "조판 자동 감사 스크립트"] },
+      { "group": "서체", "items": ["SIL Andika (OFL)"] }
+    ],
+    "decisions": [
+      { "ko": "태블릿 가로 3종 해상도(1194×834 / 1180×820 / 1024×768)를 고정 타깃으로 잡고, 11쪽 전부가 스크롤 없이 한 화면에 들어가는 것을 조건으로 걸었다.", "en": "Fixed three landscape tablet resolutions as the target and made 'all 11 pages fit one screen without scrolling' a hard condition." },
+      { "ko": "조판을 눈으로 확인하지 않는다. 헤드리스 크롬으로 실제 페이지를 띄워 문장이 그려지는지·쪽이 넘치지 않는지 검사하는 스크립트를 붙였다. 구문 검사로는 안 잡히는 종류를 잡는다.", "en": "Typography isn't checked by eye. A headless-Chrome script loads the real page and verifies that sentences render and pages don't overflow — the class of bug a syntax check never catches." },
+      { "ko": "배경 영상은 AI로 생성했고 README에 그렇게 적었다. 원문은 퍼블릭 도메인, 번역과 문제는 직접 썼다.", "en": "Background video was AI-generated and labeled as such in the README. Source text is public domain; translation and questions are original." }
+    ]
   },
 
   "KCMS": {
@@ -26,7 +59,28 @@
     },
     "role": { "ko": "리디자인 방향 설계 · 시안 4종 제작 · 비교 문서화", "en": "Direction design, four prototypes, comparison writeup" },
     "tags": ["Enterprise UI", "Design Direction", "A/B Study"],
-    "entry": ""
+    "entry": "",
+    "intent": {
+      "ko": "시스템 전면 개편 앞에서 회의는 늘 취향 대결이 된다. '이게 더 낫다'는 말은 근거를 만들지 못한다. 그래서 대표 화면 하나를 골라 방향별로 실제로 만들었다. 말로 하던 논쟁을 나란히 놓고 눌러보는 비교로 바꾸는 게 목적이었다.",
+      "en": "Before a full system rebuild, meetings default to a contest of taste — 'this one's better' produces no evidence. So one representative screen was actually built in each direction, turning a verbal argument into a side-by-side you can click."
+    },
+    "flow": [
+      { "step": "01", "ko": "인트로 — 썸네일·비교표로 진입", "en": "Intro: thumbnails and comparison table" },
+      { "step": "02", "ko": "A형 Teal Workbench — 상단 탭, 높은 정보 밀도", "en": "Type A — top tabs, high density" },
+      { "step": "03", "ko": "B형 Horizon — 좌측 내비, 카드 정돈형", "en": "Type B — left nav, card-organized" },
+      { "step": "04", "ko": "C안 — 기존 레이아웃 유지, 색만 교체", "en": "Type C — legacy layout, recolor only" },
+      { "step": "05", "ko": "각 안의 가독성 변형본 비교", "en": "Readability variants of each" }
+    ],
+    "stack": [
+      { "group": "구현", "items": ["HTML", "CSS", "Vanilla JS"] },
+      { "group": "디자인 시스템", "items": ["poly-dashboard 토큰 재사용", "Poly Blue #0066FF"] },
+      { "group": "도구", "items": ["Claude Code", "Python (자료 정리)"] }
+    ],
+    "decisions": [
+      { "ko": "방향을 두 개가 아니라 세 개로 늘렸다. 전면 개편안 두 개(A·B)만 두면 '개편 여부' 자체가 논점에서 빠진다. 기존 레이아웃을 유지하고 색만 바꾼 C안을 넣어 전환 비용이 낮은 선택지를 테이블에 올렸다.", "en": "Three directions, not two. With only two redesigns on the table, 'should we redesign at all' quietly disappears — so a low-transition-cost option (legacy layout, recolor only) was added." },
+      { "ko": "각 방향마다 가독성 변형을 따로 만들었다. 레이아웃 선호와 가독성 문제가 한 화면에 섞이면 무엇 때문에 좋다고 말하는지 구분되지 않는다.", "en": "Each direction got a separate readability variant, so layout preference and legibility couldn't be confused for one another in feedback." },
+      { "ko": "결정은 내가 하지 않았다. 비교 가능한 재료를 만들어 의사결정자에게 넘기는 것까지가 이 작업의 범위였다.", "en": "The decision wasn't mine. The scope was producing comparable material and handing it to the decision-makers." }
+    ]
   },
 
   "LIO_DESIGN": {
@@ -40,7 +94,26 @@
     },
     "role": { "ko": "프로토타입 설계 · 디자인 2종 · 구현", "en": "Prototype architecture, two visual directions, implementation" },
     "tags": ["Prototype", "Design System", "EdTech"],
-    "entry": ""
+    "entry": "",
+    "intent": {
+      "ko": "49슬라이드짜리 화면정의서는 아무도 끝까지 읽지 않는다. 슬라이드는 화면 사이의 연결을 보여주지 못해서, 리뷰가 늘 '이 다음에 뭐가 뜨죠?'에서 멈춘다. 흐름 자체를 눌러볼 수 있게 만들면 그 질문이 사라진다고 봤다.",
+      "en": "Nobody reads a 49-slide screen spec to the end, and slides can't show what connects to what — reviews stall on 'so what comes after this one?'. Making the flow itself clickable removes the question."
+    },
+    "flow": [
+      { "step": "01", "ko": "PPTX 49슬라이드를 화면 단위로 분해", "en": "Decompose 49 PPTX slides into screens" },
+      { "step": "02", "ko": "48화면을 클릭 가능한 흐름으로 재구성", "en": "Rebuild as 48 clickable screens" },
+      { "step": "03", "ko": "같은 흐름을 Design A / B 두 벌로 제작", "en": "Render the same flow in two designs" },
+      { "step": "04", "ko": "슬라이드 번호·화면 id 로 바로 진입", "en": "Deep-link by slide number or screen id" }
+    ],
+    "stack": [
+      { "group": "구현", "items": ["HTML", "CSS", "Vanilla JS"] },
+      { "group": "내비게이션", "items": ["키보드 ←/→", "URL 쿼리 딥링크 (?s= / ?id=)", "48화면 인덱스"] },
+      { "group": "원본", "items": ["PPTX 화면정의서 49슬라이드"] }
+    ],
+    "decisions": [
+      { "ko": "PPTX 슬라이드 번호를 URL에 그대로 노출했다(?s=46). 리뷰 중 '46번 슬라이드요'라는 말이 그대로 주소가 되어, 화면을 찾는 시간이 사라졌다.", "en": "PPTX slide numbers were exposed directly in the URL (?s=46), so 'slide 46' in a review becomes an address — the hunt for a screen disappears." },
+      { "ko": "같은 흐름을 두 디자인으로 병렬 제작했다. 흐름 검증과 비주얼 결정을 한 번에 끝내려고 했지만, 실제로는 두 논의가 섞여 리뷰가 길어지기도 했다.", "en": "The same flow was built in two designs to settle flow and visuals at once — though in practice the two discussions sometimes tangled and lengthened review." }
+    ]
   },
 
   "AI-Studio": {
@@ -54,7 +127,28 @@
     },
     "role": { "ko": "수업 흐름 설계 · UI · 구현", "en": "Lesson flow, UI, implementation" },
     "tags": ["Generative AI", "Kids UX", "No-scroll Layout"],
-    "entry": ""
+    "entry": "",
+    "intent": {
+      "ko": "7세에게 '이야기를 써보자'고 하면 아무것도 안 나온다. 쓸 말이 없어서가 아니라 빈 화면이 막막해서다. 아이가 먼저 그림을 갖게 하면 말이 붙는다고 보고, 장면을 고르고 다섯 가지만 답하면 AI가 그려주는 순서로 수업을 뒤집었다. 그림이 먼저, 문장은 그다음이다.",
+      "en": "Ask a seven-year-old to write a story and you get nothing — not for lack of words, but because a blank screen is paralysing. Give the child a picture first and sentences follow, so the lesson was inverted: pick a scene, answer five questions, the AI draws it. Image first, text second."
+    },
+    "flow": [
+      { "step": "01", "ko": "두 장면을 보고 순서를 정한다", "en": "Order two scenes" },
+      { "step": "02", "ko": "원하는 장면에 다섯 가지를 답한다", "en": "Answer five questions about the chosen scene" },
+      { "step": "03", "ko": "AI가 그 장면을 그린다", "en": "AI draws the scene" },
+      { "step": "04", "ko": "장면마다 한 문장씩 소리내어 말한다", "en": "Narrate each scene aloud, one sentence at a time" },
+      { "step": "05", "ko": "완성한 이야기 카드를 제출한다", "en": "Hand in the finished story card" }
+    ],
+    "stack": [
+      { "group": "구현", "items": ["HTML", "CSS", "Vanilla JS", "빌드 없음"] },
+      { "group": "레이아웃", "items": ["주어진 높이를 분할하는 무스크롤 구조"] },
+      { "group": "AI", "items": ["이미지 생성 API"] },
+      { "group": "환경", "items": ["태블릿 · PC", "정적 서버 필요"] }
+    ],
+    "decisions": [
+      { "ko": "스크롤을 아예 없앴다. 교실에서 아이가 화면을 밀면 활동의 절반이 시야에서 사라지고 교사가 통제를 잃는다. 모든 레이아웃이 주어진 높이를 나누도록 짜서 활동 전체가 항상 한 화면에 있다.", "en": "Scrolling was removed entirely. In a classroom, a child who scrolls loses half the activity off-screen and the teacher loses control — so every layout divides the height it is given and the whole activity stays visible." },
+      { "ko": "수업을 두 차시로 쪼갰다. 그리기와 말하기를 한 차시에 넣으면 7세의 집중이 끝까지 가지 않는다.", "en": "Split into two classes: drawing and speaking in one session outruns a seven-year-old's attention." }
+    ]
   },
 
   "Phonics-Studio": {

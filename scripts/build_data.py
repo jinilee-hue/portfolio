@@ -93,6 +93,50 @@ def readme_summary(owner: str, repo: str, tok: str | None) -> tuple[str, str]:
     return title, body[:400].strip()
 
 
+def commit_span(owner: str, repo: str, tok: str | None) -> dict:
+    """첫 커밋 ~ 마지막 커밋 날짜와 총 커밋 수. 작업 기간 표기에 쓴다."""
+    req = urllib.request.Request(f"{API}/repos/{owner}/{repo}/commits?per_page=1")
+    req.add_header("Accept", "application/vnd.github+json")
+    req.add_header("User-Agent", "portfolio-build")
+    if tok:
+        req.add_header("Authorization", f"Bearer {tok}")
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            first_page = json.loads(r.read().decode())
+            link = r.headers.get("Link", "")
+    except Exception:
+        return {}
+    if not first_page:
+        return {}
+    last_date = first_page[0]["commit"]["author"]["date"]
+
+    # Link 헤더의 rel="last" 페이지 번호가 곧 총 커밋 수(per_page=1 이므로)
+    total = 1
+    m = re.search(r'[?&]page=(\d+)>;\s*rel="last"', link)
+    if m:
+        total = int(m.group(1))
+    oldest = api(f"/repos/{owner}/{repo}/commits?per_page=1&page={total}", tok)
+    first_date = oldest[0]["commit"]["author"]["date"] if oldest else last_date
+    return {"first": first_date[:10], "last": last_date[:10], "commits": total}
+
+
+def dependencies(owner: str, repo: str, tok: str | None) -> list[str]:
+    """package.json 의 dependencies 키만 (버전 제외). 없으면 빈 리스트."""
+    import base64
+
+    data = api(f"/repos/{owner}/{repo}/contents/package.json", tok)
+    if not data:
+        return []
+    try:
+        pkg = json.loads(base64.b64decode(data.get("content", "")).decode("utf-8", "replace"))
+    except Exception:
+        return []
+    deps = list((pkg.get("dependencies") or {}).keys())
+    devs = list((pkg.get("devDependencies") or {}).keys())
+    keep = [d for d in deps + devs if not d.startswith("@types/")]
+    return sorted(keep)[:24]
+
+
 def main() -> int:
     tok = token()
     if not tok:
@@ -119,6 +163,8 @@ def main() -> int:
         langs = api(f"/repos/{OWNER}/{name}/languages", tok) or {}
         rm_title, rm_body = readme_summary(OWNER, name, tok)
         commits = api(f"/repos/{OWNER}/{name}/commits?per_page=1", tok)
+        span = commit_span(OWNER, name, tok)
+        deps = dependencies(OWNER, name, tok)
         projects.append(
             {
                 "id": name,
@@ -135,6 +181,8 @@ def main() -> int:
                     "created_at": r.get("created_at"),
                     "size_kb": r.get("size"),
                     "has_pages": bool(live),
+                    "span": span,
+                    "deps": deps,
                     "last_commit": (commits[0]["commit"]["message"].splitlines()[0][:120]
                                     if commits else ""),
                 },

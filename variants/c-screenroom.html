@@ -115,6 +115,39 @@
   .chips span{font-family:var(--grot);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
     color:var(--fg-55);border:1px solid var(--line);padding:3px 8px;border-radius:999px}
 
+  /* ── 케이스 스터디 상세 ─────────────────────────── */
+  .meta{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:12px;
+    font-family:var(--grot);font-size:11px;letter-spacing:.06em;color:var(--fg-28)}
+  .meta b{color:var(--fg-55);font-weight:400;font-variant-numeric:tabular-nums}
+  .more{margin-top:16px;font-family:var(--grot);font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;background:none;border:1px solid var(--line);color:var(--fg-55);
+    padding:7px 13px;cursor:pointer;transition:all .2s var(--ease)}
+  .more:hover{border-color:var(--accent);color:var(--accent)}
+  .more:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .more[aria-expanded=true]{background:var(--accent);color:#04120F;border-color:var(--accent)}
+  .case{display:none;grid-column:1/-1;border-top:1px solid var(--line);margin-top:clamp(20px,3vw,34px);
+    padding-top:clamp(22px,3vw,34px)}
+  .case.open{display:grid;gap:clamp(22px,3vw,40px)}
+  @media(min-width:900px){.case.open{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}}
+  .case h3{font-family:var(--grot);font-weight:600;font-size:10.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+  .case p{margin:0 0 18px;color:var(--fg-55);font-size:.92rem;max-width:60ch;word-break:keep-all}
+  .flow{list-style:none;margin:0 0 20px;padding:0;counter-reset:f}
+  .flow li{display:grid;grid-template-columns:2.2rem 1fr;gap:10px;padding:8px 0;
+    border-bottom:1px solid var(--line);font-size:.9rem;color:var(--fg-55)}
+  .flow li span{font-family:var(--grot);font-size:10.5px;color:var(--fg-28);letter-spacing:.08em;
+    padding-top:.2em;font-variant-numeric:tabular-nums}
+  .stack{margin:0 0 20px}
+  .stack div{display:grid;grid-template-columns:5.5rem 1fr;gap:10px;padding:7px 0;
+    border-bottom:1px solid var(--line);align-items:baseline}
+  .stack dt{font-family:var(--grot);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--fg-28);margin:0}
+  .stack dd{margin:0;font-size:.88rem;color:var(--fg-55)}
+  .dec{list-style:none;margin:0;padding:0}
+  .dec li{position:relative;padding:0 0 14px 18px;color:var(--fg-55);font-size:.9rem;
+    max-width:58ch;word-break:keep-all}
+  .dec li::before{content:'';position:absolute;left:0;top:.62em;width:6px;height:1px;background:var(--accent)}
+
   .band{border-top:1px solid var(--line);padding:clamp(48px,8vw,100px) 0}
   .band h2{font-family:var(--disp);font-weight:300;font-size:clamp(1.6rem,4vw,2.8rem);
     letter-spacing:-.02em;margin:0 0 clamp(24px,3vw,44px);max-width:20ch}
@@ -129,6 +162,54 @@
   .skip{position:absolute;left:-9999px}
   .skip:focus{left:12px;top:12px;z-index:99;background:var(--accent);color:#04120F;padding:10px 14px}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+  /* ── 인쇄 / PDF 저장 ──────────────────────────────
+     브라우저의 '대상: PDF로 저장' 으로 벡터 텍스트 PDF 가 나온다.
+     화면용 다크 테마를 흰 종이로 뒤집고, 케이스 스터디는 전부 펼쳐 인쇄한다. */
+  @media print{
+    @page{size:A4;margin:14mm 12mm}
+    :root{--bg:#fff;--fg:#000;--fg-55:#3a3a3a;--fg-28:#6a6a6a;--line:#c9c9c9;--accent:#00655a}
+    html,body{background:#fff!important;color:#000!important}
+    header,.no-print{display:none!important}
+    .wrap{max-width:none;padding:0}
+    .open{min-height:auto;padding:0 0 8mm;page-break-after:auto;
+      border-bottom:1px solid #ddd;margin-bottom:7mm}
+    h1{font-size:26pt!important;line-height:1.14;max-width:none}
+    .kick{font-size:8.5pt;color:#00655a}
+    .openfoot p{font-size:10pt;max-width:none}
+    .counts dd{font-size:16pt}
+    .room{padding:0}
+    /* 프로젝트 한 건이 페이지 중간에서 잘리지 않게 */
+    .piece{break-inside:auto;margin-bottom:9mm;
+      display:grid!important;grid-template-columns:64mm 1fr!important;gap:6mm!important;
+      border-bottom:1px solid #ddd;padding-bottom:6mm}
+    .piece:nth-child(even) .shot,.piece:nth-child(3n) .shot{grid-column:1!important;grid-row:1!important}
+    .piece:nth-child(even) .info,.piece:nth-child(3n) .info{grid-column:2!important;grid-row:1!important}
+    .shot{border:1px solid #ddd}
+    .shot img{filter:none!important;transform:none!important}
+    .shot::after{display:none}
+    .info h2{font-size:13pt!important;color:#000!important;margin-bottom:2mm}
+    .info p{font-size:9pt;color:#333}
+    .n,.role,.meta{font-size:7.5pt;color:#666}
+    .chips span{border-color:#ccc;color:#444;font-size:7pt}
+    /* 인쇄에서는 접힌 케이스 스터디도 전부 보여준다 */
+    .more{display:none!important}
+    .case{display:grid!important;grid-column:1/-1!important;grid-template-columns:1fr 1fr!important;
+      gap:6mm!important;border-top:1px solid #ddd;margin-top:4mm;padding-top:4mm}
+    /* 블록 단위로만 잘리게 해서 문장이 페이지 경계에서 끊기지 않도록 */
+    .case>div,.flow li,.stack div,.dec li,.info{break-inside:avoid}
+    .info h2{break-after:avoid}
+    .case h3{font-size:7.5pt;color:#00655a}
+    .case p,.flow li,.stack dd,.dec li{font-size:8.5pt;color:#333}
+    .band{page-break-before:auto}
+    .band h2{font-size:15pt}
+    .prin h3{font-size:10pt}.prin p{font-size:9pt}
+    footer{border-top:1px solid #ccc;font-size:8pt;color:#555}
+    a{color:#000;text-decoration:none}
+    /* 링크는 지면에서 주소가 보여야 쓸모가 있다 */
+    .piece::after{content:attr(href);font-family:var(--grot);font-size:7pt;color:#777;
+      grid-column:2;word-break:break-all}
+  }
   /* 모바일 히어로: 고정 헤더가 흐름으로 바뀌므로 하단 정렬과 뷰포트 높이를 해제한다.
      .open 정의 뒤에 와야 캐스케이드에서 이긴다. */
   @media(max-width:720px){
@@ -146,6 +227,7 @@
     <a href="#room" id="nav-work">WORK</a>
     <a href="#principles" id="nav-prin">PRINCIPLES</a>
     <a href="https://github.com/jinilee-hue">GITHUB</a>
+    <button type="button" id="pdf" class="no-print">PDF</button>
     <button type="button" data-lang="ko" aria-pressed="true">KO</button>
     <button type="button" data-lang="en" aria-pressed="false">EN</button>
   </nav>
@@ -185,7 +267,9 @@ const COPY={
     h1:'만든 걸 <i>보여주는</i> 게 제일 빠르다.',
     lede:'교육 제품을 설계하고, 프로토타입은 직접 만들어 배포한다. 아래 화면은 목업이 아니라 실제 배포된 페이지를 그대로 캡처한 것이고, 누르면 그 주소로 열린다.',
     counts:[['배포','{n}'],['라이브','{live}'],['최근','{last}']],
-    open:'열기',
+    open:'열기', more:'과정 보기', less:'접기', pdf:'PDF로 저장',
+    mPeriod:'기간', mCommits:'커밋', mRole:'역할',
+    cIntent:'기획 의도', cFlow:'흐름', cStack:'기술 스택', cDec:'설계 결정',
     prinH:'같이 일할 때 알아두면 좋은 것들',
     prin:[
       ['AI는 초안을 늘리는 도구다','한 방향을 빨리 뽑으려고 쓰지 않는다. 같은 시간에 검토할 방향의 수를 늘리려고 쓴다. 고르는 일은 위임하지 않는다.'],
@@ -200,7 +284,9 @@ const COPY={
     h1:'The fastest answer is <i>showing</i> the thing.',
     lede:'I design education products and build the prototypes myself. These are screenshots of pages actually deployed — not mockups. Click one and it opens.',
     counts:[['Shipped','{n}'],['Live','{live}'],['Latest','{last}']],
-    open:'Open',
+    open:'Open', more:'Read the process', less:'Collapse', pdf:'Save as PDF',
+    mPeriod:'Period', mCommits:'Commits', mRole:'Role',
+    cIntent:'Intent', cFlow:'Flow', cStack:'Stack', cDec:'Decisions',
     prinH:'Worth knowing before we work together',
     prin:[
       ['AI widens the draft, not the shortcut','I don\'t use it to reach one direction faster. I use it to review more directions in the same hour. Choosing is never delegated.'],
@@ -225,20 +311,48 @@ function draw(){
   counts.innerHTML=c.counts.map(([k,v])=>`<div><dt>${k}</dt><dd>${
     v.replace('{n}',ps.length).replace('{live}',live+'/'+ps.length).replace('{last}',last)}</dd></div>`).join('');
 
+  // 링크(a)에 버튼을 중첩할 수 없어 article 로 감싸고 제목만 링크로 둔다
   room.innerHTML=ps.map((p,i)=>`
-    <a class="piece" href="${p.live||p.repo}" target="_blank" rel="noopener">
-      <div class="shot" data-open="${c.open} ↗">
-        <img src="../${p.shot}" alt="${p.title} 실제 배포 화면" loading="${i<2?'eager':'lazy'}"
+    <article class="piece">
+      <a class="shot" data-open="${c.open} ↗" href="${p.live||p.repo}" target="_blank" rel="noopener"
+         aria-label="${p.title} ${c.open}">
+        <img src="./${p.shot}" alt="${p.title} 실제 배포 화면" loading="${i<2?'eager':'lazy'}"
              ${i===0?'fetchpriority="high"':''} width="1440" height="900">
-      </div>
+      </a>
       <div class="info">
         <span class="n">${String(i+1).padStart(2,'0')} / ${String(ps.length).padStart(2,'0')}${p.kicker?' · '+p.kicker:''}</span>
-        <h2>${p.title}</h2>
+        <h2><a href="${p.live||p.repo}" target="_blank" rel="noopener">${p.title}</a></h2>
         <p>${p.summary}</p>
-        ${p.role?`<span class="role">${p.role}</span>`:''}
+        <div class="meta">
+          ${p.period?`<span>${c.mPeriod} <b>${p.period}</b></span>`:''}
+          ${p.commits?`<span>${c.mCommits} <b>${p.commits}</b></span>`:''}
+          ${p.role?`<span>${c.mRole} <b>${p.role}</b></span>`:''}
+        </div>
         <div class="chips">${p.tags.slice(0,4).map(x=>`<span>${x}</span>`).join('')}</div>
+        ${p.hasCase?`<button class="more no-print" type="button" aria-expanded="false"
+           aria-controls="case-${p.id}">${c.more}</button>`:''}
       </div>
-    </a>`).join('');
+      ${p.hasCase?`<div class="case" id="case-${p.id}">
+        <div>
+          ${p.intent?`<h3>${c.cIntent}</h3><p>${p.intent}</p>`:''}
+          ${p.flow.length?`<h3>${c.cFlow}</h3><ol class="flow">${p.flow.map(f=>
+            `<li><span>${f.step}</span><span>${lang()==='ko'?f.ko:(f.en||f.ko)}</span></li>`).join('')}</ol>`:''}
+        </div>
+        <div>
+          ${p.stack.length?`<h3>${c.cStack}</h3><dl class="stack">${p.stack.map(s=>
+            `<div><dt>${s.group}</dt><dd>${s.items.join(' · ')}</dd></div>`).join('')}</dl>`:''}
+          ${p.decisions.length?`<h3>${c.cDec}</h3><ul class="dec">${p.decisions.map(d=>
+            `<li>${lang()==='ko'?d.ko:(d.en||d.ko)}</li>`).join('')}</ul>`:''}
+        </div>
+      </div>`:''}
+    </article>`).join('');
+
+  room.querySelectorAll('.more').forEach(b=>b.addEventListener('click',()=>{
+    const box=document.getElementById(b.getAttribute('aria-controls'));
+    const open=box.classList.toggle('open');
+    b.setAttribute('aria-expanded',String(open));
+    b.textContent=open?c.less:c.more;
+  }));
 
   document.getElementById('prin-h').textContent=c.prinH;
   prin.innerHTML=c.prin.map(([h,b])=>`<article><h3>${h}</h3><p>${b}</p></article>`).join('');
@@ -246,6 +360,13 @@ function draw(){
 }
 onRender(draw);
 document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+
+// PDF: 인쇄 대화상자에서 '대상 → PDF로 저장'. 접힌 케이스 스터디는 CSS 로 모두 펼쳐 인쇄된다.
+document.getElementById('pdf').addEventListener('click',()=>window.print());
+window.addEventListener('beforeprint',()=>{
+  document.title = (lang()==='ko'?'이진희 포트폴리오 — ':'Jinhee Lee Portfolio — ')
+    + new Date().toISOString().slice(0,10);
+});
 loadProjects().then(d=>{DATA=d;draw();}).catch(e=>{room.textContent='데이터 로드 실패: '+e.message;});
 </script>
 </body>

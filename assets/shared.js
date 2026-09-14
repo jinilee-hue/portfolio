@@ -23,6 +23,7 @@ export async function loadProjects() {
 
 export function pick(p) {
   const a = p.auto || {};
+  const span = a.span || {};
   return {
     id: p.id,
     title: t(p.title) || a.readme_title || p.id,
@@ -36,7 +37,32 @@ export function pick(p) {
     pushed: (a.pushed_at || '').slice(0, 10),
     langs: a.languages || [],
     featured: !!p.featured,
+    // 케이스 스터디 (overrides.json 에서 사람이 쓴 값)
+    intent: t(p.intent),
+    flow: p.flow || [],
+    stack: p.stack || [],
+    decisions: p.decisions || [],
+    // 작업 기간 — 수동 표기가 있으면 우선, 없으면 커밋 이력에서 산출
+    period: t(p.period) || periodLabel(span),
+    commits: span.commits || 0,
+    deps: a.deps || [],
+    hasCase: !!(p.intent || (p.flow || []).length || (p.decisions || []).length),
   };
+}
+
+/** 첫 커밋~마지막 커밋을 '2026.06 – 08 · 2개월' 형태로. */
+export function periodLabel(span, l = lang()) {
+  if (!span || !span.first) return '';
+  const [fy, fm] = span.first.split('-');
+  const [ty, tm] = span.last.split('-');
+  const months = (Number(ty) - Number(fy)) * 12 + (Number(tm) - Number(fm)) + 1;
+  const dur = l === 'ko'
+    ? (months <= 1 ? '1개월 미만' : `약 ${months}개월`)
+    : (months <= 1 ? 'under a month' : `~${months} months`);
+  const range = fy === ty
+    ? (fm === tm ? `${fy}.${fm}` : `${fy}.${fm}–${tm}`)
+    : `${fy}.${fm}–${ty}.${tm}`;
+  return `${range} · ${dur}`;
 }
 
 export function fmtDate(iso, l = lang()) {
