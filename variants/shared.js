@@ -39,6 +39,7 @@ export function pick(p) {
     featured: !!p.featured,
     // 케이스 스터디 (overrides.json 에서 사람이 쓴 값)
     intent: t(p.intent),
+    concept: t(p.concept),
     flow: p.flow || [],
     stack: p.stack || [],
     decisions: p.decisions || [],
@@ -49,7 +50,7 @@ export function pick(p) {
     langBytes: a.lang_bytes || {},
     first: (a.span || {}).first || '',
     last: (a.span || {}).last || '',
-    hasCase: !!(p.intent || (p.flow || []).length || (p.decisions || []).length),
+    hasCase: !!(p.intent || p.concept || (p.flow || []).length || (p.decisions || []).length),
   };
 }
 

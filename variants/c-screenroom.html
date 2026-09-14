@@ -161,7 +161,8 @@
   .flow li::before{content:'';position:absolute;top:50%;right:-14px;
     border:3px solid transparent;border-left-color:var(--fg-28);
     transform:translate(9px,-3px)}
-  .flow li:last-child::after,.flow li:last-child::before{display:none}
+  .flow li:last-child::after,.flow li:last-child::before,
+  .flow li.row-end::after,.flow li.row-end::before{display:none}
   /* 줄바꿈된 노드의 연결선은 지운다(허공을 가리키게 되므로) */
   @media(max-width:1100px){
     .flow{flex-direction:column}
@@ -359,7 +360,7 @@ const COPY={
     counts:[['배포','{n}'],['라이브','{live}'],['최근','{last}']],
     open:'열기', more:'제작 과정 상세', less:'상세 접기', pdf:'PDF로 저장',
     mPeriod:'기간', mCommits:'커밋', mRole:'역할',
-    cIntent:'기획 의도', cFlow:'흐름', cStack:'기술 스택', cDec:'설계 결정',
+    cIntent:'기획 의도', cConcept:'디자인 컨셉', cFlow:'흐름', cStack:'기술 스택', cDec:'설계 결정',
     tlH:'작업 타임라인', tlNote:'첫 커밋 – 마지막 커밋 · 프로젝트 {n}개',
     prinH:'같이 일할 때 알아두면 좋은 것들',
     prin:[
@@ -377,7 +378,7 @@ const COPY={
     counts:[['Shipped','{n}'],['Live','{live}'],['Latest','{last}']],
     open:'Open', more:'Full process', less:'Collapse', pdf:'Save as PDF',
     mPeriod:'Period', mCommits:'Commits', mRole:'Role',
-    cIntent:'Intent', cFlow:'Flow', cStack:'Stack', cDec:'Decisions',
+    cIntent:'Intent', cConcept:'Design concept', cFlow:'Flow', cStack:'Stack', cDec:'Decisions',
     tlH:'Timeline', tlNote:'first – last commit · {n} projects',
     prinH:'Worth knowing before we work together',
     prin:[
@@ -506,6 +507,7 @@ function draw(){
       ${p.hasCase?`<div class="case" id="case-${p.id}">
         <div>
           ${p.intent?`<h3>${c.cIntent}</h3><p>${p.intent}</p>`:''}
+          ${p.concept?`<h3>${c.cConcept}</h3><p>${p.concept}</p>`:''}
           ${p.flow.length?`<h3>${c.cFlow}</h3><ol class="flow">${p.flow.map(f=>
             `<li><span class="s">${f.step}</span><span class="t">${lang()==='ko'?f.ko:(f.en||f.ko)}</span></li>`).join('')}</ol>`:''}
         </div>
@@ -518,6 +520,19 @@ function draw(){
       </div>`:''}
     </article>`).join('');
 
+  // 줄바꿈된 플로우 노드의 연결선 정리 — 줄 끝 노드는 화살표를 감춘다
+  const trimFlow=()=>{
+    document.querySelectorAll('.flow').forEach(ol=>{
+      const items=[...ol.children];
+      items.forEach(li=>li.classList.remove('row-end'));
+      items.forEach((li,i)=>{
+        const next=items[i+1];
+        if(!next || next.offsetTop>li.offsetTop+2) li.classList.add('row-end');
+      });
+    });
+  };
+  window.addEventListener('resize', trimFlow);
+
   room.querySelectorAll('.more').forEach(b=>b.addEventListener('click',()=>{
     const box=document.getElementById(b.getAttribute('aria-controls'));
     const open=box.classList.toggle('open');
@@ -526,6 +541,7 @@ function draw(){
     if(open&&!window.matchMedia('(prefers-reduced-motion:reduce)').matches){
       box.scrollIntoView({block:'nearest',behavior:'smooth'});
     }
+    if(open) requestAnimationFrame(trimFlow);
   }));
 
   document.getElementById('prin-h').textContent=c.prinH;

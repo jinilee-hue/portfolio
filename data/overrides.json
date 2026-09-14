@@ -12,7 +12,8 @@
     "decisions": "핵심 설계 결정 [{ko,en}] — 무엇을 택했고 무엇을 버렸나",
     "period": "작업 기간 수동 표기. 없으면 커밋 이력에서 자동 산출",
     "shot_path": "썸네일로 촬영할 화면 경로(라이브 URL 뒤에 붙는다). 비우면 첫 화면. 인트로/로그인 대신 실제 작업이 보이는 화면을 고른다.",
-    "shot_wait": "촬영 전 추가 대기 ms (애니메이션·차트가 그려질 시간)"
+    "shot_wait": "촬영 전 추가 대기 ms (애니메이션·차트가 그려질 시간)",
+    "concept": "디자인 컨셉 — 어떤 시각 언어를 택했고 왜 그렇게 정했나 {ko,en}"
   },
   "eBOOK": {
     "order": 1,
@@ -76,17 +77,33 @@
         ]
       },
       {
-        "group": "음성·미디어",
+        "group": "음성(TTS)",
         "items": [
-          "Web Speech API",
-          "AI 생성 배경 영상(mp4)"
+          "Web Speech API SpeechSynthesis",
+          "음성 고정 저장(localStorage)",
+          "iOS Safari 첫 재생 터치 게이트",
+          "voiceschanged 1.2초 타임아웃 폴백"
+        ]
+      },
+      {
+        "group": "미디어",
+        "items": [
+          "쪽별 배경 영상 mp4 (AI 생성)",
+          "절차적 씬 폴백"
+        ]
+      },
+      {
+        "group": "학습 기능",
+        "items": [
+          "클릭 사전 178개",
+          "쪽 자동 분할 + 폰트 맞춤"
         ]
       },
       {
         "group": "검증",
         "items": [
           "Headless Chrome smoke test",
-          "조판 자동 감사 스크립트"
+          "11쪽 조판 자동 감사"
         ]
       },
       {
@@ -109,7 +126,11 @@
         "ko": "배경 영상은 AI로 생성했고 README에 그렇게 적었다. 원문은 퍼블릭 도메인, 번역과 문제는 직접 썼다.",
         "en": "Background video was AI-generated and labeled as such in the README. Source text is public domain; translation and questions are original."
       }
-    ]
+    ],
+    "concept": {
+      "ko": "화면의 주인은 그림이고 글자는 그 위에 얹힌 자막이라는 원칙을 세웠다. 배경 영상이 계속 움직이므로 본문은 반투명 판 위에 올려 대비를 확보하고, 장식은 전부 뺐다. 서체는 어린이 학습용으로 설계된 SIL Andika — a·g 같은 글자가 손글씨 형태라 초기 학습자가 헷갈리지 않는다. 색은 쪽마다 배경 영상에서 뽑아 써서 화면과 글이 따로 놀지 않게 했다.",
+      "en": "The picture owns the screen; text is a subtitle laid over it. Because the background video keeps moving, body copy sits on a translucent plate for contrast and every ornament was removed. The typeface is SIL Andika, drawn for early readers — its single-storey a and g match handwriting, so beginners don't misread them. Page colours are sampled from each scene so type and image never feel unrelated."
+    }
   },
   "KCMS": {
     "order": 2,
@@ -206,7 +227,11 @@
       }
     ],
     "shot_path": "A타입/학생 등록.dc.html",
-    "shot_wait": 3000
+    "shot_wait": 3000,
+    "concept": {
+      "ko": "업무용 화면이라 '예쁜 것'보다 오래 봐도 안 피로한 것이 기준이었다. A형은 상단 탭으로 화면 폭을 최대한 남겨 정보 밀도를 올렸고, B형은 좌측 내비로 메뉴 위계를 눈에 보이게 했다. 논점이 색으로 흐르지 않게 두 안의 서체와 간격은 같게 두고 구조만 다르게 했다. C안은 기존 화면의 뼈대를 그대로 두고 색만 세 가지로 바꿔, 전환 비용이 거의 없는 선택지가 어디까지 나아 보이는지 확인했다.",
+      "en": "For an internal tool the bar is not 'pretty' but 'still readable after eight hours'. Type A keeps navigation on top to preserve width and raise density; Type B moves it left to make menu hierarchy visible. Both share identical type and spacing so the argument couldn't drift into colour — only structure differs. Type C keeps the legacy skeleton and changes only colour, in three variants, to see how far the near-zero-transition option can get."
+    }
   },
   "LIO_DESIGN": {
     "order": 3,
@@ -294,7 +319,11 @@
       }
     ],
     "shot_path": "designA/index.html",
-    "shot_wait": 3000
+    "shot_wait": 3000,
+    "concept": {
+      "ko": "같은 흐름을 두 개의 시각 언어로 만들었다. Design A(Storybook)는 삽화와 여백을 크게 써서 이야기책에 가깝고, Design B(App UI)는 컴포넌트와 상태를 또렷하게 드러내 제품 화면에 가깝다. 학습 흐름 자체는 한 글자도 다르지 않게 두어, 리뷰에서 '흐름이 이상한 것'과 '이 톤이 안 맞는 것'을 분리해 말할 수 있게 했다.",
+      "en": "One flow, two visual languages. Design A (Storybook) leans on illustration and generous space, closer to a picture book; Design B (App UI) exposes components and states, closer to a product surface. The learning flow itself is identical word for word, so review could separate 'the flow is wrong' from 'this tone is wrong'."
+    }
   },
   "AI-Studio": {
     "order": 4,
@@ -393,7 +422,11 @@
       }
     ],
     "shot_path": "student.html",
-    "shot_wait": 3500
+    "shot_wait": 3500,
+    "concept": {
+      "ko": "7세가 쓰는 화면이라 읽어야 하는 글자를 최대한 줄였다. 지시는 아이콘과 위치로 주고, 선택지는 항상 화면 같은 자리에 둔다. 스크롤이 없으니 '아래에 더 있다'는 신호를 만들 필요도 없다. 색은 아이가 고른 장면의 그림에서 끌어와, 화면이 아이의 결과물을 담는 액자처럼 보이게 했다.",
+      "en": "Built for seven-year-olds, so the amount of text to read was cut to a minimum: instructions come from icons and position, and choices always sit in the same place. With no scrolling there's no need to signal 'more below'. Colour is pulled from the scene the child chose, so the screen reads as a frame around their own work."
+    }
   },
   "Phonics-Studio": {
     "order": 5,
@@ -470,7 +503,98 @@
       "Speech Recognition",
       "Phonics"
     ],
-    "entry": ""
+    "entry": "",
+    "featured": true,
+    "concept": {
+      "ko": "정글 사파리를 테마로 잡았다. 발음 연습은 틀리는 게 전제인 활동이라, 아이가 틀렸을 때 위축되지 않는 톤이 필요했다. 사자 마스코트가 계속 말을 걸고, 평가 결과는 점수판이 아니라 별점으로 준다. 마이크 버튼은 단어를 완성하기 전엔 잠겨 있다가 완성되면 초대 애니메이션으로 흔들려서, 다음에 뭘 해야 하는지 글자 없이 알린다.",
+      "en": "A jungle-safari theme. Pronunciation practice presumes getting it wrong, so the tone had to keep a child from shrinking back: a lion mascot keeps talking to them and results arrive as stars, not a scoreboard. The mic button stays locked until the word is complete, then shakes with an invite animation — telling the child what to do next without a line of text."
+    },
+    "intent": {
+      "ko": "한국 아이들이 틀리는 영어 소리는 정해져 있다. f와 p, v와 b, r과 l. 그런데 보통의 파닉스 앱은 전체 알파벳을 고루 다루느라 정작 안 되는 소리에 시간을 안 쓴다. 그래서 단어 풀을 이 소리쌍으로만 좁히고, 듣기에서 끝내지 않고 직접 발음해야 다음으로 넘어가게 했다.",
+      "en": "The English sounds Korean children miss are predictable: f/p, v/b, r/l. Most phonics apps spread evenly across the alphabet and spend little time exactly there. So the word pool was narrowed to those pairs, and listening alone doesn't advance you — you have to say it."
+    },
+    "flow": [
+      {
+        "step": "01",
+        "ko": "그림을 보고 글자 카드를 순서대로 끈다",
+        "en": "See the picture, drag letter cards into order"
+      },
+      {
+        "step": "02",
+        "ko": "단어 완성 → 마지막 소리와 전체 단어를 읽어준다",
+        "en": "Word completes — final sound then whole word read aloud"
+      },
+      {
+        "step": "03",
+        "ko": "마이크 버튼이 열리고 초대 애니메이션",
+        "en": "Mic unlocks with an invite animation"
+      },
+      {
+        "step": "04",
+        "ko": "직접 발음 → 음소별 정확도 평가",
+        "en": "Speak it — per-phoneme accuracy assessment"
+      },
+      {
+        "step": "05",
+        "ko": "별점·틀린 소리 IPA 표기 → Next 해금",
+        "en": "Stars, wrong sounds in IPA, then Next unlocks"
+      }
+    ],
+    "stack": [
+      {
+        "group": "구현",
+        "items": [
+          "HTML",
+          "CSS",
+          "Vanilla JS"
+        ]
+      },
+      {
+        "group": "발음 평가",
+        "items": [
+          "Azure Pronunciation Assessment (음소별 점수)",
+          "토큰 서버 (키 비노출)"
+        ]
+      },
+      {
+        "group": "폴백",
+        "items": [
+          "Web Speech API SpeechRecognition",
+          "Levenshtein 편집거리 글자 정렬",
+          "미지원 브라우저는 발음 없이 진행 허용"
+        ]
+      },
+      {
+        "group": "음성 출력",
+        "items": [
+          "SpeechSynthesis (글자·단어 듣기)"
+        ]
+      },
+      {
+        "group": "아트",
+        "items": [
+          "Figma 디자인 → 이미지 export"
+        ]
+      }
+    ],
+    "decisions": [
+      {
+        "ko": "발음 평가를 2단으로 짰다. Azure가 음소별 점수를 주지만 토큰 서버가 필요하고 항상 붙는다는 보장이 없다. 붙으면 Azure, 안 붙으면 Web Speech + 편집거리로 근사 평가, 그것도 안 되면 발음 없이 넘어가게 했다. 어떤 환경에서도 아이가 막히지 않는 게 우선이다.",
+        "en": "Assessment is tiered. Azure gives per-phoneme scores but needs a token server that isn't always reachable; when it is, Azure runs, otherwise Web Speech plus edit-distance approximates it, and failing both the child proceeds without speaking. Nothing may dead-end a child."
+      },
+      {
+        "ko": "녹음 중에는 배경음악과 TTS를 정지시킨다. 스피커 소리가 마이크로 들어가 인식률을 떨어뜨렸다. 끝나면 복구한다.",
+        "en": "Music and TTS pause during recording — speaker bleed into the mic was wrecking recognition — and resume afterwards."
+      },
+      {
+        "ko": "'발음해보세요' 안내를 마이크가 실제로 켜진 뒤에만 띄운다. 먼저 띄우면 아이가 말을 시작한 뒤에 녹음이 시작돼 앞부분이 잘렸다.",
+        "en": "The 'say it' prompt appears only after the mic actually opens; showing it earlier meant recording began mid-word and clipped the start."
+      },
+      {
+        "ko": "틀린 소리를 IPA 발음기호로 보여준다. 아이가 읽지는 못하지만 옆에 있는 교사·부모가 무엇을 고쳐줘야 하는지 바로 안다.",
+        "en": "Wrong sounds are shown in IPA. The child can't read it, but the teacher or parent beside them immediately knows what to correct."
+      }
+    ]
   },
   "phonics-wordmashup": {
     "order": 8,
