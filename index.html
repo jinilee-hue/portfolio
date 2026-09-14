@@ -27,8 +27,18 @@
   .wrap{max-width:1500px;margin:0 auto;padding:0 clamp(16px,4vw,56px)}
 
   header{position:fixed;top:0;left:0;right:0;z-index:30;mix-blend-mode:difference;
-    display:flex;justify-content:space-between;align-items:center;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
     padding:18px clamp(16px,4vw,56px);color:#fff;pointer-events:none}
+  /* 모바일: 좁은 폭에서 이름과 내비가 겹치고 본문 위에 올라탄다.
+     흐름에 맞춰 두 줄로 내리고, blend mode 대신 배경을 깔아 가독성을 확보한다. */
+  @media(max-width:720px){
+    header{position:static;mix-blend-mode:normal;flex-wrap:wrap;gap:6px 10px;
+      color:var(--fg);background:var(--bg);border-bottom:1px solid var(--line);
+      padding:12px clamp(16px,4vw,56px)}
+    header .mark{flex:1 0 100%;font-size:15px}
+    header nav{flex-wrap:wrap;margin-left:-9px}
+    header a,header button{color:var(--fg);opacity:.75;font-size:10.5px;padding:5px 9px}
+  }
   header *{pointer-events:auto}
   .mark{font-family:var(--disp);font-weight:600;font-size:17px;letter-spacing:-.01em}
   header nav{display:flex;gap:6px;align-items:center}
@@ -80,8 +90,9 @@
   }
   .shot{position:relative;overflow:hidden;background:var(--line);border:1px solid var(--line)}
   .shot img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top center;
-    transform:scale(1.01);transition:transform .8s var(--ease),filter .6s var(--ease);filter:saturate(.9)}
-  .piece:hover .shot img{transform:scale(1.045);filter:saturate(1.05)}
+    transform:scale(1.01);transition:transform .8s var(--ease),filter .6s var(--ease);
+    filter:saturate(.9) brightness(1.06)}
+  .piece:hover .shot img{transform:scale(1.045);filter:saturate(1.05) brightness(1.12)}
   .shot::after{content:attr(data-open);position:absolute;left:14px;bottom:14px;
     font-family:var(--grot);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
     background:var(--accent);color:#04120F;padding:6px 11px;opacity:0;transform:translateY(6px);
@@ -115,6 +126,13 @@
   .skip{position:absolute;left:-9999px}
   .skip:focus{left:12px;top:12px;z-index:99;background:var(--accent);color:#04120F;padding:10px 14px}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  /* 모바일 히어로: 고정 헤더가 흐름으로 바뀌므로 하단 정렬과 뷰포트 높이를 해제한다.
+     .open 정의 뒤에 와야 캐스케이드에서 이긴다. */
+  @media(max-width:720px){
+    .open{min-height:auto;justify-content:flex-start;padding:26px 0 clamp(26px,6vw,44px)}
+    .openfoot{margin-top:24px}
+    .room{padding-top:8px}
+  }
 </style>
 <meta name="description" content="이진희 · AI Product Designer. 교육 제품을 설계하고 프로토타입을 직접 만들어 배포합니다. GitHub Pages에 배포된 프로토타입 14개.">
 <link rel="canonical" href="https://jinilee-hue.github.io/portfolio/">
