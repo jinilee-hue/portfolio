@@ -39,8 +39,8 @@ GitHub API ──► scripts/build_data.py ──► data/projects.json ──�
 | 시안 | 이름 | 성격 |
 |---|---|---|
 | A | Editorial Ink | 웜 페이퍼 + 세리프 표제, 에디토리얼 목록 |
-| B | **Spec Ledger** (현재 채택) | 다크 모노크롬 + 라임, 필터 가능한 원장 테이블 |
-| C | Screen Room | 근사 블랙 + 민트, 전면 스크린샷 스택 |
+| B | Spec Ledger | 다크 모노크롬 + 라임, 필터 가능한 원장 테이블 |
+| C | **Screen Room** (현재 채택) | 근사 블랙 + 민트, 전면 스크린샷 스택 |
 
 시안 교체는 `variants/<이름>.html` 을 루트 `index.html` 로 승격하면 된다
 (경로를 `../data/` → `./data/`, `./shared.js` → `./assets/shared.js` 로 바꾸고 head 의 SEO/JSON-LD 블록을 옮긴다).
