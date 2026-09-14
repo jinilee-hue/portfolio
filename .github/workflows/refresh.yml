@@ -53,10 +53,21 @@ jobs:
           git add assets/shots
           if git diff --staged --quiet; then
             echo "변경 없음 — 커밋 생략"
-          else
-            git commit -m "chore: 포트폴리오 데이터·썸네일 자동 갱신 ($(date -u +%Y-%m-%d))"
-            git push
+            exit 0
           fi
+          git commit -m "chore: 포트폴리오 데이터·썸네일 자동 갱신 ($(date -u +%Y-%m-%d))"
+          # 실행 중 사람이 푸시하면 ref 가 앞서가 push 가 거부된다.
+          # 썸네일은 재생성 가능한 산출물이므로 원격을 받아 우리 것으로 덮고 재시도한다.
+          for attempt in 1 2 3; do
+            if git push; then
+              echo "푸시 성공 (시도 $attempt)"
+              exit 0
+            fi
+            echo "푸시 거부됨 — 원격을 받아 재시도 ($attempt/3)"
+            git pull --rebase -X ours origin main || git rebase --abort
+          done
+          # 끝내 실패해도 배포 자체는 막지 않는다 (아티팩트는 이미 최신)
+          echo "::warning::썸네일 커밋 푸시 실패 — 다음 실행에서 다시 시도됩니다"
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
