@@ -13,10 +13,11 @@
     "period": "작업 기간 수동 표기. 없으면 커밋 이력에서 자동 산출",
     "shot_path": "썸네일로 촬영할 화면 경로(라이브 URL 뒤에 붙는다). 비우면 첫 화면. 인트로/로그인 대신 실제 작업이 보이는 화면을 고른다.",
     "shot_wait": "촬영 전 추가 대기 ms (애니메이션·차트가 그려질 시간)",
-    "concept": "디자인 컨셉 — 어떤 시각 언어를 택했고 왜 그렇게 정했나 {ko,en}"
+    "concept": "디자인 컨셉 — 어떤 시각 언어를 택했고 왜 그렇게 정했나 {ko,en}",
+    "merge_into": "이 저장소를 다른 프로젝트에 흡수시킨다(목록에서 사라지고 기간·언어·링크만 합쳐짐)"
   },
   "eBOOK": {
-    "order": 1,
+    "order": 5,
     "featured": true,
     "title": {
       "ko": "Millions of Cats 인터랙티브 eBook",
@@ -133,200 +134,250 @@
     }
   },
   "KCMS": {
-    "order": 2,
+    "order": 1,
     "featured": true,
     "title": {
-      "ko": "POLY KCMS 학생 등록 화면 리디자인",
-      "en": "POLY KCMS — Student Registration Redesign"
+      "ko": "POLY KCMS 리디자인 + 개발 킷",
+      "en": "POLY KCMS Redesign + Developer Kit"
     },
     "kicker": {
-      "ko": "사내 운영 시스템 · 방향 결정용 시안",
-      "en": "Internal ops system · direction-setting study"
+      "ko": "레거시 전면 개편 · 개발자 6명이 쓰는 킷",
+      "en": "Legacy overhaul · a kit six developers build on"
     },
     "summary": {
-      "ko": "학원관리시스템 전면 개편에 앞서 레이아웃 방향을 고르기 위한 A/B 시안. 대표 화면 하나를 두 방향으로 만들고 각각 가독성 변형을 붙여, 논쟁을 취향 대신 비교 가능한 화면으로 옮겼다.",
-      "en": "An A/B layout study made before a full rebuild of an academy management system. One representative screen, two directions, each with a readability variant — moving the argument from taste to comparable screens."
+      "ko": "2000년대에 멈춰 있던 ASP.NET 학원관리시스템의 전면 개편. 시안 비교로 방향을 정한 뒤 거기서 멈추지 않고, 개발자가 그대로 쓸 수 있는 디자인 킷으로 묶어 사내에 배포했다. 현재 개발자 6명이 이 킷으로 화면을 만든다.",
+      "en": "A full overhaul of an ASP.NET academy management system frozen in the 2000s. Rather than stopping at a chosen direction, the work was packaged into a design kit and distributed internally — six developers now build screens with it."
     },
     "role": {
-      "ko": "리디자인 방향 설계 · 시안 4종 제작 · 비교 문서화",
-      "en": "Direction design, four prototypes, comparison writeup"
+      "ko": "진단 · 리디자인 방향 설계 · 디자인 시스템 · 킷 제작 · 개발 인수인계",
+      "en": "Diagnosis, direction, design system, kit authoring, developer handoff"
     },
     "tags": [
+      "Design System",
+      "Developer Kit",
       "Enterprise UI",
-      "Design Direction",
-      "A/B Study"
+      "Handoff"
     ],
     "entry": "",
     "intent": {
-      "ko": "시스템 전면 개편 앞에서 회의는 늘 취향 대결이 된다. '이게 더 낫다'는 말은 근거를 만들지 못한다. 그래서 대표 화면 하나를 골라 방향별로 실제로 만들었다. 말로 하던 논쟁을 나란히 놓고 눌러보는 비교로 바꾸는 게 목적이었다.",
-      "en": "Before a full system rebuild, meetings default to a contest of taste — 'this one's better' produces no evidence. So one representative screen was actually built in each direction, turning a verbal argument into a side-by-side you can click."
+      "ko": "시안은 채택되는 순간 낡기 시작한다. 개발자가 그것을 각자 해석해 옮기면 화면마다 간격과 색이 조금씩 달라지고, 반년 뒤엔 원래 시안과 다른 물건이 된다. 그래서 이번엔 '무엇을 만들지' 정하는 데서 끝내지 않고, 그대로 복사해 쓸 수 있는 템플릿과 규칙까지 넘겨서 해석의 여지를 줄였다.",
+      "en": "A mockup starts aging the moment it's approved: each developer interprets it, spacing and colour drift screen by screen, and six months later it's a different product. So this time the work didn't stop at deciding what to build — it handed over a copyable template and a rule set, leaving less room for interpretation."
     },
     "flow": [
       {
         "step": "01",
-        "ko": "인트로 — 썸네일·비교표로 진입",
-        "en": "Intro: thumbnails and comparison table"
+        "ko": "실제 화면 진단 — As-Is 한계 6가지",
+        "en": "Diagnose live screens — six As-Is limits"
       },
       {
         "step": "02",
-        "ko": "A형 Teal Workbench — 상단 탭, 높은 정보 밀도",
-        "en": "Type A — top tabs, high density"
+        "ko": "대표 화면을 방향별 시안으로 제작",
+        "en": "Build the key screen in each direction"
       },
       {
         "step": "03",
-        "ko": "B형 Horizon — 좌측 내비, 카드 정돈형",
-        "en": "Type B — left nav, card-organized"
+        "ko": "비교·투표로 방향 확정",
+        "en": "Compare and settle the direction"
       },
       {
         "step": "04",
-        "ko": "C안 — 기존 레이아웃 유지, 색만 교체",
-        "en": "Type C — legacy layout, recolor only"
+        "ko": "토큰·컴포넌트·템플릿을 킷으로 묶기",
+        "en": "Package tokens, components, template as a kit"
       },
       {
         "step": "05",
-        "ko": "각 안의 가독성 변형본 비교",
-        "en": "Readability variants of each"
+        "ko": "HANDOFF 문서와 함께 사내 배포",
+        "en": "Distribute internally with a handoff doc"
+      },
+      {
+        "step": "06",
+        "ko": "감사 스크립트로 시안·구현 차이 점검",
+        "en": "Audit scripts check built screens against the kit"
       }
     ],
     "stack": [
+      {
+        "group": "킷 구성",
+        "items": [
+          "tokens.css (뿌리 7색 + color-mix 파생)",
+          "common.css",
+          "template.html",
+          "components.html (코드 복사 버튼)",
+          "rules.md",
+          "HANDOFF.md"
+        ]
+      },
+      {
+        "group": "검증 자동화",
+        "items": [
+          "audit-rules.py",
+          "audit-report.py",
+          "audit-demo-vs-screen.py",
+          "build-css.py"
+        ]
+      },
+      {
+        "group": "시안",
+        "items": [
+          "A·B·C·D 타입",
+          "C타입 색상 변형 4종",
+          "가독성 변형"
+        ]
+      },
       {
         "group": "구현",
         "items": [
           "HTML",
           "CSS",
-          "Vanilla JS"
-        ]
-      },
-      {
-        "group": "디자인 시스템",
-        "items": [
-          "poly-dashboard 토큰 재사용",
-          "Poly Blue #0066FF"
-        ]
-      },
-      {
-        "group": "도구",
-        "items": [
-          "Claude Code",
-          "Python (자료 정리)"
+          "Vanilla JS",
+          "Pretendard",
+          "빌드 불필요"
         ]
       }
     ],
     "decisions": [
       {
-        "ko": "방향을 두 개가 아니라 세 개로 늘렸다. 전면 개편안 두 개(A·B)만 두면 '개편 여부' 자체가 논점에서 빠진다. 기존 레이아웃을 유지하고 색만 바꾼 C안을 넣어 전환 비용이 낮은 선택지를 테이블에 올렸다.",
-        "en": "Three directions, not two. With only two redesigns on the table, 'should we redesign at all' quietly disappears — so a low-transition-cost option (legacy layout, recolor only) was added."
+        "ko": "시안이 아니라 킷을 최종 산출물로 잡았다. 개발자 6명이 각자 해석하는 대신 template.html 을 복사해 시작하므로, 화면이 늘어나도 시스템이 흐트러지지 않는다.",
+        "en": "The deliverable was defined as the kit, not the mockups. Six developers copy template.html instead of each interpreting a picture, so the system holds as screen count grows."
       },
       {
-        "ko": "각 방향마다 가독성 변형을 따로 만들었다. 레이아웃 선호와 가독성 문제가 한 화면에 섞이면 무엇 때문에 좋다고 말하는지 구분되지 않는다.",
-        "en": "Each direction got a separate readability variant, so layout preference and legibility couldn't be confused for one another in feedback."
+        "ko": "컴포넌트 문서를 화면에 그려진 것과 같은 마크업으로 만들었다. 문서용 코드를 따로 쓰면 반드시 실제와 어긋난다. components.html 의 복사 버튼이 주는 코드가 곧 그 위에 렌더된 물건이다.",
+        "en": "Component docs render from the same markup they hand out. Maintaining separate example code guarantees drift; the copy button gives exactly the thing rendered above it."
       },
       {
-        "ko": "결정은 내가 하지 않았다. 비교 가능한 재료를 만들어 의사결정자에게 넘기는 것까지가 이 작업의 범위였다.",
-        "en": "The decision wasn't mine. The scope was producing comparable material and handing it to the decision-makers."
+        "ko": "색을 hex 로 못 쓰게 막고 뿌리 7개의 color-mix 파생만 허용했다. 규칙을 말로 부탁하는 대신 감사 스크립트로 검사한다.",
+        "en": "Writing hex was disallowed in favour of color-mix derivations from seven roots — and the rule is enforced by an audit script rather than requested in prose."
+      },
+      {
+        "ko": "밀도를 낮추지 않았다. 4,770건을 다루는 파워유저 도구라 여백을 늘리는 흔한 처방은 오히려 업무를 느리게 만든다.",
+        "en": "Density was not reduced. For a power-user tool handling 4,770 records, the usual prescription of more whitespace makes the job slower, not easier."
       }
     ],
     "shot_path": "A타입/학생 등록.dc.html",
     "shot_wait": 3000,
     "concept": {
-      "ko": "업무용 화면이라 '예쁜 것'보다 오래 봐도 안 피로한 것이 기준이었다. A형은 상단 탭으로 화면 폭을 최대한 남겨 정보 밀도를 올렸고, B형은 좌측 내비로 메뉴 위계를 눈에 보이게 했다. 논점이 색으로 흐르지 않게 두 안의 서체와 간격은 같게 두고 구조만 다르게 했다. C안은 기존 화면의 뼈대를 그대로 두고 색만 세 가지로 바꿔, 전환 비용이 거의 없는 선택지가 어디까지 나아 보이는지 확인했다.",
-      "en": "For an internal tool the bar is not 'pretty' but 'still readable after eight hours'. Type A keeps navigation on top to preserve width and raise density; Type B moves it left to make menu hierarchy visible. Both share identical type and spacing so the argument couldn't drift into colour — only structure differs. Type C keeps the legacy skeleton and changes only colour, in three variants, to see how far the near-zero-transition option can get."
+      "ko": "진단은 '기능이 부족하다'가 아니라 '위계·도구·시스템이 없다'였다. 검색폼·대용량 테이블·편집폼·메모가 같은 비중으로 한 화면에 있어 시선의 출발점이 없었다. 밀도는 파워유저 도구라 낮추지 않고, 행 높이·정렬·구분선·tabular 숫자로 '스캔 가능한 고밀도'를 만들었다. 색은 뿌리 7개만 hex 로 두고 나머지는 color-mix 로 파생시켜, 뿌리 하나를 바꾸면 계열 전체가 따라오게 했다.",
+      "en": "The diagnosis wasn't missing features but missing hierarchy, tools and system: search form, bulk table, edit form and memos all carried equal weight, leaving the eye no entry point. Density stayed high — it's a power-user tool — but became scannable through row height, alignment, rules and tabular figures. Only seven root colours are written as hex; everything else derives via color-mix, so changing one root carries its whole family."
     }
   },
   "LIO_DESIGN": {
     "order": 3,
     "featured": true,
     "title": {
-      "ko": "LIO Step 2 학습 Flow 프로토타입",
-      "en": "LIO Step 2 — Learning Flow Prototype"
+      "ko": "LIO — 브랜드부터 학습 흐름까지",
+      "en": "LIO — From Brand to Learning Flow"
     },
     "kicker": {
-      "ko": "49슬라이드 화면정의서 → 클릭 가능한 화면",
-      "en": "49-slide spec → clickable screens"
+      "ko": "AI Tutor 브랜드 · 캐릭터 · 64화면 프로토타입",
+      "en": "AI tutor brand, character and a 64-screen prototype"
     },
     "summary": {
-      "ko": "PPTX 화면정의서 49슬라이드를 클릭 가능한 48화면 프로토타입으로 옮기고, 같은 Flow를 두 디자인(Storybook / App UI)으로 병렬 제작했다. 슬라이드 번호로 바로 진입하는 주소 규칙을 둬서 리뷰 중 화면을 찾는 시간을 없앴다.",
-      "en": "A 49-slide PPTX spec rebuilt as 48 clickable screens, with the same flow rendered in two design directions. Deep links by slide number removed the hunt for a screen during review."
+      "ko": "i-LENS 안에서 학생을 실시간 코칭하는 AI Tutor 엔진 LIO. 워드마크·컬러·타이포 후보 5안을 한 페이지에 정리해 투표로 방향을 정하고, 채택된 B안으로 사자 캐릭터와 64화면 학습 흐름 프로토타입까지 이어서 만들었다.",
+      "en": "LIO is the AI tutor engine that coaches students inside i-LENS. Five brand candidates — wordmark, palette, type — were laid out on one page and settled by vote; the chosen direction then carried through to the lion character and a 64-screen learning-flow prototype."
     },
     "role": {
-      "ko": "프로토타입 설계 · 디자인 2종 · 구현",
-      "en": "Prototype architecture, two visual directions, implementation"
+      "ko": "브랜드 아이덴티티 · 캐릭터 · 프로토타입 설계 · 구현",
+      "en": "Brand identity, character, prototype architecture, implementation"
     },
     "tags": [
-      "Prototype",
+      "Brand Identity",
+      "Character",
       "Design System",
-      "EdTech"
+      "Prototype"
     ],
     "entry": "",
     "intent": {
-      "ko": "49슬라이드짜리 화면정의서는 아무도 끝까지 읽지 않는다. 슬라이드는 화면 사이의 연결을 보여주지 못해서, 리뷰가 늘 '이 다음에 뭐가 뜨죠?'에서 멈춘다. 흐름 자체를 눌러볼 수 있게 만들면 그 질문이 사라진다고 봤다.",
-      "en": "Nobody reads a 49-slide screen spec to the end, and slides can't show what connects to what — reviews stall on 'so what comes after this one?'. Making the flow itself clickable removes the question."
+      "ko": "AI 튜터에 이름과 얼굴을 주는 일부터 시작했다. 학생이 매일 만나는 존재라 로고만으로는 부족했고, 브랜드 방향이 정해지지 않은 채 화면을 그리면 나중에 전부 다시 그려야 했다. 그래서 브랜드 후보 5안을 먼저 눈에 보이게 만들어 결정을 앞으로 당기고, 정해진 다음에 화면으로 내려갔다.",
+      "en": "It started with giving the AI tutor a name and a face. Students meet it daily, so a logo alone wasn't enough — and drawing screens before the brand was settled would have meant redrawing all of them. Five candidates were made visible first to pull the decision forward, and only then did the work descend into screens."
     },
     "flow": [
       {
         "step": "01",
-        "ko": "PPTX 49슬라이드를 화면 단위로 분해",
-        "en": "Decompose 49 PPTX slides into screens"
+        "ko": "브랜드 후보 5안 — 워드마크·팔레트·타이포",
+        "en": "Five brand candidates — wordmark, palette, type"
       },
       {
         "step": "02",
-        "ko": "48화면을 클릭 가능한 흐름으로 재구성",
-        "en": "Rebuild as 48 clickable screens"
+        "ko": "한 페이지에 정리 → 투표로 방향 확정",
+        "en": "Laid out on one page, settled by vote"
       },
       {
         "step": "03",
-        "ko": "같은 흐름을 Design A / B 두 벌로 제작",
-        "en": "Render the same flow in two designs"
+        "ko": "채택안(B)으로 사자 캐릭터 전개",
+        "en": "Lion character developed from the chosen direction"
       },
       {
         "step": "04",
-        "ko": "슬라이드 번호·화면 id 로 바로 진입",
-        "en": "Deep-link by slide number or screen id"
+        "ko": "PPTX 화면정의서 49슬라이드 분해",
+        "en": "49-slide PPTX spec decomposed"
+      },
+      {
+        "step": "05",
+        "ko": "64화면 클릭 가능한 학습 흐름 구현",
+        "en": "64 clickable screens of the learning flow"
       }
     ],
     "stack": [
+      {
+        "group": "브랜드",
+        "items": [
+          "워드마크 5안",
+          "컬러 팔레트 · 타이포 가이드",
+          "사자 캐릭터 (AI 생성 후 정제)"
+        ]
+      },
       {
         "group": "구현",
         "items": [
           "HTML",
           "CSS",
-          "Vanilla JS"
+          "Vanilla JS",
+          "빌드 없음"
         ]
       },
       {
-        "group": "내비게이션",
+        "group": "프로토타입",
         "items": [
-          "키보드 ←/→",
-          "URL 쿼리 딥링크 (?s= / ?id=)",
-          "48화면 인덱스"
+          "키보드 ←/→ 내비",
+          "슬라이드 번호 딥링크 (?s=)",
+          "64화면 인덱스",
+          "화면정의 오버레이"
         ]
       },
       {
-        "group": "원본",
+        "group": "의사결정",
         "items": [
-          "PPTX 화면정의서 49슬라이드"
+          "브랜드 후보 투표 페이지 (참여 집계 내장)"
         ]
       }
     ],
     "decisions": [
       {
-        "ko": "PPTX 슬라이드 번호를 URL에 그대로 노출했다(?s=46). 리뷰 중 '46번 슬라이드요'라는 말이 그대로 주소가 되어, 화면을 찾는 시간이 사라졌다.",
-        "en": "PPTX slide numbers were exposed directly in the URL (?s=46), so 'slide 46' in a review becomes an address — the hunt for a screen disappears."
+        "ko": "브랜드 결정을 회의가 아니라 페이지로 옮겼다. 5안을 같은 조건으로 한 페이지에 놓고 투표 기능을 붙이니, 목소리 큰 사람이 아니라 표가 방향을 정했다.",
+        "en": "The brand decision moved from a meeting into a page. Five candidates under identical conditions with voting attached meant the direction was set by tallies, not by whoever spoke loudest."
       },
       {
-        "ko": "같은 흐름을 두 디자인으로 병렬 제작했다. 흐름 검증과 비주얼 결정을 한 번에 끝내려고 했지만, 실제로는 두 논의가 섞여 리뷰가 길어지기도 했다.",
-        "en": "The same flow was built in two designs to settle flow and visuals at once — though in practice the two discussions sometimes tangled and lengthened review."
+        "ko": "캐릭터를 브랜드 확정 뒤로 미뤘다. 먼저 그리면 캐릭터가 예뻐서 브랜드가 끌려가고, 나중에 색이 안 맞아 다시 그리게 된다.",
+        "en": "The character was deliberately drawn after the brand was locked. Draw it first and a likeable character drags the brand along, only to be redrawn when the palette doesn't fit."
+      },
+      {
+        "ko": "PPTX 슬라이드 번호를 URL에 그대로 노출했다(?s=46). 리뷰 중 '46번이요'라는 말이 그대로 주소가 되어 화면을 찾는 시간이 사라졌다.",
+        "en": "PPTX slide numbers are exposed in the URL (?s=46), so 'number 46' in a review becomes an address and the hunt for a screen disappears."
+      },
+      {
+        "ko": "같은 흐름을 A(Storybook)·B(App UI) 두 벌로 만들어 비교했고, B가 채택됐다. 흐름 자체는 한 글자도 다르지 않게 두어 '흐름이 이상한 것'과 '톤이 안 맞는 것'을 분리해 말할 수 있게 했다.",
+        "en": "The same flow was built twice — A (Storybook) and B (App UI) — and B was chosen. The flow itself was kept identical word for word so review could separate 'the flow is wrong' from 'the tone is wrong'."
       }
     ],
-    "shot_path": "designA/index.html",
-    "shot_wait": 3000,
+    "shot_path": "designB/index.html",
+    "shot_wait": 4000,
     "concept": {
-      "ko": "같은 흐름을 두 개의 시각 언어로 만들었다. Design A(Storybook)는 삽화와 여백을 크게 써서 이야기책에 가깝고, Design B(App UI)는 컴포넌트와 상태를 또렷하게 드러내 제품 화면에 가깝다. 학습 흐름 자체는 한 글자도 다르지 않게 두어, 리뷰에서 '흐름이 이상한 것'과 '이 톤이 안 맞는 것'을 분리해 말할 수 있게 했다.",
-      "en": "One flow, two visual languages. Design A (Storybook) leans on illustration and generous space, closer to a picture book; Design B (App UI) exposes components and states, closer to a product surface. The learning flow itself is identical word for word, so review could separate 'the flow is wrong' from 'this tone is wrong'."
+      "ko": "채택된 B안은 파랑 단색 배경에 흰 워드마크, 오른쪽 위 sparkle 하나로 '깨달음의 순간'을 표시한다. 캐릭터는 사자 — 아이가 배우는 자리에서 평가받는 기분이 들지 않도록 위엄보다 친근함 쪽으로 비율을 잡고, 목에 LIO 밴드너를 둘러 브랜드와 캐릭터를 한 몸으로 묶었다. 화면은 같은 파랑을 배경으로 써서 캐릭터가 UI 위에 얹힌 스티커처럼 보이지 않게 했다.",
+      "en": "The chosen direction pairs a solid blue field with a white wordmark and a single sparkle for the moment of understanding. The character is a lion, proportioned toward friendliness rather than majesty so a learning child never feels judged, with a LIO bandana tying character and brand into one object. Screens reuse the same blue so the character never reads as a sticker pasted onto the UI."
     }
   },
   "AI-Studio": {
-    "order": 4,
+    "order": 6,
     "featured": true,
     "title": {
       "ko": "Wonder Story Lab",
@@ -429,7 +480,7 @@
     }
   },
   "Phonics-Studio": {
-    "order": 5,
+    "order": 8,
     "title": {
       "ko": "Phonics Studio",
       "en": "Phonics Studio"
@@ -456,7 +507,7 @@
     "shot_wait": 3500
   },
   "Phonics-Playground": {
-    "order": 6,
+    "order": 9,
     "title": {
       "ko": "Phonics Playground",
       "en": "Phonics Playground"
@@ -597,7 +648,7 @@
     ]
   },
   "phonics-wordmashup": {
-    "order": 8,
+    "order": 10,
     "title": {
       "ko": "Prompt Crash — 합성어 게임",
       "en": "Prompt Crash — Compound Word Game"
@@ -622,58 +673,212 @@
     "entry": ""
   },
   "poly-dashboard": {
-    "order": 9,
+    "order": 2,
     "title": {
-      "ko": "EduPoly 캠퍼스 대시보드",
-      "en": "EduPoly Campus Dashboard"
+      "ko": "Poly Dashboard Kit",
+      "en": "Poly Dashboard Kit"
     },
     "kicker": {
-      "ko": "운영 지표 대시보드 · 디자인 시스템",
-      "en": "Ops dashboard · design system"
+      "ko": "사내 배포 디자인 킷 · v1.2 · 6개 파일",
+      "en": "Internally distributed design kit · v1.2 · six files"
     },
     "summary": {
-      "ko": "캠퍼스 운영 지표를 한 화면에서 보는 대시보드. 색·타입·차트 팔레트를 토큰으로 정의해 CANB 대시보드와 같은 뼈대를 브랜드만 갈아끼워 재사용했다.",
-      "en": "A campus operations dashboard whose color, type and chart palette live as tokens — the same skeleton reused for a second brand by swapping the token layer."
+      "ko": "캠퍼스 관리 대시보드를 만들면서 나온 토큰·컴포넌트·레이아웃을 6개 파일 40KB 킷으로 묶어 사내에 배포했다. AI 개발 에이전트에 그대로 붙여넣는 UI 규약 프롬프트를 함께 넣어, 개발자가 규칙을 설명받지 않고도 같은 톤의 화면을 만들 수 있게 했다. 이 킷으로 LeaveERP 연차 관리 등 다른 시스템이 파생됐다.",
+      "en": "Tokens, components and layout extracted from a campus dashboard, packaged as a six-file 40KB kit and distributed internally. It ships with a UI-contract prompt to paste straight into AI coding agents, so developers produce on-brand screens without being briefed on the rules — and other systems, such as a leave-management ERP, were built from it."
     },
     "role": {
-      "ko": "디자인 시스템 정의 · 화면 설계 · 구현",
-      "en": "Design tokens, UI design, implementation"
+      "ko": "디자인 시스템 정의 · 킷 제작 · 문서화 · 사내 배포",
+      "en": "Design system, kit authoring, documentation, internal distribution"
     },
     "tags": [
-      "Dashboard",
       "Design Tokens",
-      "Data Viz"
+      "Developer Kit",
+      "Dashboard",
+      "AI Agent Prompt"
     ],
     "entry": "",
-    "shot_path": "index.html",
-    "shot_wait": 4000
+    "shot_path": "download.html",
+    "shot_wait": 4000,
+    "featured": true,
+    "intent": {
+      "ko": "대시보드 하나를 잘 만들어도 다음 사람이 그것을 다시 만든다. 색을 어디서 가져올지, 차트 두께를 얼마로 할지 매번 물어보게 되고, 물어보지 않으면 제각각이 된다. 그래서 화면이 아니라 화면을 만드는 재료를 산출물로 삼았다. 개발자가 나에게 묻지 않고도 같은 결과에 도달하는 게 목표였다.",
+      "en": "Building one good dashboard doesn't help the next person, who rebuilds it. Where does this colour come from, how thick should the chart line be — asked every time, and when unasked, answered differently. So the deliverable became the materials rather than the screens: the goal was for a developer to reach the same result without asking me."
+    },
+    "concept": {
+      "ko": "Poly Blue #0066FF 하나만 쓰고 나머지는 투명도로 구분하는 톤온톤 시스템. 색을 고르는 결정 자체를 없앤 게 핵심이다. 차트도 빨강·주황 같은 시맨틱 색을 금지하고 블루 투명도 6단계(--chart-1~6)로만 그린다. 대시보드는 숫자를 읽는 화면이라 색이 늘어날수록 무엇이 중요한지 흐려진다.",
+      "en": "One colour — Poly Blue #0066FF — separated only by opacity. The point is to remove colour decisions altogether. Charts ban semantic reds and oranges and draw from six blue opacity steps, because on a screen made for reading numbers every extra hue blurs what matters."
+    },
+    "flow": [
+      {
+        "step": "01",
+        "ko": "캠퍼스 대시보드 10페이지 구축",
+        "en": "Build the 10-page campus dashboard"
+      },
+      {
+        "step": "02",
+        "ko": "반복되는 색·간격·컴포넌트를 토큰으로 추출",
+        "en": "Extract recurring colour, spacing, components as tokens"
+      },
+      {
+        "step": "03",
+        "ko": "6개 파일로 정리 + 디자인 시스템 문서",
+        "en": "Reduce to six files plus a system document"
+      },
+      {
+        "step": "04",
+        "ko": "AI 에이전트용 UI 규약 프롬프트 작성",
+        "en": "Write the UI-contract prompt for AI agents"
+      },
+      {
+        "step": "05",
+        "ko": "다운로드 페이지로 사내 배포",
+        "en": "Distribute internally via a download page"
+      },
+      {
+        "step": "06",
+        "ko": "CANB·LeaveERP 등으로 파생 검증",
+        "en": "Validated by derivatives: CANB, LeaveERP"
+      }
+    ],
+    "stack": [
+      {
+        "group": "킷 구성",
+        "items": [
+          "styles/tokens.css",
+          "styles/common.css",
+          "js/utils.js",
+          "js/layout.js",
+          "design system.md",
+          "poly-dashboard.md (에이전트 프롬프트)"
+        ]
+      },
+      {
+        "group": "차트",
+        "items": [
+          "Chart.js",
+          "테마 연동 색 전환",
+          "--chart-1~6 블루 투명도"
+        ]
+      },
+      {
+        "group": "기능",
+        "items": [
+          "라이트/다크 (localStorage)",
+          "initLayout() 한 줄 초기화",
+          "토스트 · 하단 탭바 내장"
+        ]
+      },
+      {
+        "group": "배포",
+        "items": [
+          "ZIP 40KB · 6개 파일",
+          "다운로드 페이지",
+          "Vanilla JS · 빌드 불필요"
+        ]
+      }
+    ],
+    "decisions": [
+      {
+        "ko": "AI 에이전트용 프롬프트를 킷에 넣었다. 요즘 개발자는 Cursor 같은 도구로 화면을 만드는데, 규칙을 사람에게만 설명하면 에이전트가 그것을 모른 채 기본값으로 그린다. 규약을 프롬프트로 만들어 넣으니 에이전트가 처음부터 브랜드 안에서 생성한다.",
+        "en": "An agent prompt ships inside the kit. Developers now build through tools like Cursor, and a rule explained only to humans is invisible to the agent, which falls back to its defaults. Encoding the contract as a prompt keeps generation inside the brand from the first line."
+      },
+      {
+        "ko": "빌드를 없앴다. Node·번들러·설치가 필요하면 급한 사람은 그냥 안 쓴다. CDN 4줄로 시작하게 만든 뒤에야 실제로 쓰이기 시작했다.",
+        "en": "No build step. If it needs Node, a bundler and an install, the person in a hurry simply won't use it. Adoption started only once it began with four CDN lines."
+      },
+      {
+        "ko": "삭제 버튼에 빨강을 쓰지 않기로 했다. 톤온톤 시스템에 경고색이 하나 들어오면 그 색이 화면에서 가장 강해져 실제 중요한 지표를 이긴다.",
+        "en": "Delete actions don't use red. In a tone-on-tone system a single alert colour becomes the loudest thing on screen and outshouts the metrics that actually matter."
+      }
+    ]
   },
   "canb-dashboard": {
-    "order": 10,
+    "order": 4,
     "title": {
-      "ko": "CANB 캠퍼스 대시보드",
-      "en": "CANB Campus Dashboard"
+      "ko": "CANB Dashboard Kit",
+      "en": "CANB Dashboard Kit"
     },
     "kicker": {
-      "ko": "같은 뼈대, 다른 브랜드",
-      "en": "Same skeleton, different brand"
+      "ko": "같은 킷, 브랜드만 교체 · 강사용 화면 5종 추가",
+      "en": "Same kit, brand swapped · five instructor screens added"
     },
     "summary": {
-      "ko": "EduPoly 대시보드와 구조를 공유하되 토큰만 교체한 자매 제품. 브랜드가 늘어날 때 화면을 다시 그리지 않아도 되는지 실제로 검증한 사례다.",
-      "en": "A sibling of the EduPoly dashboard sharing structure but swapping the token layer — a real test of whether adding a brand requires redrawing screens."
+      "ko": "Poly Dashboard Kit의 구조를 그대로 두고 토큰 계층만 마젠타(#BC216D)로 교체한 자매 킷. 브랜드가 하나 늘어날 때 화면을 다시 그려야 하는지를 실제로 검증한 사례이고, 여기에 강사용 화면 5종을 더해 킷이 새 도메인까지 감당하는지 확인했다.",
+      "en": "A sibling kit that keeps the Poly structure and swaps only the token layer to magenta (#BC216D) — a real test of whether adding a brand means redrawing screens. Five instructor-facing screens were added to check the kit holds up in a new domain."
     },
     "role": {
-      "ko": "토큰 재정의 · 화면 적용",
-      "en": "Token re-definition, UI application"
+      "ko": "토큰 재정의 · 강사 화면 설계 · 킷 배포",
+      "en": "Token re-definition, instructor screens, kit distribution"
     },
     "tags": [
-      "Dashboard",
       "Design Tokens",
-      "Multi-brand"
+      "Multi-brand",
+      "Developer Kit",
+      "Dashboard"
     ],
     "entry": "",
-    "shot_path": "index.html",
-    "shot_wait": 4000
+    "shot_path": "download.html",
+    "shot_wait": 4000,
+    "intent": {
+      "ko": "'토큰으로 만들었으니 브랜드 교체는 쉽다'는 말은 실제로 갈아끼워 보기 전엔 주장일 뿐이다. CANB로 두 번째 브랜드를 올려 어디가 진짜로 토큰이었고 어디에 색이 박혀 있었는지 확인했다.",
+      "en": "'It's tokenised, so rebranding is easy' is a claim until you actually swap it. Standing up CANB as a second brand revealed what was genuinely tokenised and where colour had been baked in."
+    },
+    "flow": [
+      {
+        "step": "01",
+        "ko": "Poly 킷 구조를 그대로 가져오기",
+        "en": "Take the Poly kit structure as-is"
+      },
+      {
+        "step": "02",
+        "ko": "토큰 계층만 마젠타로 재정의",
+        "en": "Redefine only the token layer to magenta"
+      },
+      {
+        "step": "03",
+        "ko": "하드코딩된 색 찾아내 토큰으로 회수",
+        "en": "Find hardcoded colours and reclaim them as tokens"
+      },
+      {
+        "step": "04",
+        "ko": "강사용 화면 5종 추가 검증",
+        "en": "Add and validate five instructor screens"
+      }
+    ],
+    "stack": [
+      {
+        "group": "킷 구성",
+        "items": [
+          "Poly 킷과 동일 구조",
+          "tokens.css 만 재정의 (CANB Magenta #BC216D)"
+        ]
+      },
+      {
+        "group": "추가 화면",
+        "items": [
+          "강사 대시보드",
+          "수업 · 일정 · 학생 · 리포트"
+        ]
+      },
+      {
+        "group": "배포",
+        "items": [
+          "canb-dashboard-kit.zip",
+          "canb-dashboard.skill",
+          "다운로드 페이지"
+        ]
+      }
+    ],
+    "decisions": [
+      {
+        "ko": "브랜드 전환을 런타임 스위처로 만들었다. 빌드로 분기하면 두 브랜드가 서서히 다른 코드가 되지만, 같은 코드에서 토큰만 갈리면 한쪽에서 고친 게 다른 쪽에도 남는다.",
+        "en": "Brand switching happens at runtime. Branching at build time lets the two brands slowly become different codebases; swapping tokens in one codebase means a fix on one side stays fixed on the other."
+      },
+      {
+        "ko": "두 번째 브랜드를 올리는 과정 자체가 감사였다. 색이 하드코딩된 자리는 브랜드를 바꾸는 순간 티가 나므로, 그때마다 토큰으로 회수했다.",
+        "en": "Standing up the second brand was itself the audit: any hardcoded colour announces itself the moment the brand changes, and each one was reclaimed as a token."
+      }
+    ]
   },
   "poly-ai-agent": {
     "order": 11,
@@ -753,27 +958,6 @@
     "entry": ""
   },
   "LIO": {
-    "order": 14,
-    "title": {
-      "ko": "LIO 디자인 시스템",
-      "en": "LIO Design System"
-    },
-    "kicker": {
-      "ko": "브랜드 · 컴포넌트 정의",
-      "en": "Brand and component definitions"
-    },
-    "summary": {
-      "ko": "LIO 프로덕트의 색·타입·컴포넌트를 한 문서에 모은 디자인 시스템 페이지.",
-      "en": "A single-page design system collecting LIO's color, type and component definitions."
-    },
-    "role": {
-      "ko": "디자인 시스템 정의",
-      "en": "Design system definition"
-    },
-    "tags": [
-      "Design System",
-      "Brand"
-    ],
-    "entry": "lio-design-system.html"
+    "merge_into": "LIO_DESIGN"
   }
 }

@@ -194,6 +194,38 @@ def main() -> int:
     ov_path = ROOT / "data" / "overrides.json"
     overrides = json.loads(ov_path.read_text(encoding="utf-8")) if ov_path.exists() else {}
 
+    # 여러 저장소가 한 프로젝트인 경우: overrides 의 merge_into 로 흡수한다.
+    # 흡수되는 쪽은 목록에서 사라지고, 커밋 구간·언어 바이트·링크만 주 프로젝트에 합쳐진다.
+    absorbed = {}
+    for p in projects:
+        into = (overrides.get(p["id"], {}) or {}).get("merge_into")
+        if into:
+            absorbed.setdefault(into, []).append(p)
+    absorbed_ids = {p["id"] for lst in absorbed.values() for p in lst}
+    projects = [p for p in projects if p["id"] not in absorbed_ids]
+
+    for p in projects:
+        parts = absorbed.get(p["id"]) or []
+        if not parts:
+            continue
+        a = p["auto"]
+        # 커밋 구간은 합집합, 커밋 수는 합계
+        spans = [a.get("span") or {}] + [q["auto"].get("span") or {} for q in parts]
+        firsts = [s["first"] for s in spans if s.get("first")]
+        lasts = [s["last"] for s in spans if s.get("last")]
+        if firsts and lasts:
+            a["span"] = {"first": min(firsts), "last": max(lasts),
+                         "commits": sum(s.get("commits", 0) for s in spans)}
+        # 언어 바이트 합산 후 상위 6개
+        tot: dict[str, int] = {}
+        for s in [a.get("lang_bytes") or {}] + [q["auto"].get("lang_bytes") or {} for q in parts]:
+            for k, v in s.items():
+                tot[k] = tot.get(k, 0) + v
+        a["lang_bytes"] = dict(sorted(tot.items(), key=lambda kv: kv[1], reverse=True)[:6])
+        a["languages"] = list(a["lang_bytes"])[:5]
+        # 흡수된 저장소의 링크를 남겨 근거를 잃지 않게 한다
+        a["also"] = [{"id": q["id"], "repo": q["auto"]["repo"], "live": q["auto"]["live"]} for q in parts]
+
     merged = []
     for p in projects:
         o = overrides.get(p["id"], {})

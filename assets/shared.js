@@ -54,6 +54,7 @@ export function pick(p) {
     commits: span.commits || 0,
     deps: a.deps || [],
     langBytes: a.lang_bytes || {},
+    also: a.also || [],   // 한 프로젝트로 합친 다른 저장소들
     first: (a.span || {}).first || '',
     last: (a.span || {}).last || '',
     hasCase: !!(p.intent || p.concept || (p.flow || []).length || (p.decisions || []).length),
