@@ -236,7 +236,7 @@ function draw(){
         <div class="tags">${p.tags.slice(0,4).map(x=>`<span>${x}</span>`).join('')}</div>
       </div>
       <div class="row-side">
-        <img class="thumb" src="../${p.shot}" alt="${p.title} 실제 화면" loading="lazy" width="640" height="400">
+        <img class="thumb" src="${p.shot}" alt="${p.title} 실제 화면" loading="lazy" width="640" height="400">
         <div class="side-meta"><span>${p.langs.slice(0,2).join(' · ')}</span><span>${p.pushed}</span></div>
       </div>
     </a>`).join('');

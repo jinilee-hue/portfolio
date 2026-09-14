@@ -487,7 +487,7 @@ function draw(){
     <article class="piece">
       <a class="shot" data-open="${c.open} ↗" href="${p.live||p.repo}" target="_blank" rel="noopener"
          aria-label="${p.title} ${c.open}">
-        <img src="./${p.shot}" alt="${p.title} 실제 배포 화면" decoding="async"
+        <img src="${p.shot}" alt="${p.title} 실제 배포 화면" decoding="async"
              ${i===0?'fetchpriority="high"':'fetchpriority="low"'} width="1440" height="900">
       </a>
       <div class="info">

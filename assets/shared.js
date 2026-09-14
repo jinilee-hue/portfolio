@@ -1,6 +1,12 @@
 /* 변체 공통 데이터 로더 — 세 방향 모두 같은 실제 데이터를 쓴다 */
 const LANG_KEY = 'pf-lang';
 
+/* 사이트 루트를 이 모듈의 위치에서 계산한다.
+   /assets/shared.js 든 /variants/shared.js 든 루트 한 단계 아래라 결과가 같다.
+   상대경로를 HTML 에 적어두면 시안을 루트로 옮길 때마다 이미지가 깨진다. */
+export const SITE_ROOT = new URL('../', import.meta.url);
+export const asset = (p) => new URL(String(p).replace(/^\.?\//, ''), SITE_ROOT).href;
+
 export function lang() {
   return localStorage.getItem(LANG_KEY) || 'ko';
 }
@@ -16,7 +22,7 @@ export function t(obj, fallback = '') {
 }
 
 export async function loadProjects() {
-  const res = await fetch('./data/projects.json');
+  const res = await fetch(asset('data/projects.json'));
   if (!res.ok) throw new Error('projects.json ' + res.status);
   return res.json();
 }
@@ -33,7 +39,7 @@ export function pick(p) {
     tags: p.tags || a.languages || [],
     live: a.live,
     repo: a.repo,
-    shot: p.shot,
+    shot: asset(p.shot),
     pushed: (a.pushed_at || '').slice(0, 10),
     langs: a.languages || [],
     featured: !!p.featured,

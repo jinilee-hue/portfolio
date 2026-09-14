@@ -230,7 +230,7 @@ function draw(){
       </td>
       <td class="stack">${p.tags.slice(0,4).map(x=>`<span>${x}</span>`).join('')}</td>
       <td class="kv">${p.pushed}</td>
-      <td class="shotcell"><img src="../${p.shot}" alt="${p.title} 실제 화면" loading="lazy" width="184" height="115"></td>
+      <td class="shotcell"><img src="${p.shot}" alt="${p.title} 실제 화면" loading="lazy" width="184" height="115"></td>
       <td><a class="go" href="${p.live||p.repo}" target="_blank" rel="noopener">OPEN ↗</a></td>
     </tr>`).join('');
 
