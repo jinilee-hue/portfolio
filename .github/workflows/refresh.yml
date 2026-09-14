@@ -47,7 +47,10 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/projects.json assets/shots
+          # data/projects.json 은 매 실행마다 재생성되는 산출물이라 커밋하지 않는다
+          # (커밋하면 로컬에서 overrides.json 을 고칠 때마다 rebase 충돌이 난다).
+          # Pages 아티팩트는 이 잡의 워크스페이스에서 만들어지므로 파일은 이미 최신이다.
+          git add assets/shots
           if git diff --staged --quiet; then
             echo "변경 없음 — 커밋 생략"
           else
