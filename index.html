@@ -33,10 +33,9 @@
      반투명 배경 + 블러로 어떤 밴드 위에서도 읽히게 한다. */
   header{position:fixed;top:0;left:0;right:0;z-index:30;
     display:flex;justify-content:space-between;align-items:center;gap:12px;
-    padding:14px clamp(16px,4vw,56px);color:#F5F3EF;pointer-events:none;
-    background:rgba(10,10,10,.82);backdrop-filter:saturate(160%) blur(14px);
-    border-bottom:1px solid rgba(245,243,239,.12)}
-  @supports not (backdrop-filter: blur(1px)){header{background:rgba(10,10,10,.95)}}
+    padding:14px clamp(16px,4vw,56px);color:var(--fg);pointer-events:none;
+    background:var(--bg);
+    border-bottom:1px solid var(--line)}
   /* 모바일: 좁은 폭에서 이름과 내비가 겹치고 본문 위에 올라탄다.
      흐름에 맞춰 두 줄로 내리고, blend mode 대신 배경을 깔아 가독성을 확보한다. */
   @media(max-width:720px){
