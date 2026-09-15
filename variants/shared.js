@@ -22,9 +22,18 @@ export function t(obj, fallback = '') {
 }
 
 export async function loadProjects() {
-  const res = await fetch(asset('data/projects.json'));
-  if (!res.ok) throw new Error('projects.json ' + res.status);
-  return res.json();
+  // file:// 로 직접 열면 브라우저가 로컬 fetch 를 막는다.
+  // 그 경우 배포된 데이터로 폴백해 '데이터 로드 실패' 대신 화면이 뜨게 한다.
+  const LIVE = 'https://jinilee-hue.github.io/portfolio/data/projects.json';
+  try {
+    const res = await fetch(asset('data/projects.json'));
+    if (!res.ok) throw new Error('projects.json ' + res.status);
+    return await res.json();
+  } catch (e) {
+    const res = await fetch(LIVE);
+    if (!res.ok) throw new Error('projects.json(live) ' + res.status);
+    return await res.json();
+  }
 }
 
 export function pick(p) {

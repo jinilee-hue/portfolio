@@ -57,8 +57,13 @@
   header a:focus-visible,header button:focus-visible{outline:2px solid #fff;outline-offset:2px;opacity:1}
 
   /* 히어로는 짧게. 작품 무대가 첫 화면의 대부분을 가져간다 (Marshall). */
-  .open{min-height:auto;display:flex;flex-direction:column;justify-content:flex-end;
-    padding:max(72px, 5vw) 0 16px;position:relative}
+  /* 표지 — 화면을 꽉 채우는 높이. 인쇄에서 A4 표지 한 장으로 쓰는 것과 짝을 이룬다 */
+  .open{min-height:calc(100svh - 60px);display:flex;flex-direction:column;justify-content:center;
+    gap:clamp(28px,5svh,64px);padding:max(72px,5vw) 0 clamp(28px,4svh,48px);position:relative}
+  .open .openfoot{margin-top:auto}
+  /* 표제(kick+h1)를 남는 공간의 세로 중앙에 — 위아래 auto 마진이 균형을 잡는다 */
+  .open .kick{margin-top:auto}
+  .open h1{margin-bottom:auto}
   .kick{font-family:var(--grot);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
     color:var(--accent);margin:0 0 18px}
   h1{font-family:var(--disp);font-weight:300;font-variation-settings:'opsz' 120;
