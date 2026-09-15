@@ -25,7 +25,7 @@ OWNER = os.environ.get("PORTFOLIO_OWNER", "jinilee-hue")
 API = "https://api.github.com"
 
 # 포트폴리오에 싣지 않을 저장소
-EXCLUDE = {"portfolio"}
+EXCLUDE = {"portfolio", "design-extractor"}
 
 
 def token() -> str | None:
@@ -242,6 +242,8 @@ def main() -> int:
             "tablet": f"assets/shots/{p['id']}--tablet.jpg",
             "mobile": f"assets/shots/{p['id']}--mobile.jpg",
         }
+        for sc in p.get("scenes") or []:
+            sc["src"] = f"assets/shots/{p['id']}--{sc['id']}.jpg"
         # 썸네일 촬영 대상: shot_path 가 있으면 그 화면, 없으면 라이브 첫 화면.
         # 인트로·로그인 화면보다 실제 작업이 보이는 화면이 포트폴리오에서 훨씬 강하다.
         base = p["auto"]["live"]

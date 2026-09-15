@@ -23,8 +23,10 @@ CI  :  refresh.yml 이 호출
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent.parent
 SHOTS = ROOT / "assets" / "shots"
@@ -39,6 +41,17 @@ DEVICES = {
 SETTLE_MS = 4200
 NETWORK_IDLE_MS = 12_000
 BLANK_STDDEV = 7.0
+
+
+def url_with_path(base: str, path: str) -> str:
+    """라이브 URL 뒤에 경로를 붙인다. 한글·공백 파일명도 깨지지 않게 인코딩한다."""
+    if not base:
+        return ""
+    path = (path or "").strip()
+    if not path:
+        return base
+    enc = "/".join(quote(seg) for seg in path.split("/") if seg)
+    return base.rstrip("/") + "/" + enc
 
 
 def variance(png_bytes: bytes) -> float:
@@ -80,8 +93,25 @@ def main() -> int:
             "selector": (p.get("shot_selector") or "").strip(),
             # 스크롤이 있는 페이지는 전체를 찍어 목업 안에서 흘려보낸다
             "full": bool(p.get("shot_full")),
+            "dest": None,
         })
+        live = p["auto"].get("live") or ""
+        for sc in p.get("scenes") or []:
+            su = url_with_path(live, sc.get("path") or "")
+            if not su:
+                continue
+            jobs.append({
+                "id": f"{p['id']}/{sc['id']}",
+                "url": su,
+                "wait": int(sc.get("wait") or p.get("shot_wait") or 0),
+                "devices": [sc.get("device") or "desktop"],
+                "selector": (sc.get("selector") or "").strip(),
+                "full": bool(sc.get("full")),
+                "dest": f"{p['id']}--{sc['id']}.jpg",
+            })
 
+    if os.environ.get("SCENES_ONLY"):
+        jobs = [j for j in jobs if j.get("dest")]
     ok = changed = 0
     blank: list[str] = []
     failed: list[tuple[str, str]] = []
@@ -92,7 +122,7 @@ def main() -> int:
         for job in jobs:
             for dev in job["devices"]:
                 spec = DEVICES[dev]
-                dest = SHOTS / f"{job['id']}{spec['suffix']}.jpg"
+                dest = SHOTS / (job["dest"] if job.get("dest") else f"{job['id']}{spec['suffix']}.jpg")
                 ctx = browser.new_context(
                     viewport={"width": spec["width"], "height": spec["height"]},
                     device_scale_factor=2,

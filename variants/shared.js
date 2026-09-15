@@ -60,7 +60,9 @@ export function pick(p) {
     commits: span.commits || 0,
     deps: a.deps || [],
     langBytes: a.lang_bytes || {},
-    contribution: p.contribution || null,   // 기획/디자인/개발/검증 % (사람이 쓴 값)
+    contribution: p.contribution || null,   // 관여도 0~100 개별 (사람이 쓴 값)
+    tools: p.tools || [],                    // 실제 사용한 AI 툴
+    devices: p.shot_devices || [],           // 대응 기기 (반응형 표기용)
     also: a.also || [],   // 한 프로젝트로 합친 다른 저장소들
     first: (a.span || {}).first || '',
     last: (a.span || {}).last || '',

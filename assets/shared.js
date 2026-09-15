@@ -46,6 +46,20 @@ export function pick(p) {
       src: asset((p.shots || {})[k] || p.shot),
       long: !!p.shot_long,   // 전체 페이지 캡처 → 목업 안에서 스크롤
     })),
+    scenes: (p.scenes || []).map(s => ({
+      id: s.id,
+      src: asset(s.src || `assets/shots/${p.id}--${s.id}.jpg`),
+      label: t(s.label),
+      note: t(s.note),
+      device: s.device || 'desktop',
+    })),
+    // 기기별 '이 화면에서' 설명. {label, note} 또는 {ko,en} 문장만 와도 된다.
+    shotNotes: Object.fromEntries(Object.entries(p.shot_notes || {}).map(([k, v]) => {
+      if (!v) return [k, { label: '', note: '' }];
+      if (typeof v === 'string') return [k, { label: '', note: v }];
+      if (v.note || v.label) return [k, { label: t(v.label), note: t(v.note) }];
+      return [k, { label: '', note: t(v) }];
+    })),
     pushed: (a.pushed_at || '').slice(0, 10),
     langs: a.languages || [],
     featured: !!p.featured,
@@ -60,7 +74,9 @@ export function pick(p) {
     commits: span.commits || 0,
     deps: a.deps || [],
     langBytes: a.lang_bytes || {},
-    contribution: p.contribution || null,   // 기획/디자인/개발/검증 % (사람이 쓴 값)
+    contribution: p.contribution || null,   // 관여도 0~100 개별 (사람이 쓴 값)
+    tools: p.tools || [],                    // 실제 사용한 AI 툴
+    devices: p.shot_devices || [],           // 대응 기기 (반응형 표기용)
     also: a.also || [],   // 한 프로젝트로 합친 다른 저장소들
     first: (a.span || {}).first || '',
     last: (a.span || {}).last || '',

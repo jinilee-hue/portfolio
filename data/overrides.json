@@ -17,8 +17,11 @@
     "merge_into": "이 저장소를 다른 프로젝트에 흡수시킨다(목록에서 사라지고 기간·언어·링크만 합쳐짐)",
     "shot_devices": "촬영할 기기 목록 ['desktop','tablet','mobile']. 비우면 3종 전부. 주 사용 환경을 반영한다.",
     "shot_selector": "이 CSS 선택자에 해당하는 요소만 캡처한다. 프로토타입 뷰어 셸·여백을 제거할 때 쓴다.",
-    "contribution": "기여 범위 % {plan,design,build,qa} — 합 100. GitHub 에서 알 수 없는 값이라 직접 쓴다.",
-    "shot_full": "true 면 전체 페이지를 찍는다. 목업 프레임 안에서 스크롤되어 보인다."
+    "contribution": "관여도 % {plan,design,build,qa} — 각 항목 0~100 독립. 혼자 다 했으면 100.",
+    "shot_full": "true 면 전체 페이지를 찍는다. 목업 프레임 안에서 스크롤되어 보인다.",
+    "scenes": "기능별 추가 컷 [{id,path,device,label{ko,en},note{ko,en}}]. 촬영 파일은 assets/shots/<프로젝트>--<id>.jpg",
+    "shot_notes": "대표 화면(shot_devices 첫 기기)의 화면별 설명 {desktop|tablet|mobile: {label{ko,en}, note{ko,en}}}",
+    "tools": "실제 사용한 AI 툴 배열. 사이트에 그대로 노출된다."
   },
   "eBOOK": {
     "featured": true,
@@ -140,11 +143,57 @@
       "desktop"
     ],
     "contribution": {
-      "plan": 25,
-      "design": 30,
-      "build": 35,
-      "qa": 10
-    }
+      "plan": 100,
+      "design": 100,
+      "build": 100,
+      "qa": 100
+    },
+    "scenes": [
+      {
+        "id": "flow",
+        "path": "flow.html",
+        "device": "desktop",
+        "wait": 3500,
+        "label": {
+          "ko": "학습 흐름",
+          "en": "Learning flow"
+        },
+        "note": {
+          "ko": "표지에서 본문 11쪽, 이해 문제, 단어장까지 한 줄로 이어지는 흐름을 한 화면에서 본다.",
+          "en": "Cover to 11 pages, comprehension strip and vocabulary cards in one flow."
+        }
+      },
+      {
+        "id": "audit",
+        "path": "tools/align-check.html",
+        "device": "desktop",
+        "wait": 3500,
+        "label": {
+          "ko": "조판 감사",
+          "en": "Type audit"
+        },
+        "note": {
+          "ko": "해상도 3종에서 글줄이 깨지지 않는지 눈이 아니라 스크립트가 검사하는 패널.",
+          "en": "A script checks line-breaking across three resolutions — not the eye."
+        }
+      }
+    ],
+    "shot_notes": {
+      "tablet": {
+        "label": {
+          "ko": "본문 읽기",
+          "en": "Reading spread"
+        },
+        "note": {
+          "ko": "배경 영상이 흐르는 위에 11쪽이 한 화면에 붙는다. 단어를 누르면 사전, 쪽 아래에는 이해 문제 띠가 따라온다.",
+          "en": "Eleven pages sit on one screen over moving video. Tap a word for the glossary; a comprehension strip rides under each spread."
+        }
+      }
+    },
+    "tools": [
+      "Claude Code",
+      "Kling (배경 영상)"
+    ]
   },
   "KCMS": {
     "featured": true,
@@ -276,11 +325,56 @@
       "tablet"
     ],
     "contribution": {
-      "plan": 30,
-      "design": 40,
-      "build": 25,
-      "qa": 5
-    }
+      "plan": 90,
+      "design": 100,
+      "build": 100,
+      "qa": 70
+    },
+    "scenes": [
+      {
+        "id": "kit",
+        "path": "kit/index.html",
+        "device": "desktop",
+        "wait": 3500,
+        "label": {
+          "ko": "개발 킷",
+          "en": "Developer kit"
+        },
+        "note": {
+          "ko": "토큰·컴포넌트·템플릿을 복사해 쓰는 킷. 시안에서 멈추지 않고 개발자가 그대로 가져가게 만든 산출물.",
+          "en": "Tokens, components and a template packaged so developers copy instead of interpret."
+        }
+      },
+      {
+        "id": "admit",
+        "path": "입학관리/index.html",
+        "device": "desktop",
+        "wait": 3500,
+        "label": {
+          "ko": "입학 관리",
+          "en": "Admissions"
+        },
+        "note": {
+          "ko": "같은 킷으로 그린 입학 관리 화면. 목록·필터·액션이 한 규칙 아래에 놓인다.",
+          "en": "Admissions built from the same kit — list, filter and action under one rule."
+        }
+      }
+    ],
+    "shot_notes": {
+      "desktop": {
+        "label": {
+          "ko": "학생 등록",
+          "en": "Student registration"
+        },
+        "note": {
+          "ko": "레거시에서 가져온 첫 업무 화면. 검색·대량 테이블·편집이 같은 킷 규칙 아래에 놓여 시선의 출발점이 생긴다.",
+          "en": "The first operations screen taken from the legacy system. Search, bulk table and edit now sit under one kit rule, so the eye has an entry point."
+        }
+      }
+    },
+    "tools": [
+      "Claude Code"
+    ]
   },
   "LIO_DESIGN": {
     "featured": true,
@@ -402,11 +496,44 @@
     ],
     "shot_selector": "#stage",
     "contribution": {
-      "plan": 20,
-      "design": 45,
-      "build": 35,
-      "qa": 0
-    }
+      "plan": 70,
+      "design": 100,
+      "build": 100,
+      "qa": 80
+    },
+    "scenes": [
+      {
+        "id": "board",
+        "path": "index.html",
+        "device": "desktop",
+        "wait": 3500,
+        "label": {
+          "ko": "방향 비교",
+          "en": "Direction board"
+        },
+        "note": {
+          "ko": "워드마크·컬러·타이포 후보를 한 페이지에 올려 투표로 방향을 정한 보드.",
+          "en": "Wordmark, colour and type candidates on one board so the direction was voted, not guessed."
+        }
+      }
+    ],
+    "shot_notes": {
+      "tablet": {
+        "label": {
+          "ko": "학습 흐름",
+          "en": "Learning flow"
+        },
+        "note": {
+          "ko": "채택된 B안으로 만든 64화면 프로토타입. PPTX 슬라이드 번호가 주소가 되어, 리뷰에서 '46번'이 곧 링크가 된다.",
+          "en": "The 64-screen prototype in the chosen direction. PPTX slide numbers become URLs, so 'number 46' in a review is already a link."
+        }
+      }
+    },
+    "tools": [
+      "Claude Code",
+      "Midjourney (캐릭터)",
+      "Nano Banana"
+    ]
   },
   "AI-Studio": {
     "featured": true,
@@ -514,11 +641,43 @@
       "desktop"
     ],
     "contribution": {
-      "plan": 30,
-      "design": 35,
-      "build": 35,
-      "qa": 0
-    }
+      "plan": 100,
+      "design": 100,
+      "build": 100,
+      "qa": 80
+    },
+    "scenes": [
+      {
+        "id": "teacher",
+        "path": "teacher.html",
+        "device": "desktop",
+        "wait": 3500,
+        "label": {
+          "ko": "교사 화면",
+          "en": "Teacher view"
+        },
+        "note": {
+          "ko": "학생이 푸는 화면과 짝을 이루는 교사 화면. 같은 학습을 양쪽에서 본다.",
+          "en": "The teacher counterpart to the student session — the same lesson from the other side."
+        }
+      }
+    ],
+    "shot_notes": {
+      "tablet": {
+        "label": {
+          "ko": "학생 수업",
+          "en": "Student lesson"
+        },
+        "note": {
+          "ko": "장면을 고르고 다섯 가지를 답하면 AI가 그린다. 스크롤 없이 활동 전체가 한 화면에 들어온다.",
+          "en": "Pick a scene, answer five questions, the AI draws it. Nothing scrolls — the whole activity stays on one screen."
+        }
+      }
+    },
+    "tools": [
+      "Claude Code",
+      "이미지 생성 API"
+    ]
   },
   "Phonics-Studio": {
     "title": {
@@ -550,12 +709,27 @@
       "tablet"
     ],
     "contribution": {
-      "plan": 20,
-      "design": 45,
-      "build": 35,
-      "qa": 0
+      "plan": 60,
+      "design": 100,
+      "build": 90,
+      "qa": 60
     },
-    "shot_full": true
+    "shot_full": true,
+    "shot_notes": {
+      "desktop": {
+        "label": {
+          "ko": "제작 콘솔",
+          "en": "Authoring console"
+        },
+        "note": {
+          "ko": "creator / reviewer / ops 세 역할로 나눈 콘텐츠 파이프라인. 권한은 화면이 아니라 서버가 판정한다.",
+          "en": "A content pipeline split across creator, reviewer and ops. Authorization stays on the server, not in the screens."
+        }
+      }
+    },
+    "tools": [
+      "Claude Code"
+    ]
   },
   "Phonics-Playground": {
     "title": {
@@ -585,11 +759,26 @@
       "tablet"
     ],
     "contribution": {
-      "plan": 15,
-      "design": 45,
-      "build": 40,
-      "qa": 0
-    }
+      "plan": 60,
+      "design": 100,
+      "build": 90,
+      "qa": 60
+    },
+    "shot_notes": {
+      "desktop": {
+        "label": {
+          "ko": "게임 셸",
+          "en": "Game shell"
+        },
+        "note": {
+          "ko": "발행된 파닉스 게임을 고르고 플레이한다. 게임은 iframe에 가두고 이벤트만 받아, 셸과 콘텐츠를 따로 배포한다.",
+          "en": "Browse and play published phonics games. Titles run sandboxed in an iframe and report through events, so shell and content ship separately."
+        }
+      }
+    },
+    "tools": [
+      "Claude Code"
+    ]
   },
   "Sound-Safari": {
     "title": {
@@ -710,11 +899,27 @@
       "desktop"
     ],
     "contribution": {
-      "plan": 25,
-      "design": 35,
-      "build": 40,
-      "qa": 0
-    }
+      "plan": 100,
+      "design": 100,
+      "build": 100,
+      "qa": 90
+    },
+    "shot_notes": {
+      "tablet": {
+        "label": {
+          "ko": "발음 라운드",
+          "en": "Pronunciation round"
+        },
+        "note": {
+          "ko": "글자 카드로 단어를 맞춘 뒤에야 마이크가 열린다. 소리를 내야 다음 문제로 넘어가고, 틀린 소리는 IPA로 옆에 표시된다.",
+          "en": "The mic unlocks only after the word is built. Speaking gates the next round, and missed sounds show in IPA for whoever is sitting beside the child."
+        }
+      }
+    },
+    "tools": [
+      "Claude Code",
+      "Midjourney (아트)"
+    ]
   },
   "phonics-wordmashup": {
     "title": {
@@ -744,11 +949,27 @@
       "desktop"
     ],
     "contribution": {
-      "plan": 30,
-      "design": 35,
-      "build": 35,
-      "qa": 0
-    }
+      "plan": 100,
+      "design": 100,
+      "build": 100,
+      "qa": 80
+    },
+    "shot_notes": {
+      "tablet": {
+        "label": {
+          "ko": "합성어 퍼즐",
+          "en": "Compound puzzle"
+        },
+        "note": {
+          "ko": "설명 문장 없이 두 조각을 합쳐 복합어를 만든다. 성공 기준은 5세가 어른 도움 없이 6라운드를 끝내는 것이다.",
+          "en": "Two halves fuse into a compound word — no instructions. Success was a five-year-old finishing six rounds unaided."
+        }
+      }
+    },
+    "tools": [
+      "Claude Code",
+      "Midjourney"
+    ]
   },
   "poly-dashboard": {
     "title": {
@@ -873,12 +1094,57 @@
       "mobile"
     ],
     "contribution": {
-      "plan": 15,
-      "design": 45,
-      "build": 30,
-      "qa": 10
+      "plan": 90,
+      "design": 100,
+      "build": 100,
+      "qa": 90
     },
-    "shot_full": true
+    "shot_full": true,
+    "scenes": [
+      {
+        "id": "students",
+        "path": "students.html",
+        "device": "desktop",
+        "wait": 3500,
+        "label": {
+          "ko": "학생 목록",
+          "en": "Students"
+        },
+        "note": {
+          "ko": "캠퍼스 운영의 실제 업무 화면. 킷의 토큰이 목록·필터·상태에 그대로 쓰인다.",
+          "en": "An operations screen: list, filter and status all draw from the kit tokens."
+        }
+      },
+      {
+        "id": "leave",
+        "path": "leave-erp/index.html",
+        "device": "desktop",
+        "wait": 3500,
+        "label": {
+          "ko": "연차 ERP",
+          "en": "Leave ERP"
+        },
+        "note": {
+          "ko": "같은 킷에서 파생된 연차 관리. 대시보드를 잘 만드는 대신 재료를 남긴 이유.",
+          "en": "Leave management derived from the same kit — the point of shipping materials, not just screens."
+        }
+      }
+    ],
+    "shot_notes": {
+      "desktop": {
+        "label": {
+          "ko": "킷 배포",
+          "en": "Kit download"
+        },
+        "note": {
+          "ko": "6개 파일과 AI 에이전트용 UI 규약을 내려받는 페이지. 화면이 아니라 화면을 만드는 재료를 사내에 뿌린 자리.",
+          "en": "Six files and the agent UI-contract, ready to download. The deliverable is the materials, not a single dashboard."
+        }
+      }
+    },
+    "tools": [
+      "Claude Code"
+    ]
   },
   "canb-dashboard": {
     "title": {
@@ -971,12 +1237,57 @@
       "mobile"
     ],
     "contribution": {
-      "plan": 10,
-      "design": 50,
-      "build": 30,
-      "qa": 10
+      "plan": 90,
+      "design": 100,
+      "build": 100,
+      "qa": 90
     },
-    "shot_full": true
+    "shot_full": true,
+    "scenes": [
+      {
+        "id": "students",
+        "path": "students.html",
+        "device": "desktop",
+        "wait": 3500,
+        "label": {
+          "ko": "학생 목록",
+          "en": "Students"
+        },
+        "note": {
+          "ko": "CANB 브랜드로 다시 칠한 같은 뼈대. 토큰만 바꾸면 화면이 따라온다.",
+          "en": "The same skeleton in CANB colour — change the tokens, the screens follow."
+        }
+      },
+      {
+        "id": "teacher",
+        "path": "teacher-dashboard.html",
+        "device": "desktop",
+        "wait": 3500,
+        "label": {
+          "ko": "교사 대시보드",
+          "en": "Teacher dashboard"
+        },
+        "note": {
+          "ko": "교사 역할의 첫 화면. 역할이 바뀌어도 간격과 타입은 킷을 벗어나지 않는다.",
+          "en": "The teacher’s home: role changes, spacing and type stay inside the kit."
+        }
+      }
+    ],
+    "shot_notes": {
+      "desktop": {
+        "label": {
+          "ko": "킷 배포",
+          "en": "Kit download"
+        },
+        "note": {
+          "ko": "같은 다운로드 구조에 마젠타 토큰만 갈아끼운 페이지. 브랜드가 늘어도 화면을 다시 그리지 않는지 여기서 확인한다.",
+          "en": "The same download structure with only the magenta token layer swapped — a live check that a new brand does not mean redrawing screens."
+        }
+      }
+    },
+    "tools": [
+      "Claude Code"
+    ]
   },
   "poly-ai-agent": {
     "title": {
@@ -1009,43 +1320,27 @@
       "mobile"
     ],
     "contribution": {
-      "plan": 20,
-      "design": 50,
-      "build": 30,
-      "qa": 0
-    }
-  },
-  "design-extractor": {
-    "title": {
-      "ko": "Design System Hub & Exporter",
-      "en": "Design System Hub & Exporter"
+      "plan": 80,
+      "design": 100,
+      "build": 100,
+      "qa": 70
     },
-    "kicker": {
-      "ko": "디자인 토큰 추출 도구",
-      "en": "Design token extraction tool"
+    "shot_notes": {
+      "desktop": {
+        "label": {
+          "ko": "분석 홈",
+          "en": "Analytics home"
+        },
+        "note": {
+          "ko": "학원 운영 데이터를 자연어로 묻는 첫 화면. 색은 전부 토큰이라 LNB 스위처로 POLY와 CANB가 런타임에 갈린다.",
+          "en": "The home for querying academy data in natural language. Every colour is a token, so a switcher swaps POLY and CANB at runtime."
+        }
+      }
     },
-    "summary": {
-      "ko": "기존 화면에서 색·타입·간격을 뽑아 토큰 문서로 내보내는 도구. 디자인 시스템을 문서로 먼저 쓰지 않고 이미 만든 화면에서 역으로 정리하는 접근을 실험했다.",
-      "en": "A tool that extracts color, type and spacing from existing screens into a token document — deriving a design system backwards from shipped UI instead of writing the spec first."
-    },
-    "role": {
-      "ko": "도구 기획 · UI · 구현",
-      "en": "Tool concept, UI, implementation"
-    },
-    "tags": [
-      "Design Tokens",
-      "Tooling"
-    ],
-    "entry": "",
-    "shot_devices": [
-      "desktop"
-    ],
-    "contribution": {
-      "plan": 30,
-      "design": 30,
-      "build": 40,
-      "qa": 0
-    }
+    "tools": [
+      "Claude Code",
+      "Gemini"
+    ]
   },
   "polyscoop": {
     "title": {
@@ -1075,12 +1370,28 @@
       "mobile"
     ],
     "contribution": {
-      "plan": 20,
-      "design": 50,
-      "build": 30,
-      "qa": 0
+      "plan": 80,
+      "design": 100,
+      "build": 100,
+      "qa": 80
     },
-    "shot_full": true
+    "shot_full": true,
+    "shot_notes": {
+      "desktop": {
+        "label": {
+          "ko": "웹진 홈",
+          "en": "Magazine home"
+        },
+        "note": {
+          "ko": "심층탐구·일상기록·세상 속으로 나뉜 학생 기자단 웹진. 영상 기사와 지난 호가 같은 구조 위에 쌓인다.",
+          "en": "Student-reported magazine in four sections. Video pieces and back issues accumulate on the same structure."
+        }
+      }
+    },
+    "tools": [
+      "Claude Code",
+      "Midjourney"
+    ]
   },
   "LIO": {
     "merge_into": "LIO_DESIGN"

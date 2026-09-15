@@ -29,9 +29,14 @@
   a{color:inherit}
   .wrap{max-width:1500px;margin:0 auto;padding:0 clamp(16px,4vw,56px)}
 
-  header{position:fixed;top:0;left:0;right:0;z-index:30;mix-blend-mode:difference;
+  /* 밴드마다 배경이 바뀌므로 blend-mode 로는 대비를 보장할 수 없다.
+     반투명 배경 + 블러로 어떤 밴드 위에서도 읽히게 한다. */
+  header{position:fixed;top:0;left:0;right:0;z-index:30;
     display:flex;justify-content:space-between;align-items:center;gap:12px;
-    padding:18px clamp(16px,4vw,56px);color:#fff;pointer-events:none}
+    padding:14px clamp(16px,4vw,56px);color:#F5F3EF;pointer-events:none;
+    background:rgba(10,10,10,.82);backdrop-filter:saturate(160%) blur(14px);
+    border-bottom:1px solid rgba(245,243,239,.12)}
+  @supports not (backdrop-filter: blur(1px)){header{background:rgba(10,10,10,.95)}}
   /* 모바일: 좁은 폭에서 이름과 내비가 겹치고 본문 위에 올라탄다.
      흐름에 맞춰 두 줄로 내리고, blend mode 대신 배경을 깔아 가독성을 확보한다. */
   @media(max-width:720px){
@@ -51,9 +56,9 @@
   header button[aria-pressed=true]{opacity:1;text-decoration:underline;text-underline-offset:4px}
   header a:focus-visible,header button:focus-visible{outline:2px solid #fff;outline-offset:2px;opacity:1}
 
-  /* 히어로 — 화면이 주인공, 타입은 위에 얹힌다 */
-  .open{min-height:92svh;display:flex;flex-direction:column;justify-content:flex-end;
-    padding:max(120px, 8vw) 0 clamp(28px,4vw,56px);position:relative}
+  /* 히어로는 짧게. 작품 무대가 첫 화면의 대부분을 가져간다 (Marshall). */
+  .open{min-height:auto;display:flex;flex-direction:column;justify-content:flex-end;
+    padding:max(72px, 5vw) 0 16px;position:relative}
   .kick{font-family:var(--grot);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
     color:var(--accent);margin:0 0 18px}
   h1{font-family:var(--disp);font-weight:300;font-variation-settings:'opsz' 120;
@@ -61,7 +66,7 @@
     text-wrap:balance;word-break:keep-all;overflow-wrap:break-word}
   /* 한글은 라틴 디스플레이 서체에 글리프가 없어 명조로 폴백된다 — 본문 서체로 되돌리고 무게로 대비를 만든다 */
   :lang(ko) h1{font-family:var(--sans);font-weight:600;letter-spacing:-.035em;line-height:1.02;
-    font-size:clamp(2.2rem,7.2vw,5.9rem)}
+    font-size:clamp(1.8rem,5.4vw,3.6rem)}
   :lang(ko) h1 i{font-weight:800}
   :lang(ko) .info h2,:lang(ko) .band h2{font-family:var(--sans);font-weight:600;letter-spacing:-.028em;
     word-break:keep-all}
@@ -78,241 +83,150 @@
   .counts dd{margin:0;font-family:var(--disp);font-size:clamp(1.6rem,3vw,2.4rem);line-height:1;
     font-variant-numeric:tabular-nums}
 
-  /* 작업 — 전면 스크린샷 스택, 홀짝 어긋나게 */
-  .room{padding:clamp(40px,7vw,90px) 0}
-  .piece{display:grid;gap:clamp(14px,2vw,28px);margin-bottom:clamp(46px,8vw,120px);
-    grid-template-columns:1fr;text-decoration:none;position:relative}
-  @media(min-width:920px){
-    .piece{grid-template-columns:repeat(12,1fr);align-items:center}
-    .piece .shots{grid-column:1/9}
-    .piece .info{grid-column:9/13}
-    .piece:nth-child(even) .shots{grid-column:5/13;grid-row:1}
-    .piece:nth-child(even) .info{grid-column:1/5;grid-row:1}
-    /* 3n 번째는 리듬을 위해 폭을 살짝 좁히되, shot 과 info 열이 겹치지 않게 한 행에 나눠 둔다
-       (겹치면 스크린샷 위로 텍스트가 올라타 화면이 잘려 보인다). */
-    .piece:nth-child(3n) .shots{grid-column:1/8;grid-row:1}
-    .piece:nth-child(3n) .info{grid-column:8/13;grid-row:1}
-  }
-  /* 기기 프레임은 스톡 목업 이미지가 아니라 CSS 로 그린다 — 이미지 요청 0, 화면은 실제 캡처.
-     주의: filter(drop-shadow) 와 transform-style:preserve-3d 를 함께 쓰면 3D 평면이 평탄화되어
-     의사요소(스탠드·턱)가 떨어져 나간다. 그래서 preserve-3d 를 쓰지 않고
-     요소마다 transform:perspective(...) 로 각도를 준다. 스탠드는 아예 그리지 않는다. */
-  .shots{position:relative;display:block;padding:2% 3% 5% 1%}
+  /* 작업 — Marshall(한 작품 무대) + Paragraph/Tamburins(기능 화면 콜라주).
+     화면이 거의 전면을 먹고, 카피는 옆에 짧게, 액센트는 CTA와 라벨에만 쓴다. */
+  .gutter{padding-inline:max(clamp(16px,4vw,56px), calc(50% - 750px + clamp(16px,4vw,56px)))}
+  .room{padding:0;background:#070707;color:#F5F3EF}
+  .pager{position:sticky;top:56px;z-index:22;display:flex;align-items:center;gap:12px;
+    min-height:52px;background:rgba(7,7,7,.9);backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(245,243,239,.12)}
+  .pager .count{font-family:var(--grot);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:rgba(245,243,239,.4);flex:none;font-variant-numeric:tabular-nums}
+  .pager .dots{display:flex;gap:5px;flex:1;overflow-x:auto;scrollbar-width:none}
+  .pager .dots::-webkit-scrollbar{display:none}
+  .pager .dots button{flex:none;width:7px;height:7px;padding:0;border:0;border-radius:50%;
+    background:rgba(245,243,239,.28);cursor:pointer}
+  .pager .dots button[aria-current=true]{background:var(--accent);width:18px;border-radius:4px}
+  .pager .navb{display:flex;gap:8px;flex:none}
+  .pager .navb button{width:36px;height:36px;background:none;border:1px solid rgba(245,243,239,.28);
+    color:#F5F3EF;cursor:pointer;font-size:16px;line-height:1}
+  .pager .navb button:hover:not(:disabled){background:var(--accent);border-color:var(--accent);color:#04120F}
+  .pager .navb button:disabled{opacity:.25;cursor:default}
+  .pager button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  .show[hidden]{display:none!important}
+
+  /* B my map: 기기들이 날고, 제목은 그 옆. 화면이 카피보다 크다. */
+  .splash{display:grid;gap:clamp(12px,2vw,28px);align-items:center;
+    min-height:auto;padding-block:clamp(16px,3vw,36px) 8px;overflow:hidden}
+  @media(min-width:960px){.splash{grid-template-columns:minmax(0,1.35fr) minmax(260px,.7fr)}}
+  .copy{position:relative;z-index:2;padding-bottom:24px}
+  .copy .num{font-family:var(--grot);font-size:13px;letter-spacing:.18em;color:rgba(245,243,239,.4);
+    margin:0 0 10px;font-variant-numeric:tabular-nums}
+  .copy .kick{color:var(--accent);margin:0 0 10px;font-size:11.5px}
+  .copy h2{font-family:var(--sans);font-weight:800;font-size:clamp(2.1rem,4.4vw,4.2rem);
+    letter-spacing:-.04em;line-height:1.02;margin:0 0 16px;word-break:keep-all;text-wrap:balance}
+  .copy .sum{margin:0;color:rgba(245,243,239,.62);max-width:36ch;font-size:.98rem;word-break:keep-all;
+    display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .play{display:inline-flex;align-items:center;gap:14px;margin:22px 0 22px;text-decoration:none;color:inherit}
+  .play b{font-family:var(--grot);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    background:var(--accent);color:#04120F;padding:11px 22px}
+  .play span{font-family:var(--grot);font-size:11px;letter-spacing:.08em;color:rgba(245,243,239,.45)}
+  .facts{margin:0;display:grid;gap:8px}
+  .facts div{display:grid;grid-template-columns:6.8rem 1fr;gap:10px;align-items:baseline}
+  .facts dt{margin:0;font-family:var(--grot);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:rgba(245,243,239,.38)}
+  .facts dd{margin:0;font-size:13px;color:rgba(245,243,239,.78);font-variant-numeric:tabular-nums}
+
+  /* 관여도 게이지 — 단계별 0~100 독립. 전부 100이면 네 줄이 꽉 찬다 */
+  .contrib{margin-top:18px}
+  .contrib .k{margin:0 0 9px}
+  .cgrid{display:grid;grid-template-columns:auto 1fr auto;gap:8px 12px;align-items:center;
+    max-width:330px}
+  .cg-l{font-family:var(--grot);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:rgba(245,243,239,.42);white-space:nowrap}
+  .cg-t{position:relative;height:6px;border-radius:3px;overflow:hidden;
+    background:rgba(245,243,239,.1)}
+  .cg-t i{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:3px}
+  .cg-v{font-family:var(--grot);font-size:12px;font-weight:600;color:rgba(245,243,239,.75);
+    font-variant-numeric:tabular-nums;min-width:3.4ch;text-align:right}
+
+  .fly{position:relative;height:min(68svh,620px)}
   .frame,.frame *{box-sizing:border-box}
-  .frame{position:absolute;transition:transform .7s var(--ease), filter .5s var(--ease)}
-  .shot{position:relative;overflow:hidden;display:block;width:100%;
-    background:color-mix(in oklab, var(--fg) 6%, transparent)}
-
-
-  /* 모니터 — 흐름에 남아 .shots 의 높이를 만든다. 아래 베젤을 두껍게 해 턱을 표현 */
-  .frame--desktop{position:relative;width:80%;z-index:1;
-    transform:perspective(1800px) rotateY(3deg) rotateX(1deg);
-    filter:drop-shadow(0 28px 46px rgba(0,0,0,.5));
-    padding:11px 11px 26px;border-radius:12px;
-    background:color-mix(in oklab, var(--fg) 13%, var(--bg));
-    box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--fg) 20%, transparent)}
-  .frame--desktop .shot{aspect-ratio:1440/900;border-radius:3px}
-
-  /* 태블릿 — 오른쪽 아래에 겹친다 */
-  .frame--tablet{right:1%;bottom:3%;width:25%;z-index:2;
-    transform:perspective(1400px) rotateY(-5deg) rotateZ(1.2deg);
-    filter:drop-shadow(-14px 22px 36px rgba(0,0,0,.64));
-    padding:9px;border-radius:15px;
-    background:color-mix(in oklab, var(--fg) 14%, var(--bg));
-    box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--fg) 22%, transparent)}
-  .frame--tablet .shot{aspect-ratio:834/1112;border-radius:6px}
-
-  /* 모바일 — 가장 앞 */
-  .frame--mobile{right:3%;bottom:0;width:13.5%;z-index:3;
-    transform:perspective(1200px) rotateY(-6deg) rotateZ(1.8deg);
-    filter:drop-shadow(-10px 16px 28px rgba(0,0,0,.7));
-    padding:5px;border-radius:17px;
-    background:color-mix(in oklab, var(--fg) 16%, var(--bg));
-    box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--fg) 24%, transparent)}
-  .frame--mobile .shot{aspect-ratio:390/844;border-radius:13px}
-
-  /* 컷이 하나뿐이면 전폭 */
-  .shots:has(.frame:only-child) .frame--desktop{width:100%;
-    transform:perspective(2000px) rotateY(1.5deg)}
-
-  /* 호버 — 각도를 펴며 앞으로 */
-  .piece:hover .frame--desktop{transform:perspective(1800px) rotateY(1deg) scale(1.012)}
-  .piece:hover .frame--tablet{transform:perspective(1400px) rotateY(-2deg) rotateZ(.6deg) translateY(-2%) scale(1.03)}
-  .piece:hover .frame--mobile{transform:perspective(1200px) rotateY(-2.5deg) rotateZ(.8deg) translateY(-4%) scale(1.05)}
-
-  .dev{position:absolute;left:0;bottom:-19px;font-family:var(--grot);font-size:9px;
-    letter-spacing:.12em;text-transform:uppercase;color:var(--fg-28);opacity:0;
-    transition:opacity .25s var(--ease)}
-  .frame--desktop .dev{bottom:-26px}
-  .piece:hover .dev{opacity:1}
-
-  @media(prefers-reduced-motion:reduce){
-    .frame,.piece:hover .frame--desktop,.piece:hover .frame--tablet,.piece:hover .frame--mobile{
-      transition:none}
+  .frame{display:block;position:absolute}
+  .shot{position:relative;overflow:hidden;display:block;width:100%;background:#111}
+  .shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
+  .fly .d,.fly .t,.fly .m{padding:9px;border-radius:22px;background:#0e0e0e;
+    box-shadow:0 24px 56px rgba(0,0,0,.48), inset 0 0 0 1px rgba(255,255,255,.14);
+    transform:none}
+  .fly .d{width:78%;left:0;top:14%;z-index:1;
+    padding:10px 10px 18px;border-radius:12px}
+  .fly .d .shot{aspect-ratio:1440/900;border-radius:4px}
+  .fly .t{width:28%;right:0;left:auto;top:2%;z-index:3}
+  .fly .t .shot{aspect-ratio:834/1112;border-radius:12px}
+  .fly .m{width:18%;right:24%;left:auto;bottom:0;z-index:2}
+  .fly .m .shot{aspect-ratio:390/844;border-radius:12px}
+  @media(max-width:959px){
+    .fly{height:58vw;order:-1}
+    .fly .d{width:82%;top:18%}
+    .fly .t{width:30%}
+    .fly .m{width:20%;right:26%}
   }
-  @media(max-width:700px){
-    /* 좁은 화면에서 3D 로 겹치면 화면이 너무 작아진다 — 평면 나열로 되돌린다 */
-    .shots{display:flex;align-items:flex-end;gap:8px;perspective:none;padding:0}
-    .frame{position:relative;transform:none!important;filter:none;
-      right:auto;bottom:auto;flex:0 0 auto}
-    .frame--desktop{width:auto;flex:1 1 auto;padding:5px 5px 0;border-radius:6px}
-    .frame--desktop::after{height:8px}
-    .frame--desktop::before{bottom:-8px;height:8px}
-    .frame--tablet{width:24%;padding:5px;border-radius:9px}
-    .frame--mobile{width:15%;padding:4px;border-radius:10px}
-    .dev{display:none}
+
+  /* 보드: 캡처와 '이 화면에서' 설명을 좌우로 붙인다. 블록마다 좌우를 뒤집는다. */
+  .board{background:#F3F1EC;color:#16140F;border-radius:28px 28px 0 0;margin-top:-28px;
+    position:relative;z-index:4;padding:clamp(40px,5vw,72px) 0 clamp(48px,6vw,80px)}
+  .board .k{font-family:var(--grot);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:#A6421F;margin:0 0 22px}
+  .feats{display:grid;gap:clamp(36px,5vw,72px)}
+  .feats figure{margin:0;display:grid;gap:18px 40px;align-items:start}
+  @media(min-width:800px){
+    .feats figure{grid-template-columns:minmax(0,1.45fr) minmax(220px,.9fr)}
+    .feats figure:nth-child(even){grid-template-columns:minmax(220px,.9fr) minmax(0,1.45fr)}
+    .feats figure:nth-child(even) .ph{order:2}
   }
-  .shot img{display:block;width:100%;height:100%;max-width:100%;object-fit:cover;object-position:top center;
-    transform:scale(1.005);transition:transform .8s var(--ease),filter .6s var(--ease);
-    filter:saturate(.9) brightness(1.06)}
-  .piece:hover .shot img{transform:scale(1.03);filter:saturate(1.05) brightness(1.12)}
-  .shots::after{content:attr(data-open);position:absolute;left:14px;bottom:14px;
-    font-family:var(--grot);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
-    background:var(--accent);color:#04120F;padding:6px 11px;opacity:0;transform:translateY(6px);
-    transition:opacity .3s var(--ease),transform .3s var(--ease)}
-  .piece:hover .shots::after,.piece:focus-visible .shots::after{opacity:1;transform:translateY(0)}
-  .piece:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
-  .piece:active .shot img{transform:scale(1.02)}
+  .feats .ph{display:block;padding:8px;border-radius:18px;background:#fff;
+    box-shadow:0 18px 40px rgba(20,18,12,.14)}
+  .feats .ph .shot{aspect-ratio:16/10;border-radius:12px;background:#eee}
+  .feats .ph .shot.is-portrait{aspect-ratio:9/16}
+  .feats figcaption .k{margin:0 0 10px}
+  .feats figcaption b{display:block;font-size:clamp(1.2rem,2.2vw,1.7rem);font-weight:700;
+    letter-spacing:-.03em;line-height:1.2;margin:0 0 10px;word-break:keep-all}
+  .feats figcaption .note{display:block;font-size:.95rem;line-height:1.65;
+    color:rgba(22,20,15,.7);word-break:keep-all;max-width:44ch}
+  .feats figcaption ol{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:6px}
+  .feats figcaption li{display:grid;grid-template-columns:2rem 1fr;gap:8px;
+    font-size:.86rem;color:rgba(22,20,15,.68)}
+  .feats figcaption li b{font-family:var(--grot);font-weight:400;font-size:11px;
+    letter-spacing:.04em;color:rgba(22,20,15,.38);margin:0;line-height:1.5}
 
-  /* ── 세로로 긴 캡처: 목업 안에서 흘려보낸다 ──────────────
-     전체 페이지를 찍은 이미지를 프레임 폭에 맞춰 늘려두고(height:auto),
-     호버하면 아래로 밀어 실제 스크롤처럼 보이게 한다.
-     .shot img 의 cover/scale 규칙보다 반드시 뒤에 와야 이긴다. */
-  .shot--long img{height:auto!important;object-fit:fill;will-change:transform;
-    transition:transform 9s cubic-bezier(.36,0,.28,1)}
-  .piece:hover .shot--long img,
-  .piece:active .shot--long img{transform:translateY(var(--scroll,0px))}
-  .shot--long::after{content:'';position:absolute;right:4px;top:4px;bottom:4px;width:2px;
-    border-radius:2px;background:color-mix(in oklab,var(--accent) 55%,transparent);
-    opacity:0;transition:opacity .3s var(--ease);z-index:2}
-  .piece:hover .shot--long::after{opacity:.8}
-  @media(prefers-reduced-motion:reduce){
-    .shot--long img{transition:none}
-    .piece:hover .shot--long img{transform:none}
-  }
-  .n{font-family:var(--grot);font-size:11.5px;letter-spacing:.13em;color:var(--fg-28);
-    display:block;margin-bottom:11px;font-variant-numeric:tabular-nums}
-  .info h2{font-family:var(--disp);font-weight:300;font-variation-settings:'opsz' 90;
-    font-size:clamp(1.5rem,3.4vw,2.5rem);line-height:1.06;letter-spacing:-.02em;margin:0 0 .45em;text-wrap:balance}
-  .piece:hover .info h2{color:var(--accent)}
-  .info p{margin:0;color:var(--fg-55);font-size:1.0rem;line-height:1.7;max-width:48ch;
-    word-break:keep-all}
-  .info .role{font-family:var(--grot);font-size:12.5px;letter-spacing:.04em;color:var(--fg-28);
-    margin-top:12px;display:block}
-  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
-  .chips span{display:inline-flex;align-items:center;gap:6px;
-    font-family:var(--grot);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
-    color:var(--fg-55);border:1px solid var(--line);padding:6px 11px 6px 9px;border-radius:999px;
-    transition:border-color .2s var(--ease),color .2s var(--ease)}
-  .chips span:hover{border-color:var(--accent);color:var(--fg)}
-  .chips .ic{width:12px;height:12px;opacity:.75;color:var(--accent)}
-  .alsoLink{display:inline-flex;align-items:center;font-family:var(--grot);font-size:10.5px;
-    letter-spacing:.08em;text-transform:uppercase;color:var(--fg-55);text-decoration:none;
-    border:1px solid var(--line);padding:5px 10px;border-radius:999px}
-  .alsoLink:hover{border-color:var(--accent);color:var(--accent)}
-  .alsoLink:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .brief{display:grid;gap:18px;margin-top:clamp(22px,3vw,36px);padding-top:22px;
+    border-top:1px solid rgba(22,20,15,.12)}
+  @media(min-width:800px){.brief{grid-template-columns:1.2fr 1fr}}
+  .brief h3{font-family:var(--grot);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:#A6421F;margin:0 0 8px}
+  .brief p{margin:0;font-size:.9rem;line-height:1.65;color:rgba(22,20,15,.7);word-break:keep-all}
+  .brief ol{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+  .brief li{display:grid;grid-template-columns:2rem 1fr;gap:8px;font-size:.88rem;color:rgba(22,20,15,.7)}
+  .brief li b{font-family:var(--grot);font-weight:400;font-size:11px;color:rgba(22,20,15,.38)}
 
-  /* ── 케이스 스터디 상세 ─────────────────────────── */
-  .meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:13px;
-    font-family:var(--grot);font-size:12.5px;letter-spacing:.02em;color:var(--fg-28)}
-  .meta b{color:var(--fg-55);font-weight:400;font-variant-numeric:tabular-nums}
-  .more{margin-top:20px;font-family:var(--grot);font-weight:600;font-size:13px;letter-spacing:.04em;
-    background:var(--accent);border:1px solid var(--accent);color:#fff;
-    padding:12px 22px;cursor:pointer;transition:all .2s var(--ease);
-    display:inline-flex;align-items:center;gap:10px;min-height:44px}
-  /* 셰브론(v) — 글리프 대신 도형으로 그려 서체에 흔들리지 않게 */
-  .more .chev{width:9px;height:9px;border-right:1.8px solid currentColor;
-    border-bottom:1.8px solid currentColor;transform:rotate(45deg) translate(-2px,-2px);
-    transition:transform .25s var(--ease)}
-  .more:hover{filter:brightness(1.1)}
-  .more:active{transform:translateY(1px)}
-  .more:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
-  .more[aria-expanded=true]{background:transparent;color:var(--accent)}
-  .more[aria-expanded=true] .chev{transform:rotate(-135deg) translate(-3px,-3px)}
-  .case{display:none;grid-column:1/-1;border-top:1px solid var(--line);margin-top:clamp(20px,3vw,34px);
-    padding-top:clamp(22px,3vw,34px)}
-  .case.open{display:grid;gap:clamp(22px,3vw,40px);align-items:start}
-  @media(min-width:900px){.case.open{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}}
-  .case>div>*:last-child{margin-bottom:0}
-  .case h3{font-family:var(--grot);font-weight:700;font-size:11.5px;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--accent);margin:0 0 12px}
-  .case p{margin:0 0 20px;color:var(--fg-55);font-size:.98rem;line-height:1.75;max-width:58ch;
-    word-break:keep-all}
-  /* 플로우 차트 — 단계 노드를 연결선으로 잇는다.
-     넓은 화면은 가로 흐름, 좁은 화면은 세로 흐름으로 자동 전환. */
-  .flow{list-style:none;margin:0 0 22px;padding:0;display:flex;flex-wrap:wrap;gap:0}
-  .flow li{position:relative;flex:1 1 128px;min-width:118px;
-    border:1px solid var(--line);padding:11px 12px 12px;margin:0 14px 14px 0;
-    background:color-mix(in oklab, var(--fg) 3%, transparent)}
-  .flow li .s{display:block;font-family:var(--grot);font-size:10.5px;letter-spacing:.12em;
-    color:var(--accent);font-variant-numeric:tabular-nums;margin-bottom:7px}
-  .flow li .t{display:block;font-size:.89rem;line-height:1.55;color:var(--fg-55);word-break:keep-all}
-  /* 노드 사이 연결선 + 화살촉 */
-  .flow li::after{content:'';position:absolute;top:50%;right:-14px;width:14px;height:1px;
-    background:var(--line)}
-  .flow li::before{content:'';position:absolute;top:50%;right:-14px;
-    border:3px solid transparent;border-left-color:var(--fg-28);
-    transform:translate(9px,-3px)}
-  .flow li:last-child::after,.flow li:last-child::before,
-  .flow li.row-end::after,.flow li.row-end::before{display:none}
-  /* 줄바꿈된 노드의 연결선은 지운다(허공을 가리키게 되므로) */
-  @media(max-width:1100px){
-    .flow{flex-direction:column}
-    .flow li{flex:none;margin:0 0 16px}
-    .flow li::after{top:auto;bottom:-16px;right:auto;left:18px;width:1px;height:16px}
-    .flow li::before{top:auto;bottom:-16px;right:auto;left:18px;
-      border-left-color:transparent;border-top-color:var(--fg-28);transform:translate(-3px,10px)}
-  }
-  .stack{margin:0 0 20px}
-  .stack div{display:grid;grid-template-columns:5.5rem 1fr;gap:10px;padding:7px 0;
-    border-bottom:1px solid var(--line);align-items:baseline}
-  .stack dt{font-family:var(--grot);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
-    color:var(--fg-28);margin:0}
-  .stack dd{margin:0;font-size:.94rem;line-height:1.65;color:var(--fg-55)}
-  .dec{list-style:none;margin:0;padding:0}
-  .dec li{position:relative;padding:0 0 15px 18px;color:var(--fg-55);font-size:.95rem;
-    line-height:1.72;max-width:56ch;word-break:keep-all}
-  .dec li::before{content:'';position:absolute;left:0;top:.62em;width:6px;height:1px;background:var(--accent)}
+  /* 2) 관여도 — 단계별 0~100 독립 게이지. 혼자 다 했으면 전부 100. */
+  .cgrid{display:grid;grid-template-columns:auto 1fr auto;gap:7px 12px;align-items:center;
+    margin:14px 0 4px;max-width:340px}
+  .cg-l{font-family:var(--grot);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--fg-28);white-space:nowrap}
+  .cg-t{position:relative;height:6px;border-radius:3px;overflow:hidden;
+    background:color-mix(in oklab,var(--fg) 9%,transparent)}
+  .cg-t i{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:3px}
+  .cg-v{font-family:var(--grot);font-size:12px;font-weight:600;color:var(--fg-55);
+    font-variant-numeric:tabular-nums;min-width:3.2ch;text-align:right}
 
-  /* ── 데이터 시각화 ────────────────────────────────
-     모든 수치는 GitHub API 에서 온 실제 값이다. 장식용 가짜 숫자는 쓰지 않는다. */
-
-  /* 1) 타임라인 — 14개 프로젝트의 실제 작업 구간 */
-  .tl{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-    padding:clamp(24px,4vw,40px) 0;margin-top:clamp(28px,4vw,48px)}
-  .tl-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:20px}
-  .tl-head h2{font-family:var(--grot);font-weight:600;font-size:11px;letter-spacing:.16em;
-    text-transform:uppercase;color:var(--accent);margin:0}
-  .tl-head span{font-family:var(--grot);font-size:10.5px;letter-spacing:.1em;color:var(--fg-28);
-    font-variant-numeric:tabular-nums}
-  .tl-axis{display:flex;justify-content:space-between;font-family:var(--grot);font-size:10px;
-    letter-spacing:.08em;color:var(--fg-28);border-bottom:1px solid var(--line);
-    padding-bottom:6px;margin-bottom:10px;font-variant-numeric:tabular-nums}
-  .tl-row{display:grid;grid-template-columns:minmax(84px,1.1fr) minmax(0,4fr);gap:12px;
-    align-items:center;padding:3px 0}
-  .tl-row b{font-size:11.5px;font-weight:400;color:var(--fg-55);white-space:nowrap;
-    overflow:hidden;text-overflow:ellipsis;font-family:var(--grot);letter-spacing:.02em}
-  .tl-track{position:relative;height:11px;background:color-mix(in oklab,var(--fg) 5%,transparent)}
-  .tl-bar{position:absolute;top:0;bottom:0;background:var(--accent);opacity:.5;
-    transition:opacity .25s var(--ease)}
-  .tl-row:hover .tl-bar{opacity:1}
-  .tl-row:hover b{color:var(--fg)}
-
-  /* 2) 기여 범위 — 기획 / 디자인 / 개발 / 검증 비중 */
-  .cbar{display:flex;height:7px;margin:14px 0 8px;overflow:hidden;gap:2px;
-    background:color-mix(in oklab,var(--fg) 6%,transparent)}
-  .cbar i{display:block;height:100%;background:var(--accent)}
-  .ckey{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--grot);font-size:12px;
-    letter-spacing:.03em;color:var(--fg-28)}
-  .ckey span{display:inline-flex;align-items:center;gap:6px}
-  .ckey em{width:8px;height:8px;font-style:normal;flex:none;background:var(--accent)}
-  .ckey b{color:var(--fg-55);font-weight:600;font-variant-numeric:tabular-nums}
+  /* 3) 툴 · 반응형 */
+  .trows{display:flex;flex-direction:column;gap:5px;margin-top:12px}
+  .trow{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 8px;
+    font-family:var(--grot);font-size:12px;letter-spacing:.02em}
+  .trow-l{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-28);
+    min-width:5.5em}
+  .trow b{font-weight:500;color:var(--fg-55)}
+  .trow .sep{width:3px;height:3px;border-radius:50%;background:var(--fg-28);
+    display:inline-block;vertical-align:middle;margin:0 2px}
 
   /* 4) 아이콘 — 메타 항목 식별용, 도형으로만 그린다 */
   .ic{width:11px;height:11px;flex:none;opacity:.5;stroke:currentColor;fill:none;stroke-width:1.6}
   .meta span{display:inline-flex;align-items:center;gap:5px}
 
-  .band{border-top:1px solid var(--line);padding:clamp(48px,8vw,100px) 0}
+  .band{border-top:1px solid var(--line);padding:clamp(48px,8vw,100px) 0;
+    margin-top:clamp(40px,6vw,80px)}
   .band h2{font-family:var(--disp);font-weight:300;font-size:clamp(1.6rem,4vw,2.8rem);
     letter-spacing:-.02em;margin:0 0 clamp(24px,3vw,44px);max-width:20ch}
   .prin{display:grid;gap:clamp(22px,3vw,44px)}
@@ -336,13 +250,23 @@
     html,body{background:#fff!important;color:#000!important}
     header,.no-print{display:none!important}
     .wrap{max-width:none;padding:0}
-    .open{min-height:auto;padding:0 0 8mm;page-break-after:auto;
-      border-bottom:1px solid #ddd;margin-bottom:7mm}
+    /* 표지: A4 한 장을 통째로 쓴다. 이름·주장·지표가 세로 중앙에 온다 */
+    .open{min-height:calc(297mm - 28mm);display:flex;flex-direction:column;
+      justify-content:center;padding:0;border-bottom:0;margin-bottom:0;
+      page-break-after:always}
+    .open h1{font-size:40pt!important;line-height:1.08;margin-bottom:10mm}
+    .open .kick{font-size:11pt;margin-bottom:8mm}
+    .openfoot{border-top:1px solid #ccc;padding-top:8mm;margin-top:14mm}
+    .openfoot p{font-size:11.5pt;line-height:1.7;max-width:60ch}
+    .counts dd{font-size:22pt}
     h1{font-size:26pt!important;line-height:1.14;max-width:none}
     .kick{font-size:8.5pt;color:#00655a}
     .openfoot p{font-size:10pt;max-width:none}
     .counts dd{font-size:16pt}
-    .room{padding:0}
+    .pager,.play{display:none!important}
+    .show[hidden]{display:block!important}
+    .splash{min-height:auto;page-break-after:avoid}
+    .board{background:#fff;color:#000;border-radius:0;margin:0}
     /* 프로젝트 한 건이 페이지 중간에서 잘리지 않게 */
     .piece{break-inside:auto;margin-bottom:9mm;
       display:grid!important;grid-template-columns:64mm 1fr!important;gap:6mm!important;
@@ -392,11 +316,11 @@
     .room{padding-top:8px}
   }
 </style>
-<meta name="description" content="이진희 · AI Product Designer. 교육 제품을 설계하고 프로토타입을 직접 만들어 배포합니다. GitHub Pages에 배포된 프로토타입 14개.">
+<meta name="description" content="이진희 · AI Product Designer. 교육 제품을 설계하고 프로토타입을 직접 만들어 배포합니다. GitHub Pages에 배포된 프로토타입 12개.">
 <link rel="canonical" href="https://jinilee-hue.github.io/portfolio/">
 <meta property="og:type" content="profile">
 <meta property="og:title" content="이진희 — AI Product Designer">
-<meta property="og:description" content="스스로 만들어 증명하는 디자이너. 기획부터 배포까지, 실제로 열리는 프로토타입 14개.">
+<meta property="og:description" content="스스로 만들어 증명하는 디자이너. 기획부터 배포까지, 실제로 열리는 프로토타입 12개.">
 <meta property="og:url" content="https://jinilee-hue.github.io/portfolio/">
 <meta property="og:image" content="https://jinilee-hue.github.io/portfolio/assets/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -428,14 +352,11 @@
     </div>
   </section>
 
-  <section class="tl" id="tl" aria-labelledby="tl-h">
-    <div class="tl-head"><h2 id="tl-h"></h2><span id="tl-note"></span></div>
-    <div class="tl-axis" id="tl-axis"></div>
-    <div id="tl-rows"></div>
-  </section>
 </div>
 
-<div class="wrap"><div class="room" id="room"></div></div>
+<!-- 밴드 배경이 화면 끝까지 닿아야 하므로 .wrap 으로 감싸지 않는다.
+     콘텐츠 정렬선은 .piece 의 좌우 padding 이 직접 계산한다. -->
+<div class="room" id="room"></div>
 
 <div class="wrap"><section class="band" id="principles">
   <h2 id="prin-h"></h2>
@@ -457,11 +378,14 @@ const COPY={
     h1:'스스로 만들어 <i>증명하는</i> 디자이너.',
     lede:'교육 제품을 설계하고, 프로토타입은 직접 만들어 배포한다. 아래 화면은 목업이 아니라 실제 배포된 페이지를 그대로 캡처한 것이고, 누르면 그 주소로 열린다.',
     counts:[['배포','{n}'],['라이브','{live}'],['최근','{last}']],
-    open:'열기', more:'제작 과정 상세', less:'상세 접기', pdf:'PDF로 저장',
+    open:'열기', play:'PLAY', playHint:'실제 배포 화면', more:'제작 과정 상세', less:'상세 접기', pdf:'PDF로 저장',
     mPeriod:'기간', mCommits:'커밋', mRole:'역할',
     cIntent:'기획 의도', cConcept:'디자인 컨셉', cFlow:'흐름', cStack:'기술 스택', cDec:'설계 결정',
+    outK:'Screens', onScreen:'이 화면에서',
+    mDate:'Date', mTool:'Tool', mContrib:'Contribution',
     cAlso:'관련 저장소',
     phase:{plan:'기획',design:'디자인',build:'개발',qa:'검증'}, cFiles:'파일 구성',
+    mTools:'AI 툴', mResp:'반응형', dev:{desktop:'데스크톱',tablet:'태블릿',mobile:'모바일'},
     tlH:'작업 타임라인', tlNote:'첫 커밋 – 마지막 커밋 · 프로젝트 {n}개',
     prinH:'같이 일할 때 알아두면 좋은 것들',
     prin:[
@@ -477,11 +401,14 @@ const COPY={
     h1:'A designer who <i>proves it</i> by building it.',
     lede:'I design education products and build the prototypes myself. These are screenshots of pages actually deployed — not mockups. Click one and it opens.',
     counts:[['Shipped','{n}'],['Live','{live}'],['Latest','{last}']],
-    open:'Open', more:'Full process', less:'Collapse', pdf:'Save as PDF',
+    open:'Open', play:'PLAY', playHint:'Live deployment', more:'Full process', less:'Collapse', pdf:'Save as PDF',
     mPeriod:'Period', mCommits:'Commits', mRole:'Role',
     cIntent:'Intent', cConcept:'Design concept', cFlow:'Flow', cStack:'Stack', cDec:'Decisions',
+    outK:'Screens', onScreen:'This screen',
+    mDate:'Date', mTool:'Tool', mContrib:'Contribution',
     cAlso:'Related repositories',
     phase:{plan:'Planning',design:'Design',build:'Build',qa:'QA'}, cFiles:'Codebase',
+    mTools:'AI tools', mResp:'Responsive', dev:{desktop:'Desktop',tablet:'Tablet',mobile:'Mobile'},
     tlH:'Timeline', tlNote:'first – last commit · {n} projects',
     prinH:'Worth knowing before we work together',
     prin:[
@@ -507,175 +434,135 @@ function draw(){
   counts.innerHTML=c.counts.map(([k,v])=>`<div><dt>${k}</dt><dd>${
     v.replace('{n}',ps.length).replace('{live}',live+'/'+ps.length).replace('{last}',last)}</dd></div>`).join('');
 
-  // 링크(a)에 버튼을 중첩할 수 없어 article 로 감싸고 제목만 링크로 둔다
-  // ── 타임라인: 전체 프로젝트의 실제 작업 구간(첫 커밋~마지막 커밋) ──
-  const withSpan=ps.filter(p=>p.first&&p.last);
-  if(withSpan.length){
-    const toN=s=>{const[y,m]=s.split('-').map(Number);return y*12+m;};
-    const min=Math.min(...withSpan.map(p=>toN(p.first)));
-    const max=Math.max(...withSpan.map(p=>toN(p.last)));
-    const span=Math.max(1,max-min);
-    const fmt=n=>`${Math.floor((n-1)/12)}.${String(((n-1)%12)+1).padStart(2,'0')}`;
-    document.getElementById('tl-h').textContent=c.tlH;
-    document.getElementById('tl-note').textContent=c.tlNote.replace('{n}',withSpan.length);
-    const ticks=[min, min+Math.round(span/3), min+Math.round(span*2/3), max];
-    document.getElementById('tl-axis').innerHTML=ticks.map(t=>`<span>${fmt(t)}</span>`).join('');
-    document.getElementById('tl-rows').innerHTML=withSpan.map(p=>{
-      const a=toN(p.first), b=toN(p.last);
-      const left=((a-min)/span)*100, w=Math.max(1.5,((b-a)/span)*100);
-      return `<div class="tl-row"><b title="${p.title}">${p.title}</b>
-        <div class="tl-track"><span class="tl-bar" style="left:${left}%;width:${w}%"></span></div></div>`;
-    }).join('');
-  } else { document.getElementById('tl').style.display='none'; }
-
-  // 기여 범위 — 언어 바이트나 커밋 수는 저장소 사정이지 디자이너의 기여가 아니다.
-  // 기획/디자인/개발/검증 비중은 GitHub 에서 알 수 없으므로 overrides.json 에 직접 적는다.
-  const shades={plan:'.34',design:'1',build:'.62',qa:'.2'};
-  const contribBar=p=>{
+  // 관여도 — 분담 비율이 아니라 단계별 0~100 독립 게이지. 혼자 다 했으면 전부 100.
+  const contribGauges=p=>{
     const cb=p.contribution; if(!cb) return '';
-    const keys=['plan','design','build','qa'].filter(k=>(cb[k]||0)>0);
-    const tot=keys.reduce((s,k)=>s+cb[k],0); if(!tot) return '';
-    return `<div class="cbar" role="img" aria-label="${keys.map(k=>c.phase[k]+' '+cb[k]+'%').join(', ')}">${
-      keys.map(k=>`<i style="width:${(cb[k]/tot*100).toFixed(1)}%;opacity:${shades[k]}"
-        title="${c.phase[k]} ${cb[k]}%"></i>`).join('')}</div>
-      <div class="ckey">${keys.map(k=>
-        `<span><em style="opacity:${shades[k]}"></em>${c.phase[k]} <b>${cb[k]}%</b></span>`).join('')}</div>`;
-  };
-  // 파일 구성은 별도 그래프 대신 기술 스택 표의 한 행으로. 저장소 바이트 기준.
-  const langRow=p=>{
-    let e=Object.entries(p.langBytes||{}); if(!e.length) return '';
-    let tot=e.reduce((s,[,v])=>s+v,0); if(!tot) return '';
-    e=e.filter(([,v])=>v/tot>=0.01);
-    tot=e.reduce((s,[,v])=>s+v,0); if(!tot) return '';
-    return `<div><dt>${c.cFiles}</dt><dd>${e.map(([k,v])=>
-      `${k} ${Math.round(v/tot*100)}%`).join(' · ')}</dd></div>`;
+    const keys=['plan','design','build','qa'].filter(k=>cb[k]!=null);
+    if(!keys.length) return '';
+    return `<div class="cgrid">${keys.map(k=>`
+      <span class="cg-l">${c.phase[k]}</span>
+      <span class="cg-t" role="img" aria-label="${c.phase[k]} ${cb[k]}%"><i style="width:${cb[k]}%"></i></span>
+      <b class="cg-v">${cb[k]}%</b>`).join('')}</div>`;
   };
 
-  const IC={cal:'<svg class="ic" viewBox="0 0 16 16"><rect x="2" y="3.5" width="12" height="10"/><path d="M2 6.5h12M5.5 2v3M10.5 2v3"/></svg>',
-            usr:'<svg class="ic" viewBox="0 0 16 16"><circle cx="8" cy="5.5" r="2.6"/><path d="M3 13.5c0-2.5 2.2-4 5-4s5 1.5 5 4"/></svg>'};
+  const desk=p=>p.shots.find(s=>s.device==='desktop')||p.shots[0];
+  const side=p=>p.shots.find(s=>s.device==='mobile')||p.shots.find(s=>s.device==='tablet')||null;
 
-  // 태그 아이콘 — 라이브러리 없이 도형으로만 그린다(요청 0개, 색은 액센트 상속).
-  const G={
-    cursor:'<path d="M3 2l5.5 12 2-5 5-2z"/>',
-    type:'<path d="M3 4h10M8 4v9M5.5 13h5"/>',
-    tablet:'<rect x="3.5" y="2" width="9" height="12" rx="1"/><path d="M7 12h2"/>',
-    spark:'<path d="M8 2l1.4 3.9L13.5 7 9.4 8.4 8 12.5 6.6 8.4 2.5 7l4.1-1.1z"/>',
-    grid:'<rect x="2.5" y="2.5" width="4.5" height="4.5"/><rect x="9" y="2.5" width="4.5" height="4.5"/><rect x="2.5" y="9" width="4.5" height="4.5"/><rect x="9" y="9" width="4.5" height="4.5"/>',
-    chart:'<path d="M2.5 13.5V9M6.2 13.5V4M9.9 13.5V7M13.6 13.5V2.5"/>',
-    game:'<rect x="1.8" y="4.5" width="12.4" height="7" rx="3.5"/><path d="M4.6 6.8v2M3.6 7.8h2M10.6 7.8h.02M12 9.2h.02"/>',
-    code:'<path d="M5.5 4.5L2 8l3.5 3.5M10.5 4.5L14 8l-3.5 3.5"/>',
-    mic:'<rect x="6" y="2" width="4" height="7" rx="2"/><path d="M3.8 8a4.2 4.2 0 008.4 0M8 12.2V14"/>',
-    doc:'<path d="M4 2h5l3 3v9H4z"/><path d="M9 2v3h3"/>',
-    swatch:'<circle cx="6" cy="6" r="3.4"/><circle cx="10" cy="10" r="3.4"/>',
-    layers:'<path d="M8 2.2l5.6 3L8 8.2 2.4 5.2z"/><path d="M2.4 8.8L8 11.8l5.6-3"/>',
-    flask:'<path d="M6.4 2v4L3 12.6c-.4.8.1 1.4.9 1.4h8.2c.8 0 1.3-.6.9-1.4L9.6 6V2M5.6 2h4.8"/>',
-    box:'<path d="M8 2l5.5 3v6L8 14l-5.5-3V5z"/><path d="M8 8l5.5-3M8 8v6M8 8L2.5 5"/>'
-  };
-  // 키워드 → 아이콘. 앞에서부터 첫 매칭을 쓴다.
-  const TAGMAP=[
-    [/design system|token|디자인 시스템|토큰/i,'layers'],
-    [/dashboard|data viz|chart|대시보드/i,'chart'],
-    [/game|게임|play/i,'game'],
-    [/speech|voice|mic|발음|음성/i,'mic'],
-    [/typograph|타이포|조판/i,'type'],
-    [/tablet|mobile|태블릿/i,'tablet'],
-    [/generative ai|ai agent|claude|prompt|생성|에이전트/i,'spark'],
-    [/prototype|프로토타입|interactive|인터랙/i,'cursor'],
-    [/react|typescript|javascript|html|css|python|vanilla/i,'code'],
-    [/editorial|content|웹진|콘텐츠|kids ux|ux/i,'doc'],
-    [/multi-?brand|brand|브랜드|색|palette/i,'swatch'],
-    [/study|a\/b|research|리서치|시안|direction/i,'flask'],
-    [/enterprise|console|workflow|role|운영|콘솔/i,'grid'],
-  ];
-  const tagIcon=t=>{
-    for(const [re,k] of TAGMAP) if(re.test(t)) return `<svg class="ic" viewBox="0 0 16 16">${G[k]}</svg>`;
-    return `<svg class="ic" viewBox="0 0 16 16">${G.box}</svg>`;
-  };
+  const esc=s=>String(s||'').replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
 
-  room.innerHTML=ps.map((p,i)=>`
-    <article class="piece">
-      <a class="shots" data-open="${c.open} ↗" href="${p.live||p.repo}" target="_blank" rel="noopener"
-         aria-label="${p.title} ${c.open}">
-        ${p.shots.map(s=>`<span class="frame frame--${s.device}">
-          <span class="shot${s.long?' shot--long':''}"><img src="${s.src}" alt="${p.title} — ${s.device} 실제 배포 화면" decoding="async"
-               ${i===0&&s.device==='desktop'?'fetchpriority="high"':'fetchpriority="low"'}
-               onerror="this.closest('.frame').remove()"></span>
-          <span class="dev">${s.device}</span>
-        </span>`).join('')}
-      </a>
-      <div class="info">
-        <span class="n">${String(i+1).padStart(2,'0')} / ${String(ps.length).padStart(2,'0')}${p.kicker?' · '+p.kicker:''}</span>
-        <h2><a href="${p.live||p.repo}" target="_blank" rel="noopener">${p.title}</a></h2>
-        <p>${p.summary}</p>
-        <div class="meta">
-          ${p.period?`<span>${IC.cal}<b>${p.period}</b></span>`:''}
-          ${p.role?`<span>${IC.usr}<b>${p.role}</b></span>`:''}
-        </div>
-        ${contribBar(p)}
-        <div class="chips">${p.tags.slice(0,4).map(x=>`<span>${tagIcon(x)}${x}</span>`).join('')}</div>
-        ${p.hasCase?`<button class="more no-print" type="button" aria-expanded="false"
-           aria-controls="case-${p.id}"><span class="lbl">${c.more}</span><i class="chev"></i></button>`:''}
-      </div>
-      ${p.hasCase?`<div class="case" id="case-${p.id}">
-        <div>
-          ${p.intent?`<h3>${c.cIntent}</h3><p>${p.intent}</p>`:''}
-          ${p.concept?`<h3>${c.cConcept}</h3><p>${p.concept}</p>`:''}
-          ${p.flow.length?`<h3>${c.cFlow}</h3><ol class="flow">${p.flow.map(f=>
-            `<li><span class="s">${f.step}</span><span class="t">${lang()==='ko'?f.ko:(f.en||f.ko)}</span></li>`).join('')}</ol>`:''}
-        </div>
-        <div>
-          ${p.stack.length||Object.keys(p.langBytes||{}).length?`<h3>${c.cStack}</h3><dl class="stack">${
-            p.stack.map(s=>`<div><dt>${s.group}</dt><dd>${s.items.join(' · ')}</dd></div>`).join('')
-          }${langRow(p)}</dl>`:''}
-          ${p.decisions.length?`<h3>${c.cDec}</h3><ul class="dec">${p.decisions.map(d=>
-            `<li>${lang()==='ko'?d.ko:(d.en||d.ko)}</li>`).join('')}</ul>`:''}
-          ${p.also.length?`<h3>${c.cAlso}</h3><div class="chips">${p.also.map(a=>
-            `<a class="alsoLink" href="${a.live||a.repo}" target="_blank" rel="noopener">${a.id} ↗</a>`).join('')}</div>`:''}
-        </div>
-      </div>`:''}
-    </article>`).join('');
-
-  // 긴 캡처의 스크롤 이동량을 실제 렌더 높이에서 계산한다.
-  // 이미지가 프레임보다 얼마나 긴지는 로드 후에야 알 수 있다.
-  const setScroll=()=>{
-    room.querySelectorAll('.shot--long').forEach(el=>{
-      const img=el.querySelector('img'); if(!img||!img.naturalWidth) return;
-      const rendered=el.clientWidth*(img.naturalHeight/img.naturalWidth);
-      const over=rendered-el.clientHeight;
-      // 끝까지 내리면 페이지 하단 여백만 남는다 — 70% 지점까지, 상한 1400px
-      const travel=Math.min(over*0.7, 1400);
-      el.style.setProperty('--scroll', travel>12 ? `-${Math.round(travel)}px` : '0px');
-    });
-  };
-  room.querySelectorAll('.shot--long img').forEach(img=>{
-    if(img.complete) setScroll(); else img.addEventListener('load', setScroll, {once:true});
-  });
-  window.addEventListener('resize', setScroll);
-
-  // 줄바꿈된 플로우 노드의 연결선 정리 — 줄 끝 노드는 화살표를 감춘다
-  const trimFlow=()=>{
-    document.querySelectorAll('.flow').forEach(ol=>{
-      const items=[...ol.children];
-      items.forEach(li=>li.classList.remove('row-end'));
-      items.forEach((li,i)=>{
-        const next=items[i+1];
-        if(!next || next.offsetTop>li.offsetTop+2) li.classList.add('row-end');
+  const DEV_L={ko:{desktop:'데스크톱',tablet:'태블릿',mobile:'모바일'},
+               en:{desktop:'Desktop',tablet:'Tablet',mobile:'Mobile'}};
+  const gallery=p=>{
+    const notes=p.shotNotes||{};
+    const seen=new Set();
+    const out=[];
+    const primary=p.shots[0];
+    if(primary){
+      const n=notes[primary.device]||{};
+      out.push({
+        src:primary.src,
+        device:primary.device,
+        label:n.label||DEV_L[L][primary.device]||primary.device,
+        note:n.note||p.concept||''
       });
-    });
-  };
-  window.addEventListener('resize', trimFlow);
-
-  room.querySelectorAll('.more').forEach(b=>b.addEventListener('click',()=>{
-    const box=document.getElementById(b.getAttribute('aria-controls'));
-    const open=box.classList.toggle('open');
-    b.setAttribute('aria-expanded',String(open));
-    b.querySelector('.lbl').textContent=open?c.less:c.more;
-    if(open&&!window.matchMedia('(prefers-reduced-motion:reduce)').matches){
-      box.scrollIntoView({block:'nearest',behavior:'smooth'});
+      seen.add(primary.src);
     }
-    if(open) requestAnimationFrame(trimFlow);
-  }));
+    for(const s of (p.scenes||[])){
+      if(seen.has(s.src)) continue;
+      out.push(s);
+    }
+    return out;
+  };
 
+  room.innerHTML=`<div class="pager gutter">
+      <span class="count" id="pg-count"></span>
+      <div class="dots" id="pg-dots" role="tablist" aria-label="프로젝트"></div>
+      <div class="navb">
+        <button type="button" id="pg-prev" aria-label="이전">←</button>
+        <button type="button" id="pg-next" aria-label="다음">→</button>
+      </div>
+    </div>`+ps.map((p,i)=>{
+      const d=desk(p), tab=p.shots.find(s=>s.device==='tablet'), mob=p.shots.find(s=>s.device==='mobile');
+      const gal=gallery(p).slice(0,4);
+      const fl=f=>L==='ko'?f.ko:(f.en||f.ko);
+      return `<article class="show" id="p-${p.id}" data-i="${i}" ${i?'hidden':''}>
+        <div class="splash gutter">
+          <div class="fly">
+            ${d?`<span class="frame d"><span class="shot"><img src="${d.src}" alt="${esc(p.title)}"
+              ${i===0?'fetchpriority="high"':'loading="lazy"'} decoding="async"
+              onerror="this.closest('.frame').remove()"></span></span>`:''}
+            ${tab?`<span class="frame t"><span class="shot"><img src="${tab.src}" alt="" loading="lazy" decoding="async"
+              onerror="this.closest('.frame').remove()"></span></span>`:''}
+            ${mob?`<span class="frame m"><span class="shot"><img src="${mob.src}" alt="" loading="lazy" decoding="async"
+              onerror="this.closest('.frame').remove()"></span></span>`:''}
+          </div>
+          <div class="copy">
+            <p class="num">${String(i+1).padStart(2,'0')}.</p>
+            ${p.kicker?`<p class="kick">${esc(p.kicker)}</p>`:''}
+            <h2>${esc(p.title)}</h2>
+            ${p.summary?`<p class="sum">${esc(p.summary)}</p>`:''}
+            <a class="play" href="${p.live||p.repo}" target="_blank" rel="noopener">
+              <b>${c.play}</b><span>← ${c.playHint}</span>
+            </a>
+            <dl class="facts">
+              ${p.period?`<div><dt>${c.mDate}</dt><dd>${esc(p.period)}</dd></div>`:''}
+              ${p.tools.length?`<div><dt>${c.mTools}</dt><dd>${esc(p.tools.join(' · '))}</dd></div>`:''}
+              ${p.devices.length>1?`<div><dt>${c.mResp}</dt><dd>${esc(p.devices.map(k=>c.dev[k]||k).join(' · '))}</dd></div>`:''}
+            </dl>
+            ${contribGauges(p)?`<div class="contrib"><p class="k">${c.mContrib}</p>${contribGauges(p)}</div>`:''}
+          </div>
+        </div>
+        <div class="board">
+          <div class="gutter">
+            <p class="k">${c.outK}</p>
+            <div class="feats">${gal.map((s,si)=>`<figure>
+              <span class="ph"><span class="shot${s.device==='mobile'?' is-portrait':''}"><img src="${s.src}" alt="${esc(s.label||p.title)}" loading="lazy" decoding="async"
+                onerror="this.closest('figure').remove()"></span></span>
+              <figcaption>
+                <p class="k">${c.onScreen}</p>
+                <b>${esc(s.label||s.device||'')}</b>
+                ${s.note?`<span class="note">${esc(s.note)}</span>`:''}
+                ${si===0&&p.flow.length?`<ol>${p.flow.slice(0,5).map(f=>
+                  `<li><b>${esc(f.step)}</b><span>${esc(fl(f))}</span></li>`).join('')}</ol>`:''}
+              </figcaption>
+            </figure>`).join('')}</div>
+            ${(p.intent||p.concept)?`<div class="brief">
+              ${p.intent?`<div><h3>${c.cIntent}</h3><p>${esc(p.intent)}</p></div>`:''}
+              ${p.concept?`<div><h3>${c.cConcept}</h3><p>${esc(p.concept)}</p></div>`:''}
+            </div>`:''}
+          </div>
+        </div>
+      </article>`;
+    }).join('');
+
+  const dots=document.getElementById('pg-dots');
+  dots.innerHTML=ps.map((p,i)=>`<button type="button" role="tab" data-i="${i}"
+    aria-label="${esc(p.title)}" ${i?'':'aria-current="true"'}></button>`).join('');
+  let cur=0;
+  const go=(n,scroll)=>{
+    cur=Math.max(0,Math.min(ps.length-1,n));
+    room.querySelectorAll('.show').forEach((el,i)=>el.hidden=i!==cur);
+    dots.querySelectorAll('button').forEach((b,i)=>b.toggleAttribute('aria-current',i===cur));
+    document.getElementById('pg-count').textContent=
+      `${String(cur+1).padStart(2,'0')} / ${String(ps.length).padStart(2,'0')}`;
+    document.getElementById('pg-prev').disabled=cur===0;
+    document.getElementById('pg-next').disabled=cur===ps.length-1;
+    history.replaceState(null,'','#'+ps[cur].id);
+    if(scroll){
+      const vis=room.querySelector('.show:not([hidden])');
+      vis?.querySelector('.splash')?.scrollIntoView({block:'start'});
+    }
+  };
+  document.getElementById('pg-prev').onclick=()=>go(cur-1,true);
+  document.getElementById('pg-next').onclick=()=>go(cur+1,true);
+  dots.onclick=e=>{const b=e.target.closest('button[data-i]'); if(b) go(+b.dataset.i,true);};
+  const fromHash=()=>{
+    const id=decodeURIComponent((location.hash||'').slice(1));
+    const i=ps.findIndex(p=>p.id===id);
+    go(i>=0?i:0, !!location.hash);
+  };
+  fromHash();
+  window.addEventListener('hashchange',fromHash);
 
   // ── AI 가독성 레이어: 실제 데이터로 JSON-LD 채우기 ──
   const site='https://jinilee-hue.github.io/portfolio/';

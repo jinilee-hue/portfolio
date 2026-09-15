@@ -29,9 +29,14 @@
   a{color:inherit}
   .wrap{max-width:1500px;margin:0 auto;padding:0 clamp(16px,4vw,56px)}
 
-  header{position:fixed;top:0;left:0;right:0;z-index:30;mix-blend-mode:difference;
+  /* 밴드마다 배경이 바뀌므로 blend-mode 로는 대비를 보장할 수 없다.
+     반투명 배경 + 블러로 어떤 밴드 위에서도 읽히게 한다. */
+  header{position:fixed;top:0;left:0;right:0;z-index:30;
     display:flex;justify-content:space-between;align-items:center;gap:12px;
-    padding:18px clamp(16px,4vw,56px);color:#fff;pointer-events:none}
+    padding:14px clamp(16px,4vw,56px);color:#F5F3EF;pointer-events:none;
+    background:rgba(10,10,10,.82);backdrop-filter:saturate(160%) blur(14px);
+    border-bottom:1px solid rgba(245,243,239,.12)}
+  @supports not (backdrop-filter: blur(1px)){header{background:rgba(10,10,10,.95)}}
   /* 모바일: 좁은 폭에서 이름과 내비가 겹치고 본문 위에 올라탄다.
      흐름에 맞춰 두 줄로 내리고, blend mode 대신 배경을 깔아 가독성을 확보한다. */
   @media(max-width:720px){
@@ -52,8 +57,8 @@
   header a:focus-visible,header button:focus-visible{outline:2px solid #fff;outline-offset:2px;opacity:1}
 
   /* 히어로 — 화면이 주인공, 타입은 위에 얹힌다 */
-  .open{min-height:92svh;display:flex;flex-direction:column;justify-content:flex-end;
-    padding:max(120px, 8vw) 0 clamp(28px,4vw,56px);position:relative}
+  .open{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
+    padding:max(120px, 8vw) 0 clamp(40px,6vw,84px);position:relative}
   .kick{font-family:var(--grot);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
     color:var(--accent);margin:0 0 18px}
   h1{font-family:var(--disp);font-weight:300;font-variation-settings:'opsz' 120;
@@ -79,37 +84,62 @@
     font-variant-numeric:tabular-nums}
 
   /* 작업 — 전면 스크린샷 스택, 홀짝 어긋나게 */
-  .room{padding:clamp(40px,7vw,90px) 0}
-  .piece{display:grid;gap:clamp(14px,2vw,28px);margin-bottom:clamp(46px,8vw,120px);
-    grid-template-columns:1fr;text-decoration:none;position:relative}
+  .room{padding:0}
+  /* 프로젝트마다 배경을 바꿔 섹션을 구분한다.
+     검정 → 밝은 종이 → 짙은 녹색 3종 순환. 각 밴드 안에서 색 변수를 재정의하므로
+     본문·액센트·테두리가 모두 따라오고, 기기 프레임도 그 배경에 맞춰 그려진다. */
+  /* .room 은 전폭이다. 그래서 좌우 padding 이 .wrap(max-width 1500px + 좌우 여백) 의
+     정렬선을 그대로 재현한다. 1500px 보다 넓은 화면에서는 남는 폭의 절반을 더 밀어 넣는다.
+     vw 대신 % 를 쓰는 이유: vw 는 스크롤바 폭을 포함해 다른 섹션과 몇 px 어긋난다. */
+  .piece{display:grid;gap:clamp(14px,2vw,28px);
+    grid-template-columns:1fr;text-decoration:none;position:relative;
+    padding:clamp(38px,6vw,86px) max(clamp(16px,4vw,56px), calc(50% - 750px + clamp(16px,4vw,56px)));
+    background:var(--band);color:var(--fg);transition:background-color .4s var(--ease)}
+
+  /* 밴드 1 — 기본 검정 (변수 그대로) */
+  .piece:nth-child(3n+1){--band:var(--bg)}
+
+  /* 밴드 2 — 밝은 종이. 다크 모드에서도 이 구간만 반전된다 */
+  .piece:nth-child(3n+2){
+    --band:#F4F2ED; --fg:#131311; --fg-55:rgba(19,19,17,.76); --fg-28:rgba(19,19,17,.5);
+    --line:rgba(19,19,17,.16); --accent:#00655A}
+
+  /* 밴드 3 — 짙은 녹색 */
+  .piece:nth-child(3n){
+    --band:#07211D; --fg:#EAF5F2; --fg-55:rgba(234,245,242,.78); --fg-28:rgba(234,245,242,.52);
+    --line:rgba(234,245,242,.17); --accent:#41F5D2}
   @media(min-width:920px){
     .piece{grid-template-columns:repeat(12,1fr);align-items:center}
-    .piece .shots{grid-column:1/9}
-    .piece .info{grid-column:9/13}
-    .piece:nth-child(even) .shots{grid-column:5/13;grid-row:1}
-    .piece:nth-child(even) .info{grid-column:1/5;grid-row:1}
+    .piece .shots{grid-column:1/8}
+    .piece .info{grid-column:8/13}
+    .piece:nth-child(even) .shots{grid-column:6/13;grid-row:1}
+    .piece:nth-child(even) .info{grid-column:1/6;grid-row:1}
     /* 3n 번째는 리듬을 위해 폭을 살짝 좁히되, shot 과 info 열이 겹치지 않게 한 행에 나눠 둔다
        (겹치면 스크린샷 위로 텍스트가 올라타 화면이 잘려 보인다). */
-    .piece:nth-child(3n) .shots{grid-column:1/8;grid-row:1}
-    .piece:nth-child(3n) .info{grid-column:8/13;grid-row:1}
+
   }
   /* 기기 프레임은 스톡 목업 이미지가 아니라 CSS 로 그린다 — 이미지 요청 0, 화면은 실제 캡처.
      주의: filter(drop-shadow) 와 transform-style:preserve-3d 를 함께 쓰면 3D 평면이 평탄화되어
      의사요소(스탠드·턱)가 떨어져 나간다. 그래서 preserve-3d 를 쓰지 않고
      요소마다 transform:perspective(...) 로 각도를 준다. 스탠드는 아예 그리지 않는다. */
-  .shots{position:relative;display:block;padding:2% 3% 5% 1%}
+  .shots{position:relative;display:block;padding:2% 3% 5% 1%;max-width:100%;overflow:visible}
   .frame,.frame *{box-sizing:border-box}
-  .frame{position:absolute;transition:transform .7s var(--ease), filter .5s var(--ease)}
+  /* span 이라 기본이 inline 이다. tablet/mobile 은 position:absolute 라 자동으로 블록이 되지만
+     desktop 은 position:relative 이므로 display 를 직접 주지 않으면 인라인으로 남는다.
+     그러면 width/padding 이 먹지 않고 블록인 .shot 이 프레임을 뚫고 나가 베젤이 사라진다. */
+  .frame{display:block;position:absolute;transition:transform .7s var(--ease), filter .5s var(--ease)}
   .shot{position:relative;overflow:hidden;display:block;width:100%;
     background:color-mix(in oklab, var(--fg) 6%, transparent)}
 
 
   /* 모니터 — 흐름에 남아 .shots 의 높이를 만든다. 아래 베젤을 두껍게 해 턱을 표현 */
+  /* 베젤은 전역 --bg 가 아니라 자기가 놓인 밴드 색과 섞는다. 그러지 않으면
+     밝은 밴드 위에 검은 프레임이 얹혀 목업이 배경에서 떠 보인다. */
   .frame--desktop{position:relative;width:80%;z-index:1;
     transform:perspective(1800px) rotateY(3deg) rotateX(1deg);
     filter:drop-shadow(0 28px 46px rgba(0,0,0,.5));
     padding:11px 11px 26px;border-radius:12px;
-    background:color-mix(in oklab, var(--fg) 13%, var(--bg));
+    background:color-mix(in oklab, var(--fg) 13%, var(--band,var(--bg)));
     box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--fg) 20%, transparent)}
   .frame--desktop .shot{aspect-ratio:1440/900;border-radius:3px}
 
@@ -118,7 +148,7 @@
     transform:perspective(1400px) rotateY(-5deg) rotateZ(1.2deg);
     filter:drop-shadow(-14px 22px 36px rgba(0,0,0,.64));
     padding:9px;border-radius:15px;
-    background:color-mix(in oklab, var(--fg) 14%, var(--bg));
+    background:color-mix(in oklab, var(--fg) 14%, var(--band,var(--bg)));
     box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--fg) 22%, transparent)}
   .frame--tablet .shot{aspect-ratio:834/1112;border-radius:6px}
 
@@ -127,7 +157,7 @@
     transform:perspective(1200px) rotateY(-6deg) rotateZ(1.8deg);
     filter:drop-shadow(-10px 16px 28px rgba(0,0,0,.7));
     padding:5px;border-radius:17px;
-    background:color-mix(in oklab, var(--fg) 16%, var(--bg));
+    background:color-mix(in oklab, var(--fg) 16%, var(--band,var(--bg)));
     box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--fg) 24%, transparent)}
   .frame--mobile .shot{aspect-ratio:390/844;border-radius:13px}
 
@@ -277,42 +307,76 @@
   /* ── 데이터 시각화 ────────────────────────────────
      모든 수치는 GitHub API 에서 온 실제 값이다. 장식용 가짜 숫자는 쓰지 않는다. */
 
-  /* 1) 타임라인 — 14개 프로젝트의 실제 작업 구간 */
+  /* 1) 타임라인 — 한 줄 축 위에 작업 구간을 얹고, 이름은 위아래로 번갈아 붙인다.
+     행을 쌓으면 세로로 길어지고 시간의 연속성이 안 보인다. */
   .tl{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
     padding:clamp(24px,4vw,40px) 0;margin-top:clamp(28px,4vw,48px)}
-  .tl-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:20px}
-  .tl-head h2{font-family:var(--grot);font-weight:600;font-size:11px;letter-spacing:.16em;
+  .tl-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:14px}
+  .tl-head h2{font-family:var(--grot);font-weight:700;font-size:11.5px;letter-spacing:.14em;
     text-transform:uppercase;color:var(--accent);margin:0}
-  .tl-head span{font-family:var(--grot);font-size:10.5px;letter-spacing:.1em;color:var(--fg-28);
+  .tl-head span{font-family:var(--grot);font-size:11.5px;letter-spacing:.08em;color:var(--fg-28);
     font-variant-numeric:tabular-nums}
-  .tl-axis{display:flex;justify-content:space-between;font-family:var(--grot);font-size:10px;
-    letter-spacing:.08em;color:var(--fg-28);border-bottom:1px solid var(--line);
-    padding-bottom:6px;margin-bottom:10px;font-variant-numeric:tabular-nums}
-  .tl-row{display:grid;grid-template-columns:minmax(84px,1.1fr) minmax(0,4fr);gap:12px;
-    align-items:center;padding:3px 0}
-  .tl-row b{font-size:11.5px;font-weight:400;color:var(--fg-55);white-space:nowrap;
-    overflow:hidden;text-overflow:ellipsis;font-family:var(--grot);letter-spacing:.02em}
-  .tl-track{position:relative;height:11px;background:color-mix(in oklab,var(--fg) 5%,transparent)}
-  .tl-bar{position:absolute;top:0;bottom:0;background:var(--accent);opacity:.5;
-    transition:opacity .25s var(--ease)}
-  .tl-row:hover .tl-bar{opacity:1}
-  .tl-row:hover b{color:var(--fg)}
 
-  /* 2) 기여 범위 — 기획 / 디자인 / 개발 / 검증 비중 */
-  .cbar{display:flex;height:7px;margin:14px 0 8px;overflow:hidden;gap:2px;
-    background:color-mix(in oklab,var(--fg) 6%,transparent)}
-  .cbar i{display:block;height:100%;background:var(--accent)}
-  .ckey{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--grot);font-size:12px;
-    letter-spacing:.03em;color:var(--fg-28)}
-  .ckey span{display:inline-flex;align-items:center;gap:6px}
-  .ckey em{width:8px;height:8px;font-style:normal;flex:none;background:var(--accent)}
-  .ckey b{color:var(--fg-55);font-weight:600;font-variant-numeric:tabular-nums}
+  /* 축 + 위아래 라벨 영역 */
+  .tl-plot{position:relative;height:210px;margin:6px 0 4px}
+  .tl-axisline{position:absolute;left:0;right:0;top:50%;height:2px;
+    background:color-mix(in oklab,var(--fg) 14%,transparent)}
+  .tl-ticks{position:absolute;left:0;right:0;top:calc(50% + 9px);height:0}
+  .tl-ticks span{position:absolute;transform:translateX(-50%);font-family:var(--grot);
+    font-size:10.5px;letter-spacing:.08em;color:var(--fg-28);font-variant-numeric:tabular-nums;
+    white-space:nowrap}
+  .tl-ticks span::before{content:'';position:absolute;left:50%;top:-9px;width:1px;height:6px;
+    background:color-mix(in oklab,var(--fg) 20%,transparent)}
+
+  /* 구간 막대 — 축 위에 겹쳐 놓는다 */
+  .tl-item{position:absolute;top:50%;transform:translateY(-50%);height:9px;
+    background:var(--accent);opacity:.45;border-radius:1px;
+    transition:opacity .22s var(--ease),height .22s var(--ease)}
+  .tl-item:hover{opacity:1;height:13px}
+
+  /* 이름 — 홀수는 위, 짝수는 아래. 지시선으로 막대와 잇는다 */
+  .tl-label{position:absolute;font-family:var(--grot);font-size:11px;letter-spacing:.01em;
+    color:var(--fg-55);white-space:nowrap;text-decoration:none;
+    transition:color .2s var(--ease)}
+  .tl-label:hover{color:var(--accent)}
+  .tl-label::after{content:'';position:absolute;left:0;width:1px;
+    background:color-mix(in oklab,var(--fg) 18%,transparent)}
+  .tl-label--up{transform:translateX(-2px)}
+  .tl-label--up::after{top:100%;height:var(--lead,14px)}
+  .tl-label--down{transform:translateX(-2px)}
+  .tl-label--down::after{bottom:100%;height:var(--lead,14px)}
+  @media(max-width:760px){
+    .tl-plot{height:270px}
+    .tl-label{font-size:10px}
+  }
+
+  /* 2) 관여도 — 단계별 0~100 독립 게이지. 혼자 다 했으면 전부 100. */
+  .cgrid{display:grid;grid-template-columns:auto 1fr auto;gap:7px 12px;align-items:center;
+    margin:14px 0 4px;max-width:340px}
+  .cg-l{font-family:var(--grot);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--fg-28);white-space:nowrap}
+  .cg-t{position:relative;height:6px;border-radius:3px;overflow:hidden;
+    background:color-mix(in oklab,var(--fg) 9%,transparent)}
+  .cg-t i{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:3px}
+  .cg-v{font-family:var(--grot);font-size:12px;font-weight:600;color:var(--fg-55);
+    font-variant-numeric:tabular-nums;min-width:3.2ch;text-align:right}
+
+  /* 3) 툴 · 반응형 */
+  .trows{display:flex;flex-direction:column;gap:5px;margin-top:12px}
+  .trow{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 8px;
+    font-family:var(--grot);font-size:12px;letter-spacing:.02em}
+  .trow-l{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-28);
+    min-width:5.5em}
+  .trow b{font-weight:500;color:var(--fg-55)}
+  .trow .sep{width:3px;height:3px;border-radius:50%;background:var(--fg-28);
+    display:inline-block;vertical-align:middle;margin:0 2px}
 
   /* 4) 아이콘 — 메타 항목 식별용, 도형으로만 그린다 */
   .ic{width:11px;height:11px;flex:none;opacity:.5;stroke:currentColor;fill:none;stroke-width:1.6}
   .meta span{display:inline-flex;align-items:center;gap:5px}
 
-  .band{border-top:1px solid var(--line);padding:clamp(48px,8vw,100px) 0}
+  .band{border-top:1px solid var(--line);padding:clamp(48px,8vw,100px) 0;
+    margin-top:clamp(40px,6vw,80px)}
   .band h2{font-family:var(--disp);font-weight:300;font-size:clamp(1.6rem,4vw,2.8rem);
     letter-spacing:-.02em;margin:0 0 clamp(24px,3vw,44px);max-width:20ch}
   .prin{display:grid;gap:clamp(22px,3vw,44px)}
@@ -336,8 +400,15 @@
     html,body{background:#fff!important;color:#000!important}
     header,.no-print{display:none!important}
     .wrap{max-width:none;padding:0}
-    .open{min-height:auto;padding:0 0 8mm;page-break-after:auto;
-      border-bottom:1px solid #ddd;margin-bottom:7mm}
+    /* 표지: A4 한 장을 통째로 쓴다. 이름·주장·지표가 세로 중앙에 온다 */
+    .open{min-height:calc(297mm - 28mm);display:flex;flex-direction:column;
+      justify-content:center;padding:0;border-bottom:0;margin-bottom:0;
+      page-break-after:always}
+    .open h1{font-size:40pt!important;line-height:1.08;margin-bottom:10mm}
+    .open .kick{font-size:11pt;margin-bottom:8mm}
+    .openfoot{border-top:1px solid #ccc;padding-top:8mm;margin-top:14mm}
+    .openfoot p{font-size:11.5pt;line-height:1.7;max-width:60ch}
+    .counts dd{font-size:22pt}
     h1{font-size:26pt!important;line-height:1.14;max-width:none}
     .kick{font-size:8.5pt;color:#00655a}
     .openfoot p{font-size:10pt;max-width:none}
@@ -420,12 +491,17 @@
 
   <section class="tl" id="tl" aria-labelledby="tl-h">
     <div class="tl-head"><h2 id="tl-h"></h2><span id="tl-note"></span></div>
-    <div class="tl-axis" id="tl-axis"></div>
-    <div id="tl-rows"></div>
+    <div class="tl-plot">
+      <div class="tl-axisline"></div>
+      <div class="tl-ticks" id="tl-ticks"></div>
+      <div id="tl-rows"></div>
+    </div>
   </section>
 </div>
 
-<div class="wrap"><div class="room" id="room"></div></div>
+<!-- 밴드 배경이 화면 끝까지 닿아야 하므로 .wrap 으로 감싸지 않는다.
+     콘텐츠 정렬선은 .piece 의 좌우 padding 이 직접 계산한다. -->
+<div class="room" id="room"></div>
 
 <div class="wrap"><section class="band" id="principles">
   <h2 id="prin-h"></h2>
@@ -452,6 +528,7 @@ const COPY={
     cIntent:'기획 의도', cConcept:'디자인 컨셉', cFlow:'흐름', cStack:'기술 스택', cDec:'설계 결정',
     cAlso:'관련 저장소',
     phase:{plan:'기획',design:'디자인',build:'개발',qa:'검증'}, cFiles:'파일 구성',
+    mTools:'AI 툴', mResp:'반응형', dev:{desktop:'데스크톱',tablet:'태블릿',mobile:'모바일'},
     tlH:'작업 타임라인', tlNote:'첫 커밋 – 마지막 커밋 · 프로젝트 {n}개',
     prinH:'같이 일할 때 알아두면 좋은 것들',
     prin:[
@@ -472,6 +549,7 @@ const COPY={
     cIntent:'Intent', cConcept:'Design concept', cFlow:'Flow', cStack:'Stack', cDec:'Decisions',
     cAlso:'Related repositories',
     phase:{plan:'Planning',design:'Design',build:'Build',qa:'QA'}, cFiles:'Codebase',
+    mTools:'AI tools', mResp:'Responsive', dev:{desktop:'Desktop',tablet:'Tablet',mobile:'Mobile'},
     tlH:'Timeline', tlNote:'first – last commit · {n} projects',
     prinH:'Worth knowing before we work together',
     prin:[
@@ -508,28 +586,56 @@ function draw(){
     const fmt=n=>`${Math.floor((n-1)/12)}.${String(((n-1)%12)+1).padStart(2,'0')}`;
     document.getElementById('tl-h').textContent=c.tlH;
     document.getElementById('tl-note').textContent=c.tlNote.replace('{n}',withSpan.length);
+
+    // 눈금: 축 위 4지점
     const ticks=[min, min+Math.round(span/3), min+Math.round(span*2/3), max];
-    document.getElementById('tl-axis').innerHTML=ticks.map(t=>`<span>${fmt(t)}</span>`).join('');
-    document.getElementById('tl-rows').innerHTML=withSpan.map(p=>{
+    document.getElementById('tl-ticks').innerHTML=ticks.map(t=>
+      `<span style="left:${((t-min)/span*100).toFixed(1)}%">${fmt(t)}</span>`).join('');
+
+    // 시작일 순으로 늘어놓고 위/아래를 번갈아 배정한다.
+    // 같은 쪽 라벨끼리 가로로 겹치면 한 단씩 더 띄워 글자가 포개지지 않게 한다.
+    const sorted=[...withSpan].sort((x,y)=>toN(x.first)-toN(y.first));
+    const lastEndPx={up:[],down:[]};   // 단(level)별 마지막 라벨 오른쪽 끝 (%)
+    const html=sorted.map((p,i)=>{
       const a=toN(p.first), b=toN(p.last);
-      const left=((a-min)/span)*100, w=Math.max(1.5,((b-a)/span)*100);
-      return `<div class="tl-row"><b title="${p.title}">${p.title}</b>
-        <div class="tl-track"><span class="tl-bar" style="left:${left}%;width:${w}%"></span></div></div>`;
+      const left=((a-min)/span)*100, w=Math.max(1.6,((b-a)/span)*100);
+      const side=i%2===0?'up':'down';
+      const approxW=Math.min(30, p.title.length*0.95);   // 라벨 폭 대략치(%)
+      const arr=lastEndPx[side];
+      let level=0;
+      while(level<arr.length && left < arr[level]+1) level++;
+      arr[level]=left+approxW;
+      const step=26;                                      // 단 간격(px)
+      const offset=18+level*step;
+      const pos=side==='up' ? `bottom:calc(50% + ${offset}px)` : `top:calc(50% + ${offset}px)`;
+      return `<span class="tl-item" style="left:${left}%;width:${w}%" title="${p.title}"></span>
+        <a class="tl-label tl-label--${side}" href="${p.live||p.repo}" target="_blank" rel="noopener"
+           style="left:${left}%;${pos};--lead:${offset-9}px">${p.title}</a>`;
     }).join('');
+    document.getElementById('tl-rows').innerHTML=html;
   } else { document.getElementById('tl').style.display='none'; }
 
-  // 기여 범위 — 언어 바이트나 커밋 수는 저장소 사정이지 디자이너의 기여가 아니다.
-  // 기획/디자인/개발/검증 비중은 GitHub 에서 알 수 없으므로 overrides.json 에 직접 적는다.
-  const shades={plan:'.34',design:'1',build:'.62',qa:'.2'};
+  // 관여도 — 분담 비율(합 100)이 아니라 단계별 0~100 독립 게이지.
+  // 혼자 다 했으면 네 게이지가 전부 100% 로 찬다. 값은 overrides.json 에 직접 쓴다.
   const contribBar=p=>{
     const cb=p.contribution; if(!cb) return '';
-    const keys=['plan','design','build','qa'].filter(k=>(cb[k]||0)>0);
-    const tot=keys.reduce((s,k)=>s+cb[k],0); if(!tot) return '';
-    return `<div class="cbar" role="img" aria-label="${keys.map(k=>c.phase[k]+' '+cb[k]+'%').join(', ')}">${
-      keys.map(k=>`<i style="width:${(cb[k]/tot*100).toFixed(1)}%;opacity:${shades[k]}"
-        title="${c.phase[k]} ${cb[k]}%"></i>`).join('')}</div>
-      <div class="ckey">${keys.map(k=>
-        `<span><em style="opacity:${shades[k]}"></em>${c.phase[k]} <b>${cb[k]}%</b></span>`).join('')}</div>`;
+    const keys=['plan','design','build','qa'].filter(k=>cb[k]!=null);
+    if(!keys.length) return '';
+    return `<div class="cgrid">${keys.map(k=>`
+      <span class="cg-l">${c.phase[k]}</span>
+      <span class="cg-t" role="img" aria-label="${c.phase[k]} ${cb[k]}%">
+        <i style="width:${cb[k]}%"></i></span>
+      <b class="cg-v">${cb[k]}%</b>`).join('')}</div>`;
+  };
+  // 실제 사용 AI 툴 + 반응형 대응 기기
+  const DEVI={desktop:'🖥',tablet:'⌨',mobile:'📱'};
+  const toolRow=p=>{
+    const rows=[];
+    if(p.tools.length) rows.push(`<span class="trow"><span class="trow-l">${c.mTools}</span>${
+      p.tools.map(t=>`<b>${t}</b>`).join('<i class="sep"></i>')}</span>`);
+    if(p.devices.length>1) rows.push(`<span class="trow"><span class="trow-l">${c.mResp}</span><b>${
+      p.devices.map(k=>c.dev[k]||k).join(' · ')}</b></span>`);
+    return rows.length?`<div class="trows">${rows.join('')}</div>`:'';
   };
   // 파일 구성은 별도 그래프 대신 기술 스택 표의 한 행으로. 저장소 바이트 기준.
   const langRow=p=>{
@@ -602,6 +708,7 @@ function draw(){
           ${p.role?`<span>${IC.usr}<b>${p.role}</b></span>`:''}
         </div>
         ${contribBar(p)}
+        ${toolRow(p)}
         <div class="chips">${p.tags.slice(0,4).map(x=>`<span>${tagIcon(x)}${x}</span>`).join('')}</div>
         ${p.hasCase?`<button class="more no-print" type="button" aria-expanded="false"
            aria-controls="case-${p.id}"><span class="lbl">${c.more}</span><i class="chev"></i></button>`:''}
