@@ -249,69 +249,80 @@
      브라우저의 '대상: PDF로 저장' 으로 벡터 텍스트 PDF 가 나온다.
      화면용 다크 테마를 흰 종이로 뒤집고, 케이스 스터디는 전부 펼쳐 인쇄한다. */
   @media print{
-    /* 가로(landscape) 출력 전용 — 화면 슬라이드 비율과 맞아 기기 목업이 잘리지 않는다 */
-    @page{size:A4 landscape;margin:10mm 14mm}
-    :root{--bg:#fff;--fg:#000;--fg-55:#3a3a3a;--fg-28:#6a6a6a;--line:#c9c9c9;--accent:#00655a}
-    html,body{background:#fff!important;color:#000!important}
-    header,.no-print{display:none!important}
+    /* 가로(A4 landscape) 전용. 구성: 표지 1장 + 프로젝트당 1~2장(무대/보드) + 원칙 1장 */
+    @page{size:A4 landscape;margin:9mm 12mm}
+    :root{--bg:#fff;--fg:#000;--fg-55:#333;--fg-28:#666;--line:#c9c9c9;--accent:#00655A}
+    html,body{background:#fff!important;color:#000!important;font-size:12px}
+    header,.pager,.play,.no-print{display:none!important}
     .wrap{max-width:none;padding:0}
-    /* 표지: A4 한 장을 통째로 쓴다. 이름·주장·지표가 세로 중앙에 온다 */
-    .open{min-height:calc(210mm - 20mm);display:flex;flex-direction:column;
-      justify-content:center;padding:0;border-bottom:0;margin-bottom:0;
-      page-break-after:always}
-    .open h1{font-size:40pt!important;line-height:1.08;margin-bottom:10mm}
-    .open .kick{font-size:11pt;margin-bottom:8mm}
-    .openfoot{border-top:1px solid #ccc;padding-top:8mm;margin-top:14mm}
-    .openfoot p{font-size:11.5pt;line-height:1.7;max-width:60ch}
-    .counts dd{font-size:22pt}
-    h1{font-size:26pt!important;line-height:1.14;max-width:none}
-    .kick{font-size:8.5pt;color:#00655a}
-    .openfoot p{font-size:10pt;max-width:none}
-    .counts dd{font-size:16pt}
-    .pager,.play{display:none!important}
+
+    /* 표지 — 가로 한 장, 세로 중앙 */
+    .open{min-height:calc(210mm - 18mm);display:flex;flex-direction:column;
+      justify-content:center;padding:0;page-break-after:always}
+    .open h1{font-size:44pt!important;line-height:1.06;color:#000!important}
+    .open .kick{font-size:11pt;color:#00655A}
+    .openfoot{border-top:1px solid #ccc;padding-top:6mm;margin-top:12mm}
+    .openfoot p{font-size:11pt;line-height:1.65;max-width:none;color:#333}
+    .counts dd{font-size:20pt;color:#000}
+    .counts dt{color:#888}
+
+    /* 숨긴 슬라이드도 전부 출력 + 다크 무대를 흰 지면으로 강제 반전 */
+    .show{display:block!important}
     .show[hidden]{display:block!important}
-    .splash{min-height:auto;page-break-after:avoid}
-    .board{background:#fff;color:#000;border-radius:0;margin:0}
-    /* 프로젝트 한 건이 페이지 중간에서 잘리지 않게 */
-    .piece{break-inside:auto;margin-bottom:9mm;
-      display:grid!important;grid-template-columns:64mm 1fr!important;gap:6mm!important;
-      border-bottom:1px solid #ddd;padding-bottom:6mm}
-    .piece:nth-child(even) .shot,.piece:nth-child(3n) .shot{grid-column:1!important;grid-row:1!important}
-    .piece:nth-child(even) .info,.piece:nth-child(3n) .info{grid-column:2!important;grid-row:1!important}
-    .frame{background:#eee;padding:1mm;border-radius:1mm}
-    .frame--desktop::after,.frame--desktop::before,.frame--mobile::after{display:none}
-    .shot{border:1px solid #ddd}
-    .shots{gap:2mm}
+    .show,.splash,.splash *{background-color:transparent!important}
+    .show{background:#fff!important;color:#000!important}
+    .splash{background:#fff!important}
+    .copy,.copy *{color:#111!important}
+    .copy .kick,.contrib .k{color:#00655A!important}
+    .copy .num,.facts dt,.cg-l{color:#888!important}
+    .facts dd,.cg-v{color:#222!important}
+    .cg-t{background:#e8e8e8!important}
+    .cg-t i{background:#00655A!important}
+
+    /* 무대(기기 목업+개요): 프로젝트당 첫 장 */
+    .splash{display:grid!important;grid-template-columns:1.35fr 1fr;gap:8mm;
+      align-items:center;min-height:calc(210mm - 18mm);
+      page-break-before:always;page-break-after:always;break-inside:avoid}
+    .fly{position:relative;height:120mm;order:0}
+    .fly .d,.fly .t,.fly .m{box-shadow:none;background:#eee;border:1px solid #ddd}
+    .shot{background:#f4f4f4}
     .shot img{filter:none!important;transform:none!important}
-    .shot::after{display:none}
-    .info h2{font-size:13pt!important;color:#000!important;margin-bottom:2mm}
-    .info p{font-size:9pt;color:#333}
-    .n,.role,.meta{font-size:7.5pt;color:#666}
-    .chips span{border-color:#ccc;color:#444;font-size:7pt}
-    /* 인쇄에서는 접힌 케이스 스터디도 전부 보여준다 */
-    .more{display:none!important}
-    .case{display:grid!important;grid-column:1/-1!important;grid-template-columns:1fr 1fr!important;
-      gap:6mm!important;border-top:1px solid #ddd;margin-top:4mm;padding-top:4mm}
-    /* 블록 단위로만 잘리게 해서 문장이 페이지 경계에서 끊기지 않도록 */
-    .case>div,.flow li,.stack div,.dec li,.info{break-inside:avoid}
-    .info h2{break-after:avoid}
-    .case h3{font-size:7.5pt;color:#00655a}
-    .case p,.stack dd,.dec li{font-size:8.5pt;color:#333}
-    .flow{flex-direction:row!important;flex-wrap:wrap}
-    .flow li{font-size:7.5pt;color:#333;background:#f7f7f7;border-color:#ddd;
-      padding:2mm 2.5mm;margin:0 3mm 3mm 0;flex:1 1 26mm;min-width:24mm}
-    .flow li .s{color:#00655a;font-size:6.5pt}
-    .flow li .t{font-size:7.5pt;color:#333}
-    .flow li::after{right:-3mm;width:3mm;background:#bbb}
-    .flow li::before{right:-3mm;border-left-color:#888}
-    .band{page-break-before:auto}
-    .band h2{font-size:15pt}
-    .prin h3{font-size:10pt}.prin p{font-size:9pt}
+    .copy .num{color:#999}
+    .copy h2{font-size:20pt!important;color:#000!important}
+    .copy .kick{font-size:9pt}
+    .copy .sum{font-size:10.5pt;color:#333;max-width:none}
+    .facts dt{color:#888;font-size:7.5pt}
+    .facts dd{color:#222;font-size:9.5pt}
+    .contrib .k{color:#00655A;font-size:8pt}
+    .cg-l{color:#777}
+    .cg-t{background:#e8e8e8}
+    .cg-t i{background:#00655A}
+    .cg-v{color:#222}
+
+    /* 보드(화면 상세): 이어지는 장들 — 그림 단위로만 잘리게 */
+    .board{background:#fff;color:#000;border-radius:0;margin:0;padding:0}
+    .board .k{color:#00655A;font-size:8pt}
+    .feats{gap:6mm}
+    .feats figure{break-inside:avoid;grid-template-columns:1.4fr 1fr!important;gap:5mm}
+    .feats figure:nth-child(even) .ph{order:0}
+    .feats .ph{box-shadow:none;border:1px solid #ddd;background:#fff;padding:1.5mm}
+    .feats figcaption b{font-size:12pt;color:#000}
+    .feats figcaption .note{font-size:9pt;color:#333}
+    .feats figcaption li{font-size:8.5pt;color:#333}
+    .feats figcaption li b{font-size:8pt;color:#888}
+    .brief{break-inside:avoid;border-top:1px solid #ddd}
+    .brief h3{color:#00655A;font-size:8pt}
+    .brief p{font-size:9pt;color:#333}
+    .brief li{font-size:8.5pt;color:#333}
+    .brief li b{color:#888}
+
+    /* 원칙 + 푸터 */
+    .band{page-break-before:always}
+    .band h2{font-size:16pt;color:#000}
+    .prin h3{font-size:10.5pt;color:#000}
+    .prin p{font-size:9.5pt;color:#333}
     footer{border-top:1px solid #ccc;font-size:8pt;color:#555}
     a{color:#000;text-decoration:none}
-    /* 링크는 지면에서 주소가 보여야 쓸모가 있다 */
-    .piece::after{content:attr(href);font-family:var(--grot);font-size:7pt;color:#777;
-      grid-column:2;word-break:break-all}
   }
   /* 모바일 히어로: 고정 헤더가 흐름으로 바뀌므로 하단 정렬과 뷰포트 높이를 해제한다.
      .open 정의 뒤에 와야 캐스케이드에서 이긴다. */
