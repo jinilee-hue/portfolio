@@ -73,6 +73,8 @@ export function pick(p) {
     scenes: (p.scenes || []).map(s => ({
       id: s.id,
       src: asset(s.src || `assets/shots/${p.id}--${s.id}.jpg`),
+      // flow 컷은 큰 도판이 아니라 하단 띠에 작게 늘어놓는다
+      flow: !!s.flow,
       label: t(s.label),
       note: t(s.note),
       features: (s.features || []).map(feat),

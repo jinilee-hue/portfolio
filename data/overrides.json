@@ -714,29 +714,36 @@
     },
     "flow": [
       {
-        "step": "01",
-        "ko": "브랜드 후보 5안 — 워드마크·팔레트·타이포",
-        "en": "Five brand candidates — wordmark, palette, type"
+        "id": "f1",
+        "n": 5,
+        "label": {
+          "ko": "표지",
+          "en": "Cover"
+        }
       },
       {
-        "step": "02",
-        "ko": "한 페이지에 정리 → 투표로 방향 확정",
-        "en": "Laid out on one page, settled by vote"
+        "id": "f2",
+        "n": 7,
+        "label": {
+          "ko": "스킬 안내",
+          "en": "Skill card"
+        }
       },
       {
-        "step": "03",
-        "ko": "채택안(B)으로 사자 캐릭터 전개",
-        "en": "Lion character developed from the chosen direction"
+        "id": "f3",
+        "n": 9,
+        "label": {
+          "ko": "오늘의 순서",
+          "en": "Today's plan"
+        }
       },
       {
-        "step": "04",
-        "ko": "PPTX 화면정의서 49슬라이드 분해",
-        "en": "49-slide PPTX spec decomposed"
-      },
-      {
-        "step": "05",
-        "ko": "64화면 클릭 가능한 학습 흐름 구현",
-        "en": "64 clickable screens of the learning flow"
+        "id": "f4",
+        "n": 19,
+        "label": {
+          "ko": "읽고 근거 짚기",
+          "en": "Read & tap"
+        }
       }
     ],
     "stack": [
@@ -895,6 +902,78 @@
             ]
           }
         ]
+      },
+      {
+        "id": "f1",
+        "device": "desktop",
+        "wait": 3600,
+        "path": "designB/index.html",
+        "selector": "#stage",
+        "eval": "(() => new Promise(r => { const i=document.querySelector('#pj-num,input[type=number],input'); if(i){ i.value=5; document.querySelector('#pj-go')?.click(); } setTimeout(r,2400); }))()",
+        "flow": true,
+        "label": {
+          "ko": "표지",
+          "en": "Cover"
+        },
+        "note": {
+          "ko": "",
+          "en": ""
+        },
+        "features": []
+      },
+      {
+        "id": "f2",
+        "device": "desktop",
+        "wait": 3600,
+        "path": "designB/index.html",
+        "selector": "#stage",
+        "eval": "(() => new Promise(r => { const i=document.querySelector('#pj-num,input[type=number],input'); if(i){ i.value=7; document.querySelector('#pj-go')?.click(); } setTimeout(r,2400); }))()",
+        "flow": true,
+        "label": {
+          "ko": "스킬 안내",
+          "en": "Skill card"
+        },
+        "note": {
+          "ko": "",
+          "en": ""
+        },
+        "features": []
+      },
+      {
+        "id": "f3",
+        "device": "desktop",
+        "wait": 3600,
+        "path": "designB/index.html",
+        "selector": "#stage",
+        "eval": "(() => new Promise(r => { const i=document.querySelector('#pj-num,input[type=number],input'); if(i){ i.value=9; document.querySelector('#pj-go')?.click(); } setTimeout(r,2400); }))()",
+        "flow": true,
+        "label": {
+          "ko": "오늘의 순서",
+          "en": "Today's plan"
+        },
+        "note": {
+          "ko": "",
+          "en": ""
+        },
+        "features": []
+      },
+      {
+        "id": "f4",
+        "device": "desktop",
+        "wait": 3600,
+        "path": "designB/index.html",
+        "selector": "#stage",
+        "eval": "(() => new Promise(r => { const i=document.querySelector('#pj-num,input[type=number],input'); if(i){ i.value=19; document.querySelector('#pj-go')?.click(); } setTimeout(r,2400); }))()",
+        "flow": true,
+        "label": {
+          "ko": "읽고 근거 짚기",
+          "en": "Read & tap"
+        },
+        "note": {
+          "ko": "",
+          "en": ""
+        },
+        "features": []
       }
     ],
     "shot_notes": {
