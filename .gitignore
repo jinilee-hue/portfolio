@@ -6,3 +6,6 @@ data/projects.json
 # 검증용 임시 파일
 _tmp_print.pdf
 _pdfcheck.html
+.venv/
+_pc.pdf
+_pv.html

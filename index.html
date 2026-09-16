@@ -498,7 +498,7 @@
 
     /* 표지 — 가로 한 장, 세로 중앙 */
     /* 표지는 화면 테마를 따른다 — html 을 검게 깔았으므로 여기서 되돌린다. */
-    .open{min-height:100vh;box-sizing:border-box;display:flex;flex-direction:column;
+    .open{min-height:186mm;box-sizing:border-box;display:flex;flex-direction:column;
       justify-content:center;padding:12mm 14mm;page-break-after:always;
       background:var(--bg)}
     .open h1{font-size:44pt!important;line-height:1.06}
@@ -574,16 +574,14 @@
        인쇄는 body 배경을 깔지 않으므로 같은 색을 직접 준다. --bg 를 쓰면
        라이트 모드에서 흰색으로 뒤집혀 화면과 달라진다. */
     /* 지면 여백 0 이라 섹션 배경만으로는 위아래 흰 띠가 남는다.
-       html/body 에도 같은 색을 깔아 종이 전체를 채운다. */
-    html,body{background:#0A0A0A!important}
-    .band{page-break-before:always;padding:12mm 14mm;min-height:100vh;box-sizing:border-box;
-      background:#0A0A0A!important;color:#F3F6F5!important}
-    .band h2,.band h3,.band b{color:#F3F6F5!important}
-    .ctime .org,.ctime .note,.credl span{color:rgba(243,246,245,.78)!important}
-    .ctime .when,.credl b{color:rgba(243,246,245,.52)!important}
-    .ctime li.now .when{color:#2AF0CE!important}
-    .ctime .tags li{border-color:rgba(243,246,245,.16)!important;
-      color:rgba(243,246,245,.78)!important}
+       화면에서 이 섹션은 투명 배경 위로 body 색이 비치므로, 인쇄에서도
+       같은 토큰(--bg/--fg)을 쓴다. 고정 hex 를 박으면 라이트 모드에서
+       화면은 검은 글자인데 지면만 흰 글자가 되어 어긋난다. */
+    html,body{background:var(--bg)!important}
+    /* 100vh 는 인쇄 지면 높이와 어긋나 한 쪽을 넘겨 빈 페이지를 만든다.
+       A4 가로(210mm)에서 위아래 패딩을 뺀 실제 사용 높이를 쓴다. */
+    .band{page-break-before:always;padding:12mm 14mm;min-height:186mm;box-sizing:border-box;
+      background:var(--bg)!important;color:var(--fg)!important}
     .band:last-of-type{page-break-after:avoid}
     #credits{page-break-before:always;page-break-after:avoid}
     .creds > div{break-inside:avoid;page-break-inside:avoid}
@@ -1091,20 +1089,24 @@ function draw(){
     return {pins, left:anns('left'), right:anns('right'), loose:looseRows, hasPins:!!pinItems.length};
   };
 
-  const wireCallouts=scope=>{
+  // 인쇄 훅(모듈 바깥)에서도 불러야 하므로 전역에 노출한다.
+  const wireCallouts=window.__wireCallouts=scope=>{
     (scope||document).querySelectorAll('.feats figure').forEach(fig=>{
       const stage=fig.querySelector('.stage');
+      // 점선 SVG 는 핀이 있을 때만 생긴다. 하지만 '문구 세로 분산'은 핀이 없어도
+      // 해야 한다 — 여기서 빠져나가면 그 도판의 콜아웃이 한 지점에 포개진다.
       const svg=stage?.querySelector('svg.wires');
-      if(!stage||!svg) return;
+      if(!stage) return;
       const paint=()=>{
-        if(fig.closest('[hidden]')){ svg.innerHTML=''; return; }
         // 인쇄/PDF 는 항상 가로 A4 라 좁은 뷰포트여도 데스크톱 배치로 나간다.
         // 이때 선을 지우면 지면에 점선이 사라지므로 print 중에는 계속 그린다.
         const printing=window.matchMedia('print').matches;
+        // 인쇄에서는 숨은 슬라이드도 CSS 로 펼쳐져 지면에 나간다 — 건너뛰면 안 된다.
+        if(!printing && fig.closest('[hidden]')){ if(svg) svg.innerHTML=''; return; }
         if(!printing && window.matchMedia('(max-width:879px)').matches){ svg.innerHTML=''; return; }
         const sr=stage.getBoundingClientRect();
         if(sr.width<8) return;
-        svg.setAttribute('viewBox',`0 0 ${sr.width} ${sr.height}`);
+        if(svg) svg.setAttribute('viewBox',`0 0 ${sr.width} ${sr.height}`);
         const ph=stage.querySelector('.ph');
         const pr0=ph?ph.getBoundingClientRect():sr;
         const paths=[];
@@ -1177,7 +1179,7 @@ function draw(){
             paths.push(`<path d="${d}" fill="none" stroke="currentColor" stroke-width="0.9" stroke-dasharray="2.5 4.5" stroke-linecap="round" stroke-linejoin="round"/>`);
           });
         });
-        svg.innerHTML=paths.join('');
+        if(svg) svg.innerHTML=paths.join('');
       };
       paint();
       fig.querySelectorAll('img').forEach(im=>{
@@ -1376,6 +1378,22 @@ const readyForPrint=()=>{
 document.getElementById('pdf').addEventListener('click',async()=>{ await readyForPrint(); window.print(); });
 // 브라우저 인쇄 단축키(⌘P)로 들어오는 경우 — 기다릴 수는 없지만 로딩은 시작시킨다
 window.addEventListener('beforeprint',readyForPrint);
+// 인쇄에서는 숨은 슬라이드가 CSS 로 전부 펼쳐진다. 그 도판들은 화면에서 한 번도
+// 보인 적이 없어 콜아웃 위치가 계산되지 않은 상태 — 그대로 인쇄하면 문구가 겹친다.
+// 지면에 나갈 모든 figure 에 대해 배치를 다시 계산한다.
+window.addEventListener('beforeprint',()=>{
+  // hidden 속성이 남아 있으면 display:none 이 이겨 .stage 폭이 0 → 배치 계산이
+  // 조기 반환한다. 속성을 걷어 실제 레이아웃을 만든 뒤 콜아웃을 재계산한다.
+  document.querySelectorAll('.show[hidden]').forEach(el=>{
+    el.dataset.printUnhid='1'; el.hidden=false;
+  });
+  window.__wireCallouts?.(document);
+});
+window.addEventListener('afterprint',()=>{
+  document.querySelectorAll('.show[data-print-unhid]').forEach(el=>{
+    el.hidden=true; delete el.dataset.printUnhid;
+  });
+});
 window.addEventListener('beforeprint',()=>{
   document.title = (lang()==='ko'?'이진희 포트폴리오 — ':'Jinhee Lee Portfolio — ')
     + new Date().toISOString().slice(0,10);
