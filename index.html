@@ -678,7 +678,9 @@ const COPY={
     cAlso:'관련 저장소',
     phase:{plan:'Planning',design:'Design',build:'Build',qa:'QA'}, cFiles:'파일 구성',
     mTools:'AI tools', mStack:'Tech stack', mResp:'Responsive',
-    dev:{desktop:'데스크톱',tablet:'태블릿',mobile:'모바일'},
+    // 기기명은 한국어 모드에서도 영문 유지 — Project info 의 다른 값(AI 툴·기술 스택)이 전부 영문이라
+    // 한글로 쓰면 그 열만 톤이 튄다.
+    dev:{desktop:'Desktop',tablet:'Tablet',mobile:'Mobile'},
     tlH:'작업 타임라인', tlNote:'첫 커밋 – 마지막 커밋 · 프로젝트 {n}개',
     carH:'커리어',
     jobs:[

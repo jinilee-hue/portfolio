@@ -375,7 +375,7 @@
     },
     "tools": [
       "Claude Code",
-      "Veo (배경 영상)"
+      "Veo (ambient video)"
     ],
     "stack_line": [
       "Vanilla JS",
@@ -841,7 +841,7 @@
     },
     "tools": [
       "Claude Code",
-      "Midjourney (캐릭터)",
+      "Midjourney (character)",
       "Nano Banana"
     ]
   },
@@ -1030,7 +1030,7 @@
     },
     "tools": [
       "Claude Code",
-      "이미지 생성 API"
+      "Image generation API"
     ]
   },
   "Phonics-Studio": {
@@ -1342,7 +1342,7 @@
     },
     "tools": [
       "Claude Code",
-      "Midjourney (아트)"
+      "Midjourney (art)"
     ]
   },
   "phonics-wordmashup": {
