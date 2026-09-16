@@ -15,7 +15,7 @@
 - 교육(EdTech) 제품 UI/UX 설계 — 학습자용 인터랙션, 운영자용 콘솔, 캠퍼스 대시보드
 - 디자인 시스템과 디자인 토큰 — 다중 브랜드에서 한 뼈대를 재사용하는 구조
 - 동작하는 프로토타입 제작 — 화면정의서/PPTX 를 클릭 가능한 HTML 프로토타입으로 전환
-- 생성형 AI 를 쓴 디자인 워크플로 — Claude Code, Midjourney, Kling, Gemini
+- 생성형 AI 를 쓴 디자인 워크플로 — Claude Code, Midjourney, Veo, Gemini
 
 ## 작업 철학 (사이트 히어로에 녹여 둠)
 
