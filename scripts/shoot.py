@@ -54,6 +54,14 @@ def url_with_path(base: str, path: str) -> str:
     return base.rstrip("/") + "/" + enc
 
 
+def with_query(url: str, query: str) -> str:
+    q = (query or "").strip().lstrip("?")
+    if not url or not q:
+        return url
+    sep = "&" if "?" in url else "?"
+    return url + sep + q
+
+
 def variance(png_bytes: bytes) -> float:
     """캡처가 사실상 단색인지 판정. 표준편차가 낮으면 빈 화면."""
     try:
@@ -86,18 +94,23 @@ def main() -> int:
         wanted = p.get("shot_devices") or list(DEVICES)
         jobs.append({
             "id": p["id"],
-            "url": url,
+            "url": with_query(url, p.get("shot_query") or ""),
             "wait": int(p.get("shot_wait") or 0),
             "devices": [d for d in wanted if d in DEVICES],
             # 프로토타입 뷰어처럼 셸이 화면을 감싸는 경우, 실제 화면 요소만 잘라낸다
             "selector": (p.get("shot_selector") or "").strip(),
             # 스크롤이 있는 페이지는 전체를 찍어 목업 안에서 흘려보낸다
             "full": bool(p.get("shot_full")),
+            "click": (p.get("shot_click") or "").strip(),
+            "eval": (p.get("shot_eval") or "").strip(),
             "dest": None,
         })
         live = p["auto"].get("live") or ""
         for sc in p.get("scenes") or []:
-            su = url_with_path(live, sc.get("path") or "")
+            su = with_query(
+                url_with_path(live, sc.get("path") or ""),
+                sc.get("query") or p.get("shot_query") or "",
+            )
             if not su:
                 continue
             jobs.append({
@@ -107,9 +120,14 @@ def main() -> int:
                 "devices": [sc.get("device") or "desktop"],
                 "selector": (sc.get("selector") or "").strip(),
                 "full": bool(sc.get("full")),
+                "click": (sc.get("click") or p.get("shot_click") or "").strip(),
+                "eval": (sc.get("eval") or "").strip(),
                 "dest": f"{p['id']}--{sc['id']}.jpg",
             })
 
+    only = os.environ.get("ONLY", "").strip()
+    if only:
+        jobs = [j for j in jobs if j["id"] == only or j["id"].startswith(only + "/")]
     if os.environ.get("SCENES_ONLY"):
         jobs = [j for j in jobs if j.get("dest")]
     ok = changed = 0
@@ -118,7 +136,8 @@ def main() -> int:
     total = sum(len(j["devices"]) for j in jobs)
 
     with sync_playwright() as pw:
-        browser = pw.chromium.launch()
+        chrome = os.environ.get("PLAYWRIGHT_CHROMIUM") or os.environ.get("CHROME_PATH")
+        browser = pw.chromium.launch(executable_path=chrome) if chrome else pw.chromium.launch()
         for job in jobs:
             for dev in job["devices"]:
                 spec = DEVICES[dev]
@@ -137,6 +156,20 @@ def main() -> int:
                         page.wait_for_load_state("networkidle", timeout=NETWORK_IDLE_MS)
                     except Exception:
                         pass  # 영상 루프 등으로 idle 이 안 와도 계속 진행
+                    click = job.get("click") or ""
+                    if click:
+                        try:
+                            page.click(click, timeout=8000)
+                            page.wait_for_timeout(700)
+                        except Exception:
+                            pass
+                    script = job.get("eval") or ""
+                    if script:
+                        try:
+                            page.evaluate(script)
+                            page.wait_for_timeout(500)
+                        except Exception:
+                            pass
                     page.wait_for_timeout(max(SETTLE_MS, job["wait"]))
                     target = page
                     if job["selector"]:

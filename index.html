@@ -5,20 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>이진희 — AI Product Designer · Portfolio</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600&family=Archivo:wdth,wght@75..125,400;75..125,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600&family=Archivo:wdth,wght@75..125,400;75..125,600;75..125,700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
 <style>
   :root{
-    --bg:#0A0A0A; --fg:#F5F3EF; --fg-55:rgba(245,243,239,.78); --fg-28:rgba(245,243,239,.52);
-    --line:rgba(245,243,239,.16); --accent:#2AF0CE;
+    --bg:#0A0A0A; --fg:#F3F6F5; --fg-55:rgba(243,246,245,.78); --fg-28:rgba(243,246,245,.52);
+    --line:rgba(243,246,245,.16); --accent:#2AF0CE;
+    --venn-fill:rgba(255,95,162,.19); --wire:#2AF0CE;
     --disp:'Fraunces',ui-serif,Georgia,serif;
     --grot:'Archivo',system-ui,sans-serif;
     --sans:'Pretendard Variable',Pretendard,-apple-system,sans-serif;
     --ease:cubic-bezier(.19,1,.22,1);
   }
   @media (prefers-color-scheme:light){
-    :root{--bg:#FAFAF8;--fg:#0D0D0C;--fg-55:rgba(13,13,12,.76);--fg-28:rgba(13,13,12,.5);
-      --line:rgba(13,13,12,.16);--accent:#00655A;}
+    :root{--bg:#F7FAF9;--fg:#0D0D0C;--fg-55:rgba(13,13,12,.76);--fg-28:rgba(13,13,12,.5);
+      --line:rgba(13,13,12,.16);--accent:#00655A;
+      --venn-fill:rgba(255,95,162,.17);--wire:#2AF0CE;}
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);
@@ -42,30 +44,55 @@
     header{position:static;mix-blend-mode:normal;flex-wrap:wrap;gap:6px 10px;
       color:var(--fg);background:var(--bg);border-bottom:1px solid var(--line);
       padding:12px clamp(16px,4vw,56px)}
-    header .mark{flex:1 0 100%;font-size:15px}
+    header .mark{flex:1 0 100%;font-size:13px;gap:.32em}
     header nav{flex-wrap:wrap;margin-left:-9px}
-    header a,header button{color:var(--fg);opacity:.75;font-size:10.5px;padding:5px 9px}
+    header a,header button{color:var(--fg);opacity:1;font-size:10.5px;padding:5px 9px;font-weight:700}
   }
   header *{pointer-events:auto}
-  .mark{font-family:var(--disp);font-weight:600;font-size:17px;letter-spacing:-.01em}
+  .mark{display:inline-flex;align-items:center;gap:.36em;height:1.15em;
+    font-family:var(--sans);font-weight:900;font-size:14px;letter-spacing:0;line-height:1}
+  .mark > span{display:inline-flex;align-items:center;justify-content:center;
+    width:1.15em;height:1.15em;flex:none;position:relative;overflow:visible}
+  /* 칸 em은 .mark 기준. 자음 font-size를 같은 요소에 두면 칸이 같이 커져 ㅣ만 작아 보인다.
+     글리프만 키워 잉크 높이를 ㅣ(칸 100%)에 맞춘다. */
+  .mark .c b{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    font-weight:900;font-size:2.2em;line-height:1}
+  .mark .v::before,.mark .h::before{content:"";background:currentColor}
+  .mark .v::before{width:.35em;height:100%}
+  .mark .h::before{width:100%;height:.35em}
   header nav{display:flex;gap:6px;align-items:center}
   header a,header button{font-family:var(--grot);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
-    text-decoration:none;color:#fff;background:none;border:0;cursor:pointer;padding:7px 10px;opacity:.82}
+    text-decoration:none;color:#fff;background:none;border:0;cursor:pointer;padding:7px 10px;
+    font-weight:700;opacity:1}
   header a:hover,header button:hover{opacity:1}
-  header button[aria-pressed=true]{opacity:1;text-decoration:underline;text-underline-offset:4px}
-  header a:focus-visible,header button:focus-visible{outline:2px solid #fff;outline-offset:2px;opacity:1}
+  header a:focus-visible,header button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}
+  @media (prefers-color-scheme:light){
+    header a,header button{color:#000}
+  }
+  #lang{margin-left:4px}
 
   /* 히어로는 짧게. 작품 무대가 첫 화면의 대부분을 가져간다 (Marshall). */
   /* 표지 — 화면을 꽉 채우는 높이. 인쇄에서 A4 표지 한 장으로 쓰는 것과 짝을 이룬다 */
   .open{min-height:calc(100svh - 60px);display:flex;flex-direction:column;justify-content:center;
-    gap:clamp(28px,5svh,64px);padding:max(72px,5vw) 0 clamp(28px,4svh,48px);position:relative}
-  .open .openfoot{margin-top:auto}
+    gap:clamp(28px,5svh,64px);padding:max(72px,5vw) 0;position:relative}
+  .open .openfoot{margin-top:auto;margin-bottom:auto}
   /* 표제(kick+h1)를 남는 공간의 세로 중앙에 — 위아래 auto 마진이 균형을 잡는다 */
   .open .kick{margin-top:auto}
-  .open h1{margin-bottom:auto}
-  .kick{font-family:var(--grot);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+  .open .hero-wrap{margin-bottom:auto}
+  /* 서명 — 표제 위에 흘림체 영문 이름을 크게 겹친다.
+     포스터의 사인처럼: 기울고, 핑크, 표제와 살짝 어긋난 위치.
+     mix-blend 없이 반투명으로 두어 어떤 배경에서도 읽힘을 해치지 않는다. */
+  .hero-wrap{position:relative}
+  .sig-name{position:absolute;left:clamp(-28px,-2vw,0);bottom:-12%;z-index:2;pointer-events:none;
+    font-family:'Caveat',cursive;font-weight:700;
+    font-size:clamp(3.2rem,9vw,7.8rem);line-height:1;color:#FF5FA2;
+    transform:rotate(-6deg) translateX(-12px);opacity:.9;
+    text-shadow:0 2px 24px rgba(255,95,162,.3)}
+  @media(max-width:900px){.sig-name{left:0;bottom:-8%;font-size:clamp(2.4rem,12vw,4.2rem)}}
+  @media print{.sig-name{color:#E14C8B;opacity:.9;text-shadow:none}}
+  .kick{font-family:var(--grot);font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
     color:var(--accent);margin:0 0 18px}
-  h1{font-family:var(--disp);font-weight:300;font-variation-settings:'opsz' 120;
+  h1{font-family:var(--disp);font-weight:400;font-variation-settings:'opsz' 120;
     font-size:clamp(2.8rem,9vw,7.8rem);line-height:.96;letter-spacing:-.028em;margin:0;max-width:16ch;
     text-wrap:balance;word-break:keep-all;overflow-wrap:break-word}
   /* 한글은 라틴 디스플레이 서체에 글리프가 없어 명조로 폴백된다 — 본문 서체로 되돌리고 무게로 대비를 만든다 */
@@ -74,36 +101,47 @@
   :lang(ko) h1 i{font-weight:800}
   :lang(ko) .info h2,:lang(ko) .band h2{font-family:var(--sans);font-weight:600;letter-spacing:-.028em;
     word-break:keep-all}
-  :lang(ko) .counts dd{font-family:var(--sans);font-weight:600}
-  :lang(ko) .mark{font-family:var(--sans);font-weight:700}
+  :lang(ko) .counts dd{font-family:var(--grot);font-weight:600}
   h1 i{font-weight:600;font-style:normal;color:var(--accent)}
   .openfoot{display:flex;flex-wrap:wrap;gap:20px 48px;align-items:end;justify-content:space-between;
-    margin-top:clamp(28px,4vw,52px);border-top:1px solid var(--line);padding-top:20px}
-  .openfoot p{margin:0;max-width:44ch;color:var(--fg-55);font-size:1.05rem;line-height:1.72}
-  .counts{display:flex;gap:clamp(20px,3vw,44px)}
-  .counts div{white-space:nowrap}
-  .counts dt{font-family:var(--grot);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
-    color:var(--fg-28);margin:0 0 4px}
-  .counts dd{margin:0;font-family:var(--disp);font-size:clamp(1.6rem,3vw,2.4rem);line-height:1;
-    font-variant-numeric:tabular-nums}
+    margin-top:clamp(28px,4vw,52px)}
+  .lede{margin:0;max-width:min(46rem,100%);flex:1 1 40rem}
+  .lede p{margin:0 0 .3em;color:var(--fg-55);font-size:1.05rem;font-weight:500;line-height:1.72;word-break:keep-all;
+    text-wrap:pretty;hanging-punctuation:allow-end}
+  .lede p:last-child{margin-bottom:0}
+
+  /* 벤다이어그램 — 네 단계를 다 맡는다는 주장을 겹침의 밝기로 보인다 */
+  .venn{--d:clamp(78px,11.5vw,122px);display:flex;align-items:center;
+    margin-top:clamp(20px,2.6vw,34px)}
+  .venn .vc{flex:none;width:var(--d);height:var(--d);border-radius:50%;
+    background:var(--venn-fill);display:grid;place-items:center}
+  .venn .vc + .vc{margin-left:calc(var(--d) * -.13)}
+  .venn b{font-family:var(--grot);font-size:clamp(9.5px,1.05vw,12px);font-weight:700;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--fg);white-space:nowrap}
+  @media(max-width:640px){.venn{--d:clamp(66px,19vw,92px)}.venn b{letter-spacing:.06em}}
+  .counts{display:flex;gap:clamp(20px,3vw,44px);writing-mode:vertical-rl;align-self:center}
+  .counts div{white-space:nowrap;display:flex;align-items:center;gap:10px}
+  .counts dt{font-family:var(--grot);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--fg-28);margin:0}
+  .counts dd{margin:0;font-family:var(--grot);font-size:14px;font-weight:600;line-height:1;
+    letter-spacing:.06em;color:var(--fg-55);font-variant-numeric:tabular-nums}
 
   /* 작업 — Marshall(한 작품 무대) + Paragraph/Tamburins(기능 화면 콜라주).
      화면이 거의 전면을 먹고, 카피는 옆에 짧게, 액센트는 CTA와 라벨에만 쓴다. */
   .gutter{padding-inline:max(clamp(16px,4vw,56px), calc(50% - 750px + clamp(16px,4vw,56px)))}
-  .room{padding:0;background:#070707;color:#F5F3EF}
-  .pager{position:sticky;top:56px;z-index:22;display:flex;align-items:center;gap:12px;
+  .room{padding:0;background:#070707;color:#F3F6F5}
+  .pager{position:sticky;top:56px;z-index:22;display:flex;align-items:center;justify-content:space-between;gap:16px;
     min-height:52px;background:rgba(7,7,7,.9);backdrop-filter:blur(12px);
-    border-bottom:1px solid rgba(245,243,239,.12)}
-  .pager .count{font-family:var(--grot);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-    color:rgba(245,243,239,.6);flex:none;font-variant-numeric:tabular-nums}
-  .pager .dots{display:flex;gap:5px;flex:1;overflow-x:auto;scrollbar-width:none}
-  .pager .dots::-webkit-scrollbar{display:none}
-  .pager .dots button{flex:none;width:7px;height:7px;padding:0;border:0;border-radius:50%;
-    background:rgba(245,243,239,.42);cursor:pointer}
-  .pager .dots button[aria-current=true]{background:var(--accent);width:18px;border-radius:4px}
+    border-bottom:1px solid rgba(243,246,245,.12)}
+  .pager .label,.pager .count{font-family:var(--grot);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+    font-weight:700;color:#F3F6F5;flex:none}
+  .pager .count{font-variant-numeric:tabular-nums;letter-spacing:.12em}
+  .pager .end{display:flex;align-items:center;gap:16px;flex:none}
   .pager .navb{display:flex;gap:8px;flex:none}
-  .pager .navb button{width:36px;height:36px;background:none;border:1px solid rgba(245,243,239,.42);
-    color:#F5F3EF;cursor:pointer;font-size:16px;line-height:1}
+  .pager .navb button{width:36px;height:36px;padding:0;display:grid;place-items:center;
+    background:none;border:1px solid rgba(243,246,245,.42);color:#F3F6F5;cursor:pointer;
+    border-radius:12px}
+  .pager .navb button svg{width:16px;height:16px;display:block}
   .pager .navb button:hover:not(:disabled){background:var(--accent);border-color:var(--accent);color:#04120F}
   .pager .navb button:disabled{opacity:.25;cursor:default}
   .pager button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -111,41 +149,77 @@
   .show[hidden]{display:none!important}
 
   /* B my map: 기기들이 날고, 제목은 그 옆. 화면이 카피보다 크다. */
+  /* 무대 — 히어로와 같은 풀하이트. 인쇄에서 가로 한 장에 꽉 차는 것과 짝
+     메타(기간·툴·관여도)는 썸네일 아래 좌우로 둔다. */
   .splash{display:grid;gap:clamp(12px,2vw,28px);align-items:center;
-    min-height:auto;padding-block:clamp(16px,3vw,36px) 8px;overflow:hidden}
-  @media(min-width:960px){.splash{grid-template-columns:minmax(0,1.35fr) minmax(260px,.7fr)}}
+    min-height:calc(100svh - 60px);padding-block:clamp(16px,3vw,36px) 28px;overflow-x:hidden}
   .copy{position:relative;z-index:2;padding-bottom:24px}
-  .copy .num{font-family:var(--grot);font-size:13px;letter-spacing:.18em;color:rgba(245,243,239,.6);
+  @media(min-width:960px){
+    .splash{grid-template-columns:minmax(0,1.35fr) minmax(260px,.7fr);
+      grid-template-rows:auto auto;grid-template-areas:"fly copy" "meta meta";
+      align-items:start;align-content:start}
+    .fly{grid-area:fly}
+    .copy{grid-area:copy;align-self:center;padding-bottom:0}
+    .splash-meta{grid-area:meta}
+  }
+  .copy .num{font-family:var(--grot);font-size:13px;font-weight:600;letter-spacing:.18em;color:rgba(243,246,245,.78);
     margin:0 0 10px;font-variant-numeric:tabular-nums}
-  .copy .kick{color:var(--accent);margin:0 0 10px;font-size:11.5px}
+  .copy .kick{color:#fff;margin:0 0 10px;font-size:12px;font-weight:600}
   .copy h2{font-family:var(--sans);font-weight:800;font-size:clamp(2.1rem,4.4vw,4.2rem);
     letter-spacing:-.04em;line-height:1.02;margin:0 0 16px;word-break:keep-all;text-wrap:balance}
-  .copy .sum{margin:0;color:rgba(245,243,239,.82);max-width:36ch;font-size:.98rem;word-break:keep-all;
+  .copy .sum{margin:0;color:rgba(243,246,245,.92);max-width:36ch;font-size:1.02rem;word-break:keep-all;
     display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
-  .play{display:inline-flex;align-items:center;gap:14px;margin:22px 0 22px;text-decoration:none;color:inherit}
-  .play b{font-family:var(--grot);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
-    background:var(--accent);color:#04120F;padding:11px 22px}
-  .play span{font-family:var(--grot);font-size:11px;letter-spacing:.08em;color:rgba(245,243,239,.66)}
-  .facts{margin:0;display:grid;gap:8px}
-  .facts div{display:grid;grid-template-columns:6.8rem 1fr;gap:10px;align-items:baseline}
-  .facts dt{margin:0;font-family:var(--grot);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
-    color:rgba(245,243,239,.58)}
-  .facts dd{margin:0;font-size:13px;color:rgba(245,243,239,.78);font-variant-numeric:tabular-nums}
+  .play{display:inline-flex;align-items:center;margin:22px 0 22px;text-decoration:none;color:inherit}
+  .play b{display:inline-flex;align-items:center;gap:14px;
+    font-family:var(--grot);font-size:18px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    background:#FF5FA2;color:#fff;padding:12px 12px 12px 29px;border-radius:999px}
+  .play-go{display:inline-flex;align-items:center;justify-content:center;flex:none;
+    width:38px;height:38px;border-radius:50%;background:#fff;color:#FF5FA2;
+    box-shadow:0 5px 12px rgba(0,0,0,.22)}
+  .play-go svg{width:16px;height:16px;display:block;margin-left:1px}
+  .facts{margin:0;display:grid;gap:10px}
+  .facts div{display:grid;grid-template-columns:8.2rem 1fr;gap:10px;align-items:baseline}
+  .facts dt{margin:0;font-family:var(--grot);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+    font-weight:600;color:rgba(243,246,245,.78)}
+  .facts dd{margin:0;font-size:15px;font-weight:500;color:#F3F6F5;font-variant-numeric:tabular-nums;
+    word-break:keep-all}
 
   /* 관여도 게이지 — 단계별 0~100 독립. 전부 100이면 네 줄이 꽉 찬다 */
+  .splash-meta{display:grid;gap:clamp(20px,2.6vw,34px) clamp(32px,5.2vw,88px);align-items:start;
+    padding-top:4px}
+  @media(min-width:720px){
+    .splash-meta{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
+      border-top:1px solid rgba(243,246,245,.22);
+      margin-top:clamp(24px,3.6vw,56px);padding-top:clamp(24px,2.8vw,40px)}
+    .splash-meta .overview{grid-column:1/-1}
+  }
+  /* Overview·Project info·Contribution 한 줄. 산문이 들어가는 첫 열을 제일 넓게 */
+  @media(min-width:1100px){
+    .splash-meta.m3{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr) minmax(0,.95fr)}
+    .splash-meta.m3 .overview{grid-column:auto}
+  }
+  .overview p:not(.k){margin:0 0 .7em;font-size:.93rem;line-height:1.7;
+    color:rgba(243,246,245,.82);word-break:keep-all;text-wrap:pretty}
+  .overview p:last-child{margin-bottom:0}
+  .splash-meta .k{font-family:var(--grot);font-size:12.5px;letter-spacing:.14em;
+    text-transform:uppercase;font-weight:700;color:#F3F6F5;margin:0 0 12px}
   .contrib{margin-top:18px}
-  .contrib .k{margin:0 0 9px}
+  .splash-meta .contrib{margin-top:0}
   .cgrid{display:grid;grid-template-columns:auto 1fr auto;gap:8px 12px;align-items:center;
     max-width:330px}
-  .cg-l{font-family:var(--grot);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
-    color:rgba(245,243,239,.62);white-space:nowrap}
+  .splash-meta .cgrid{max-width:none}
+  .cg-l{font-family:var(--grot);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+    font-weight:600;color:#F3F6F5;white-space:nowrap}
   .cg-t{position:relative;height:6px;border-radius:3px;overflow:hidden;
-    background:rgba(245,243,239,.1)}
-  .cg-t i{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:3px}
-  .cg-v{font-family:var(--grot);font-size:12px;font-weight:600;color:rgba(245,243,239,.88);
+    background:rgba(243,246,245,.1)}
+  .cg-t i{position:absolute;left:0;top:0;bottom:0;background:var(--wire);border-radius:3px}
+  .cg-v{font-family:var(--grot);font-size:13px;font-weight:700;color:#F3F6F5;
     font-variant-numeric:tabular-nums;min-width:3.4ch;text-align:right}
 
-  .fly{position:relative;height:min(68svh,620px)}
+  .fly{position:relative;
+    --neck:clamp(26px,3.2vw,44px);--base:9px;--stand:calc(var(--neck) + var(--base));
+    --head:max(calc(116px - clamp(16px,3vw,36px)),7.4vh);  /* sticky 페이저 바(아래끝 108px) 회피 */
+    padding-top:var(--head);padding-bottom:var(--stand)}
   .frame,.frame *{box-sizing:border-box}
   .frame{display:block;position:absolute}
   .shot{position:relative;overflow:hidden;display:block;width:100%;background:#111}
@@ -153,73 +227,107 @@
   .fly .d,.fly .t,.fly .m{padding:9px;border-radius:22px;background:#0e0e0e;
     box-shadow:0 24px 56px rgba(0,0,0,.48), inset 0 0 0 1px rgba(255,255,255,.14);
     transform:none}
-  .fly .d{width:78%;left:0;top:14%;z-index:1;
-    padding:10px 10px 18px;border-radius:12px}
+  .fly .d{position:relative;width:78%;max-width:calc((54svh - 28px) / .625 + 20px);
+    z-index:1;padding:10px 10px 18px;border-radius:12px}
   .fly .d .shot{aspect-ratio:1440/900;border-radius:4px}
-  .fly .t{width:28%;right:0;left:auto;top:2%;z-index:3}
+  /* 모니터 목·받침. 없으면 16:10 가로 패드와 실루엣이 같아진다 */
+  .fly .d::before,.fly .d::after{content:'';position:absolute;left:50%;
+    transform:translateX(-50%);pointer-events:none}
+  .fly .d::before{top:100%;width:13%;height:var(--neck);
+    background:linear-gradient(90deg,#101010,#2c2c2c 28%,#343434 52%,#232323 78%,#101010);
+    clip-path:polygon(15% 0,85% 0,100% 100%,0 100%)}
+  .fly .d::after{top:calc(100% + var(--neck));width:34%;height:var(--base);
+    border-radius:2px 2px 5px 5px;background:linear-gradient(180deg,#3a3a3a,#161616);
+    box-shadow:0 12px 24px rgba(0,0,0,.5)}
+  .fly .t{width:28%;right:0;left:auto;top:auto;bottom:0;z-index:3}
   .fly .t .shot{aspect-ratio:834/1112;border-radius:12px}
   .fly .m{width:18%;right:24%;left:auto;bottom:0;z-index:2}
   .fly .m .shot{aspect-ratio:390/844;border-radius:12px}
   @media(max-width:959px){
-    .fly{height:58vw;order:-1}
-    .fly .d{width:82%;top:18%}
+    .fly{order:-1;--neck:clamp(20px,3vw,34px);--base:7px;
+      --head:max(calc(116px - clamp(16px,3vw,36px)),6vh)}
+    .fly .d{width:82%;max-width:none}
+    .fly .d::after{width:30%}
     .fly .t{width:30%}
     .fly .m{width:20%;right:26%}
   }
 
-  /* 보드: 캡처와 '이 화면에서' 설명을 좌우로 붙인다. 블록마다 좌우를 뒤집는다. */
-  .board{background:#F3F1EC;color:#16140F;border-radius:28px 28px 0 0;margin-top:-28px;
+  /* 보드: 화면 가운데, 기능 제목은 좌우에서 점선으로 가리킨다.
+     보드도 녹색 계열. 갈색·웜 페이퍼는 쓰지 않는다. 핑크는 서명(.sig-name)만. */
+  .board{background:#1A201E;color:#E9F1EE;border-radius:0;margin-top:0;
     position:relative;z-index:4;padding:clamp(40px,5vw,72px) 0 clamp(48px,6vw,80px)}
-  .board .k{font-family:var(--grot);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-    color:#8A3210;margin:0 0 22px}
-  .feats{display:grid;gap:clamp(36px,5vw,72px)}
-  .feats figure{margin:0;display:grid;gap:18px 40px;align-items:start}
-  @media(min-width:800px){
-    .feats figure{grid-template-columns:minmax(0,1.45fr) minmax(220px,.9fr)}
-    .feats figure:nth-child(even){grid-template-columns:minmax(220px,.9fr) minmax(0,1.45fr)}
-    .feats figure:nth-child(even) .ph{order:2}
-  }
-  .feats .ph{display:block;padding:8px;border-radius:18px;background:#fff;
-    box-shadow:0 18px 40px rgba(20,18,12,.14)}
-  .feats .ph .shot{aspect-ratio:16/10;border-radius:12px;background:#eee}
-  .feats .ph .shot.is-portrait{aspect-ratio:9/16}
-  .feats figcaption .k{margin:0 0 10px}
-  .feats figcaption b{display:block;font-size:clamp(1.2rem,2.2vw,1.7rem);font-weight:700;
+  .board .k{font-family:var(--grot);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--wire);margin:0 0 22px}
+  .feats{display:grid;gap:clamp(48px,6vw,96px)}
+  .feats figure{margin:0;position:relative;display:grid;gap:18px}
+  .feats .stage{position:relative;display:grid;
+    grid-template-columns:minmax(160px,1fr) minmax(0,auto) minmax(160px,1fr);
+    gap:0 6px;align-items:stretch}
+  .feats .ph{display:block;position:relative;padding:10px;border-radius:14px;background:#0e0e0e;
+    box-shadow:0 18px 40px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.14);
+    grid-column:2;align-self:center}
+  .feats .ph .shot img{border-radius:3px}
+  /* 데스크톱 — 히어로와 같은 목·받침. margin 으로 캡션과 겹치지 않게 자리를 비운다 */
+  .feats .ph-desktop{padding:10px 10px 18px;border-radius:12px;
+    --neck:40px;--base:9px;margin-bottom:calc(var(--neck) + var(--base) + 10px)}
+  .feats .ph-desktop::before,.feats .ph-desktop::after{content:'';position:absolute;
+    left:50%;transform:translateX(-50%);pointer-events:none}
+  .feats .ph-desktop::before{top:100%;width:13%;height:var(--neck);
+    background:linear-gradient(90deg,#101010,#2c2c2c 28%,#343434 52%,#232323 78%,#101010);
+    clip-path:polygon(15% 0,85% 0,100% 100%,0 100%)}
+  .feats .ph-desktop::after{top:calc(100% + var(--neck));width:34%;height:var(--base);
+    border-radius:2px 2px 5px 5px;background:linear-gradient(180deg,#3a3a3a,#161616);
+    box-shadow:0 12px 22px rgba(0,0,0,.5)}
+  .feats .ph-tablet{padding:11px;border-radius:20px}
+  .feats .ph-tablet .shot img{border-radius:10px}
+  .feats .ph-mobile{padding:9px;border-radius:24px}
+  .feats .ph-mobile .shot img{border-radius:16px}
+  .feats .ph .shot{position:relative;display:block;width:fit-content;max-width:100%;
+    margin-inline:auto;aspect-ratio:auto;border-radius:0;background:#0d100f;overflow:visible}
+  .feats .ph .shot img{width:auto;max-width:100%;height:auto;max-height:min(78vh,860px);
+    object-fit:contain;object-position:top center}
+  .feats .ph .shot.is-portrait img{max-height:min(82vh,920px)}
+  .feats .pins{position:absolute;inset:0;margin:0;padding:0;list-style:none;pointer-events:none}
+  .feats .pins li,.feats .pins li::marker{list-style:none}
+  .feats .pins li::marker{content:none}
+  .feats .pins li{position:absolute;width:10px;height:10px;transform:translate(-50%,-50%);
+    border-radius:50%;background:var(--wire);
+    box-shadow:0 0 0 3px rgba(42,240,206,.3);
+    box-shadow:0 0 0 3px color-mix(in srgb, var(--wire) 30%, transparent)}
+  .feats svg.wires{color:var(--wire);position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
+    overflow:visible;z-index:1}
+  .feats .anns{position:relative;z-index:2;margin:0;padding:0;list-style:none}
+  .feats .anns.left{grid-column:1}
+  .feats .anns.right{grid-column:3}
+  .feats .anns li{position:absolute;left:0;right:0;display:flex;align-items:center;gap:10px}
+  .feats .anns.left li{justify-content:flex-end;text-align:right;flex-direction:row-reverse}
+  .feats .anns.right li{justify-content:flex-start;text-align:left}
+  .feats .anns .adot{width:8px;height:8px;border-radius:50%;background:var(--wire);flex:none;
+    box-shadow:0 0 0 3px rgba(42,240,206,.3);
+    box-shadow:0 0 0 3px color-mix(in srgb, var(--wire) 30%, transparent)}
+  .feats .anns .ttl{font-size:.9rem;font-weight:700;line-height:1.4;letter-spacing:-.02em;
+    color:rgba(233,241,238,.94);word-break:keep-all;max-width:9em;text-wrap:balance}
+  .feats figcaption > b{display:block;font-size:clamp(1.2rem,2.2vw,1.7rem);font-weight:700;
     letter-spacing:-.03em;line-height:1.2;margin:0 0 10px;word-break:keep-all}
   .feats figcaption .note{display:block;font-size:.95rem;line-height:1.65;
-    color:rgba(22,20,15,.86);word-break:keep-all;max-width:44ch}
-  .feats figcaption ol{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:6px}
-  .feats figcaption li{display:grid;grid-template-columns:2rem 1fr;gap:8px;
-    font-size:.92rem;color:rgba(22,20,15,.84)}
-  .feats figcaption li b{font-family:var(--grot);font-weight:400;font-size:11px;
-    letter-spacing:.04em;color:rgba(22,20,15,.56);margin:0;line-height:1.5}
+    color:rgba(233,241,238,.80);word-break:keep-all;max-width:62ch}
+  .feats figcaption ol.loose{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+  .feats figcaption ol.loose li{font-size:.92rem;font-weight:700;color:rgba(233,241,238,.82)}
+  @media(max-width:879px){
+    .feats .stage{display:flex;flex-direction:column;gap:16px}
+    .feats .ph{grid-column:auto;order:-1}
+    .feats .anns{display:contents}
+    .feats .anns li{position:static;transform:none!important;top:auto!important;
+      justify-content:flex-start;text-align:left;flex-direction:row;order:var(--i,0)}
+    .feats svg.wires{display:none}
+  }
 
-  .brief{display:grid;gap:18px;margin-top:clamp(22px,3vw,36px);padding-top:22px;
-    border-top:1px solid rgba(22,20,15,.12)}
-  @media(min-width:800px){.brief{grid-template-columns:1.2fr 1fr}}
-  .brief h3{font-family:var(--grot);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-    color:#8A3210;margin:0 0 8px}
-  .brief p{margin:0;font-size:.97rem;line-height:1.72;color:rgba(22,20,15,.86);word-break:keep-all}
-  .brief ol{margin:0;padding:0;list-style:none;display:grid;gap:6px}
-  .brief li{display:grid;grid-template-columns:2rem 1fr;gap:8px;font-size:.94rem;color:rgba(22,20,15,.84)}
-  .brief li b{font-family:var(--grot);font-weight:400;font-size:12px;color:rgba(22,20,15,.56)}
-
-  /* 2) 관여도 — 단계별 0~100 독립 게이지. 혼자 다 했으면 전부 100. */
-  .cgrid{display:grid;grid-template-columns:auto 1fr auto;gap:7px 12px;align-items:center;
-    margin:14px 0 4px;max-width:340px}
-  .cg-l{font-family:var(--grot);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
-    color:var(--fg-28);white-space:nowrap}
-  .cg-t{position:relative;height:6px;border-radius:3px;overflow:hidden;
-    background:color-mix(in oklab,var(--fg) 9%,transparent)}
-  .cg-t i{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:3px}
-  .cg-v{font-family:var(--grot);font-size:12px;font-weight:600;color:var(--fg-55);
-    font-variant-numeric:tabular-nums;min-width:3.2ch;text-align:right}
 
   /* 3) 툴 · 반응형 */
   .trows{display:flex;flex-direction:column;gap:5px;margin-top:12px}
   .trow{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 8px;
-    font-family:var(--grot);font-size:12px;letter-spacing:.02em}
-  .trow-l{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-28);
+    font-family:var(--grot);font-size:12px;font-weight:500;letter-spacing:.02em}
+  .trow-l{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-28);
     min-width:5.5em}
   .trow b{font-weight:500;color:var(--fg-55)}
   .trow .sep{width:3px;height:3px;border-radius:50%;background:var(--fg-28);
@@ -229,18 +337,119 @@
   .ic{width:11px;height:11px;flex:none;opacity:.5;stroke:currentColor;fill:none;stroke-width:1.6}
   .meta span{display:inline-flex;align-items:center;gap:5px}
 
-  .band{border-top:1px solid var(--line);padding:clamp(48px,8vw,100px) 0;
-    margin-top:clamp(40px,6vw,80px)}
-  .band h2{font-family:var(--disp);font-weight:300;font-size:clamp(1.6rem,4vw,2.8rem);
+  .band{padding:clamp(48px,5vw,80px) 0}
+  #career{margin-top:clamp(24px,4vw,56px)}
+  .band + .band{margin-top:0}
+  .band h2{font-family:var(--disp);font-weight:400;font-size:clamp(1.6rem,4vw,2.8rem);
     letter-spacing:-.02em;margin:0 0 clamp(24px,3vw,44px);max-width:20ch}
-  .prin{display:grid;gap:clamp(22px,3vw,44px)}
-  @media(min-width:900px){.prin{grid-template-columns:repeat(2,1fr)}}
-  .prin article{border-top:1px solid var(--line);padding-top:14px}
-  .prin h3{font-family:var(--grot);font-weight:600;font-size:1.04rem;letter-spacing:.005em;margin:0 0 10px}
-  .prin p{margin:0;color:var(--fg-55);font-size:.99rem;line-height:1.72;word-break:keep-all}
-  footer{border-top:1px solid var(--line);padding:30px 0 64px;color:var(--fg-28);font-size:13.5px;
-    display:flex;flex-wrap:wrap;gap:14px 36px;justify-content:space-between;align-items:baseline}
-  footer .colo{max-width:58ch;line-height:1.72;word-break:keep-all}
+  .ctime{list-style:none;margin:0;padding:0;display:grid;gap:clamp(28px,4vw,44px)}
+  .ctime > li{display:grid;grid-template-columns:1.25rem minmax(0,1fr);column-gap:16px}
+  .ctime .rail{grid-column:1;grid-row:1/-1}
+  .ctime .cell{grid-column:2;min-width:0}
+  .ctime .when{margin:0;font-family:var(--grot);font-size:12px;font-weight:600;letter-spacing:.08em;
+    font-variant-numeric:tabular-nums;color:var(--fg-28);padding-top:4px;line-height:1.4}
+  .ctime li.now .when{color:var(--accent)}
+  .ctime .rail{position:relative}
+  .ctime .rail::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;
+    background:var(--line);transform:translateX(-50%)}
+  .ctime > li:first-child .rail::before{top:9px}
+  .ctime > li:last-child .rail::before{bottom:auto;height:9px}
+  .ctime .dot{position:absolute;left:50%;top:7px;width:9px;height:9px;border-radius:50%;
+    background:rgba(243,246,245,.38);transform:translateX(-50%);box-shadow:0 0 0 4px var(--bg)}
+  .ctime li.now .dot{background:var(--accent)}
+  /* 가로 타임라인 — 가운데 레일, 위아래 교차 배치.
+     subgrid 로 모든 항목이 같은 행 격자를 공유해야 레일 높이가 하나로 맞는다. */
+  @media screen and (min-width:900px){
+    .ctime{grid-auto-flow:column;grid-auto-columns:clamp(290px,23vw,352px);
+      grid-template-rows:auto auto auto;gap:0;
+      overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;
+      padding-bottom:14px;scrollbar-width:thin;scrollbar-color:var(--fg-28) transparent}
+    .ctime > li{grid-row:1/-1;grid-template-rows:subgrid;grid-template-columns:none;
+      column-gap:0;scroll-snap-align:start}
+    .ctime .rail{grid-row:2;grid-column:1;width:100%;height:1px;background:var(--line)}
+    .ctime .rail::before{content:none}
+    .ctime .dot,.ctime .dot-b{left:0;top:50%;transform:translate(0,-50%)}
+    .ctime .dot-b:hover{transform:translate(0,-50%) scale(1.12)}
+    .ctime .cell{grid-row:1;grid-column:1;align-self:end;padding:0 26px 22px 0}
+    .ctime > li:nth-child(even) .cell{grid-row:3;align-self:start;padding:22px 26px 0 0}
+    .ctime .note,.ctime .jgi li{max-width:none}
+    .ctime::-webkit-scrollbar{height:6px;background:transparent}
+    .ctime::-webkit-scrollbar-track{background:transparent;border:0;box-shadow:none}
+    .ctime::-webkit-scrollbar-thumb{background:var(--fg-28);border-radius:3px}
+  }
+  .ctime h3{margin:0;font-family:var(--sans);font-weight:700;font-size:clamp(1.15rem,2vw,1.45rem);
+    letter-spacing:-.03em;line-height:1.25}
+  .ctime .org{margin:4px 0 0;font-size:.98rem;color:var(--fg-55)}
+  .ctime .note{margin:10px 0 0;max-width:52ch;font-size:.97rem;line-height:1.7;color:var(--fg-55);word-break:keep-all}
+  .ctime .when .span{display:block;margin-top:3px;color:var(--accent);letter-spacing:.04em}
+  .jgrp{margin:20px 0 0}
+  .jgl{margin:0 0 8px;font-size:.95rem;font-weight:600;color:var(--fg);word-break:keep-all}
+  .jgi{margin:0;padding:0;list-style:none;display:grid;gap:5px}
+  .jgi li{position:relative;padding-left:13px;font-size:.92rem;line-height:1.6;
+    color:var(--fg-55);word-break:keep-all}
+  .jgi li::marker{content:none}
+  .jgi li::before{content:'';position:absolute;left:0;top:.72em;width:6px;height:1px;
+    background:var(--fg-28)}
+
+  /* 경력 상세 버튼 · 대화상자 */
+  /* 레일 위의 + 버튼 — 이걸 누르면 상세가 열린다 */
+  .dot-b{position:absolute;left:50%;top:7px;width:25px;height:25px;padding:0;
+    transform:translate(-50%,0);border:1px solid var(--line);border-radius:50%;
+    background:var(--bg);color:var(--fg-55);cursor:pointer;
+    display:grid;place-items:center;line-height:0;
+    transition:border-color .2s var(--ease),color .2s var(--ease),transform .2s var(--ease)}
+  .dot-b svg{width:13px;height:13px;display:block}
+  .dot-b:hover{border-color:var(--accent);color:var(--accent);transform:translate(-50%,0) scale(1.12)}
+  .dot-b:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .ctime li.now .dot-b{border-color:var(--accent);color:var(--accent)}
+  .jdlg{border:0;padding:0;background:transparent;width:min(92vw,620px);max-width:none;
+    color:var(--fg)}
+  .jdlg:focus,.jdlg:focus-visible,.jdlg-in:focus{outline:none}
+  .jdlg::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(2px)}
+  .jdlg-in{position:relative;background:var(--bg);border:1px solid var(--line);border-radius:16px;
+    padding:clamp(24px,3.4vw,38px);max-height:min(82vh,780px);overflow:auto;
+    box-shadow:0 30px 70px rgba(0,0,0,.35)}
+  .jdlg-x{position:absolute;top:14px;right:14px;width:34px;height:34px;display:grid;
+    place-items:center;border:0;border-radius:50%;background:transparent;color:var(--fg-55);
+    cursor:pointer}
+  .jdlg-x:hover{background:var(--line);color:var(--fg)}
+  .jdlg-x svg{width:17px;height:17px}
+  .jdlg-w{margin:0 0 10px;font-family:var(--grot);font-size:12px;font-weight:600;
+    letter-spacing:.08em;font-variant-numeric:tabular-nums;color:var(--accent)}
+  .jdlg h3{margin:0;font-family:var(--sans);font-weight:700;font-size:clamp(1.25rem,2.4vw,1.6rem);
+    letter-spacing:-.03em;padding-right:40px}
+  .jdlg .org{margin:5px 0 0;font-size:.98rem;color:var(--fg-55)}
+  .jdlg-n{margin:16px 0 0;font-size:.97rem;line-height:1.7;color:var(--fg-55);word-break:keep-all}
+  .jdlg .jgrp:first-of-type{margin-top:22px}
+
+  /* 넓은 화면에서는 8개를 한 화면에 — 열 폭을 균등 분할해 가로 스크롤을 없앤다 */
+  @media screen and (min-width:1180px){
+    .ctime{grid-auto-columns:minmax(0,1fr);overflow-x:visible;padding-bottom:0}
+    /* 그리드 항목의 기본 min-width:auto 를 풀어야 1fr 이 실제로 줄어든다 */
+    .ctime > li,.ctime .cell{min-width:0}
+    .ctime .cell,.ctime > li:nth-child(even) .cell{padding-right:13px}
+    .ctime .when{font-size:clamp(9.5px,.78vw,11px);letter-spacing:.04em}
+    .ctime h3{font-size:clamp(.82rem,1.05vw,1.16rem);letter-spacing:-.035em;word-break:keep-all}
+    .ctime .org{font-size:clamp(.74rem,.62vw,.86rem);margin-top:3px;word-break:keep-all}
+  }
+
+  /* 자격 · 수상 */
+  .creds{display:grid;gap:clamp(36px,4.5vw,72px)}
+  .creds h2{margin-bottom:clamp(20px,2.4vw,32px)}
+  @media(min-width:800px){.creds{grid-template-columns:1fr 1fr}}
+  .credl{list-style:none;margin:0;padding:0;display:grid;gap:18px}
+  .credl li{display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:16px;align-items:baseline}
+  .cwhen{margin:0;font-family:var(--grot);font-size:12px;font-weight:600;letter-spacing:.08em;
+    font-variant-numeric:tabular-nums;color:var(--fg-28)}
+  .credl b{font-size:1rem;font-weight:700;letter-spacing:-.02em}
+  .cby{display:block;margin-top:3px;font-size:.9rem;color:var(--fg-55)}
+  .cnote{margin:6px 0 0;font-size:.9rem;color:var(--fg-55);word-break:keep-all}
+  .ctime .tags{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0;padding:0;list-style:none}
+  .ctime .tags li{font-family:var(--grot);font-size:11px;font-weight:500;letter-spacing:.06em;padding:5px 10px;
+    border:1px solid var(--line);border-radius:999px;color:var(--fg-55)}
+  @media (prefers-color-scheme:light){
+    .ctime .dot{background:rgba(13,13,12,.28)}
+  }
   .skip{position:absolute;left:-9999px}
   .skip:focus{left:12px;top:12px;z-index:99;background:var(--accent);color:#04120F;padding:10px 14px}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -249,9 +458,10 @@
      브라우저의 '대상: PDF로 저장' 으로 벡터 텍스트 PDF 가 나온다.
      화면용 다크 테마를 흰 종이로 뒤집고, 케이스 스터디는 전부 펼쳐 인쇄한다. */
   @media print{
-    /* 가로(A4 landscape) 전용. 구성: 표지 1장 + 프로젝트당 1~2장(무대/보드) + 원칙 1장 */
+    /* 가로(A4 landscape) 전용. 구성: 표지 1장 + 프로젝트당 1~2장(무대/보드) + 커리어 */
     @page{size:A4 landscape;margin:9mm 12mm}
-    :root{--bg:#fff;--fg:#000;--fg-55:#333;--fg-28:#666;--line:#c9c9c9;--accent:#00655A}
+    :root{--bg:#fff;--fg:#000;--fg-55:#333;--fg-28:#666;--line:#c9c9c9;--accent:#00655A;
+      --venn-fill:rgba(255,95,162,.18)}
     html,body{background:#fff!important;color:#000!important;font-size:12px}
     header,.pager,.play,.no-print{display:none!important}
     .wrap{max-width:none;padding:0}
@@ -262,7 +472,10 @@
     .open h1{font-size:44pt!important;line-height:1.06;color:#000!important}
     .open .kick{font-size:11pt;color:#00655A}
     .openfoot{border-top:1px solid #ccc;padding-top:6mm;margin-top:12mm}
-    .openfoot p{font-size:11pt;line-height:1.65;max-width:none;color:#333}
+    .lede{max-width:none}
+    .lede p{font-size:11pt;line-height:1.65;max-width:none;color:#333}
+    .venn{--d:22mm;margin-top:4mm}
+    .venn b{color:#10211C!important;font-size:6.5pt;letter-spacing:.06em}
     .counts dd{font-size:20pt;color:#000}
     .counts dt{color:#888}
 
@@ -273,18 +486,29 @@
     .show{background:#fff!important;color:#000!important}
     .splash{background:#fff!important}
     .copy,.copy *{color:#111!important}
-    .copy .kick,.contrib .k{color:#00655A!important}
+    .copy .kick,.splash-meta .k{color:#00655A!important}
     .copy .num,.facts dt,.cg-l{color:#888!important}
     .facts dd,.cg-v{color:#222!important}
     .cg-t{background:#e8e8e8!important}
     .cg-t i{background:#00655A!important}
 
     /* 무대(기기 목업+개요): 프로젝트당 첫 장 */
-    .splash{display:grid!important;grid-template-columns:1.35fr 1fr;gap:8mm;
-      align-items:center;min-height:calc(210mm - 18mm);
+    .splash{display:grid!important;grid-template-columns:1.35fr 1fr;
+      grid-template-rows:1fr auto;grid-template-areas:"fly copy" "meta meta"!important;
+      gap:6mm;align-items:stretch;min-height:calc(210mm - 18mm);
       page-break-before:always;page-break-after:always;break-inside:avoid}
-    .fly{position:relative;height:120mm;order:0}
+    .fly{position:relative;grid-area:fly;height:auto!important;min-height:95mm;order:0;
+      --neck:6mm;--base:1.2mm;--head:0mm}
+    .fly .d{max-width:none!important}
+    .copy{grid-area:copy;align-self:center}
+    .splash-meta{grid-area:meta;border-top:1px solid #ddd;margin-top:4mm;padding-top:5mm;gap:5mm 12mm}
+    .splash-meta.m3{grid-template-columns:1.5fr 1fr .95fr!important}
+    .splash-meta.m3 .overview{grid-column:auto!important}
+    .overview p:not(.k){color:#333!important;font-size:8.5pt;line-height:1.55;margin-bottom:.5em}
+    .splash-meta .cgrid{max-width:80mm}
     .fly .d,.fly .t,.fly .m{box-shadow:none;background:#eee;border:1px solid #ddd}
+    .fly .d::before{background:#ddd!important}
+    .fly .d::after{background:#ccc!important;box-shadow:none!important}
     .shot{background:#f4f4f4}
     .shot img{filter:none!important;transform:none!important}
     .copy .num{color:#999}
@@ -293,35 +517,60 @@
     .copy .sum{font-size:10.5pt;color:#333;max-width:none}
     .facts dt{color:#888;font-size:7.5pt}
     .facts dd{color:#222;font-size:9.5pt}
-    .contrib .k{color:#00655A;font-size:8pt}
+    .splash-meta .k{color:#00655A;font-size:8pt}
     .cg-l{color:#777}
     .cg-t{background:#e8e8e8}
     .cg-t i{background:#00655A}
     .cg-v{color:#222}
 
     /* 보드(화면 상세): 이어지는 장들 — 그림 단위로만 잘리게 */
-    .board{background:#fff;color:#000;border-radius:0;margin:0;padding:0}
-    .board .k{color:#00655A;font-size:8pt}
+    .board{background:#fff;color:#000;--wire:#00655A;border-radius:0;margin:0;padding:0}
+    .board .k{color:#00655A;font-size:8pt;break-after:avoid;page-break-after:avoid}
     .feats{gap:6mm}
-    .feats figure{break-inside:avoid;grid-template-columns:1.4fr 1fr!important;gap:5mm}
-    .feats figure:nth-child(even) .ph{order:0}
-    .feats .ph{box-shadow:none;border:1px solid #ddd;background:#fff;padding:1.5mm}
-    .feats figcaption b{font-size:12pt;color:#000}
+    .feats figure{break-inside:avoid;gap:5mm}
+    .feats .ph .shot img{max-height:118mm!important}
+    .feats .ph .shot.is-portrait img{max-height:128mm!important}
+    .feats .stage{grid-template-columns:minmax(28mm,1fr) auto minmax(28mm,1fr)!important;gap:0 2mm}
+    .feats .ph{box-shadow:none;border:1px solid #ccc;background:#e9e9e9;padding:1.5mm}
+    .feats .ph-desktop{--neck:6mm;--base:1.2mm;margin-bottom:9mm;padding:1.5mm 1.5mm 3mm}
+    .feats .ph-desktop::before{background:#ddd!important}
+    .feats .ph-desktop::after{background:#ccc!important;box-shadow:none!important}
+    .feats .pins li{box-shadow:0 0 0 1.5pt #fff;background:#00655A}
+    .feats .anns .ttl{font-size:8pt;color:#222}
+    .feats .anns .adot{box-shadow:0 0 0 2pt #fff;background:#00655A}
+    .feats .ph .shot{background:#f4f4f4}
+    .feats figcaption > b{font-size:12pt;color:#000}
     .feats figcaption .note{font-size:9pt;color:#333}
-    .feats figcaption li{font-size:8.5pt;color:#333}
-    .feats figcaption li b{font-size:8pt;color:#888}
-    .brief{break-inside:avoid;border-top:1px solid #ddd}
-    .brief h3{color:#00655A;font-size:8pt}
-    .brief p{font-size:9pt;color:#333}
-    .brief li{font-size:8.5pt;color:#333}
-    .brief li b{color:#888}
+    .feats figcaption ol.loose li{font-size:8.5pt;color:#333}
 
-    /* 원칙 + 푸터 */
+    /* 커리어 + 푸터 */
     .band{page-break-before:always}
+    .band:last-of-type{page-break-after:avoid}
+    #credits{page-break-before:always;page-break-after:avoid}
+    .creds > div{break-inside:avoid;page-break-inside:avoid}
+    .creds h2{break-after:avoid;page-break-after:avoid}
+    .credl li{break-inside:avoid}
+    /* 문서 끝 여백이 한 쪽을 더 만들지 않게 */
+    #credits,main,body{margin-bottom:0!important;padding-bottom:0!important}
+    main{page-break-after:avoid}
     .band h2{font-size:16pt;color:#000}
-    .prin h3{font-size:10.5pt;color:#000}
-    .prin p{font-size:9.5pt;color:#333}
-    footer{border-top:1px solid #ccc;font-size:8pt;color:#555}
+    .ctime{display:block!important;columns:2;column-gap:14mm}
+    .ctime > li{break-inside:avoid;margin:0 0 5mm;
+      grid-template-columns:5mm minmax(0,1fr)!important;column-gap:4mm}
+    .ctime h3{font-size:12pt!important;margin:0}
+    .ctime .org{font-size:9pt;margin-top:1mm}
+    .ctime .when{font-size:8pt}
+    .ctime .when .span{margin-top:0.6mm}
+    .ctime .dot-b{width:9px;height:9px;border:0;background:#bbb;box-shadow:0 0 0 3pt #fff}
+    .ctime .dot-b svg{display:none}
+    .ctime li.now .dot-b{background:#00655A}
+    .ctime .when{color:#888}
+    .ctime li.now .when{color:#00655A}
+    .ctime h3{color:#000}
+    .ctime .org,.ctime .note{color:#333}
+    .ctime .tags li{border-color:#ccc;color:#333}
+    .ctime .dot{background:#bbb;box-shadow:0 0 0 4px #fff}
+    .ctime li.now .dot{background:#00655A}
     a{color:#000;text-decoration:none}
   }
   /* 모바일 히어로: 고정 헤더가 흐름으로 바뀌므로 하단 정렬과 뷰포트 높이를 해제한다.
@@ -346,14 +595,12 @@
 <body>
 <a class="skip" href="#room">본문으로 건너뛰기</a>
 <header>
-  <span class="mark">이진희 · Jinhee Lee</span>
+  <span class="mark" lang="ko" aria-label="이진희"><span class="c" aria-hidden="true"><b>ㅇ</b></span><span class="v" aria-hidden="true"></span><span class="c" aria-hidden="true"><b>ㅈ</b></span><span class="v" aria-hidden="true"></span><span class="c" aria-hidden="true"><b>ㄴ</b></span><span class="c" aria-hidden="true"><b>ㅎ</b></span><span class="h" aria-hidden="true"></span><span class="v" aria-hidden="true"></span></span>
   <nav>
     <a href="#room" id="nav-work">WORK</a>
-    <a href="#principles" id="nav-prin">PRINCIPLES</a>
-    <a href="https://github.com/jinilee-hue">GITHUB</a>
+    <a href="#career" id="nav-career">CAREER</a>
     <button type="button" id="pdf" class="no-print">PDF</button>
-    <button type="button" data-lang="ko" aria-pressed="true">KO</button>
-    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    <button type="button" id="lang" data-lang="en" aria-label="Switch to English">EN</button>
   </nav>
 </header>
 
@@ -361,9 +608,12 @@
 <div class="wrap">
   <section class="open">
     <p class="kick" id="kick"></p>
-    <h1 id="h1"></h1>
+    <div class="hero-wrap">
+      <span class="sig-name" aria-hidden="true">Jinhee Lee</span>
+      <h1 id="h1"></h1>
+    </div>
     <div class="openfoot">
-      <p id="lede"></p>
+      <div class="lede" id="lede"></div>
       <dl class="counts" id="counts"></dl>
     </div>
   </section>
@@ -374,64 +624,314 @@
      콘텐츠 정렬선은 .piece 의 좌우 padding 이 직접 계산한다. -->
 <div class="room" id="room"></div>
 
-<div class="wrap"><section class="band" id="principles">
-  <h2 id="prin-h"></h2>
-  <div class="prin" id="prin"></div>
-</section></div>
+<div class="wrap">
+<section class="band" id="career">
+  <h2 id="car-h"></h2>
+  <ol class="ctime" id="cv"></ol>
+</section>
+<section class="band" id="credits">
+  <div class="creds">
+    <div><h2 id="cert-h"></h2><ol class="credl" id="certs"></ol></div>
+    <div><h2 id="award-h"></h2><ol class="credl" id="awards"></ol></div>
+  </div>
+</section>
+</div>
 </main>
 
-<div class="wrap"><footer>
-  <p class="colo" id="colophon"></p>
-  <a href="https://github.com/jinilee-hue">github.com/jinilee-hue</a>
-</footer></div>
+<dialog class="jdlg" id="jobdlg" aria-labelledby="jdlg-t">
+  <div class="jdlg-in">
+    <button type="button" class="jdlg-x" id="jdlg-x" aria-label="닫기">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <p class="jdlg-w" id="jdlg-w"></p>
+    <h3 id="jdlg-t"></h3>
+    <p class="org" id="jdlg-o"></p>
+    <p class="jdlg-n" id="jdlg-n" hidden></p>
+    <div id="jdlg-b"></div>
+  </div>
+</dialog>
+
 
 <script type="module">
 import { loadProjects, pick, lang, setLang, onRender, fmtDate } from './assets/shared.js';
 
 const COPY={
   ko:{
-    kick:'AI Product Designer · EduPoly · Seoul',
+    kick:'AI Product Designer',
     h1:'스스로 만들어 <i>증명하는</i> 디자이너.',
-    lede:'교육 제품을 설계하고, 프로토타입은 직접 만들어 배포한다. 아래 화면은 목업이 아니라 실제 배포된 페이지를 그대로 캡처한 것이고, 누르면 그 주소로 열린다.',
-    counts:[['배포','{n}'],['라이브','{live}'],['최근','{last}']],
-    open:'열기', play:'PLAY', playHint:'실제 배포 화면', more:'제작 과정 상세', less:'상세 접기', pdf:'PDF로 저장',
+    lede:[
+      '기획부터 프론트 개발까지 디자이너가 직접 만든다.\nAI는 한 가지 답을 빨리 받으려고 쓰는 게 아니라, 기획·디자인·개발 어디서든 판단할 재료를 늘리려고 쓴다. 가정은 먼저 프로토타입으로 만들어 돌려 보고, 화면은 여러 안을 구현해 나란히 제안한다.',
+      '색과 타입은 화면에 박지 않고 토큰에 적는다. 통일성이 유지되고, 모델에 매번 같은 값을 다시 설명할 일이 줄어 토큰 비용도 같이 내려간다. 최종 카피와 브랜드 판단, 접근성 검증은 내 손에서 끝낸다. AI가 90% 맞혔을 때 남은 10%를 알아보는 게 나의 일이다.',
+    ],
+    ledeLine:'기획부터 프론트 개발까지 디자이너가 직접 만든다.',
+    ledeSub:'AI가 90% 맞혔을 때 남은 10%를 알아보는 게 나의 일이다.',
+    counts:[['Update date','{last}']],
+    open:'열기', play:'PLAY NOW', more:'제작 과정 상세', less:'상세 접기', pdf:'PDF로 저장',
     mPeriod:'기간', mCommits:'커밋', mRole:'역할',
     cIntent:'기획 의도', cConcept:'디자인 컨셉', cFlow:'흐름', cStack:'기술 스택', cDec:'설계 결정',
-    outK:'Screens', onScreen:'이 화면에서',
-    mDate:'Date', mTool:'Tool', mContrib:'Contribution',
+    outK:'Screens',
+    mDate:'Date', mTool:'Tool', mContrib:'Contribution', mSpec:'Project info', mOverview:'Overview',
     cAlso:'관련 저장소',
-    phase:{plan:'기획',design:'디자인',build:'개발',qa:'검증'}, cFiles:'파일 구성',
-    mTools:'AI 툴', mResp:'반응형', dev:{desktop:'데스크톱',tablet:'태블릿',mobile:'모바일'},
+    phase:{plan:'Planning',design:'Design',build:'Build',qa:'QA'}, cFiles:'파일 구성',
+    mTools:'AI tools', mStack:'Tech stack', mResp:'Responsive',
+    dev:{desktop:'데스크톱',tablet:'태블릿',mobile:'모바일'},
     tlH:'작업 타임라인', tlNote:'첫 커밋 – 마지막 커밋 · 프로젝트 {n}개',
-    prinH:'같이 일할 때 알아두면 좋은 것들',
-    prin:[
-      ['AI는 초안을 늘리는 도구다','한 방향을 빨리 뽑으려고 쓰지 않는다. 같은 시간에 검토할 방향의 수를 늘리려고 쓴다. 고르는 일은 위임하지 않는다.'],
-      ['판단이 필요하면 눌러볼 수 있게 만든다','정지 이미지는 클릭했을 때 뭐가 되는지 말해주지 못한다. 결정이 필요한 화면은 동작하는 프로토타입으로 회의에 올린다.'],
-      ['토큰이 먼저, 화면은 그다음','대시보드 두 개가 브랜드만 바꿔 같은 뼈대를 재사용할 수 있었던 이유. 색과 타입이 화면이 아니라 토큰에 적혀 있었다.'],
-      ['AI를 쓰지 않는 선을 정해둔다','최종 카피, 브랜드 판단, 접근성 검증은 직접 한다. 생성물이 90% 맞을 때 남은 10%를 알아보는 게 디자이너의 일이다.'],
+    carH:'커리어',
+    jobs:[
+      {current:true, when:'2023.07 — 재직중', since:'2023-07', title:'폴리인스퍼레이션', org:'IT사업본부 AI Product팀 · 차장', note:'POLY · CANB · NAC 학습 화면부터 캠퍼스 운영 도구까지 설계하고, 프로토타입은 열리는 주소로 낸다.', groups:[
+          {items:[
+              'POLY 학부모앱 UI/UX 디자인',
+              'CANB Global (Vietnam/Indonesia) 사이트 구축',
+              'CANB Sum 관리자 디자인 리뉴얼',
+              'Polaris 사이트 구축'
+            ]}
+        ], tags:[
+          'EdTech UI/UX',
+          '디자인 시스템',
+          '프로토타입',
+          'GUI'
+        ]},
+      {when:'2013.03 — 2023.06', span:'10년 4개월', title:'케이지에듀원', org:'디자인제작팀 · 차장 팀장', note:'이러닝 신규사업 사이트를 구축하고, 운영 중인 서비스의 UI/UX를 개선했다.', groups:[
+          {label:'신규사업 사이트 구축 및 운영사이트 UI/UX 개선', items:[
+              '2023 신규사업 올링 사이트 구축',
+              '2021 신규사업 9공구(9급공무원구독하기) 사이트 구축 메인 디자인',
+              '2019 · 2020 쌤플러스 메인 개편',
+              '2019 B2B 영업 홍보사이트 꿈을담다통 사이트 구축',
+              '2018 아이티뱅크 사이트 개편',
+              '2018 내일코칭 사이트 개편',
+              '2017 KG에듀원 내일배움 사이트 구축',
+              '2016 신규 이러닝 콘텐츠 통판 사이트 구축'
+            ]},
+          {label:'LMS 판매에 따른 사이트 구축', items:[
+              '2021 YJ평생교육원 메인',
+              '2020 전주비전대학교 평생교육원 메인'
+            ]},
+          {label:'HRD B2B 사이트 구축', items:[
+              '기본타입 D타입 구축',
+              'KB그룹 · 농협 · 동원 · 동국제강 등'
+            ]},
+          {label:'사업전반 사이트 유지보수', items:[
+              '쌤플러스 · 법원검찰직공무원사이트 · 미래경영아카데미 · 아이티뱅크 · 평생교육원 · HRD B2B 등'
+            ]}
+        ], tags:[
+          '모바일 디자인',
+          'GUI'
+        ]},
+      {when:'2011.12 — 2013.02', span:'1년 3개월', title:'웅진패스원', org:'eHRD기획팀 · 대리', note:'HRD B2B 사이트를 구축하고 유지보수했다.', groups:[
+          {items:[
+              'HRD B2B 사이트 구축',
+              'HRD B2B 사이트 유지보수'
+            ]}
+        ], tags:[
+          '모바일 디자인',
+          'GUI',
+          'UI·UX 기획'
+        ]},
+      {when:'2010.12 — 2011.07', span:'8개월', title:'DBK네트웍스', org:'미디어사업부 · 선임연구원', note:'공공·선거 사이트와 인터넷신문 100여 개를 디자인하고 운영했다.', groups:[
+          {items:[
+              '서울시 SNS오픈채널 홈페이지 및 모바일웹 (웹표준 작업)',
+              '엄기영 선거홈페이지 및 모바일웹 제작',
+              '한나라당 국회의원 이병석 사이트 개편',
+              '한나라당 국회의원 이재오 사이트 개편 시안작업',
+              '한나라당 국회의원 사이트 6종 운영 및 디자인',
+              '인터넷신문 100여 개 운영 및 디자인',
+              '자체서비스 돔켓사이트 제작 및 스킨 다종 제작',
+              '충북일보 · 에이원축산 모바일웹 제작'
+            ]}
+        ], tags:[
+          '모바일 디자인',
+          'GUI',
+          'UI·UX 기획'
+        ]},
+      {when:'2009.10 — 2010.10', span:'1년 1개월', title:'서울신용평가정보', org:'신용조회부 · 계장', note:'신용조회 서비스 SIREN24 · BIZSIREN을 개편하고 운영했다.', groups:[
+          {items:[
+              'SIREN24 프리미엄서비스 제휴 신한카드 리뉴얼',
+              'SIREN24 · BIZSIREN 운영 및 유지보수',
+              'BIZSIREN · SIREN24 개편 시안작업'
+            ]}
+        ], tags:[
+          '모바일 디자인',
+          'GUI',
+          'UI·UX 기획'
+        ]},
+      {when:'2005.11 — 2009.07', span:'3년 9개월', title:'애니온소프트', org:'사업기획팀 · 과장 팀장', note:'스카이라이프와 KBS 계열 사이트 16종을 새로 짓고 리뉴얼했다.', groups:[
+          {label:'사이트 신규 구축 및 리뉴얼', items:[
+              '2009 스카이라이프 사이트 리뉴얼',
+              '2008 KBS TUNE 사이트 구축',
+              '2008 불교방송 리뉴얼',
+              '2008 스카이라이프 사이트 리뉴얼',
+              '2008 하겐다즈 파티프로모션',
+              '2007 스카이라이프 SKYRAINBOW 신규사이트 구축',
+              '2007 키즈톡톡 브롬라이더 신규사이트 구축',
+              '2007 스카이라이프 업그레이드센터 신규사이트 구축',
+              '2007 SkyHD 리뉴얼',
+              '2007 스카이라이프 사이트 리뉴얼',
+              '2006 스카이라이프 지사 리뉴얼',
+              '2006 애니온소프트 리뉴얼',
+              '2006 잔디로 골프웨어 리뉴얼',
+              '2006 온누리교회 Ezra4 리뉴얼',
+              '2006 KBS 드라마 《봄의왈츠》 쇼핑몰 디자인 및 공연안내 방송페이지 제작',
+              '2005 온누리교회 Ezra3 리뉴얼'
+            ]},
+          {label:'사이트 운영 및 유지보수', items:[
+              '스카이라이프 사이트 및 전체 패밀리사이트',
+              'KBS N · KBS미디어 · KBS방송아카데미'
+            ]},
+          {label:'기타 시안작업', items:[
+              '2006 이화여고박물관 · 잔디로 골프웨어',
+              '2007 KBSN · 스카이라이프 상담원커뮤니티',
+              '2008 스카이라이프 엔터테인먼트채널 · KBSWORLD · KBS토론 · KBSechannel'
+            ]}
+        ], tags:[
+          '모바일 디자인',
+          'GUI',
+          'UI·UX 기획'
+        ]},
+      {when:'2004.11 — 2005.11', span:'1년 1개월', title:'KBS인터넷', org:'웹제작 프로젝트팀', note:'스카이라이프와 KBS 콘피아 사이트를 운영하고 유지보수했다.', groups:[
+          {items:[
+              '스카이라이프 사이트 운영 및 유지보수',
+              'KBS 콘피아 사이트 유지보수'
+            ]}
+        ], tags:[
+          '모바일 디자인',
+          'GUI',
+          'UI·UX 기획'
+        ]},
+      {when:'2002.09 — 2004.11', span:'2년 3개월', title:'한국디지털위성방송', org:'IT개발실 IT운용팀', note:'스카이라이프 사이트 운영과 유지보수로 웹 일을 시작했다.', groups:[
+          {items:[
+              '스카이라이프 사이트 운영 및 유지보수'
+            ]}
+        ], tags:[
+          '모바일 디자인',
+          'GUI',
+          'UI·UX 기획'
+        ]}
+    ],
+    certK:'자격증', awardK:'수상',
+    moreJ:'상세 보기', closeJ:'닫기',
+    certs:[
+      {when:'2003.02', title:'실기교사', by:'교원인적자원부'},
+      {when:'2002.10', title:'컴퓨터그래픽스운용기능사', by:'한국산업인력공단'}
+    ],
+    awards:[
+      {when:'2002.07', title:'대전광역시 산업디자인전', by:'한국예술문화단체총연합회', note:'기업지원디자인 장려상'}
     ],
     colophon:'이 사이트는 Claude Code로 만들었다. 처음 제안받은 기본값(Inter · 인디고 그래디언트 · 3단 카드 그리드)은 전부 버렸다. 프로젝트 목록과 썸네일은 GitHub Actions가 매일 자동으로 다시 채운다.',
   },
   en:{
-    kick:'AI Product Designer · EduPoly · Seoul',
+    kick:'AI Product Designer',
     h1:'A designer who <i>proves it</i> by building it.',
-    lede:'I design education products and build the prototypes myself. These are screenshots of pages actually deployed — not mockups. Click one and it opens.',
-    counts:[['Shipped','{n}'],['Live','{live}'],['Latest','{last}']],
-    open:'Open', play:'PLAY', playHint:'Live deployment', more:'Full process', less:'Collapse', pdf:'Save as PDF',
+    lede:[
+      'I take a product from planning through front-end development myself. I don\'t use AI to get one answer faster; I use it to have more to judge — in planning, design and build alike. Assumptions get built into a prototype and run first, and screens go out as several working options side by side.',
+      'Color and type live in tokens, never hardcoded into a screen — the system stays consistent, and since the model is never told the same values twice, it burns fewer tokens too. Final copy, brand judgment and accessibility checks stay in my hands. When AI gets 90% right, spotting the other 10% is the job.',
+    ],
+    ledeLine:'I take a product from planning through front-end development myself.',
+    ledeSub:'When AI gets 90% right, spotting the other 10% is the job.',
+    counts:[['Update date','{last}']],
+    open:'Open', play:'PLAY NOW', more:'Full process', less:'Collapse', pdf:'Save as PDF',
     mPeriod:'Period', mCommits:'Commits', mRole:'Role',
     cIntent:'Intent', cConcept:'Design concept', cFlow:'Flow', cStack:'Stack', cDec:'Decisions',
-    outK:'Screens', onScreen:'This screen',
-    mDate:'Date', mTool:'Tool', mContrib:'Contribution',
+    outK:'Screens',
+    mDate:'Date', mTool:'Tool', mContrib:'Contribution', mSpec:'Project info', mOverview:'Overview',
     cAlso:'Related repositories',
     phase:{plan:'Planning',design:'Design',build:'Build',qa:'QA'}, cFiles:'Codebase',
-    mTools:'AI tools', mResp:'Responsive', dev:{desktop:'Desktop',tablet:'Tablet',mobile:'Mobile'},
+    mTools:'AI tools', mStack:'Tech stack', mResp:'Responsive',
+    dev:{desktop:'Desktop',tablet:'Tablet',mobile:'Mobile'},
     tlH:'Timeline', tlNote:'first – last commit · {n} projects',
-    prinH:'Worth knowing before we work together',
-    prin:[
-      ['AI widens the draft, not the shortcut','I don\'t use it to reach one direction faster. I use it to review more directions in the same hour. Choosing is never delegated.'],
-      ['If it needs a decision, make it pressable','A still image can\'t answer what happens on click. Decision-bearing screens enter the room as working prototypes.'],
-      ['Tokens first, screens second','Why two dashboards reused one skeleton across brands: color and type lived in tokens, not in the screens.'],
-      ['Know where AI stops','Final copy, brand judgment and accessibility checks stay manual. When a generation is 90% right, catching the last 10% is the job.'],
+    carH:'Career',
+    jobs:[
+      {current:true, when:'2023.07 — Now', since:'2023-07', title:'PolyInspiration', org:'IT Division, AI Product team · Manager', note:'POLY, CANB and NAC — from learner-facing lessons to campus ops tools, shipped as URLs that open.', groups:[
+          {items:[
+              'POLY parent app — UI/UX',
+              'CANB Global (Vietnam / Indonesia) site build',
+              'CANB Sum admin redesign',
+              'Polaris site build'
+            ]}
+        ], tags:[
+          'EdTech UI/UX',
+          'Design systems',
+          'Prototypes',
+          'GUI'
+        ]},
+      {when:'2013.03 — 2023.06', span:'10 yr 4 mo', title:'KG Eduone', org:'Design Production team · Manager, team lead', note:'Built new-business e-learning sites and reworked the UX of services already running.', groups:[
+          {items:[
+              'New-business sites and UX overhaul of live services (8 builds)',
+              'Sites delivered alongside LMS sales (2 builds)',
+              'HRD B2B site builds — KB Group, Nonghyup, Dongwon, Dongkuk Steel',
+              'Maintenance across every business line'
+            ]}
+        ], tags:[
+          'Mobile design',
+          'GUI'
+        ]},
+      {when:'2011.12 — 2013.02', span:'1 yr 3 mo', title:'Woongjin Passone', org:'eHRD Planning team · Assistant manager', note:'Built and maintained HRD B2B sites.', groups:[
+          {items:[
+              'HRD B2B site build and maintenance'
+            ]}
+        ], tags:[
+          'Mobile design',
+          'GUI',
+          'UI/UX planning'
+        ]},
+      {when:'2010.12 — 2011.07', span:'8 mo', title:'DBK Networks', org:'Media Business division · Senior researcher', note:'Designed and ran public-sector, campaign and 100+ online news properties.', groups:[
+          {items:[
+              'Seoul City SNS open-channel site and mobile web (web standards)',
+              'Campaign and National Assembly member sites',
+              'Operations and design for 100+ online news properties'
+            ]}
+        ], tags:[
+          'Mobile design',
+          'GUI',
+          'UI/UX planning'
+        ]},
+      {when:'2009.10 — 2010.10', span:'1 yr 1 mo', title:'Seoul Credit Rating & Information', org:'Credit Inquiry division · Supervisor', note:'Redesigned and operated the SIREN24 and BIZSIREN credit-check services.', groups:[
+          {items:[
+              'SIREN24 premium service — Shinhan Card partnership redesign',
+              'SIREN24 and BIZSIREN operations, maintenance and redesign'
+            ]}
+        ], tags:[
+          'Mobile design',
+          'GUI',
+          'UI/UX planning'
+        ]},
+      {when:'2005.11 — 2009.07', span:'3 yr 9 mo', title:'Anion Soft', org:'Business Planning team · Senior manager, team lead', note:'Built and redesigned 16 sites across Skylife and the KBS group.', groups:[
+          {items:[
+              'New builds and redesigns (16 sites) — Skylife, KBS TUNE, BBS',
+              'Operations and maintenance — Skylife family sites, KBS N, KBS Media',
+              'Pitch work — KBSN, KBSWORLD, Skylife entertainment channels'
+            ]}
+        ], tags:[
+          'Mobile design',
+          'GUI',
+          'UI/UX planning'
+        ]},
+      {when:'2004.11 — 2005.11', span:'1 yr 1 mo', title:'KBS Internet', org:'Web Production project team', note:'Operated and maintained the Skylife and KBS Confia sites.', groups:[
+          {items:[
+              'Skylife and KBS Confia site operations and maintenance'
+            ]}
+        ], tags:[
+          'Mobile design',
+          'GUI',
+          'UI/UX planning'
+        ]},
+      {when:'2002.09 — 2004.11', span:'2 yr 3 mo', title:'Korea Digital Satellite Broadcasting', org:'IT Development · IT Operations team', note:'Started in web work, operating and maintaining the Skylife site.', groups:[
+          {items:[
+              'Skylife site operations and maintenance'
+            ]}
+        ], tags:[
+          'Mobile design',
+          'GUI',
+          'UI/UX planning'
+        ]}
+    ],
+    certK:'Certifications', awardK:'Awards',
+    moreJ:'Details', closeJ:'Close',
+    certs:[
+      {when:'2003.02', title:'Practical-subject teacher certificate', by:'Ministry of Education & Human Resources'},
+      {when:'2002.10', title:'Craftsman, Computer Graphics Operation', by:'Human Resources Development Service of Korea'}
+    ],
+    awards:[
+      {when:'2002.07', title:'Daejeon Industrial Design Exhibition', by:'Korean Federation of Culture & Arts', note:'Encouragement Prize, corporate-support design'}
     ],
     colophon:'Built with Claude Code. Its first defaults — Inter, an indigo gradient, a three-card grid — were all discarded. The project list and thumbnails are refilled daily by GitHub Actions.',
   }
@@ -440,15 +940,34 @@ let DATA=null;
 
 function draw(){
   const L=lang(),c=COPY[L];
+  const durSince=iso=>{
+    const [y,m]=iso.split('-').map(Number), n=new Date();
+    const t=Math.max(1,(n.getFullYear()-y)*12+(n.getMonth()+1-m)+1);
+    const yy=Math.floor(t/12), mm=t%12;
+    return L==='ko'
+      ? [yy&&yy+'년', mm&&mm+'개월'].filter(Boolean).join(' ')
+      : [yy&&yy+' yr', mm&&mm+' mo'].filter(Boolean).join(' ');
+  };
   document.documentElement.lang=L;
-  document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===L)));
-  kick.textContent=c.kick; h1.innerHTML=c.h1; lede.textContent=c.lede;
+  const next=L==='ko'?'en':'ko';
+  const langBtn=document.getElementById('lang');
+  langBtn.dataset.lang=next;
+  langBtn.textContent=next==='en'?'EN':'KR';
+  langBtn.setAttribute('aria-label',L==='ko'?'Switch to English':'한국어로 바꾸기');
+  const esc=s=>String(s||'').replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+  kick.textContent=c.kick; h1.innerHTML=c.h1;
+  // 히어로 리드 = 기획·디자인·개발·검증 4원 벤다이어그램.
+  // 라벨은 Contribution 게이지와 같은 c.phase 를 써서 표기가 갈라지지 않게 한다.
+  const PH=['plan','design','build','qa'];
+  lede.innerHTML=`<p>${esc(c.ledeLine)}</p>`
+    +(c.ledeSub?`<p>${esc(c.ledeSub)}</p>`:'')
+    +`<div class="venn" role="img" aria-label="${esc(PH.map(k=>c.phase[k]).join(' + '))}">`
+    +PH.map(k=>`<span class="vc"><b>${esc(c.phase[k])}</b></span>`).join('')
+    +`</div>`;
 
   const ps=DATA.projects.map(pick);
-  const live=ps.filter(p=>p.live).length;
   const last=fmtDate(DATA.projects.map(p=>p.auto.pushed_at).sort().at(-1),L);
-  counts.innerHTML=c.counts.map(([k,v])=>`<div><dt>${k}</dt><dd>${
-    v.replace('{n}',ps.length).replace('{live}',live+'/'+ps.length).replace('{last}',last)}</dd></div>`).join('');
+  counts.innerHTML=c.counts.map(([k,v])=>`<div><dt>${k}</dt><dd>${v.replace('{last}',last)}</dd></div>`).join('');
 
   // 관여도 — 분담 비율이 아니라 단계별 0~100 독립 게이지. 혼자 다 했으면 전부 100.
   const contribGauges=p=>{
@@ -464,7 +983,33 @@ function draw(){
   const desk=p=>p.shots.find(s=>s.device==='desktop')||p.shots[0];
   const side=p=>p.shots.find(s=>s.device==='mobile')||p.shots.find(s=>s.device==='tablet')||null;
 
-  const esc=s=>String(s||'').replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+  // 스플래시 메타용 짧은 스택. 음성 이름 나열은 빼고 구현·TTS·검증만.
+  const stackLine=p=>{
+    if((p.stackLine||[]).length) return p.stackLine;
+    const bits=[];
+    const push=x=>{
+      const s=String(x||'').split(/[—–,(]/)[0].replace(/\s+/g,' ').trim();
+      if(s && !/빌드/.test(s) && !bits.includes(s)) bits.push(s);
+    };
+    for(const g of p.stack||[]){
+      const items=g.items||[];
+      const blob=`${g.group} ${items.join(' ')}`;
+      if(/구현|코드|런타임/i.test(g.group)){
+        items.filter(x=>!/빌드/.test(x)).slice(0,3).forEach(push);
+      }else if(/TTS|음성\(|음성 출력/i.test(g.group)){
+        push(items[0]);
+      }else if(/발음 평가/i.test(g.group)){
+        push(items[0]);
+      }else if(/검증|python|\.py/i.test(blob)){
+        const py=items.find(x=>/python|\.py/i.test(x));
+        push(/\.py/i.test(py||'')?'Python':(py||'Python'));
+      }else if(/차트/i.test(g.group)){
+        push(items[0]);
+      }
+    }
+    return bits.slice(0,4);
+  };
+
 
   const DEV_L={ko:{desktop:'데스크톱',tablet:'태블릿',mobile:'모바일'},
                en:{desktop:'Desktop',tablet:'Tablet',mobile:'Mobile'}};
@@ -479,7 +1024,8 @@ function draw(){
         src:primary.src,
         device:primary.device,
         label:n.label||DEV_L[L][primary.device]||primary.device,
-        note:n.note||p.concept||''
+        note:n.note||'',
+        features:n.features||[]
       });
       seen.add(primary.src);
     }
@@ -490,17 +1036,106 @@ function draw(){
     return out;
   };
 
+  const featRow=(src,list)=>{
+    const items=(list||[]).slice(0,5).map((f,fi)=>{
+      if(typeof f==='string') return {text:f, at:null, i:fi};
+      return {text:f.text||'', at:f.at||null, i:fi};
+    });
+    const pinItems=items.filter(f=>f.at);
+    const loose=items.filter(f=>!f.at);
+    const pins=pinItems.map(f=>
+      `<li data-i="${f.i}" style="left:${f.at[0]}%;top:${f.at[1]}%"></li>`).join('');
+    const anns=side=>pinItems.filter(f=>side==='left'?f.at[0]<50:f.at[0]>=50).map(f=>
+      `<li data-i="${f.i}" data-side="${side}" style="--i:${f.i};--y:${f.at[1]}%">
+        <i class="adot" aria-hidden="true"></i>
+        <span class="ttl">${esc(f.text)}</span>
+      </li>`).join('');
+    const looseRows=loose.map(f=>`<li><span class="ttl">${esc(f.text)}</span></li>`).join('');
+    return {pins, left:anns('left'), right:anns('right'), loose:looseRows, hasPins:!!pinItems.length};
+  };
+
+  const wireCallouts=scope=>{
+    (scope||document).querySelectorAll('.feats figure').forEach(fig=>{
+      const stage=fig.querySelector('.stage');
+      const svg=stage?.querySelector('svg.wires');
+      if(!stage||!svg) return;
+      const paint=()=>{
+        if(fig.closest('[hidden]')){ svg.innerHTML=''; return; }
+        if(window.matchMedia('(max-width:879px)').matches){ svg.innerHTML=''; return; }
+        const sr=stage.getBoundingClientRect();
+        if(sr.width<8) return;
+        svg.setAttribute('viewBox',`0 0 ${sr.width} ${sr.height}`);
+        const ph=stage.querySelector('.ph');
+        const pr0=ph?ph.getBoundingClientRect():sr;
+        const paths=[];
+        ['left','right'].forEach(side=>{
+          const col=stage.querySelector(`.anns.${side}`);
+          if(!col) return;
+          // 핀의 세로 순서로 정렬 — 이 순서를 유지해야 선끼리 엇갈리지 않는다
+          const items=[...col.querySelectorAll('li[data-i]')].map(li=>{
+            const pin=stage.querySelector(`.pins [data-i="${li.dataset.i}"]`);
+            return pin?{li,pin,py:pin.getBoundingClientRect().top}:null;
+          }).filter(Boolean).sort((a,b)=>a.py-b.py);
+          if(!items.length) return;
+
+          // 문구를 세로로 고르게 분산. 핀에 바짝 붙이면 서로 뭉쳐 선이 사선이 된다.
+          const H=col.clientHeight, n=items.length;
+          items.forEach((it,i)=>{
+            const h=it.li.offsetHeight||36;
+            const y=Math.max(h/2+2, Math.min(H-h/2-2, H*(i+.5)/n));
+            it.li.style.top=y+'px';
+            it.li.style.transform='translateY(-50%)';
+          });
+
+          // 직각 경로 — 가로 → 세로 채널 → 가로. 채널은 선마다 어긋나게 둔다.
+          items.forEach((it,i)=>{
+            const dot=it.li.querySelector('.adot');
+            if(!dot) return;
+            const a=it.pin.getBoundingClientRect(), b=dot.getBoundingClientRect();
+            const x1=a.left+a.width/2-sr.left, y1=a.top+a.height/2-sr.top;
+            const x2=b.left+b.width/2-sr.left, y2=b.top+b.height/2-sr.top;
+            const dir=side==='left'?1:-1;
+            const edge=(side==='left'?pr0.left:pr0.right)-sr.left;
+            let ch=edge+dir*(14+i*11);
+            const lo=Math.min(x1,x2)+6, hi=Math.max(x1,x2)-6;
+            ch = hi>lo ? Math.min(Math.max(ch,lo),hi) : (x1+x2)/2;
+            paths.push(`<path d="M${x2.toFixed(1)},${y2.toFixed(1)} H${ch.toFixed(1)} V${y1.toFixed(1)} H${x1.toFixed(1)}" fill="none" stroke="currentColor" stroke-width="0.9" stroke-dasharray="2.5 4.5" stroke-linecap="round" stroke-linejoin="round"/>`);
+          });
+        });
+        svg.innerHTML=paths.join('');
+      };
+      paint();
+      fig.querySelectorAll('img').forEach(im=>{
+        if(!im.complete) im.addEventListener('load',()=>requestAnimationFrame(paint),{once:true});
+      });
+      if(!fig._ro){ fig._ro=new ResizeObserver(()=>requestAnimationFrame(paint)); fig._ro.observe(stage); }
+    });
+  };
+
   room.innerHTML=`<div class="pager gutter">
+      <span class="label">Portfolio</span>
+      <div class="end">
       <span class="count" id="pg-count"></span>
-      <div class="dots" id="pg-dots" role="tablist" aria-label="프로젝트"></div>
       <div class="navb">
-        <button type="button" id="pg-prev" aria-label="이전">←</button>
-        <button type="button" id="pg-next" aria-label="다음">→</button>
+        <button type="button" id="pg-prev" aria-label="이전"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6.5 8 12l7 5.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" id="pg-next" aria-label="다음"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6.5 16 12 9 17.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
       </div>
     </div>`+ps.map((p,i)=>{
       const d=desk(p), tab=p.shots.find(s=>s.device==='tablet'), mob=p.shots.find(s=>s.device==='mobile');
       const gal=gallery(p).slice(0,4);
-      const fl=f=>L==='ko'?f.ko:(f.en||f.ko);
+      const line=stackLine(p);
+      const facts=[
+        p.period&&`<div><dt>${c.mDate}</dt><dd>${esc(p.period)}</dd></div>`,
+        p.tools.length&&`<div><dt>${c.mTools}</dt><dd>${esc(p.tools.join(' · '))}</dd></div>`,
+        line.length&&`<div><dt>${c.mStack}</dt><dd>${esc(line.join(' · '))}</dd></div>`,
+        p.devices.length>1&&`<div><dt>${c.mResp}</dt><dd>${esc(p.devices.map(k=>c.dev[k]||k).join(' · '))}</dd></div>`,
+      ].filter(Boolean).join('');
+      const gauges=contribGauges(p);
+      // Overview — 기획 의도 + 디자인 컨셉을 한 덩어리로. 무대 메타의 첫 열.
+      const ovp=[p.intent,p.concept].filter(Boolean).map(t=>`<p>${esc(t)}</p>`).join('');
+      const overview=ovp?`<div class="overview"><p class="k">${c.mOverview}</p>${ovp}</div>`:'';
+      const metaN=[overview,facts,gauges].filter(Boolean).length;
       return `<article class="show" id="p-${p.id}" data-i="${i}" ${i?'hidden':''}>
         <div class="splash gutter">
           <div class="fly">
@@ -518,64 +1153,74 @@ function draw(){
             <h2>${esc(p.title)}</h2>
             ${p.summary?`<p class="sum">${esc(p.summary)}</p>`:''}
             <a class="play" href="${p.live||p.repo}" target="_blank" rel="noopener">
-              <b>${c.play}</b><span>← ${c.playHint}</span>
+              <b>${c.play}<span class="play-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9 6.5 16 12 9 17.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></b>
             </a>
-            <dl class="facts">
-              ${p.period?`<div><dt>${c.mDate}</dt><dd>${esc(p.period)}</dd></div>`:''}
-              ${p.tools.length?`<div><dt>${c.mTools}</dt><dd>${esc(p.tools.join(' · '))}</dd></div>`:''}
-              ${p.devices.length>1?`<div><dt>${c.mResp}</dt><dd>${esc(p.devices.map(k=>c.dev[k]||k).join(' · '))}</dd></div>`:''}
-            </dl>
-            ${contribGauges(p)?`<div class="contrib"><p class="k">${c.mContrib}</p>${contribGauges(p)}</div>`:''}
           </div>
+          ${(overview||facts||gauges)?`<div class="splash-meta m${metaN}">
+            ${overview}
+            ${facts?`<div class="facts-col"><p class="k">${c.mSpec}</p><dl class="facts">${facts}</dl></div>`:''}
+            ${gauges?`<div class="contrib"><p class="k">${c.mContrib}</p>${gauges}</div>`:''}
+          </div>`:''}
         </div>
         <div class="board">
           <div class="gutter">
             <p class="k">${c.outK}</p>
-            <div class="feats">${gal.map((s,si)=>`<figure>
-              <span class="ph"><span class="shot${s.device==='mobile'?' is-portrait':''}"><img src="${s.src}" alt="${esc(s.label||p.title)}" loading="lazy" decoding="async"
-                onerror="this.closest('figure').remove()"></span></span>
+            <div class="feats">${gal.map(s=>{
+              const ft=featRow(s.src, s.features);
+              return `<figure>
+              <div class="stage">
+                <ul class="anns left">${ft.left}</ul>
+                <span class="ph ph-${s.device||'desktop'}"><span class="shot${s.device==='mobile'?' is-portrait':''}"><img src="${s.src}" alt="${esc(s.label||p.title)}" loading="lazy" decoding="async"
+                  onerror="this.closest('figure').remove()">
+                  ${ft.pins?`<ol class="pins" aria-hidden="true">${ft.pins}</ol>`:''}
+                </span></span>
+                <ul class="anns right">${ft.right}</ul>
+                ${ft.hasPins?`<svg class="wires" aria-hidden="true"></svg>`:''}
+              </div>
               <figcaption>
-                <p class="k">${c.onScreen}</p>
                 <b>${esc(s.label||s.device||'')}</b>
                 ${s.note?`<span class="note">${esc(s.note)}</span>`:''}
-                ${si===0&&p.flow.length?`<ol>${p.flow.slice(0,5).map(f=>
-                  `<li><b>${esc(f.step)}</b><span>${esc(fl(f))}</span></li>`).join('')}</ol>`:''}
+                ${ft.loose?`<ol class="loose">${ft.loose}</ol>`:''}
               </figcaption>
-            </figure>`).join('')}</div>
-            ${(p.intent||p.concept)?`<div class="brief">
-              ${p.intent?`<div><h3>${c.cIntent}</h3><p>${esc(p.intent)}</p></div>`:''}
-              ${p.concept?`<div><h3>${c.cConcept}</h3><p>${esc(p.concept)}</p></div>`:''}
-            </div>`:''}
+            </figure>`;
+            }).join('')}</div>
           </div>
         </div>
       </article>`;
     }).join('');
 
-  const dots=document.getElementById('pg-dots');
-  dots.innerHTML=ps.map((p,i)=>`<button type="button" role="tab" data-i="${i}"
-    aria-label="${esc(p.title)}" ${i?'':'aria-current="true"'}></button>`).join('');
   let cur=0;
-  const go=(n,scroll)=>{
+  const go=(n,scroll,keepHash)=>{
     cur=Math.max(0,Math.min(ps.length-1,n));
     room.querySelectorAll('.show').forEach((el,i)=>el.hidden=i!==cur);
-    dots.querySelectorAll('button').forEach((b,i)=>b.toggleAttribute('aria-current',i===cur));
     document.getElementById('pg-count').textContent=
       `${String(cur+1).padStart(2,'0')} / ${String(ps.length).padStart(2,'0')}`;
     document.getElementById('pg-prev').disabled=cur===0;
     document.getElementById('pg-next').disabled=cur===ps.length-1;
-    history.replaceState(null,'','#'+ps[cur].id);
+    if(!keepHash) history.replaceState(null,'','#'+ps[cur].id);
     if(scroll){
       const vis=room.querySelector('.show:not([hidden])');
       vis?.querySelector('.splash')?.scrollIntoView({block:'start'});
     }
+    requestAnimationFrame(()=>wireCallouts(room.querySelector('.show:not([hidden])')));
   };
   document.getElementById('pg-prev').onclick=()=>go(cur-1,true);
   document.getElementById('pg-next').onclick=()=>go(cur+1,true);
-  dots.onclick=e=>{const b=e.target.closest('button[data-i]'); if(b) go(+b.dataset.i,true);};
+  const PAGE_HASH=new Set(['room','career']);
   const fromHash=()=>{
     const id=decodeURIComponent((location.hash||'').slice(1));
+    if(id==='principles'){
+      go(cur,false,true);
+      document.querySelector('.open')?.scrollIntoView({block:'start'});
+      return;
+    }
+    if(PAGE_HASH.has(id)){
+      go(cur,false,true);
+      document.getElementById(id)?.scrollIntoView({block:'start'});
+      return;
+    }
     const i=ps.findIndex(p=>p.id===id);
-    go(i>=0?i:0, !!location.hash);
+    go(i>=0?i:0, !!id);
   };
   fromHash();
   window.addEventListener('hashchange',fromHash);
@@ -596,15 +1241,66 @@ function draw(){
         "description":p.summary,"author":{"@type":"Person","name":"이진희"},
         "dateModified":p.pushed}}))
   });
-  document.getElementById('prin-h').textContent=c.prinH;
-  prin.innerHTML=c.prin.map(([h,b])=>`<article><h3>${h}</h3><p>${b}</p></article>`).join('');
-  colophon.textContent=c.colophon;
+  document.getElementById('car-h').textContent=c.carH;
+  document.getElementById('cv').innerHTML=c.jobs.map((j,i)=>`<li${j.current?' class="now"':''}>
+      <span class="rail">${(j.groups||[]).some(g=>(g.items||[]).length)
+        ? `<button type="button" class="dot-b" data-j="${i}" aria-label="${esc(j.title)} ${esc(c.moreJ)}"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 6.5v11M6.5 12h11" stroke="currentColor" stroke-width="3.8" stroke-linecap="round"/></svg></button>`
+        : '<i class="dot" aria-hidden="true"></i>'}</span>
+      <div class="cell">
+        <p class="when">${esc(j.when)}${(()=>{const sp=j.span||(j.since?durSince(j.since):'');
+          return sp?`<span class="span">${esc(sp)}</span>`:'';})()}</p>
+        <h3>${esc(j.title)}</h3>
+        ${j.org?`<p class="org">${esc(j.org)}</p>`:''}
+      </div>
+    </li>`).join('');
+
+  JOBS=c.jobs;
+  document.getElementById('jdlg-x').setAttribute('aria-label',c.closeJ);
+
+  const credRow=r=>`<li><p class="cwhen">${esc(r.when)}</p>
+      <div><b>${esc(r.title)}</b>${r.by?`<span class="cby">${esc(r.by)}</span>`:''}
+      ${r.note?`<p class="cnote">${esc(r.note)}</p>`:''}</div></li>`;
+  document.getElementById('cert-h').textContent=c.certK;
+  document.getElementById('award-h').textContent=c.awardK;
+  document.getElementById('certs').innerHTML=(c.certs||[]).map(credRow).join('');
+  document.getElementById('awards').innerHTML=(c.awards||[]).map(credRow).join('');
 }
+// 경력 상세 — 카드에는 역할 한 줄만 두고, 전체 실적은 대화상자로 뺀다
+let JOBS=[];
+const jdlg=document.getElementById('jobdlg');
+document.getElementById('cv').addEventListener('click',e=>{
+  const btn=e.target.closest('.dot-b'); if(!btn) return;
+  const j=JOBS[+btn.dataset.j]; if(!j) return;
+  const esc=t=>String(t||'').replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+  document.getElementById('jdlg-w').textContent=j.when+(j.span?'  ·  '+j.span:'');
+  document.getElementById('jdlg-t').textContent=j.title;
+  document.getElementById('jdlg-o').textContent=j.org||'';
+  const nEl=document.getElementById('jdlg-n');
+  nEl.textContent=j.note||''; nEl.hidden=!j.note;
+  document.getElementById('jdlg-b').innerHTML=(j.groups||[]).map(g=>`<div class="jgrp">${g.label?`<p class="jgl">${esc(g.label)}</p>`:''}
+    <ul class="jgi">${(g.items||[]).map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>`).join('');
+  jdlg.showModal();
+});
+document.getElementById('jdlg-x').addEventListener('click',()=>jdlg.close());
+// 배경(백드롭) 클릭으로 닫기 — 대화상자 자체가 클릭 대상일 때만 바깥이다
+jdlg.addEventListener('click',e=>{ if(e.target===jdlg) jdlg.close(); });
+
 onRender(draw);
-document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+document.getElementById('lang').addEventListener('click',()=>setLang(lang()==='ko'?'en':'ko'));
 
 // PDF: 인쇄 대화상자에서 '대상 → PDF로 저장'. 접힌 케이스 스터디는 CSS 로 모두 펼쳐 인쇄된다.
-document.getElementById('pdf').addEventListener('click',()=>window.print());
+const readyForPrint=()=>{
+  document.querySelectorAll('img[loading="lazy"]').forEach(i=>{i.loading='eager'; if(!i.src&&i.dataset.src) i.src=i.dataset.src;});
+  const pend=[...document.images].filter(i=>!i.complete);
+  if(!pend.length) return Promise.resolve();
+  return Promise.race([
+    Promise.all(pend.map(i=>new Promise(r=>{i.addEventListener('load',r,{once:true});i.addEventListener('error',r,{once:true});}))),
+    new Promise(r=>setTimeout(r,8000))          // 네트워크가 느려도 인쇄는 진행
+  ]);
+};
+document.getElementById('pdf').addEventListener('click',async()=>{ await readyForPrint(); window.print(); });
+// 브라우저 인쇄 단축키(⌘P)로 들어오는 경우 — 기다릴 수는 없지만 로딩은 시작시킨다
+window.addEventListener('beforeprint',readyForPrint);
 window.addEventListener('beforeprint',()=>{
   document.title = (lang()==='ko'?'이진희 포트폴리오 — ':'Jinhee Lee Portfolio — ')
     + new Date().toISOString().slice(0,10);

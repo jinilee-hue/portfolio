@@ -21,6 +21,16 @@ export function t(obj, fallback = '') {
   return obj[lang()] || obj.ko || obj.en || fallback;
 }
 
+/* 화면 기능 콜아웃. 문자열이면 텍스트만, {ko,en,at:[x,y]} 이면 스크린 % 좌표를 유지한다. */
+export function feat(f) {
+  if (f == null) return { text: '', at: null };
+  if (typeof f === 'string') return { text: f, at: null };
+  const at = Array.isArray(f.at) && f.at.length >= 2
+    ? [Number(f.at[0]), Number(f.at[1])]
+    : null;
+  return { text: t(f), at: at && Number.isFinite(at[0]) && Number.isFinite(at[1]) ? at : null };
+}
+
 export async function loadProjects() {
   // file:// 로 직접 열면 브라우저가 로컬 fetch 를 막는다.
   // 그 경우 배포된 데이터로 폴백해 '데이터 로드 실패' 대신 화면이 뜨게 한다.
@@ -60,14 +70,18 @@ export function pick(p) {
       src: asset(s.src || `assets/shots/${p.id}--${s.id}.jpg`),
       label: t(s.label),
       note: t(s.note),
+      features: (s.features || []).map(feat),
       device: s.device || 'desktop',
     })),
-    // 기기별 '이 화면에서' 설명. {label, note} 또는 {ko,en} 문장만 와도 된다.
+    // 기기별 '이 화면에서' 설명. {label, note, features[]} 또는 {ko,en} 문장만 와도 된다.
     shotNotes: Object.fromEntries(Object.entries(p.shot_notes || {}).map(([k, v]) => {
-      if (!v) return [k, { label: '', note: '' }];
-      if (typeof v === 'string') return [k, { label: '', note: v }];
-      if (v.note || v.label) return [k, { label: t(v.label), note: t(v.note) }];
-      return [k, { label: '', note: t(v) }];
+      if (!v) return [k, { label: '', note: '', features: [] }];
+      if (typeof v === 'string') return [k, { label: '', note: v, features: [] }];
+      if (v.note || v.label || v.features) return [k, {
+        label: t(v.label), note: t(v.note),
+        features: (v.features || []).map(feat),
+      }];
+      return [k, { label: '', note: t(v), features: [] }];
     })),
     pushed: (a.pushed_at || '').slice(0, 10),
     langs: a.languages || [],
@@ -77,6 +91,7 @@ export function pick(p) {
     concept: t(p.concept),
     flow: p.flow || [],
     stack: p.stack || [],
+    stackLine: Array.isArray(p.stack_line) ? p.stack_line.map(x=>t(x)).filter(Boolean) : [],
     decisions: p.decisions || [],
     // 작업 기간 — 수동 표기가 있으면 우선, 없으면 커밋 이력에서 산출
     period: t(p.period) || periodLabel(span),

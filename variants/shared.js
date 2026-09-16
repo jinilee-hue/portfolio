@@ -63,6 +63,7 @@ export function pick(p) {
     concept: t(p.concept),
     flow: p.flow || [],
     stack: p.stack || [],
+    stackLine: Array.isArray(p.stack_line) ? p.stack_line.map(x=>t(x)).filter(Boolean) : [],
     decisions: p.decisions || [],
     // 작업 기간 — 수동 표기가 있으면 우선, 없으면 커밋 이력에서 산출
     period: t(p.period) || periodLabel(span),
