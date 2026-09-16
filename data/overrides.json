@@ -375,7 +375,8 @@
     },
     "tools": [
       "Claude Code",
-      "Veo"
+      "Veo",
+      "Kling"
     ],
     "stack_line": [
       "Vanilla JS",
