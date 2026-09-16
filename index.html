@@ -254,7 +254,12 @@
     border-radius:2px 2px 5px 5px;background:linear-gradient(180deg,#3a3a3a,#161616);
     box-shadow:0 12px 24px rgba(0,0,0,.5)}
   .fly .t{width:28%;right:0;left:auto;top:auto;bottom:0;z-index:3}
-  .fly .t .shot{aspect-ratio:834/1112;border-radius:12px}
+  /* 비율은 이미지가 정한다 — 가로 태블릿(1112×834)도 같은 프레임을 쓴다.
+     aspect-ratio 를 세로로 고정하면 가로 촬영본이 찌그러진다. */
+  .fly .t .shot{border-radius:12px}
+  .fly .t .shot img{display:block;width:100%;height:auto}
+  /* 가로 태블릿은 세로보다 넓게 — 28% 면 화면이 너무 작게 보인다 */
+  .fly .t.is-land{width:40%}
   .fly .m{width:18%;right:24%;left:auto;bottom:0;z-index:2}
   .fly .m .shot{aspect-ratio:390/844;border-radius:12px}
   @media(max-width:959px){
@@ -1220,6 +1225,7 @@ function draw(){
               ${i===0?'fetchpriority="high"':'loading="lazy"'} decoding="async"
               onerror="this.closest('.frame').remove()"></span></span>`:''}
             ${tab?`<span class="frame t"><span class="shot"><img src="${tab.src}" alt="" loading="lazy" decoding="async"
+              onload="if(this.naturalWidth>this.naturalHeight)this.closest('.frame').classList.add('is-land')"
               onerror="this.closest('.frame').remove()"></span></span>`:''}
             ${mob?`<span class="frame m"><span class="shot"><img src="${mob.src}" alt="" loading="lazy" decoding="async"
               onerror="this.closest('.frame').remove()"></span></span>`:''}

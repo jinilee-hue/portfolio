@@ -4,7 +4,7 @@ data/projects.json 의 촬영 대상 URL을 실제로 열어 assets/shots/ 에 �
 
 기기별로 여러 컷을 찍는다:
     <id>.jpg          데스크톱 1440×900   (대표 · 목록 썸네일)
-    <id>--tablet.jpg  태블릿  834×1112
+    <id>--tablet.jpg  태블릿  834×1112 (가로형은 tablet-land, 1112×834)
     <id>--mobile.jpg  모바일  390×844
 
 기기 프레임(맥북 목업 등)은 씌우지 않는다. 실제 뷰포트로 찍은 화면을 실물 비율대로
@@ -35,6 +35,9 @@ SHOTS = ROOT / "assets" / "shots"
 DEVICES = {
     "desktop": {"width": 1440, "height": 900, "mobile": False, "suffix": ""},
     "tablet": {"width": 834, "height": 1112, "mobile": True, "suffix": "--tablet"},
+    # 가로 태블릿 — 슬라이드형·가로 고정 화면용. 파일명은 tablet 과 같아서
+    # 사이트는 그대로 '태블릿'으로 읽고, 비율만 실제 이미지에서 따라간다.
+    "tablet-land": {"width": 1112, "height": 834, "mobile": True, "suffix": "--tablet"},
     "mobile": {"width": 390, "height": 844, "mobile": True, "suffix": "--mobile"},
 }
 

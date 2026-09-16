@@ -117,7 +117,25 @@ def commit_span(owner: str, repo: str, tok: str | None) -> dict:
         total = int(m.group(1))
     oldest = api(f"/repos/{owner}/{repo}/commits?per_page=1&page={total}", tok)
     first_date = oldest[0]["commit"]["author"]["date"] if oldest else last_date
-    return {"first": first_date[:10], "last": last_date[:10], "commits": total}
+
+    # 실제로 커밋한 '날'의 수. 첫~마지막 달력 개월수는 손 놓은 기간까지 포함해
+    # 실제 투입을 부풀린다(예: 6월에 시작해 8월에 마무리 → "약 3개월").
+    # 작업일수를 세면 "7일"처럼 실제 들인 시간이 드러난다.
+    days: set[str] = set()
+    for page in range(1, min(total // 100 + 2, 11)):        # 최대 1,000 커밋
+        batch = api(f"/repos/{owner}/{repo}/commits?per_page=100&page={page}", tok)
+        if not batch:
+            break
+        for c in batch:
+            try:
+                days.add(c["commit"]["author"]["date"][:10])
+            except (KeyError, TypeError):
+                continue
+        if len(batch) < 100:
+            break
+
+    return {"first": first_date[:10], "last": last_date[:10], "commits": total,
+            "active_days": len(days) or 1}
 
 
 def dependencies(owner: str, repo: str, tok: str | None) -> list[str]:
@@ -215,7 +233,11 @@ def main() -> int:
         lasts = [s["last"] for s in spans if s.get("last")]
         if firsts and lasts:
             a["span"] = {"first": min(firsts), "last": max(lasts),
-                         "commits": sum(s.get("commits", 0) for s in spans)}
+                         "commits": sum(s.get("commits", 0) for s in spans),
+                         # 합친 저장소의 작업일이 겹칠 수 있어 합계는 과대평가다.
+                         # 정확한 합집합은 날짜 목록이 필요하므로 최댓값을 쓴다.
+                         "active_days": max((s.get("active_days", 0) for s in spans),
+                                            default=0)}
         # 언어 바이트 합산 후 상위 6개
         tot: dict[str, int] = {}
         for s in [a.get("lang_bytes") or {}] + [q["auto"].get("lang_bytes") or {} for q in parts]:

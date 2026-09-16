@@ -790,7 +790,7 @@
       "en": "The chosen direction pairs a solid blue field with a white wordmark and a single sparkle for the moment of understanding. The character is a lion, proportioned toward friendliness rather than majesty so a learning child never feels judged, with a LIO bandana tying character and brand into one object. Screens reuse the same blue so the character never reads as a sticker pasted onto the UI."
     },
     "shot_devices": [
-      "tablet",
+      "tablet-land",
       "desktop"
     ],
     "shot_selector": "#stage",

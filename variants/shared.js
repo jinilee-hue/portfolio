@@ -21,6 +21,16 @@ export function t(obj, fallback = '') {
   return obj[lang()] || obj.ko || obj.en || fallback;
 }
 
+/* 화면 기능 콜아웃. 문자열이면 텍스트만, {ko,en,at:[x,y]} 이면 스크린 % 좌표를 유지한다. */
+export function feat(f) {
+  if (f == null) return { text: '', at: null };
+  if (typeof f === 'string') return { text: f, at: null };
+  const at = Array.isArray(f.at) && f.at.length >= 2
+    ? [Number(f.at[0]), Number(f.at[1])]
+    : null;
+  return { text: t(f), at: at && Number.isFinite(at[0]) && Number.isFinite(at[1]) ? at : null };
+}
+
 export async function loadProjects() {
   // file:// 로 직접 열면 브라우저가 로컬 fetch 를 막는다.
   // 그 경우 배포된 데이터로 폴백해 '데이터 로드 실패' 대신 화면이 뜨게 한다.
@@ -55,6 +65,24 @@ export function pick(p) {
       src: asset((p.shots || {})[k] || p.shot),
       long: !!p.shot_long,   // 전체 페이지 캡처 → 목업 안에서 스크롤
     })),
+    scenes: (p.scenes || []).map(s => ({
+      id: s.id,
+      src: asset(s.src || `assets/shots/${p.id}--${s.id}.jpg`),
+      label: t(s.label),
+      note: t(s.note),
+      features: (s.features || []).map(feat),
+      device: s.device || 'desktop',
+    })),
+    // 기기별 '이 화면에서' 설명. {label, note, features[]} 또는 {ko,en} 문장만 와도 된다.
+    shotNotes: Object.fromEntries(Object.entries(p.shot_notes || {}).map(([k, v]) => {
+      if (!v) return [k, { label: '', note: '', features: [] }];
+      if (typeof v === 'string') return [k, { label: '', note: v, features: [] }];
+      if (v.note || v.label || v.features) return [k, {
+        label: t(v.label), note: t(v.note),
+        features: (v.features || []).map(feat),
+      }];
+      return [k, { label: '', note: t(v), features: [] }];
+    })),
     pushed: (a.pushed_at || '').slice(0, 10),
     langs: a.languages || [],
     featured: !!p.featured,
@@ -85,13 +113,22 @@ export function periodLabel(span, l = lang()) {
   if (!span || !span.first) return '';
   const [fy, fm] = span.first.split('-');
   const [ty, tm] = span.last.split('-');
+  const range = fy === ty
+    ? (fm === tm ? `${fy}.${fm}` : `${fy}.${fm}–${tm}`)
+    : `${fy}.${fm}–${ty}.${tm}`;
+
+  // 실제 커밋한 날의 수를 쓴다. 첫~마지막 달력 개월수는 손 놓은 기간까지 세어
+  // 투입을 부풀린다 — "약 3개월"보다 "작업 7일"이 실제로 들인 시간에 가깝다.
+  const days = Number(span.active_days) || 0;
+  if (days > 0) {
+    const dur = l === 'ko' ? `작업 ${days}일` : `${days} working ${days === 1 ? 'day' : 'days'}`;
+    return `${range} · ${dur}`;
+  }
+  // active_days 가 아직 수집되지 않은 데이터는 기존 표기로 물러난다
   const months = (Number(ty) - Number(fy)) * 12 + (Number(tm) - Number(fm)) + 1;
   const dur = l === 'ko'
     ? (months <= 1 ? '1개월 미만' : `약 ${months}개월`)
     : (months <= 1 ? 'under a month' : `~${months} months`);
-  const range = fy === ty
-    ? (fm === tm ? `${fy}.${fm}` : `${fy}.${fm}–${tm}`)
-    : `${fy}.${fm}–${ty}.${tm}`;
   return `${range} · ${dur}`;
 }
 

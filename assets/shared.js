@@ -113,13 +113,22 @@ export function periodLabel(span, l = lang()) {
   if (!span || !span.first) return '';
   const [fy, fm] = span.first.split('-');
   const [ty, tm] = span.last.split('-');
+  const range = fy === ty
+    ? (fm === tm ? `${fy}.${fm}` : `${fy}.${fm}–${tm}`)
+    : `${fy}.${fm}–${ty}.${tm}`;
+
+  // 실제 커밋한 날의 수를 쓴다. 첫~마지막 달력 개월수는 손 놓은 기간까지 세어
+  // 투입을 부풀린다 — "약 3개월"보다 "작업 7일"이 실제로 들인 시간에 가깝다.
+  const days = Number(span.active_days) || 0;
+  if (days > 0) {
+    const dur = l === 'ko' ? `작업 ${days}일` : `${days} working ${days === 1 ? 'day' : 'days'}`;
+    return `${range} · ${dur}`;
+  }
+  // active_days 가 아직 수집되지 않은 데이터는 기존 표기로 물러난다
   const months = (Number(ty) - Number(fy)) * 12 + (Number(tm) - Number(fm)) + 1;
   const dur = l === 'ko'
     ? (months <= 1 ? '1개월 미만' : `약 ${months}개월`)
     : (months <= 1 ? 'under a month' : `~${months} months`);
-  const range = fy === ty
-    ? (fm === tm ? `${fy}.${fm}` : `${fy}.${fm}–${tm}`)
-    : `${fy}.${fm}–${ty}.${tm}`;
   return `${range} · ${dur}`;
 }
 
