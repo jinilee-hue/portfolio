@@ -60,11 +60,16 @@ export function pick(p) {
     repo: a.repo,
     shot: asset(p.shot),
     // 기기별 컷. 파일이 없을 수 있으므로 렌더 쪽에서 onerror 로 제거한다.
-    shots: (p.shot_devices || ['desktop']).map(k => ({
-      device: k,
-      src: asset((p.shots || {})[k] || p.shot),
-      long: !!p.shot_long,   // 전체 페이지 캡처 → 목업 안에서 스크롤
-    })),
+    // tablet-land 는 '가로로 찍은 태블릿'이라 파일명·프레임은 tablet 과 같다.
+    // 별칭을 풀지 않으면 shots['tablet-land'] 가 없어 이미지가 통째로 빠진다.
+    shots: (p.shot_devices || ['desktop']).map(k => {
+      const key = k === 'tablet-land' ? 'tablet' : k;
+      return {
+        device: key,
+        src: asset((p.shots || {})[key] || p.shot),
+        long: !!p.shot_long,   // 전체 페이지 캡처 → 목업 안에서 스크롤
+      };
+    }),
     scenes: (p.scenes || []).map(s => ({
       id: s.id,
       src: asset(s.src || `assets/shots/${p.id}--${s.id}.jpg`),

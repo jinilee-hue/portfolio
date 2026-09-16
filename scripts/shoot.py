@@ -179,9 +179,11 @@ def main() -> int:
                         el = page.query_selector(job["selector"])
                         if el:
                             target = el          # 요소만 캡처 — 뷰어 셸과 여백이 빠진다
-                    full = job["full"] and target is page
-                    probe = target.screenshot(type="png", full_page=full)
-                    shot = target.screenshot(type="jpeg", quality=84, full_page=full)
+                    # ElementHandle.screenshot() 은 full_page 인자를 받지 않는다.
+                    # 요소 캡처일 때 넘기면 TypeError 로 촬영이 통째로 실패한다.
+                    opts = {"full_page": job["full"]} if target is page else {}
+                    probe = target.screenshot(type="png", **opts)
+                    shot = target.screenshot(type="jpeg", quality=84, **opts)
                 except Exception as e:
                     failed.append((f"{job['id']}/{dev}", str(e)[:70]))
                     ctx.close()

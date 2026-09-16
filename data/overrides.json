@@ -559,27 +559,27 @@
         },
         "features": [
           {
-            "ko": "토큰·컴포넌트·템플릿을 복사한다",
-            "en": "Copy tokens, components and a template",
+            "ko": "킷을 ZIP 하나로 내려받는다",
+            "en": "The whole kit downloads as one ZIP",
             "at": [
               22,
-              28
+              62
             ]
           },
           {
-            "ko": "코드 복사 버튼이 붙어 있다",
-            "en": "Each snippet has a copy button",
+            "ko": "AI 에이전트용 규약 프롬프트가 같이 간다",
+            "en": "Ships with a UI-contract prompt for AI agents",
             "at": [
-              50,
-              58
+              27,
+              73
             ]
           },
           {
-            "ko": "HANDOFF 문서와 감사 스크립트가 같이 간다",
-            "en": "HANDOFF notes and audit scripts ship with it",
+            "ko": "토큰·컴포넌트가 실제 화면 CSS에서 나왔다",
+            "en": "Tokens and components extracted from the live CSS",
             "at": [
-              18,
-              48
+              48,
+              73
             ]
           }
         ]
@@ -640,32 +640,40 @@
             "ko": "학번·이름으로 학생을 찾는다",
             "en": "Find a student by ID or name",
             "at": [
-              50,
-              25
+              40,
+              17
             ]
           },
           {
             "ko": "상태·레벨 필터로 목록을 좁힌다",
             "en": "Narrow the list with status and level filters",
             "at": [
-              35,
-              16
+              13,
+              17
+            ]
+          },
+          {
+            "ko": "4,932명을 한 테이블에서 훑는다",
+            "en": "Scan 4,932 records in one table",
+            "at": [
+              30,
+              38
             ]
           },
           {
             "ko": "행을 고르면 오른쪽에서 바로 편집한다",
             "en": "Pick a row and edit it in the right pane",
             "at": [
-              84,
-              49
+              81,
+              30
             ]
           },
           {
-            "ko": "저장·수납·전환을 같은 줄에서 처리한다",
+            "ko": "저장·수납·전환이 같은 줄에 있다",
             "en": "Save, billing and transfer sit on one row",
             "at": [
-              86,
-              23
+              78,
+              16
             ]
           }
         ]
@@ -686,8 +694,8 @@
       "en": "AI tutor brand, character and a 64-screen prototype"
     },
     "summary": {
-      "ko": "i-LENS 안에서 학생을 실시간 코칭하는 AI Tutor 엔진 LIO. 워드마크·컬러·타이포 후보 5안을 한 페이지에 정리해 투표로 방향을 정하고 채택된 B안으로 사자 캐릭터와 64화면 학습 흐름 프로토타입까지 이어서 만들었다.",
-      "en": "LIO is the AI tutor engine that coaches students inside i-LENS. Five brand candidates — wordmark, palette, type — were laid out on one page and settled by vote; the chosen direction then carried through to the lion character and a 64-screen learning-flow prototype."
+      "ko": "i-LENS 안에서 학생을 실시간 코칭하는 AI Tutor 엔진 LIO. 워드마크와 컬러·타이포를 정하고, 아이가 매일 만날 사자 캐릭터를 직접 만들고, 49슬라이드 화면정의서를 클릭으로 넘어가는 64화면 프로토타입까지 혼자 이었다. 같은 흐름을 두 디자인으로 구현해 비교했고 채택된 B안으로 마무리했다.",
+      "en": "LIO is the AI tutor that coaches students inside i-LENS. One pair of hands took it from wordmark, palette and type, through the lion character a child meets every day, to a 49-slide spec rebuilt as a clickable 64-screen prototype. The same flow was built twice and Design B was chosen."
     },
     "role": {
       "ko": "브랜드 아이덴티티 · 캐릭터 · 프로토타입 설계 · 구현",
@@ -781,100 +789,132 @@
       {
         "ko": "같은 흐름을 A(Storybook)·B(App UI) 두 벌로 만들어 비교했고 B가 채택됐다. 흐름 자체는 한 글자도 다르지 않게 두어 '흐름이 이상한 것'과 '톤이 안 맞는 것'을 분리해 말할 수 있게 했다.",
         "en": "The same flow was built twice — A (Storybook) and B (App UI) — and B was chosen. The flow itself was kept identical word for word so review could separate 'the flow is wrong' from 'the tone is wrong'."
+      },
+      {
+        "ko": "캐릭터를 그림으로 끝내지 않고 말하고 반응하는 상태로 만들었다. 지문에서 근거 문장을 짚으면 LIO 가 그 자리에서 답하고, 영어가 막히면 KR 버튼으로 같은 말을 한국어로 다시 듣는다. 정지된 시안으로는 '이 튜터가 곁에 있는 느낌'을 확인할 수 없어 프로토타입에서 직접 눌러 보게 했다.",
+        "en": "The character didn't stop at artwork — it speaks and reacts. Tap the sentence that supports the main idea and LIO answers on the spot; when the English stalls, KR replays the same line in Korean. A static mockup can't tell you whether a tutor feels present, so it had to be clickable."
       }
     ],
     "shot_path": "designB/index.html",
-    "shot_wait": 4000,
+    "shot_wait": 4200,
     "concept": {
       "ko": "채택된 B안은 파랑 단색 배경에 흰 워드마크, 오른쪽 위 sparkle 하나로 '깨달음의 순간'을 표시한다. 캐릭터는 사자 — 아이가 배우는 자리에서 평가받는 기분이 들지 않도록 위엄보다 친근함 쪽으로 비율을 잡고 목에 LIO 밴드너를 둘러 브랜드와 캐릭터를 한 몸으로 묶었다. 화면은 같은 파랑을 배경으로 써서 캐릭터가 UI 위에 얹힌 스티커처럼 보이지 않게 했다.",
       "en": "The chosen direction pairs a solid blue field with a white wordmark and a single sparkle for the moment of understanding. The character is a lion, proportioned toward friendliness rather than majesty so a learning child never feels judged, with a LIO bandana tying character and brand into one object. Screens reuse the same blue so the character never reads as a sticker pasted onto the UI."
     },
     "shot_devices": [
-      "tablet-land",
-      "desktop"
+      "desktop",
+      "tablet-land"
     ],
     "shot_selector": "#stage",
     "contribution": {
-      "plan": 70,
+      "plan": 100,
       "design": 100,
       "build": 100,
-      "qa": 80
+      "qa": 90
     },
     "scenes": [
       {
-        "id": "board",
-        "path": "index.html",
+        "id": "compare",
         "device": "desktop",
-        "wait": 3500,
+        "wait": 3800,
+        "path": "index.html",
         "label": {
-          "ko": "방향 비교",
-          "en": "Direction board"
+          "ko": "A·B 시안 비교",
+          "en": "Design A vs B"
         },
         "note": {
-          "ko": "후보를 한 페이지에 올려 그 자리에서 방향을 정한다.",
-          "en": "Candidates on one page so the direction is decided there, not guessed later."
+          "ko": "같은 학습 흐름을 두 가지 디자인으로 구현해 나란히 열어 비교했다. 채택된 것은 로열블루·3D 마스코트의 B안이다.",
+          "en": "The same flow, built twice — Storybook and App UI — opened side by side. Design B won."
         },
         "features": [
           {
-            "ko": "워드마크·컬러·타이포 후보를 한 보드에 나란히 둔다",
-            "en": "Brand candidates laid side by side on one board",
+            "ko": "같은 Flow 를 두 디자인으로 구현했다",
+            "en": "One flow, two design systems",
             "at": [
-              28,
+              34,
               50
             ]
           },
           {
-            "ko": "두 방향을 같은 조건에서 비교한다",
-            "en": "Two directions compared under the same conditions",
+            "ko": "양쪽을 실제로 열어 비교한다",
+            "en": "Both open as working prototypes",
             "at": [
-              72,
+              66,
               50
             ]
           }
         ]
+      },
+      {
+        "id": "game",
+        "device": "desktop",
+        "wait": 4200,
+        "path": "designB/index.html",
+        "eval": "(() => new Promise(r => { const i=document.querySelector('#pj-num,input[type=number],input'); if(i){ i.value=12; document.querySelector('#pj-go')?.click(); } setTimeout(r,2500); }))()",
+        "label": {
+          "ko": "학습 게임 화면",
+          "en": "Practice game"
+        },
+        "note": {
+          "ko": "읽기 다음에 바로 확인 문제가 붙는다. 학생이 고른 답에 따라 LIO 가 그 자리에서 반응한다.",
+          "en": "A check follows the reading immediately, and LIO responds to the answer on the spot."
+        },
+        "features": []
       }
     ],
     "shot_notes": {
-      "tablet": {
-        "label": {
-          "ko": "학습 흐름",
-          "en": "Learning flow"
-        },
-        "note": {
-          "ko": "채택된 B안으로 만든 64화면 프로토타입. 리뷰에서 슬라이드 번호가 곧 링크가 된다.",
-          "en": "The 64-screen prototype in the chosen direction. In review, a slide number is already a link."
-        },
+      "desktop": {
         "features": [
           {
-            "ko": "이전 · 다음으로 64화면을 이어 본다",
-            "en": "Step through all 64 screens",
+            "ko": "워드마크와 sparkle — 깨달음의 순간을 점 하나로",
+            "en": "Wordmark and a single sparkle for the moment it clicks",
             "at": [
-              11,
-              97
+              62,
+              33
             ]
           },
           {
-            "ko": "번호를 입력해 원하는 화면으로 건너뛴다",
-            "en": "Jump straight to a screen by number",
+            "ko": "직접 만든 사자 캐릭터, 목에 LIO 밴드너",
+            "en": "The lion, with the LIO bandana tying brand to character",
             "at": [
-              56,
-              97
+              27,
+              38
             ]
           },
           {
-            "ko": "인덱스로 전체 흐름을 한눈에 본다",
-            "en": "The index shows the whole flow at once",
+            "ko": "캐릭터와 화면이 같은 파랑 — 스티커처럼 얹히지 않게",
+            "en": "Character and screen share one blue so it never looks pasted on",
             "at": [
-              82,
-              97
+              50,
+              72
+            ]
+          }
+        ]
+      },
+      "tablet": {
+        "features": [
+          {
+            "ko": "지문에서 근거 문장을 직접 짚는다",
+            "en": "Tap the sentence in the passage that proves it",
+            "at": [
+              25,
+              30
             ]
           },
           {
-            "ko": "화면정의 오버레이로 의도를 같이 본다",
-            "en": "A spec overlay carries the intent with the screen",
+            "ko": "LIO 가 그 자리에서 코칭한다",
+            "en": "LIO coaches right there, turn by turn",
             "at": [
-              93,
-              97
+              73,
+              25
+            ]
+          },
+          {
+            "ko": "영어가 막히면 KR 로 같은 말을 듣는다",
+            "en": "KR replays the same line in Korean",
+            "at": [
+              78,
+              44
             ]
           }
         ]
@@ -884,7 +924,9 @@
       "Claude Code",
       "Midjourney",
       "Nano Banana"
-    ]
+    ],
+    "shot_url": "https://jinilee-hue.github.io/LIO_DESIGN/designB/index.html",
+    "shot_eval": "(() => new Promise(r => { const i=document.querySelector('#pj-num,input[type=number],input'); if(i){ i.value=20; document.querySelector('#pj-go')?.click(); } setTimeout(r, 2500); }))()"
   },
   "AI-Studio": {
     "featured": true,
