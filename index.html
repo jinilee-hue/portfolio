@@ -93,8 +93,10 @@
   @media(max-width:900px){.sig-name{left:0;bottom:-8%;font-size:clamp(2.4rem,12vw,4.2rem)}}
   /* 인쇄에서는 표제 글자 크기가 화면과 달라 서명이 본문을 덮는다.
      아래로 더 내리고 살짝 투명하게 — 표제 가독이 우선이다. */
-  @media print{.sig-name{text-shadow:none;bottom:-34%;opacity:.55;
-    font-size:clamp(2.6rem,7vw,5.4rem)}}
+  /* 인쇄에서도 화면과 같은 크기로 둔다. 종이 폭(A4 가로)이 1440px 뷰포트보다
+     좁아 vw 기반 clamp 가 자동으로 줄어드는데, 여기서 또 줄이면 표지에서
+     서명만 유독 작아진다. 그림자만 빼고 크기는 건드리지 않는다. */
+  @media print{.sig-name{text-shadow:none;bottom:-34%;opacity:.55}}
   .kick{font-family:var(--grot);font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
     color:var(--accent);margin:0 0 18px}
   h1{font-family:var(--disp);font-weight:400;font-variation-settings:'opsz' 120;
@@ -548,7 +550,11 @@
     /* 보드(화면 상세): 이어지는 장들 — 그림 단위로만 잘리게 */
     .board{border-radius:0;margin:0;padding:12mm 14mm}
     /* 그림 한 장이 지면 한 쪽을 차지한다 — 위로 몰리지 않게 세로 중앙에 둔다 */
-    .feats figure{min-height:170mm;align-content:center;page-break-after:always}
+    /* 부모가 grid 면 page-break-after 가 제대로 먹지 않아 도판 사이에
+       빈 장이 끼어든다. 인쇄에서는 block 흐름으로 되돌린 뒤 쪽을 나눈다. */
+    .feats{display:block!important;gap:0!important}
+    .feats figure{align-content:center;page-break-after:always;
+      break-inside:avoid;page-break-inside:avoid;margin:0}
     .feats figure:last-child{page-break-after:auto}
     .board .k{font-size:8pt;break-after:avoid;page-break-after:avoid}
     .feats{gap:6mm}
@@ -589,18 +595,30 @@
     html,body{background:var(--bg)!important}
     /* 100vh 는 인쇄 지면 높이와 어긋나 한 쪽을 넘겨 빈 페이지를 만든다.
        A4 가로(210mm)에서 위아래 패딩을 뺀 실제 사용 높이를 쓴다. */
-    .band{page-break-before:always;padding:12mm 14mm;min-height:186mm;box-sizing:border-box;
+    /* min-height 로 지면을 채우면 제목만 남고 본문이 다음 장으로 밀린다.
+       높이는 내용에 맡기고, 제목과 본문이 갈라지지 않게 통째로 묶는다. */
+    .band{page-break-before:always;padding:12mm 14mm;box-sizing:border-box;
+      break-inside:avoid;page-break-inside:avoid;
       background:var(--bg)!important;color:var(--fg)!important}
     .band:last-of-type{page-break-after:avoid}
-    #credits{page-break-before:always;page-break-after:avoid}
+    /* 자격증·수상은 커리어와 같은 장에 이어 붙인다. .band 의 강제 개쪽과
+       min-height 를 함께 풀어야 한다 — 둘 중 하나만 풀면 여전히 밀린다.
+       분량이 적어 커리어 아래 남는 공간에 들어간다. */
+    #credits{page-break-before:avoid!important;page-break-after:avoid;
+      break-inside:avoid;min-height:0!important;padding-top:0}
     .creds > div{break-inside:avoid;page-break-inside:avoid}
     .creds h2{break-after:avoid;page-break-after:avoid}
     .credl li{break-inside:avoid}
     /* 문서 끝 여백이 한 쪽을 더 만들지 않게 */
     #credits,main,body{margin-bottom:0!important;padding-bottom:0!important}
     main{page-break-after:avoid}
-    .band h2{font-size:16pt}
-    .ctime{display:block!important;columns:2;column-gap:14mm}
+    .band h2{font-size:16pt;break-after:avoid;page-break-after:avoid}
+    /* 화면은 8열 가로 타임라인이다. columns 로 바꾸면 세로로 흘러 담기고
+       단 구분선까지 생겨 화면과 전혀 달라진다. 같은 grid 를 쓰되 지면 폭에
+       맞춰 4열 두 줄로 접는다 — 가로로 흐르는 성질은 그대로 남는다. */
+    .ctime{display:grid!important;grid-template-columns:repeat(4,1fr);
+      column-gap:8mm;row-gap:7mm;align-content:start}
+    .ctime > li{width:auto;min-width:0}
     .ctime > li{break-inside:avoid;margin:0 0 5mm;
       grid-template-columns:5mm minmax(0,1fr)!important;column-gap:4mm}
     .ctime h3{font-size:12pt!important;margin:0}

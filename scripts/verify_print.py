@@ -122,6 +122,8 @@ def blank_pages(pdf_path: str) -> list[int]:
     지면 넘침으로 생긴 공백 페이지를 잡는다. pdftotext 로 글자를, 없으면
     콘텐츠 스트림 길이로 판정한다 — 둘 다 없으면 검사를 건너뛴다.
     """
+    # 배경색만 칠해진 쪽은 콘텐츠 스트림이 비어 보이지 않으므로
+    # 글자 유무를 우선 기준으로 삼는다.
     try:
         import pypdf
     except ImportError:
@@ -136,9 +138,9 @@ def blank_pages(pdf_path: str) -> list[int]:
             text = (page.extract_text() or "").strip()
         except Exception:
             continue
-        # 글자가 거의 없고 그림도 없으면 빈 쪽
-        has_image = "/Image" in str(page.get("/Resources", {}))
-        if len(text) < 12 and not has_image:
+        # 배경 이미지만 깔린 쪽도 빈 쪽이다 — 그림 유무로 봐주면
+        # 배경색이 칠해진 공백 장을 놓친다. 글자를 기준으로 판정한다.
+        if len(text) < 12:
             blanks.append(i)
     return blanks
 
