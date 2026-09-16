@@ -347,27 +347,43 @@
         },
         "features": [
           {
-            "ko": "자막 on/off — 본문을 접어 영상에 집중한다",
-            "en": "Caption toggle — fold the text to watch the scene",
+            "ko": "이전 · 다음 쪽으로 11쪽을 넘긴다",
+            "en": "Page through all 11 spreads",
+            "at": [
+              33,
+              95
+            ]
+          },
+          {
+            "ko": "단어장을 열어 뜻을 확인한다",
+            "en": "Open the glossary panel",
+            "at": [
+              42,
+              95
+            ]
+          },
+          {
+            "ko": "책을 접어 영상에 집중한다",
+            "en": "Fold the text away to focus on the video",
             "at": [
               48,
-              93
+              95
             ]
           },
           {
-            "ko": "PAGE · NEXT로 11쪽을 넘긴다",
-            "en": "PAGE and NEXT step through 11 spreads",
+            "ko": "따라 읽기로 읽는 단어를 짚는다",
+            "en": "Read-along highlights each word",
             "at": [
-              32,
-              93
+              55,
+              95
             ]
           },
           {
-            "ko": "TTS 재생과 음소거",
-            "en": "Read-aloud and mute",
+            "ko": "소리를 켜고 끈다",
+            "en": "Toggle narration audio",
             "at": [
-              60,
-              93
+              61,
+              95
             ]
           }
         ]

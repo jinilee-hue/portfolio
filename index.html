@@ -27,7 +27,9 @@
     font-size:16px;line-height:1.7;letter-spacing:-.003em;overflow-x:hidden;
     -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
   /* 고정 헤더가 스크롤 목적지를 가리지 않도록 (WCAG 2.4.11 Focus Not Obscured) */
-  :where(h2,h3,.case,.band,[id]){scroll-margin-top:72px}
+  /* 고정 헤더(63px) + 그 아래 붙는 PORTFOLIO 바(52px) 를 함께 비켜야 한다.
+     72px 이면 바 높이만큼 가려져 좌우 버튼 줄에서 시작한 것처럼 보인다. */
+  :where(h2,h3,.case,.band,[id]){scroll-margin-top:124px}
   a{color:inherit}
   .wrap{max-width:1500px;margin:0 auto;padding:0 clamp(16px,4vw,56px)}
 
@@ -89,7 +91,7 @@
     transform:rotate(-6deg) translateX(-12px);opacity:.9;
     text-shadow:0 2px 24px rgba(255,95,162,.3)}
   @media(max-width:900px){.sig-name{left:0;bottom:-8%;font-size:clamp(2.4rem,12vw,4.2rem)}}
-  @media print{.sig-name{color:#E14C8B;opacity:.9;text-shadow:none}}
+  @media print{.sig-name{text-shadow:none}}
   .kick{font-family:var(--grot);font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
     color:var(--accent);margin:0 0 18px}
   h1{font-family:var(--disp);font-weight:400;font-variation-settings:'opsz' 120;
@@ -473,41 +475,35 @@
 
   /* ── 인쇄 / PDF 저장 ──────────────────────────────
      브라우저의 '대상: PDF로 저장' 으로 벡터 텍스트 PDF 가 나온다.
-     화면용 다크 테마를 흰 종이로 뒤집고, 케이스 스터디는 전부 펼쳐 인쇄한다. */
+     화면과 똑같이 어두운 지면으로 내보낸다 — 흰 종이로 뒤집으면 무대 위 밝은 글자가
+     흰 배경에 얹혀 사라지는 구간이 생긴다. 배경 인쇄는 print-color-adjust 로 강제한다. */
   @media print{
     /* 가로(A4 landscape) 전용. 구성: 표지 1장 + 프로젝트당 1~2장(무대/보드) + 커리어 */
-    @page{size:A4 landscape;margin:9mm 12mm}
-    :root{--bg:#fff;--fg:#000;--fg-55:#333;--fg-28:#666;--line:#c9c9c9;--accent:#00655A;
-      --venn-fill:rgba(255,95,162,.18)}
-    html,body{background:#fff!important;color:#000!important;font-size:12px}
+    @page{size:A4 landscape;margin:9mm 12mm;background:#0A0A0A}
+    *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+    /* 다크 토큰을 인쇄에서도 그대로 유지 (라이트 모드 사용자도 동일하게 나오도록 고정값) */
+    :root{--bg:#0A0A0A;--fg:#F3F6F5;--fg-55:rgba(243,246,245,.78);--fg-28:rgba(243,246,245,.52);
+      --line:rgba(243,246,245,.16);--accent:#2AF0CE;--wire:#2AF0CE;
+      --venn-fill:rgba(255,95,162,.19)}
+    html,body{background:#0A0A0A!important;color:#F3F6F5!important;font-size:12px}
     header,.pager,.play,.no-print{display:none!important}
     .wrap{max-width:none;padding:0}
 
     /* 표지 — 가로 한 장, 세로 중앙 */
     .open{min-height:calc(210mm - 18mm);display:flex;flex-direction:column;
       justify-content:center;padding:0;page-break-after:always}
-    .open h1{font-size:44pt!important;line-height:1.06;color:#000!important}
-    .open .kick{font-size:11pt;color:#00655A}
-    .openfoot{border-top:1px solid #ccc;padding-top:6mm;margin-top:12mm}
+    .open h1{font-size:44pt!important;line-height:1.06}
+    .open .kick{font-size:11pt}
+    .openfoot{border-top:1px solid var(--line);padding-top:6mm;margin-top:12mm}
     .lede{max-width:none}
-    .lede p{font-size:11pt;line-height:1.65;max-width:none;color:#333}
+    .lede p{font-size:11pt;line-height:1.65;max-width:none}
     .venn{--d:22mm;margin-top:4mm}
-    .venn b{color:#10211C!important;font-size:6.5pt;letter-spacing:.06em}
-    .counts dd{font-size:20pt;color:#000}
-    .counts dt{color:#888}
+    .venn b{font-size:6.5pt;letter-spacing:.06em}
+    .counts dd{font-size:20pt}
 
-    /* 숨긴 슬라이드도 전부 출력 + 다크 무대를 흰 지면으로 강제 반전 */
+    /* 숨긴 슬라이드도 전부 출력 — 색은 화면 그대로 둔다 */
     .show{display:block!important}
     .show[hidden]{display:block!important}
-    .show,.splash,.splash *{background-color:transparent!important}
-    .show{background:#fff!important;color:#000!important}
-    .splash{background:#fff!important}
-    .copy,.copy *{color:#111!important}
-    .copy .kick,.splash-meta .k{color:#00655A!important}
-    .copy .num,.facts dt,.cg-l{color:#888!important}
-    .facts dd,.cg-v{color:#222!important}
-    .cg-t{background:#e8e8e8!important}
-    .cg-t i{background:#00655A!important}
 
     /* 무대(기기 목업+개요): 프로젝트당 첫 장 */
     .splash{display:grid!important;grid-template-columns:1.35fr 1fr;
@@ -523,42 +519,27 @@
     .splash-meta.m3 .overview{grid-column:auto!important}
     .overview p:not(.k){color:#333!important;font-size:8.5pt;line-height:1.55;margin-bottom:.5em}
     .splash-meta .cgrid{max-width:80mm}
-    .fly .d,.fly .t,.fly .m{box-shadow:none;background:#eee;border:1px solid #ddd}
-    .fly .d::before{background:#ddd!important}
-    .fly .d::after{background:#ccc!important;box-shadow:none!important}
-    .shot{background:#f4f4f4}
     .shot img{filter:none!important;transform:none!important}
-    .copy .num{color:#999}
-    .copy h2{font-size:20pt!important;color:#000!important}
+    .copy h2{font-size:20pt!important}
     .copy .kick{font-size:9pt}
-    .copy .sum{font-size:10.5pt;color:#333;max-width:none}
-    .facts dt{color:#888;font-size:7.5pt}
-    .facts dd{color:#222;font-size:9.5pt}
-    .splash-meta .k{color:#00655A;font-size:8pt}
-    .cg-l{color:#777}
-    .cg-t{background:#e8e8e8}
-    .cg-t i{background:#00655A}
-    .cg-v{color:#222}
+    .copy .sum{font-size:10.5pt;max-width:none}
+    .facts dt{font-size:7.5pt}
+    .facts dd{font-size:9.5pt}
+    .splash-meta .k{font-size:8pt}
 
     /* 보드(화면 상세): 이어지는 장들 — 그림 단위로만 잘리게 */
-    .board{background:#fff;color:#000;--wire:#00655A;border-radius:0;margin:0;padding:0}
-    .board .k{color:#00655A;font-size:8pt;break-after:avoid;page-break-after:avoid}
+    .board{border-radius:0;margin:0;padding:0}
+    .board .k{font-size:8pt;break-after:avoid;page-break-after:avoid}
     .feats{gap:6mm}
     .feats figure{break-inside:avoid;gap:5mm}
     .feats .ph .shot img{max-height:118mm!important}
     .feats .ph .shot.is-portrait img{max-height:128mm!important}
     .feats .stage{grid-template-columns:minmax(28mm,1fr) auto minmax(28mm,1fr)!important;gap:0 2mm}
-    .feats .ph{box-shadow:none;border:1px solid #ccc;background:#e9e9e9;padding:1.5mm}
     .feats .ph-desktop{--neck:6mm;--base:1.2mm;margin-bottom:9mm;padding:1.5mm 1.5mm 3mm}
-    .feats .ph-desktop::before{background:#ddd!important}
-    .feats .ph-desktop::after{background:#ccc!important;box-shadow:none!important}
-    .feats .pins li{box-shadow:0 0 0 1.5pt #fff;background:#00655A}
-    .feats .anns .ttl{font-size:8pt;color:#222}
-    .feats .anns .adot{box-shadow:0 0 0 2pt #fff;background:#00655A}
-    .feats .ph .shot{background:#f4f4f4}
-    .feats figcaption > b{font-size:12pt;color:#000}
-    .feats figcaption .note{font-size:9pt;color:#333}
-    .feats figcaption ol.loose li{font-size:8.5pt;color:#333}
+    .feats .anns .ttl{font-size:8pt}
+    .feats figcaption > b{font-size:12pt}
+    .feats figcaption .note{font-size:9pt}
+    .feats figcaption ol.loose li{font-size:8.5pt}
 
     /* 커리어 + 푸터 */
     .band{page-break-before:always}
@@ -570,7 +551,7 @@
     /* 문서 끝 여백이 한 쪽을 더 만들지 않게 */
     #credits,main,body{margin-bottom:0!important;padding-bottom:0!important}
     main{page-break-after:avoid}
-    .band h2{font-size:16pt;color:#000}
+    .band h2{font-size:16pt}
     .ctime{display:block!important;columns:2;column-gap:14mm}
     .ctime > li{break-inside:avoid;margin:0 0 5mm;
       grid-template-columns:5mm minmax(0,1fr)!important;column-gap:4mm}
@@ -578,17 +559,13 @@
     .ctime .org{font-size:9pt;margin-top:1mm}
     .ctime .when{font-size:8pt}
     .ctime .when .span{margin-top:0.6mm}
-    .ctime .dot-b{width:9px;height:9px;border:0;background:#bbb;box-shadow:0 0 0 3pt #fff}
+    .ctime .dot-b{width:9px;height:9px;border:0;background:var(--fg-28);
+      box-shadow:0 0 0 3pt var(--bg)}
     .ctime .dot-b svg{display:none}
-    .ctime li.now .dot-b{background:#00655A}
-    .ctime .when{color:#888}
-    .ctime li.now .when{color:#00655A}
-    .ctime h3{color:#000}
-    .ctime .org,.ctime .note{color:#333}
-    .ctime .tags li{border-color:#ccc;color:#333}
-    .ctime .dot{background:#bbb;box-shadow:0 0 0 4px #fff}
-    .ctime li.now .dot{background:#00655A}
-    a{color:#000;text-decoration:none}
+    .ctime li.now .dot-b{background:var(--accent)}
+    .ctime .dot{background:var(--fg-28);box-shadow:0 0 0 4px var(--bg)}
+    .ctime li.now .dot{background:var(--accent)}
+    a{color:inherit;text-decoration:none}
   }
   /* 모바일 히어로: 고정 헤더가 흐름으로 바뀌므로 하단 정렬과 뷰포트 높이를 해제한다.
      .open 정의 뒤에 와야 캐스케이드에서 이긴다. */
