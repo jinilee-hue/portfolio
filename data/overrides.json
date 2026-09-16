@@ -629,27 +629,35 @@
         },
         "features": [
           {
-            "ko": "검색으로 학생을 찾는다",
-            "en": "Search to find a student",
+            "ko": "학번·이름으로 학생을 찾는다",
+            "en": "Find a student by ID or name",
             "at": [
-              52,
-              28
+              50,
+              25
             ]
           },
           {
-            "ko": "대량 테이블에서 목록을 스캔한다",
-            "en": "Scan a dense table of rows",
+            "ko": "상태·레벨 필터로 목록을 좁힌다",
+            "en": "Narrow the list with status and level filters",
             "at": [
-              40,
-              58
+              35,
+              16
             ]
           },
           {
-            "ko": "행을 열어 바로 편집한다",
-            "en": "Open a row and edit in place",
+            "ko": "행을 고르면 오른쪽에서 바로 편집한다",
+            "en": "Pick a row and edit it in the right pane",
             "at": [
-              82,
-              38
+              84,
+              49
+            ]
+          },
+          {
+            "ko": "저장·수납·전환을 같은 줄에서 처리한다",
+            "en": "Save, billing and transfer sit on one row",
+            "at": [
+              86,
+              23
             ]
           }
         ]
@@ -1662,26 +1670,34 @@
         "features": [
           {
             "ko": "6개 파일 ZIP(40KB)을 내려받는다",
-            "en": "Download a 40KB zip of six files",
+            "en": "Download the 6-file ZIP (40KB)",
             "at": [
-              42,
-              18
+              43,
+              54
             ]
           },
           {
-            "ko": "AI 에이전트에 붙여넣는 UI 규약 프롬프트가 같이 간다",
-            "en": "A UI-contract prompt to paste into an AI agent",
+            "ko": "캠퍼스 데모로 바로 확인한다",
+            "en": "Open the campus demo to see it running",
             "at": [
-              50,
-              82
+              55,
+              54
             ]
           },
           {
-            "ko": "라이트/다크 토큰과 차트 색이 킷 안에 있다",
-            "en": "Light/dark tokens and chart colours ship in the kit",
+            "ko": "AI 에이전트용 UI 규약 프롬프트가 같이 간다",
+            "en": "Ships with a UI-contract prompt for AI agents",
             "at": [
-              50,
-              32
+              25,
+              92
+            ]
+          },
+          {
+            "ko": "디자인 토큰과 컴포넌트 스타일이 킷 안에 있다",
+            "en": "Tokens and component styles live in the kit",
+            "at": [
+              61,
+              92
             ]
           }
         ]
@@ -1882,27 +1898,35 @@
         },
         "features": [
           {
-            "ko": "Poly 킷 구조 그대로 내려받는다",
-            "en": "Download the same Poly kit structure",
+            "ko": "Poly 킷 구조 그대로 ZIP을 내려받는다",
+            "en": "Same kit structure as Poly, downloaded as a ZIP",
             "at": [
-              42,
-              18
+              43,
+              54
+            ]
+          },
+          {
+            "ko": "CANB 캠퍼스 데모로 확인한다",
+            "en": "Check it in the CANB campus demo",
+            "at": [
+              55,
+              54
             ]
           },
           {
             "ko": "토큰 계층만 마젠타(#BC216D)로 바꾼다",
-            "en": "Only the token layer is magenta (#BC216D)",
+            "en": "Only the token layer switches to magenta",
             "at": [
-              50,
-              32
+              49,
+              92
             ]
           },
           {
-            "ko": "브랜드가 늘어도 화면을 다시 그리지 않는지 여기서 확인한다",
-            "en": "A live check that a new brand does not mean redrawing screens",
+            "ko": "컴포넌트는 손대지 않고 그대로 쓴다",
+            "en": "Components carry over untouched",
             "at": [
-              50,
-              18
+              73,
+              92
             ]
           }
         ]
@@ -2046,26 +2070,26 @@
         "features": [
           {
             "ko": "심층탐구 · 일상기록 · 세상 속으로 섹션을 나눈다",
-            "en": "Sections for in-depth, daily notes and the wider world",
+            "en": "Insights, Life Log and Inside the World",
             "at": [
-              20,
-              32
+              34,
+              4
             ]
           },
           {
-            "ko": "영상 기사를 글과 같이 둔다",
-            "en": "Video pieces sit with the text",
+            "ko": "영상 기사를 글과 같은 자리에 둔다",
+            "en": "Video stories sit alongside the written ones",
             "at": [
-              50,
-              16
+              30,
+              46
             ]
           },
           {
             "ko": "지난 호를 계속 쌓아 아카이브로 남긴다",
-            "en": "Back issues accumulate as an archive",
+            "en": "Past issues stack up as an archive",
             "at": [
-              50,
-              88
+              88,
+              86
             ]
           }
         ]

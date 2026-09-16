@@ -482,7 +482,9 @@
      흰 배경에 얹혀 사라지는 구간이 생긴다. 배경 인쇄는 print-color-adjust 로 강제한다. */
   @media print{
     /* 가로(A4 landscape) 전용. 구성: 표지 1장 + 프로젝트당 1~2장(무대/보드) + 커리어 */
-    @page{size:A4 landscape;margin:9mm 12mm}
+    /* 풀블리드: 지면 여백을 0 으로 두고, 안쪽 여백은 섹션이 각자 갖는다.
+       무대·보드(어두운 면)는 종이 끝까지 차고, 표지·커리어만 안쪽 패딩을 준다. */
+    @page{size:A4 landscape;margin:0}
     *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
     /* 토큰을 덮어쓰지 않는다 — 표지는 화면 테마를 그대로 따라가고(라이트면 흰 표지),
        무대·보드는 원래 항상 어두운 면이라 그대로 어둡게 나온다. 이게 '화면과 동일'이다. */
@@ -491,8 +493,10 @@
     .wrap{max-width:none;padding:0}
 
     /* 표지 — 가로 한 장, 세로 중앙 */
-    .open{min-height:calc(210mm - 18mm);display:flex;flex-direction:column;
-      justify-content:center;padding:0;page-break-after:always}
+    /* 표지는 화면 테마를 따른다 — html 을 검게 깔았으므로 여기서 되돌린다. */
+    .open{min-height:100vh;box-sizing:border-box;display:flex;flex-direction:column;
+      justify-content:center;padding:12mm 14mm;page-break-after:always;
+      background:var(--bg)}
     .open h1{font-size:44pt!important;line-height:1.06}
     .open .kick{font-size:11pt}
     .openfoot{border-top:1px solid var(--line);padding-top:6mm;margin-top:12mm}
@@ -509,7 +513,7 @@
     /* 무대(기기 목업+개요): 프로젝트당 첫 장 */
     .splash{display:grid!important;grid-template-columns:1.35fr 1fr;
       grid-template-rows:1fr auto;grid-template-areas:"fly copy" "meta meta"!important;
-      gap:6mm;align-items:stretch;min-height:calc(210mm - 18mm);
+      gap:6mm;align-items:stretch;min-height:210mm;padding:12mm 14mm;
       page-break-before:always;page-break-after:always;break-inside:avoid}
     .fly{position:relative;grid-area:fly;height:auto!important;min-height:95mm;order:0;
       --neck:6mm;--base:1.2mm;--head:0mm}
@@ -529,21 +533,46 @@
     .splash-meta .k{font-size:8pt}
 
     /* 보드(화면 상세): 이어지는 장들 — 그림 단위로만 잘리게 */
-    .board{border-radius:0;margin:0;padding:0}
+    .board{border-radius:0;margin:0;padding:12mm 14mm}
     .board .k{font-size:8pt;break-after:avoid;page-break-after:avoid}
     .feats{gap:6mm}
     .feats figure{break-inside:avoid;gap:5mm}
     .feats .ph .shot img{max-height:118mm!important}
     .feats .ph .shot.is-portrait img{max-height:128mm!important}
-    .feats .stage{grid-template-columns:minmax(28mm,1fr) auto minmax(28mm,1fr)!important;gap:0 2mm}
+    /* 좁은 뷰포트로 인쇄하면 max-width:879px 모바일 분기가 걸려 주석이 한 줄로 쌓이고
+       점선(svg.wires)이 사라진다. 지면은 항상 가로 A4 이므로 데스크톱 배치를 되살린다. */
+    .feats .stage{display:grid!important;
+      grid-template-columns:minmax(28mm,1fr) auto minmax(28mm,1fr)!important;gap:0 2mm}
+    .feats .ph{grid-column:2!important;order:0!important}
+    .feats .anns{display:block!important;position:relative!important}
+    .feats .anns.left{grid-column:1!important}
+    .feats .anns.right{grid-column:3!important}
+    .feats .anns li{position:absolute!important;left:0;right:0;
+      display:flex!important;align-items:center;gap:2mm}
+    .feats .anns.left li{justify-content:flex-end;text-align:right;flex-direction:row-reverse}
+    .feats .anns.right li{justify-content:flex-start;text-align:left;flex-direction:row}
+    .feats svg.wires{display:block!important}
     .feats .ph-desktop{--neck:6mm;--base:1.2mm;margin-bottom:9mm;padding:1.5mm 1.5mm 3mm}
     .feats .anns .ttl{font-size:8pt}
     .feats figcaption > b{font-size:12pt}
     .feats figcaption .note{font-size:9pt}
     .feats figcaption ol.loose li{font-size:8.5pt}
 
-    /* 커리어 + 푸터 */
-    .band{page-break-before:always}
+    /* 커리어 + 자격증 — 화면과 동일한 면. 여백 0 지면이므로 안쪽 패딩을 준다. */
+    /* 화면에서 이 섹션은 투명 배경 위로 body(#0A0A0A)가 비친다.
+       인쇄는 body 배경을 깔지 않으므로 같은 색을 직접 준다. --bg 를 쓰면
+       라이트 모드에서 흰색으로 뒤집혀 화면과 달라진다. */
+    /* 지면 여백 0 이라 섹션 배경만으로는 위아래 흰 띠가 남는다.
+       html/body 에도 같은 색을 깔아 종이 전체를 채운다. */
+    html,body{background:#0A0A0A!important}
+    .band{page-break-before:always;padding:12mm 14mm;min-height:100vh;box-sizing:border-box;
+      background:#0A0A0A!important;color:#F3F6F5!important}
+    .band h2,.band h3,.band b{color:#F3F6F5!important}
+    .ctime .org,.ctime .note,.credl span{color:rgba(243,246,245,.78)!important}
+    .ctime .when,.credl b{color:rgba(243,246,245,.52)!important}
+    .ctime li.now .when{color:#2AF0CE!important}
+    .ctime .tags li{border-color:rgba(243,246,245,.16)!important;
+      color:rgba(243,246,245,.78)!important}
     .band:last-of-type{page-break-after:avoid}
     #credits{page-break-before:always;page-break-after:avoid}
     .creds > div{break-inside:avoid;page-break-inside:avoid}
@@ -1058,7 +1087,10 @@ function draw(){
       if(!stage||!svg) return;
       const paint=()=>{
         if(fig.closest('[hidden]')){ svg.innerHTML=''; return; }
-        if(window.matchMedia('(max-width:879px)').matches){ svg.innerHTML=''; return; }
+        // 인쇄/PDF 는 항상 가로 A4 라 좁은 뷰포트여도 데스크톱 배치로 나간다.
+        // 이때 선을 지우면 지면에 점선이 사라지므로 print 중에는 계속 그린다.
+        const printing=window.matchMedia('print').matches;
+        if(!printing && window.matchMedia('(max-width:879px)').matches){ svg.innerHTML=''; return; }
         const sr=stage.getBoundingClientRect();
         if(sr.width<8) return;
         svg.setAttribute('viewBox',`0 0 ${sr.width} ${sr.height}`);
