@@ -814,17 +814,68 @@
     },
     "scenes": [
       {
+        "id": "character",
+        "device": "desktop",
+        "wait": 4200,
+        "path": "designB/index.html",
+        "eval": "(() => new Promise(r => { const i=document.querySelector('#pj-num,input[type=number],input'); if(i){ i.value=7; document.querySelector('#pj-go')?.click(); } setTimeout(r,2600); }))()",
+        "label": {
+          "ko": "캐릭터 — 평가자가 아니라 옆에 앉은 친구",
+          "en": "Character — a friend beside you, not a grader"
+        },
+        "note": {
+          "ko": "사자를 고른 이유는 '잘한다'고 말해줄 존재가 필요해서였다. 다만 왕이나 심판처럼 보이면 아이가 채점당하는 기분이 든다. 그래서 머리를 몸보다 크게 잡고 갈기를 둥글려 위엄을 덜어냈고, 눈높이를 정면보다 살짝 아래로 두어 내려다보지 않게 했다. 목에 두른 LIO 밴드너는 캐릭터와 워드마크를 한 몸으로 묶는 장치다 — 캐릭터만 떼어 놔도 어느 브랜드인지 읽힌다. 표정과 포즈는 Midjourney 로 시안을 넓게 뽑고 Nano Banana 로 갈기·비율·손 모양을 다듬어 인사·설명·칭찬·되묻기 네 가지 상태로 정리했다.",
+          "en": "The lion exists to say 'you've got this.' But a king or a judge makes a child feel graded, so the head runs larger than the body, the mane is rounded off, and the eyeline sits just below straight-on — never looking down. The LIO bandana ties character to wordmark: lift the lion out on its own and the brand still reads. Poses were explored wide in Midjourney, then refined in Nano Banana into four states — greeting, explaining, praising, asking back."
+        },
+        "features": [
+          {
+            "ko": "머리를 크게, 갈기를 둥글려 위엄 대신 친근함",
+            "en": "Bigger head, rounder mane — friendly over regal",
+            "at": [
+              30,
+              34
+            ]
+          },
+          {
+            "ko": "목의 LIO 밴드너가 캐릭터와 브랜드를 묶는다",
+            "en": "The bandana ties character to brand",
+            "at": [
+              32,
+              62
+            ]
+          }
+        ],
+        "selector": "#stage"
+      },
+      {
+        "id": "game",
+        "device": "desktop",
+        "wait": 4200,
+        "path": "designB/index.html",
+        "eval": "(() => new Promise(r => { const i=document.querySelector('#pj-num,input[type=number],input'); if(i){ i.value=12; document.querySelector('#pj-go')?.click(); } setTimeout(r,2600); }))()",
+        "label": {
+          "ko": "확인 문제 — 읽은 직후에 바로",
+          "en": "Check — right after the reading"
+        },
+        "note": {
+          "ko": "읽기와 문제를 다른 화면으로 떼어 놓으면 아이가 지문을 잊은 채 문제를 푼다. 그래서 같은 흐름 안에서 읽은 직후에 확인 문제가 따라붙게 했다. 답을 고르면 정답 여부만 뜨는 게 아니라 LIO 가 그 선택을 근거로 되짚어준다. 틀린 답에도 반응을 준비해 둔 이유는, 오답 화면에서 아이가 가장 많이 이탈하기 때문이다.",
+          "en": "Split the reading and the questions across screens and the child answers with the passage already gone. So the check follows immediately, inside the same flow. Picking an answer doesn't just return right or wrong — LIO walks back through that choice. Wrong answers get a prepared response because that's the screen children abandon most."
+        },
+        "features": [],
+        "selector": "#stage"
+      },
+      {
         "id": "compare",
         "device": "desktop",
         "wait": 3800,
         "path": "index.html",
         "label": {
-          "ko": "A·B 시안 비교",
-          "en": "Design A vs B"
+          "ko": "시안 비교 — 같은 흐름을 두 벌로",
+          "en": "Two builds of one flow"
         },
         "note": {
-          "ko": "같은 학습 흐름을 두 가지 디자인으로 구현해 나란히 열어 비교했다. 채택된 것은 로열블루·3D 마스코트의 B안이다.",
-          "en": "The same flow, built twice — Storybook and App UI — opened side by side. Design B won."
+          "ko": "A(Storybook)는 숲·우드사인·양피지 톤으로 그림책에 가깝고, B(App UI)는 로열블루·3D 마스코트·컬러 카드로 앱에 가깝다. 흐름 자체는 한 글자도 다르게 두지 않았다. 그래야 리뷰에서 '흐름이 이상한 것'과 '톤이 안 맞는 것'을 섞지 않고 말할 수 있다. 양쪽 다 실제로 열리는 프로토타입이라 회의에서 눌러 보고 B 안으로 정해졌다.",
+          "en": "Design A leans storybook — forest, wood signage, parchment. Design B leans app — royal blue, a 3D mascot, colour cards. The flow itself was kept identical, word for word, so reviewers could separate 'the flow is off' from 'the tone is off.' Both opened as working prototypes, and B was chosen in the room."
         },
         "features": [
           {
@@ -844,22 +895,6 @@
             ]
           }
         ]
-      },
-      {
-        "id": "game",
-        "device": "desktop",
-        "wait": 4200,
-        "path": "designB/index.html",
-        "eval": "(() => new Promise(r => { const i=document.querySelector('#pj-num,input[type=number],input'); if(i){ i.value=12; document.querySelector('#pj-go')?.click(); } setTimeout(r,2500); }))()",
-        "label": {
-          "ko": "학습 게임 화면",
-          "en": "Practice game"
-        },
-        "note": {
-          "ko": "읽기 다음에 바로 확인 문제가 붙는다. 학생이 고른 답에 따라 LIO 가 그 자리에서 반응한다.",
-          "en": "A check follows the reading immediately, and LIO responds to the answer on the spot."
-        },
-        "features": []
       }
     ],
     "shot_notes": {
@@ -889,7 +924,15 @@
               72
             ]
           }
-        ]
+        ],
+        "label": {
+          "ko": "브랜드 — 워드마크와 캐릭터",
+          "en": "Brand — wordmark and character"
+        },
+        "note": {
+          "ko": "이름부터 지었다. LIO 는 Lion 과 i-LENS 의 i·o 를 겹친 말로, 학생이 부르기 쉬운 두 음절로 줄였다. 워드마크의 O 는 사자 갈기를 금색 호로 추상화해 글자 안에 캐릭터를 심었고, 오른쪽 위 sparkle 하나로 '막히던 문제가 풀리는 순간'을 표시한다. 컬러는 로열블루 단색 — 아동 서비스가 흔히 쓰는 원색 조합을 피해 화면이 오래 켜져 있어도 눈이 덜 피로하게 했다. 브랜드 후보는 5안을 같은 조건으로 한 페이지에 올려 투표로 좁혔고, 정해진 다음에야 화면 설계로 내려갔다.",
+          "en": "The name came first. LIO folds Lion into the i and o of i-LENS — two syllables a child can call out. The O in the wordmark abstracts the mane into a gold arc, planting the character inside the letters, and a single sparkle marks the moment a stuck problem gives way. One royal blue, no primary-colour pile-up, so the screen stays easy on the eyes. Five brand directions went on one page and were narrowed by vote before any screen was drawn."
+        }
       },
       "tablet": {
         "features": [
@@ -917,7 +960,15 @@
               44
             ]
           }
-        ]
+        ],
+        "label": {
+          "ko": "학습 플로우 — 읽고, 짚고, 답을 듣는다",
+          "en": "Learning flow — read, tap, hear back"
+        },
+        "note": {
+          "ko": "Skill Core 는 '주제 고르기 → 읽기 → 근거 짚기 → 확인 문제 → 추가 연습' 다섯 단계로 이어진다. 핵심은 읽고 끝나지 않는 것이다. 학생이 지문에서 주제를 뒷받침하는 문장을 직접 드래그해 짚으면 LIO 가 그 선택을 두고 바로 반응한다. 맞으면 왜 맞는지, 빗나가면 어느 쪽을 다시 보라고 짚어준다. 영어 설명이 막히는 아이를 위해 KR 버튼을 같은 자리에 두어 같은 말을 한국어로 다시 듣게 했다. 채점이 아니라 대화로 느껴지게 하는 것이 이 화면의 기준이었다.",
+          "en": "Skill Core runs five steps — pick a topic, read, mark the evidence, check, practise further. The point is that reading doesn't end it. The student drags across the sentence that supports the main idea and LIO answers that choice: why it holds, or which part to look at again. A KR button sits in the same spot so a child who loses the English can hear the line in Korean. The bar was that it read as conversation, not scoring."
+        }
       }
     },
     "tools": [
@@ -926,7 +977,10 @@
       "Nano Banana"
     ],
     "shot_url": "https://jinilee-hue.github.io/LIO_DESIGN/designB/index.html",
-    "shot_eval": "(() => new Promise(r => { const i=document.querySelector('#pj-num,input[type=number],input'); if(i){ i.value=20; document.querySelector('#pj-go')?.click(); } setTimeout(r, 2500); }))()"
+    "shot_eval": "(() => new Promise(r => { const i=document.querySelector('#pj-num,input[type=number],input'); if(i){ i.value=5; document.querySelector('#pj-go')?.click(); } setTimeout(r,2600); }))()",
+    "shot_evals": {
+      "tablet": "(() => new Promise(r => { const i=document.querySelector('#pj-num,input[type=number],input'); if(i){ i.value=20; document.querySelector('#pj-go')?.click(); } setTimeout(r,2600); }))()"
+    }
   },
   "AI-Studio": {
     "featured": true,

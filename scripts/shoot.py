@@ -106,6 +106,9 @@ def main() -> int:
             "full": bool(p.get("shot_full")),
             "click": (p.get("shot_click") or "").strip(),
             "eval": (p.get("shot_eval") or "").strip(),
+            # 기기마다 다른 화면을 찍어야 할 때가 있다(데스크톱=표지, 태블릿=본문).
+            # shot_evals: {"tablet": "...", "desktop": "..."} 가 있으면 기기별로 갈아낀다.
+            "evals": {k: (v or "").strip() for k, v in (p.get("shot_evals") or {}).items()},
             "dest": None,
         })
         live = p["auto"].get("live") or ""
@@ -166,7 +169,11 @@ def main() -> int:
                             page.wait_for_timeout(700)
                         except Exception:
                             pass
-                    script = job.get("eval") or ""
+                    # tablet-land 는 tablet 파일명을 쓰므로 별칭도 함께 찾는다
+                    alias = "tablet" if dev in ("tablet", "tablet-land") else dev
+                    script = (job.get("evals") or {}).get(dev) \
+                        or (job.get("evals") or {}).get(alias) \
+                        or job.get("eval") or ""
                     if script:
                         try:
                             page.evaluate(script)
