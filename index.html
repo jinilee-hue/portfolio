@@ -91,7 +91,10 @@
     transform:rotate(-6deg) translateX(-12px);opacity:.9;
     text-shadow:0 2px 24px rgba(255,95,162,.3)}
   @media(max-width:900px){.sig-name{left:0;bottom:-8%;font-size:clamp(2.4rem,12vw,4.2rem)}}
-  @media print{.sig-name{text-shadow:none}}
+  /* 인쇄에서는 표제 글자 크기가 화면과 달라 서명이 본문을 덮는다.
+     아래로 더 내리고 살짝 투명하게 — 표제 가독이 우선이다. */
+  @media print{.sig-name{text-shadow:none;bottom:-34%;opacity:.55;
+    font-size:clamp(2.6rem,7vw,5.4rem)}}
   .kick{font-family:var(--grot);font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
     color:var(--accent);margin:0 0 18px}
   h1{font-family:var(--disp);font-weight:400;font-variation-settings:'opsz' 120;
@@ -479,13 +482,11 @@
      흰 배경에 얹혀 사라지는 구간이 생긴다. 배경 인쇄는 print-color-adjust 로 강제한다. */
   @media print{
     /* 가로(A4 landscape) 전용. 구성: 표지 1장 + 프로젝트당 1~2장(무대/보드) + 커리어 */
-    @page{size:A4 landscape;margin:9mm 12mm;background:#0A0A0A}
+    @page{size:A4 landscape;margin:9mm 12mm}
     *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-    /* 다크 토큰을 인쇄에서도 그대로 유지 (라이트 모드 사용자도 동일하게 나오도록 고정값) */
-    :root{--bg:#0A0A0A;--fg:#F3F6F5;--fg-55:rgba(243,246,245,.78);--fg-28:rgba(243,246,245,.52);
-      --line:rgba(243,246,245,.16);--accent:#2AF0CE;--wire:#2AF0CE;
-      --venn-fill:rgba(255,95,162,.19)}
-    html,body{background:#0A0A0A!important;color:#F3F6F5!important;font-size:12px}
+    /* 토큰을 덮어쓰지 않는다 — 표지는 화면 테마를 그대로 따라가고(라이트면 흰 표지),
+       무대·보드는 원래 항상 어두운 면이라 그대로 어둡게 나온다. 이게 '화면과 동일'이다. */
+    html,body{font-size:12px}
     header,.pager,.play,.no-print{display:none!important}
     .wrap{max-width:none;padding:0}
 
@@ -517,7 +518,7 @@
     .splash-meta{grid-area:meta;border-top:1px solid #ddd;margin-top:4mm;padding-top:5mm;gap:5mm 12mm}
     .splash-meta.m3{grid-template-columns:1.5fr 1fr .95fr!important}
     .splash-meta.m3 .overview{grid-column:auto!important}
-    .overview p:not(.k){color:#333!important;font-size:8.5pt;line-height:1.55;margin-bottom:.5em}
+    .overview p:not(.k){font-size:8.5pt;line-height:1.55;margin-bottom:.5em}
     .splash-meta .cgrid{max-width:80mm}
     .shot img{filter:none!important;transform:none!important}
     .copy h2{font-size:20pt!important}
