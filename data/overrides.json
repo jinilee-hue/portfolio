@@ -411,8 +411,8 @@
       "en": "Legacy overhaul · a kit six developers build on"
     },
     "summary": {
-      "ko": "2000년대에 멈춰 있던 ASP.NET 학원관리시스템의 전면 개편. 시안 비교로 방향을 정한 뒤 거기서 멈추지 않고 개발자가 그대로 쓸 수 있는 디자인 킷으로 묶어 사내에 배포했다. 현재 개발자 6명이 이 킷으로 화면을 만든다.",
-      "en": "A full overhaul of an ASP.NET academy management system frozen in the 2000s. Rather than stopping at a chosen direction, the work was packaged into a design kit and distributed internally — six developers now build screens with it."
+      "ko": "2000년대에 멈춰 있던 ASP.NET 학원관리시스템의 전면 개편. 시안 3종 중 현업이 고른 것은 가장 새로워 보이는 안이 아니라 기존 구조를 지킨 안이었다. 그 선택을 그대로 받아 개발자가 복사해 쓰는 디자인 킷으로 묶어 사내에 배포했고, 현재 개발자 6명이 이 킷으로 화면을 만든다.",
+      "en": "A full overhaul of an ASP.NET academy management system frozen in the 2000s. Of three directions, the field chose the one that kept the existing structure over the one that looked newest. That choice was taken at face value and packaged into a copy-and-go design kit — six developers now build screens with it."
     },
     "role": {
       "ko": "진단 · 리디자인 방향 설계 · 디자인 시스템 · 킷 제작 · 개발 인수인계",
@@ -426,8 +426,8 @@
     ],
     "entry": "",
     "intent": {
-      "ko": "시안은 채택되는 순간 낡기 시작한다. 개발자가 그것을 각자 해석해 옮기면 화면마다 간격과 색이 조금씩 달라지고 반년 뒤엔 원래 시안과 다른 물건이 된다. 그래서 이번엔 '무엇을 만들지' 정하는 데서 끝내지 않고 그대로 복사해 쓸 수 있는 템플릿과 규칙까지 넘겨서 해석의 여지를 줄였다.",
-      "en": "A mockup starts aging the moment it's approved: each developer interprets it, spacing and colour drift screen by screen, and six months later it's a different product. So this time the work didn't stop at deciding what to build — it handed over a copyable template and a rule set, leaving less room for interpretation."
+      "ko": "현업 6명에게 시안 3종을 돌렸더니 표가 반씩 갈렸고, 고른 이유를 읽어보니 기준이 분명했다. 하루 종일 반복 조회를 하는 자리에서는 새 레이아웃보다 '다시 배울 것이 없는 구조'와 '한 화면에서 끝나는 조회'가 컸다. 그래서 구조는 건드리지 않고 폰트·간격·색·컴포넌트만 다시 세웠다. 그리고 시안에서 멈추지 않았다. 개발자가 각자 해석해 옮기면 화면마다 간격과 색이 달라지고 반년 뒤엔 다른 물건이 되므로, 복사해 쓸 수 있는 템플릿과 규칙까지 넘겨 해석의 여지를 줄였다.",
+      "en": "Three directions went to six people in the field and the vote split evenly — but the reasons were consistent. At a desk running lookups all day, a structure with nothing to relearn and a lookup that finishes on one screen mattered more than a new layout. So the structure stayed and type, spacing, colour and components were rebuilt instead. The work didn't stop at a mockup either: left to interpret a picture, each developer drifts, and in six months it's a different product — so a copyable template and rule set went with it."
     },
     "flow": [
       {
@@ -502,6 +502,14 @@
       }
     ],
     "decisions": [
+      {
+        "ko": "시안 3종을 돌려 현업 6명에게 받은 의견은 A안 3표, C안 3표로 갈렸다. C안으로 정한 근거는 심미성이 아니라 업무였다. 좌측 목록과 우측 상세가 한 화면에 같이 있어 클릭이나 화면 전환 없이 학생 정보를 확인할 수 있고, 기존 KCMS와 구조가 같아 캠퍼스·본사 직원이 다시 배울 것이 없다. 반복 조회가 하루 종일인 자리에서는 이 두 가지가 새 레이아웃보다 크다.",
+        "en": "Three directions went out to six people in the field and came back split — three for A, three for C. C won on work, not looks: list and detail sit on one screen, so a record is read without a click or a page change, and the structure matches the KCMS they already use, so nothing has to be relearned. For a desk that runs lookups all day, those two beat a new layout."
+      },
+      {
+        "ko": "C안의 약점도 그대로 안고 갔다. 레이아웃을 바꾸지 않아 '개편했다'는 체감이 약하고, 메모나 배정 이력이 쌓이면 고정 영역에 스크롤이 생긴다. 대신 폰트·간격·색·컴포넌트를 전부 다시 정리해 같은 구조 위에서 읽는 속도를 올렸다. 익숙함을 버리지 않으면서 고칠 수 있는 것을 고쳤다.",
+        "en": "C's weaknesses were taken on knowingly: keeping the layout means the redesign is less visible, and stacked memos or placement history will scroll inside fixed panes. In exchange, type, spacing, colour and components were rebuilt so the same structure reads faster — fixing what could be fixed without spending the familiarity."
+      },
       {
         "ko": "시안이 아니라 킷을 최종 산출물로 잡았다. 개발자 6명이 각자 해석하는 대신 template.html 을 복사해 시작하므로 화면이 늘어나도 시스템이 흐트러지지 않는다.",
         "en": "The deliverable was defined as the kit, not the mockups. Six developers copy template.html instead of each interpreting a picture, so the system holds as screen count grows."
