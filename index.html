@@ -205,11 +205,15 @@
     text-transform:uppercase;font-weight:700;color:#F3F6F5;margin:0 0 12px}
   .contrib{margin-top:18px}
   .splash-meta .contrib{margin-top:0}
-  .cgrid{display:grid;grid-template-columns:auto 1fr auto;gap:8px 12px;align-items:center;
-    max-width:330px}
+  /* 첫 줄 베이스라인을 Project info(.facts) 와 맞추려면 행 높이가 같아야 한다.
+     게이지 막대는 6px 라 텍스트 행보다 낮게 앉으므로 최소 높이를 준다. */
+  .cgrid{display:grid;grid-template-columns:auto 1fr auto;gap:10px 12px;align-items:center;
+    grid-auto-rows:minmax(1.5em,auto);max-width:330px}
   .splash-meta .cgrid{max-width:none}
-  .cg-l{font-family:var(--grot);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
-    font-weight:600;color:#F3F6F5;white-space:nowrap}
+  /* 라벨 타이포는 Project info 의 dt 와 동일 규격을 쓴다 — 두 리스트가 한 줄에 서므로
+     크기·자간·색이 다르면 같은 층위인데 다른 종류처럼 읽힌다. */
+  .cg-l{font-family:var(--grot);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+    font-weight:600;color:var(--fg-55);white-space:nowrap}
   .cg-t{position:relative;height:6px;border-radius:3px;overflow:hidden;
     background:rgba(243,246,245,.1)}
   .cg-t i{position:absolute;left:0;top:0;bottom:0;background:var(--wire);border-radius:3px}
