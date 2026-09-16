@@ -412,7 +412,13 @@
   .jdlg::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(2px)}
   .jdlg-in{position:relative;background:var(--bg);border:1px solid var(--line);border-radius:16px;
     padding:clamp(24px,3.4vw,38px);max-height:min(82vh,780px);overflow:auto;
-    box-shadow:0 30px 70px rgba(0,0,0,.35)}
+    box-shadow:0 30px 70px rgba(0,0,0,.35);
+    /* 트랙(회색 틀) 없이 손잡이만 — 타임라인 스크롤바와 같은 처리 */
+    scrollbar-width:thin;scrollbar-color:var(--fg-28) transparent}
+  .jdlg-in::-webkit-scrollbar{width:6px;background:transparent}
+  .jdlg-in::-webkit-scrollbar-track{background:transparent;border:0;box-shadow:none}
+  .jdlg-in::-webkit-scrollbar-thumb{background:var(--fg-28);border-radius:3px}
+  .jdlg-in::-webkit-scrollbar-corner{background:transparent}
   .jdlg-x{position:absolute;top:14px;right:14px;width:34px;height:34px;display:grid;
     place-items:center;border:0;border-radius:50%;background:transparent;color:var(--fg-55);
     cursor:pointer}
