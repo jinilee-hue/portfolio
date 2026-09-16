@@ -212,8 +212,11 @@
   .splash-meta .cgrid{max-width:none}
   /* 라벨 타이포는 Project info 의 dt 와 동일 규격을 쓴다 — 두 리스트가 한 줄에 서므로
      크기·자간·색이 다르면 같은 층위인데 다른 종류처럼 읽힌다. */
+  /* 무대(.splash)는 라이트 모드에서도 어두운 면이라 텍스트 색을 --fg-55 로 두면 안 된다.
+     라이트에서 그 변수는 검게 뒤집혀 '검은 배경 + 검은 글씨'가 된다.
+     .facts dt 와 같은 고정 밝은색을 쓴다. */
   .cg-l{font-family:var(--grot);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
-    font-weight:600;color:var(--fg-55);white-space:nowrap}
+    font-weight:600;color:rgba(243,246,245,.78);white-space:nowrap}
   .cg-t{position:relative;height:6px;border-radius:3px;overflow:hidden;
     background:rgba(243,246,245,.1)}
   .cg-t i{position:absolute;left:0;top:0;bottom:0;background:var(--wire);border-radius:3px}
