@@ -272,9 +272,11 @@
     color:var(--wire);margin:0 0 22px}
   .feats{display:grid;gap:clamp(48px,6vw,96px)}
   .feats figure{margin:0;position:relative;display:grid;gap:18px}
+  /* 좌우 주석 칸을 넉넉히 준다. 목업이 폭을 다 먹으면 점선이 이미지 위로만 지나가
+     화면과 뒤섞여 안 보인다. 그림은 조금 줄이고 여백에서 선을 읽게 한다. */
   .feats .stage{position:relative;display:grid;
-    grid-template-columns:minmax(160px,1fr) minmax(0,auto) minmax(160px,1fr);
-    gap:0 6px;align-items:stretch}
+    grid-template-columns:minmax(200px,1.05fr) minmax(0,auto) minmax(200px,1.05fr);
+    gap:0 clamp(18px,2.4vw,40px);align-items:stretch}
   .feats .ph{display:block;position:relative;padding:10px;border-radius:14px;background:#0e0e0e;
     box-shadow:0 18px 40px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.14);
     grid-column:2;align-self:center}
@@ -296,9 +298,9 @@
   .feats .ph-mobile .shot img{border-radius:16px}
   .feats .ph .shot{position:relative;display:block;width:fit-content;max-width:100%;
     margin-inline:auto;aspect-ratio:auto;border-radius:0;background:#0d100f;overflow:visible}
-  .feats .ph .shot img{width:auto;max-width:100%;height:auto;max-height:min(78vh,860px);
+  .feats .ph .shot img{width:auto;max-width:100%;height:auto;max-height:min(68vh,720px);
     object-fit:contain;object-position:top center}
-  .feats .ph .shot.is-portrait img{max-height:min(82vh,920px)}
+  .feats .ph .shot.is-portrait img{max-height:min(74vh,800px)}
   .feats .pins{position:absolute;inset:0;margin:0;padding:0;list-style:none;pointer-events:none}
   .feats .pins li,.feats .pins li::marker{list-style:none}
   .feats .pins li::marker{content:none}
@@ -1109,9 +1111,30 @@ function draw(){
 
           // 문구를 세로로 고르게 분산. 핀에 바짝 붙이면 서로 뭉쳐 선이 사선이 된다.
           const H=col.clientHeight, n=items.length;
-          items.forEach((it,i)=>{
+          // 균등 분산 후, 이웃과 최소 간격을 강제한다. 칸이 좁으면 균등값만으로는
+          // 두 줄짜리 문구끼리 겹친다(실측: 한쪽에 3개 이상 몰릴 때).
+          const ys=items.map((it,i)=>{
             const h=it.li.offsetHeight||36;
-            const y=Math.max(h/2+2, Math.min(H-h/2-2, H*(i+.5)/n));
+            return {it,h,y:Math.max(h/2+2, Math.min(H-h/2-2, H*(i+.5)/n))};
+          });
+          for(let i=1;i<ys.length;i++){
+            const prev=ys[i-1], cur=ys[i];
+            const min=prev.y+(prev.h+cur.h)/2+6;
+            if(cur.y<min) cur.y=min;
+          }
+          // 아래로 밀려 칸을 넘치면 위로 되감는다
+          const last=ys[ys.length-1];
+          if(last && last.y+last.h/2>H){
+            let shift=last.y+last.h/2-H;
+            for(let i=ys.length-1;i>=0;i--){
+              ys[i].y-=shift;
+              if(i>0){
+                const gap=ys[i].y-ys[i-1].y-(ys[i].h+ys[i-1].h)/2;
+                if(gap>6) break;
+              }
+            }
+          }
+          ys.forEach(({it,y})=>{
             it.li.style.top=y+'px';
             it.li.style.transform='translateY(-50%)';
           });
@@ -1123,12 +1146,22 @@ function draw(){
             const a=it.pin.getBoundingClientRect(), b=dot.getBoundingClientRect();
             const x1=a.left+a.width/2-sr.left, y1=a.top+a.height/2-sr.top;
             const x2=b.left+b.width/2-sr.left, y2=b.top+b.height/2-sr.top;
-            const dir=side==='left'?1:-1;
+            // 세로 채널은 기기 목업 '바깥'에 둔다. 안쪽(dir 반대)으로 잡으면 점선이
+            // 스크린샷 위를 길게 지나가 화면과 뒤섞여 안 보인다. 여백 쪽으로 빼야 읽힌다.
+            const dir=side==='left'?-1:1;               // 목업에서 멀어지는 방향
             const edge=(side==='left'?pr0.left:pr0.right)-sr.left;
-            let ch=edge+dir*(14+i*11);
-            const lo=Math.min(x1,x2)+6, hi=Math.max(x1,x2)-6;
-            ch = hi>lo ? Math.min(Math.max(ch,lo),hi) : (x1+x2)/2;
-            paths.push(`<path d="M${x2.toFixed(1)},${y2.toFixed(1)} H${ch.toFixed(1)} V${y1.toFixed(1)} H${x1.toFixed(1)}" fill="none" stroke="currentColor" stroke-width="0.9" stroke-dasharray="2.5 4.5" stroke-linecap="round" stroke-linejoin="round"/>`);
+            let ch=edge+dir*(12+i*9);
+            // 채널은 반드시 목업 '바깥' 여백 안에 둔다 — 문구(x2)와 목업 가장자리(edge) 사이.
+            // 이 구간을 벗어나면 선이 스크린샷 위로 올라가 배경과 뒤섞인다.
+            const lo = side==='left' ? x2+8 : edge+8;
+            const hi = side==='left' ? edge-8 : x2-8;
+            ch = hi>lo ? Math.min(Math.max(ch,lo),hi) : (x2+edge)/2;
+            // 핀이 이미지 안쪽 깊숙이 있으면 마지막 가로선이 스크린샷을 길게 가로지른다.
+            // 핀 높이에서 먼저 가장자리로 빠져나온 뒤 채널을 타도록 경로를 뒤집는다.
+            const gx=edge+dir*8;                       // 목업 가장자리 바로 바깥
+            const d = `M${x1.toFixed(1)},${y1.toFixed(1)} H${gx.toFixed(1)} `
+                    + `V${y2.toFixed(1)} H${x2.toFixed(1)}`;
+            paths.push(`<path d="${d}" fill="none" stroke="currentColor" stroke-width="0.9" stroke-dasharray="2.5 4.5" stroke-linecap="round" stroke-linejoin="round"/>`);
           });
         });
         svg.innerHTML=paths.join('');

@@ -808,27 +808,19 @@
         },
         "features": [
           {
-            "ko": "워드마크·컬러·타이포 5안을 한 보드에 둔다",
-            "en": "Five wordmark, colour and type directions on one board",
+            "ko": "워드마크·컬러·타이포 후보를 한 보드에 나란히 둔다",
+            "en": "Brand candidates laid side by side on one board",
             "at": [
-              30,
-              48
+              28,
+              50
             ]
           },
           {
-            "ko": "그 자리에서 투표한다",
-            "en": "Vote on the board itself",
+            "ko": "두 방향을 같은 조건에서 비교한다",
+            "en": "Two directions compared under the same conditions",
             "at": [
-              70,
-              48
-            ]
-          },
-          {
-            "ko": "참여 집계가 보드에 붙는다",
-            "en": "Tallies sit on the same page",
-            "at": [
-              50,
-              72
+              72,
+              50
             ]
           }
         ]
@@ -846,20 +838,36 @@
         },
         "features": [
           {
-            "ko": "64화면을 클릭으로 이어 본다",
-            "en": "Click through 64 screens in sequence"
+            "ko": "이전 · 다음으로 64화면을 이어 본다",
+            "en": "Step through all 64 screens",
+            "at": [
+              11,
+              97
+            ]
           },
           {
-            "ko": "키보드 ←/→ 로 넘긴다",
-            "en": "Step with the arrow keys"
+            "ko": "번호를 입력해 원하는 화면으로 건너뛴다",
+            "en": "Jump straight to a screen by number",
+            "at": [
+              56,
+              97
+            ]
           },
           {
-            "ko": "슬라이드 번호가 주소가 된다 (?s=)",
-            "en": "PPTX slide numbers become URLs (?s=)"
+            "ko": "인덱스로 전체 흐름을 한눈에 본다",
+            "en": "The index shows the whole flow at once",
+            "at": [
+              82,
+              97
+            ]
           },
           {
             "ko": "화면정의 오버레이로 의도를 같이 본다",
-            "en": "A spec overlay sits on the screen"
+            "en": "A spec overlay carries the intent with the screen",
+            "at": [
+              93,
+              97
+            ]
           }
         ]
       }
@@ -997,27 +1005,27 @@
         },
         "features": [
           {
-            "ko": "같은 학습을 반대편에서 본다",
-            "en": "Watch the same lesson from the other side",
-            "at": [
-              38,
-              62
-            ]
-          },
-          {
-            "ko": "학생 진행과 짝을 이룬다",
-            "en": "Paired with the student session",
-            "at": [
-              62,
-              62
-            ]
-          },
-          {
-            "ko": "스크롤 없이 수업 진행을 한 화면에서 본다",
-            "en": "The whole lesson stays on one screen — nothing scrolls",
+            "ko": "그림 만들기와 이야기 짓기 중 고른다",
+            "en": "Pick Picture Maker or Story Builder",
             "at": [
               50,
-              78
+              64
+            ]
+          },
+          {
+            "ko": "활동마다 무엇을 하는지 한 줄로 말해준다",
+            "en": "Each activity says what it does in one line",
+            "at": [
+              38,
+              70
+            ]
+          },
+          {
+            "ko": "스크롤 없이 한 화면에서 시작한다",
+            "en": "Everything starts on one screen, no scrolling",
+            "at": [
+              50,
+              88
             ]
           }
         ]
@@ -1035,20 +1043,28 @@
         },
         "features": [
           {
-            "ko": "두 장면을 보고 순서를 정한다",
-            "en": "See two scenes and pick an order"
-          },
-          {
             "ko": "다섯 가지를 답하면 AI가 그 장면을 그린다",
-            "en": "Answer five prompts and the AI draws the scene"
+            "en": "Answer five questions and the AI draws the scene",
+            "at": [
+              50,
+              40
+            ]
           },
           {
             "ko": "장면마다 한 문장을 소리내어 말한다",
-            "en": "Say one sentence per scene"
+            "en": "Say one sentence aloud for each scene",
+            "at": [
+              50,
+              62
+            ]
           },
           {
-            "ko": "완성한 이야기 카드를 제출한다",
-            "en": "Submit the finished story card"
+            "ko": "Continue 로 다음 단계로 넘어간다",
+            "en": "Continue moves to the next step",
+            "at": [
+              87,
+              96
+            ]
           }
         ]
       }
@@ -1106,27 +1122,27 @@
         },
         "features": [
           {
-            "ko": "creator / reviewer / ops 세 역할로 화면을 나눈다",
-            "en": "Screens split across creator, reviewer and ops",
-            "at": [
-              48,
-              4
-            ]
-          },
-          {
-            "ko": "제작·검수·운영이 한 파이프라인이다",
-            "en": "Authoring, review and ops sit in one pipeline",
+            "ko": "creator · reviewer · ops 세 역할로 메뉴가 갈린다",
+            "en": "Menus split across creator, reviewer and ops",
             "at": [
               42,
-              22
+              4
             ]
           },
           {
-            "ko": "권한 판정은 서버가 한다",
-            "en": "Authorization stays on the server",
+            "ko": "검수대기·게시중단·반려를 한 줄에서 본다",
+            "en": "Review queue, holds and rejects on one row",
             "at": [
-              88,
-              4
+              45,
+              49
+            ]
+          },
+          {
+            "ko": "미리보기로 게시 전에 확인한다",
+            "en": "Preview before anything is published",
+            "at": [
+              45,
+              66
             ]
           }
         ]
@@ -1181,27 +1197,35 @@
         },
         "features": [
           {
-            "ko": "발행된 게임을 둘러보고 고른다",
-            "en": "Browse and pick a published game",
+            "ko": "발행된 게임을 갤러리에서 고른다",
+            "en": "Pick a published game from the gallery",
             "at": [
-              12,
-              28
+              13,
+              4
             ]
           },
           {
-            "ko": "게임은 iframe 안에 가둔다",
+            "ko": "레벨·종류로 목록을 좁힌다",
+            "en": "Filter by level and game type",
+            "at": [
+              68,
+              4
+            ]
+          },
+          {
+            "ko": "카드형과 리스트형을 바꿔 본다",
+            "en": "Switch between card and list view",
+            "at": [
+              89,
+              4
+            ]
+          },
+          {
+            "ko": "게임은 iframe 안에 가두고 이벤트만 주고받는다",
             "en": "Games run sandboxed in an iframe",
             "at": [
-              12,
-              22
-            ]
-          },
-          {
-            "ko": "이벤트만 postMessage로 받아 셸과 콘텐츠를 따로 배포한다",
-            "en": "Events arrive via postMessage so shell and content ship separately",
-            "at": [
-              50,
-              40
+              10,
+              34
             ]
           }
         ]
@@ -1416,27 +1440,15 @@
         "features": [
           {
             "ko": "두 조각을 합쳐 복합어를 만든다",
-            "en": "Join two halves to make a compound",
-            "at": [
-              14,
-              42
-            ]
+            "en": "Join two halves to make a compound"
           },
           {
             "ko": "규칙 설명 문장을 화면에 두지 않는다",
-            "en": "No rule-text on screen",
-            "at": [
-              50,
-              42
-            ]
+            "en": "No rule-text on screen"
           },
           {
             "ko": "6라운드를 혼자 끝내는 것이 성공 기준이다",
-            "en": "Success is six rounds unaided",
-            "at": [
-              86,
-              42
-            ]
+            "en": "Success is six rounds unaided"
           }
         ]
       }
@@ -1985,34 +1997,34 @@
         "features": [
           {
             "ko": "자연어로 운영 데이터를 묻는다",
-            "en": "Ask operations data in natural language",
+            "en": "Ask about operations data in plain language",
             "at": [
-              55,
-              42
-            ]
-          },
-          {
-            "ko": "채팅 · 프로젝트 · 리포트 뷰어로 이어진다",
-            "en": "Continues into chat, projects and a report viewer",
-            "at": [
-              8,
-              22
+              58,
+              23
             ]
           },
           {
             "ko": "LNB에서 POLY / CANB 브랜드를 바꾼다",
-            "en": "A switcher swaps POLY and CANB in the LNB",
+            "en": "Switch POLY / CANB brand from the sidebar",
             "at": [
-              12,
+              8,
               8
             ]
           },
           {
-            "ko": "색은 전부 토큰이다",
-            "en": "Every colour is a token",
+            "ko": "채팅 · 프로젝트 · 리포트로 이어진다",
+            "en": "Chat, projects and reports in one rail",
             "at": [
-              20,
-              12
+              8,
+              25
+            ]
+          },
+          {
+            "ko": "데이터 소스를 골라 분석 범위를 정한다",
+            "en": "Choose the data source to scope the analysis",
+            "at": [
+              33,
+              44
             ]
           }
         ]
