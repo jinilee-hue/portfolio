@@ -186,6 +186,23 @@ def run(url: str, pdf_out: str | None) -> int:
             if printed["figures"] == 0:
                 fails.append(f"{tag} 인쇄에 도판이 하나도 없다")
 
+            # 기기 목업: 화면 라운드는 베젤 곡률 − 안쪽 여백이어야 한다.
+            # 어긋나면 네 귀퉁이에 베젤이 비쳐 빈 공간처럼 보인다.
+            bad_radius = page.evaluate("""(() => {
+              const out = [];
+              document.querySelectorAll('.fly .frame').forEach(f => {
+                const sh = f.querySelector('.shot');
+                if (!sh) return;
+                const fs = getComputedStyle(f), ss = getComputedStyle(sh);
+                const want = Math.max(0, parseFloat(fs.borderRadius) - parseFloat(fs.paddingLeft));
+                const got = parseFloat(ss.borderRadius);
+                if (Math.abs(got - want) > 1) out.push(f.className + ': ' + got + 'px, 기대 ' + want + 'px');
+              });
+              return [...new Set(out)];
+            })()""")
+            if bad_radius:
+                fails.append(f"{tag} 목업 모서리 어긋남: {', '.join(bad_radius[:3])}")
+
             if scheme == "light" and pdf_out:
                 page.pdf(path=pdf_out, landscape=True, print_background=True,
                          prefer_css_page_size=True)

@@ -243,9 +243,10 @@
     transform:none}
   .fly .d{position:relative;width:78%;max-width:calc((54svh - 28px) / .625 + 20px);
     z-index:1;padding:10px 10px 18px;border-radius:12px}
-  /* 화면은 각지게 둔다 — 모서리를 굴리면 베젤(검정)이 비쳐 스크린샷 네 귀퉁이에
-     빈 공간처럼 보인다. 실제 모니터도 패널 자체는 직각이다. */
-  .fly .d .shot{aspect-ratio:1440/900;border-radius:0;overflow:hidden}
+  /* 화면 라운드는 베젤 곡률에서 안쪽 여백만큼 뺀 값이어야 한다(12 - 10 = 2px).
+     0 으로 두면 굴려진 베젤 안에서 각진 화면이 튀어나와 네 귀퉁이에 검은 삼각형이
+     남고, 반대로 크게 주면 화면 모서리 바깥으로 베젤이 비쳐 빈 공간이 보인다. */
+  .fly .d .shot{aspect-ratio:1440/900;border-radius:2px;overflow:hidden}
   .fly .d .shot img{display:block;width:100%;height:100%;object-fit:cover}
   /* 모니터 목·받침. 없으면 16:10 가로 패드와 실루엣이 같아진다 */
   .fly .d::before,.fly .d::after{content:'';position:absolute;left:50%;
@@ -259,12 +260,12 @@
   .fly .t{width:28%;right:0;left:auto;top:auto;bottom:0;z-index:3}
   /* 비율은 이미지가 정한다 — 가로 태블릿(1112×834)도 같은 프레임을 쓴다.
      aspect-ratio 를 세로로 고정하면 가로 촬영본이 찌그러진다. */
-  .fly .t .shot{border-radius:9px;overflow:hidden}
+  .fly .t .shot{border-radius:13px;overflow:hidden}
   .fly .t .shot img{display:block;width:100%;height:auto}
   /* 가로 태블릿은 세로보다 넓게 — 28% 면 화면이 너무 작게 보인다 */
   .fly .t.is-land{width:40%}
   .fly .m{width:18%;right:24%;left:auto;bottom:0;z-index:2}
-  .fly .m .shot{aspect-ratio:390/844;border-radius:12px}
+  .fly .m .shot{aspect-ratio:390/844;border-radius:13px}
   @media(max-width:959px){
     .fly{order:-1;--neck:clamp(20px,3vw,34px);--base:7px;
       --head:max(calc(116px - clamp(16px,3vw,36px)),6vh)}
