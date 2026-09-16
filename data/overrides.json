@@ -1072,8 +1072,8 @@
       "en": "An AI story-writing lesson for seven-year-olds"
     },
     "summary": {
-      "ko": "아이가 장면을 고르고 다섯 가지를 답하면 AI가 그림을 그리는 수업용 도구. 스크롤을 아예 없애고 주어진 높이를 나누는 레이아웃으로, 태블릿에서 활동 전체가 한 화면에 들어온다.",
-      "en": "A classroom tool where a child answers five questions and an AI draws the scene. No screen scrolls: every layout divides the height it is given so the whole activity stays visible."
+      "ko": "일곱 살이 AI와 함께 이야기를 짓는 수업용 웹앱. 두 장면을 관찰해 순서를 잡고 다섯 질문에 답하면 AI가 그림을 그려주는 Picture Maker, 그 그림을 보고 한 문장씩 말해 이야기를 완성하는 Story Builder 두 교시로 나뉘고, 교사 화면에서 제출 현황과 아이별 스토리카드를 본다.",
+      "en": "A classroom web app where seven-year-olds write a story with AI. Picture Maker — observe two scenes, order them, answer five questions, and watch the AI draw it — then Story Builder, telling each scene one sentence at a time. A teacher view tracks submissions and opens each child's story card."
     },
     "role": {
       "ko": "수업 흐름 설계 · UI · 구현",
@@ -1086,8 +1086,8 @@
     ],
     "entry": "",
     "intent": {
-      "ko": "7세에게 '이야기를 써보자'고 하면 아무것도 안 나온다. 쓸 말이 없어서가 아니라 빈 화면이 막막해서다. 아이가 먼저 그림을 갖게 하면 말이 붙는다고 보고 장면을 고르고 다섯 가지만 답하면 AI가 그려주는 순서로 수업을 뒤집었다. 그림이 먼저, 문장은 그다음이다.",
-      "en": "Ask a seven-year-old to write a story and you get nothing — not for lack of words, but because a blank screen is paralysing. Give the child a picture first and sentences follow, so the lesson was inverted: pick a scene, answer five questions, the AI draws it. Image first, text second."
+      "ko": "아이에게 'AI로 이야기를 만들어봐'라고 하면 아무 일도 일어나지 않는다. 무엇을 물어야 그림이 나오는지를 모르기 때문이다. 그래서 프롬프트를 쓰게 하는 대신 Who·Where·What happens 라는 질문으로 쪼개고, 아이는 질문에만 답하게 했다.",
+      "en": "Tell a child to make a story with AI and nothing happens — they don't know what to ask for. So instead of writing a prompt, the ask is broken into Who, Where, What happens, and the child only answers questions."
     },
     "flow": [
       {
@@ -1148,29 +1148,33 @@
     ],
     "decisions": [
       {
-        "ko": "스크롤을 아예 없앴다. 교실에서 아이가 화면을 밀면 활동의 절반이 시야에서 사라지고 교사가 통제를 잃는다. 모든 레이아웃이 주어진 높이를 나누도록 짜서 활동 전체가 항상 한 화면에 있다.",
-        "en": "Scrolling was removed entirely. In a classroom, a child who scrolls loses half the activity off-screen and the teacher loses control — so every layout divides the height it is given and the whole activity stays visible."
+        "ko": "AI 윤문을 덮어쓰지 않고 나란히 놓았다. 아이 문장이 사라지면 '내가 쓴 이야기'가 아니게 된다.",
+        "en": "The AI rewrite sits beside the original instead of replacing it. Erase the child's sentence and it stops being their story."
       },
       {
-        "ko": "수업을 두 차시로 쪼갰다. 그리기와 말하기를 한 차시에 넣으면 7세의 집중이 끝까지 가지 않는다.",
-        "en": "Split into two classes: drawing and speaking in one session outruns a seven-year-old's attention."
+        "ko": "필수 질문 셋과 선택 질문 둘을 배지로 갈랐다. 다섯 개를 다 채워야 넘어가면 느린 아이가 막힌다.",
+        "en": "Three required questions and two optional, marked by badge. Force all five and the slower child stalls."
+      },
+      {
+        "ko": "진행 조건을 못 채우면 버튼을 비활성으로 두고 아래에 한 줄로 이유를 적었다. 아이는 왜 안 눌리는지 스스로 알아내지 못한다.",
+        "en": "When a step isn't met the button greys out with a one-line reason under it. A child won't work out why it doesn't respond."
       }
     ],
     "shot_path": "student.html",
     "shot_wait": 3500,
     "concept": {
-      "ko": "7세가 쓰는 화면이라 읽어야 하는 글자를 최대한 줄였다. 지시는 아이콘과 위치로 주고 선택지는 항상 화면 같은 자리에 둔다. 스크롤이 없으니 '아래에 더 있다'는 신호를 만들 필요도 없다. 색은 아이가 고른 장면의 그림에서 끌어와 화면이 아이의 결과물을 담는 액자처럼 보이게 했다.",
-      "en": "Built for seven-year-olds, so the amount of text to read was cut to a minimum: instructions come from icons and position, and choices always sit in the same place. With no scrolling there's no need to signal 'more below'. Colour is pulled from the scene the child chose, so the screen reads as a frame around their own work."
+      "ko": "모든 화면이 같은 골격을 쓴다. 왼쪽 아래는 Back, 오른쪽 아래는 다음 행동, 그 옆에 현재 단계 이름. 아이가 매 화면에서 기억할 것은 '다음은 오른쪽 아래' 하나다. 입력은 말하기가 기본이고 'In my picture, I see ___' 같은 빈칸 문장 틀을 줬다. 마지막 Magic 버튼은 아이가 쓴 문장과 AI가 늘린 문장을 나란히 보여준다 — 고쳐주는 게 아니라 비교하게 두었다.",
+      "en": "Every screen shares one frame: Back at bottom-left, the next action bottom-right, the current step named beside it. The only thing a child has to remember is 'next is bottom-right.' Input is speech first, with sentence frames like 'In my picture, I see ___.' The Magic button at the end shows the child's sentence and the AI's expanded one side by side — not a correction, a comparison."
     },
     "shot_devices": [
       "tablet",
       "desktop"
     ],
     "contribution": {
-      "plan": 100,
+      "plan": 90,
       "design": 100,
       "build": 100,
-      "qa": 80
+      "qa": 70
     },
     "scenes": [
       {
@@ -1267,8 +1271,8 @@
       "en": "Authoring, review and ops console"
     },
     "summary": {
-      "ko": "파닉스 콘텐츠를 만들고 검수하고 운영하는 웹 앱의 프런트엔드. creator / reviewer / ops 세 역할로 화면을 나누되 권한 판정은 백엔드에 맡기는 구조로 설계했다.",
-      "en": "The front end of a phonics content pipeline, split across creator / reviewer / ops roles while authorization stays server-side."
+      "ko": "파닉스 콘텐츠를 등록하고 검수하고 게시하는 운영 도구. 창작자·검토자·운영자 세 역할이 한 시스템 안에서 각자의 화면을 갖고, 자동검수 5단계가 근거를 만들면 승인·반려는 사람이 누른다.",
+      "en": "The pipeline tool for phonics content — upload, review, publish. Creator, reviewer and operator each get their own screens, and while a five-stage automatic check builds the evidence, a person makes the call."
     },
     "role": {
       "ko": "역할별 화면 설계 · 프런트엔드",
@@ -1287,10 +1291,10 @@
       "tablet"
     ],
     "contribution": {
-      "plan": 60,
+      "plan": 90,
       "design": 100,
       "build": 90,
-      "qa": 60
+      "qa": 70
     },
     "shot_full": true,
     "shot_notes": {
@@ -1333,6 +1337,32 @@
     },
     "tools": [
       "Claude Code"
+    ],
+    "intent": {
+      "ko": "콘텐츠를 여러 사람이 만들기 시작하면 '올린 다음 무슨 일이 일어나는가'가 문제가 된다. 누가 보고, 무엇을 기준으로 통과시키고, 언제 학생에게 열리는지가 정해져 있지 않으면 품질이 사람마다 달라진다. 그래서 등록 화면보다 검수와 게시 화면을 먼저 설계했다.",
+      "en": "Once several people start making content, the real question is what happens after upload. Without a set answer to who looks at it, against what, and when it reaches students, quality drifts per person. So the review and publish screens were designed before the upload form."
+    },
+    "concept": {
+      "ko": "AI를 판정자가 아니라 근거 생산자로 두었다. 자동검수는 형식·정적 스캔·메타데이터·품질평가·루브릭 다섯 단계를 돌려 통과/경고/참고로 표시하고, 화면에는 'AI 점수는 참고용이며 최종 판정은 사람이 합니다'를 명시했다. 자동 반려는 형식·정적 검사에서만 나온다. 운영자가 교육성·재미·기술완성도·사용성·안전성 다섯 축의 가중치를 직접 조정할 수 있게 해 기준 자체를 손에 쥐게 했다.",
+      "en": "AI produces evidence, not verdicts. The automatic pass runs five stages — format, static scan, metadata, quality score, rubric — and labels each pass / warning / reference, with the screen stating plainly that AI scores are advisory and a person decides. Only format and static checks can auto-reject. Operators tune the weights across the five rubric axes themselves, so the standard stays in their hands."
+    },
+    "decisions": [
+      {
+        "ko": "역할을 계정이 아니라 화면 묶음으로 나눴다. 창작자·검토자·운영자 메뉴가 한 내비게이션에 그룹으로 서 있어 권한이 늘어도 구조가 흔들리지 않는다.",
+        "en": "Roles are split by screen group, not by account. Creator, reviewer and operator menus stand as groups in one nav, so the structure holds as permissions grow."
+      },
+      {
+        "ko": "검수 화면에 책임 한계를 문장으로 박아뒀다. '판정은 사람이 합니다', 'AI 점수는 참고용입니다' — 도구가 자동으로 떨어뜨렸다고 오해하면 검토자가 판단을 멈춘다.",
+        "en": "The limits are written into the review screen: a person decides, AI scores are advisory. If reviewers think the tool already ruled, they stop judging."
+      },
+      {
+        "ko": "콘텐츠 상태를 여섯 가지로 고정했다(OPEN·검수대기·승인완료·게시중단·반려·보관됨). 상태가 모호하면 '지금 이건 학생이 볼 수 있나'를 매번 물어봐야 한다.",
+        "en": "Six fixed states — open, pending, approved, unpublished, rejected, archived. Vague states mean asking every time whether students can see this yet."
+      },
+      {
+        "ko": "AI로 만든 콘텐츠는 등록 때 체크하게 하고 목록에 'AI' 배지로 드러냈다. 숨기면 나중에 신뢰 문제가 된다.",
+        "en": "AI-made content is declared at upload and carries an AI badge in every list. Hiding it becomes a trust problem later."
+      }
     ]
   },
   "Phonics-Playground": {
@@ -1345,8 +1375,8 @@
       "en": "Student-facing game client"
     },
     "summary": {
-      "ko": "발행된 파닉스 게임을 둘러보고 플레이하는 학생용 SPA. 게임은 iframe 안에 격리하고 이벤트만 postMessage로 받아 게임과 셸을 따로 배포할 수 있게 했다.",
-      "en": "A student SPA for browsing and playing published phonics games. Games run sandboxed in an iframe and report through postMessage, so shell and content ship separately."
+      "ko": "Studio 에서 게시된 콘텐츠가 학생에게 닿는 쪽 화면. 레벨과 스킬 두 축으로 골라 전체화면으로 실행하고, 끝나면 별점과 감상 칩으로 반응을 남긴다. 같은 계정에 관리자 통계가 숨어 있다.",
+      "en": "Where published content reaches the student. Pick by level and skill, play full-screen, then leave a rating and a reaction chip. An admin dashboard hides behind the same account."
     },
     "role": {
       "ko": "화면 설계 · 프런트엔드",
@@ -1363,10 +1393,10 @@
       "tablet"
     ],
     "contribution": {
-      "plan": 60,
+      "plan": 90,
       "design": 100,
       "build": 90,
-      "qa": 60
+      "qa": 70
     },
     "shot_notes": {
       "desktop": {
@@ -1416,6 +1446,28 @@
     },
     "tools": [
       "Claude Code"
+    ],
+    "intent": {
+      "ko": "제작 도구와 학생 화면을 하나로 합치면 둘 다 어정쩡해진다. 데이터는 공유하되 얼굴은 완전히 갈라야 했다. 학생은 어두운 어드민을 볼 이유가 없고, 운영자는 캐릭터 카드 사이에서 지표를 읽을 수 없다.",
+      "en": "Merge the authoring tool with the student view and both end up half-right. Share the data, split the face. A child has no reason to see a dark admin, and an operator can't read metrics between character cards."
+    },
+    "concept": {
+      "ko": "Studio 가 다크 네이비에 텍스트 내비라면 이쪽은 파스텔에 큰 라운드 카드와 캐릭터다. 관리 기능은 지우지 않고 헤더의 작은 아이콘 알약으로 접어 넣어, 아이 화면을 방해하지 않으면서 운영자가 학생이 보는 그 자리에서 성과를 열 수 있게 했다. 실행은 페이지 이동이 아니라 검은 전체화면 오버레이라 콘텐츠 밖의 UI가 사라진다.",
+      "en": "Where Studio is dark navy with text nav, this is pastel with big rounded cards and characters. The admin tools aren't removed but folded into a small icon pill in the header — out of a child's way, yet letting an operator open the numbers from the very screen students use. Content runs in a black full-screen overlay, so the surrounding UI disappears."
+    },
+    "decisions": [
+      {
+        "ko": "콘텐츠를 iframe 안에 격리하고 이벤트만 주고받게 했다. 게임과 셸을 따로 배포할 수 있어 게임 하나 고치자고 앱 전체를 다시 올리지 않는다.",
+        "en": "Content is isolated in an iframe, exchanging only events. Games and shell deploy separately, so fixing one game doesn't mean shipping the whole app."
+      },
+      {
+        "ko": "평가를 별점만으로 받지 않고 '재밌어요/어려워요/또 하고 싶어요' 칩을 붙였다. 아이는 별 개수보다 말로 고르는 게 빠르다.",
+        "en": "Feedback isn't stars alone — chips like fun, hard, again. Children pick words faster than they weigh stars."
+      },
+      {
+        "ko": "레벨과 스킬을 독립된 두 축으로 뒀다. 한 줄 카테고리로 합치면 '단모음 a를 ECP2에서' 같은 실제 수업 단위를 못 찾는다.",
+        "en": "Level and skill stay two independent axes. Collapse them into one list and you can't find a real lesson unit like short-a at ECP2."
+      }
     ]
   },
   "Sound-Safari": {
@@ -1428,8 +1480,8 @@
       "en": "Pronunciation game · speech recognition"
     },
     "summary": {
-      "ko": "한국 아이들이 자주 헷갈리는 소리쌍(f↔p, v↔b, r↔l)만 골라 만든 정글 테마 단어 게임. 글자 카드를 순서대로 끌어 단어를 맞추고 마이크로 직접 발음해야 다음 문제로 넘어간다. 듣기에서 끝내지 않고 발음을 게이트로 걸어 아이가 소리를 내도록 강제했다.",
-      "en": "A jungle-themed word game built around the sound pairs Korean learners confuse most (f↔p, v↔b, r↔l). Children drag letter cards into order, then must say the word aloud — pronunciation gates the next round, so listening alone never counts as done."
+      "ko": "그림을 보고 알파벳 타일을 끌어 세 글자 단어를 만든 뒤, 그 단어를 직접 소리 내 발음까지 평가받는 파닉스 게임. 철자와 발음을 한 판 안에서 이어 붙였다.",
+      "en": "A phonics game: build a three-letter word by dragging alphabet tiles onto a picture, then say it aloud and get scored on the pronunciation. Spelling and speaking join inside one round."
     },
     "role": {
       "ko": "게임 설계 · 아트 디렉션 · 구현",
@@ -1443,12 +1495,12 @@
     "entry": "",
     "featured": true,
     "concept": {
-      "ko": "정글 사파리를 테마로 잡았다. 발음 연습은 틀리는 게 전제인 활동이라 아이가 틀렸을 때 위축되지 않는 톤이 필요했다. 사자 마스코트가 계속 말을 걸고 평가 결과는 점수판이 아니라 별점으로 준다. 마이크 버튼은 단어를 완성하기 전엔 잠겨 있다가 완성되면 초대 애니메이션으로 흔들려서 다음에 뭘 해야 하는지 글자 없이 알린다.",
-      "en": "A jungle-safari theme. Pronunciation practice presumes getting it wrong, so the tone had to keep a child from shrinking back: a lion mascot keeps talking to them and results arrive as stars, not a scoreboard. The mic button stays locked until the word is complete, then shakes with an invite animation — telling the child what to do next without a line of text."
+      "ko": "마이크를 처음부터 열어두지 않고 단어를 완성해야 잠금이 풀리게 했다. 순서가 곧 학습 설계다 — 철자가 맞아야 발음할 대상이 생긴다. 발음 결과는 점수 대신 별 세 개와 글자별 색으로 보여줘 '어느 소리에서 막혔는지'가 숫자 없이 읽힌다. 사자 마스코트는 네 가지 표정으로 정답·오답을 말없이 알린다.",
+      "en": "The mic stays locked until the word is built. The order is the lesson — spelling right is what gives you something to pronounce. Results come back as three stars and per-letter colour rather than a score, so which sound broke down reads without numbers. A lion mascot signals right and wrong across four faces, wordlessly."
     },
     "intent": {
-      "ko": "한국 아이들이 틀리는 영어 소리는 정해져 있다. f와 p, v와 b, r과 l. 그런데 보통의 파닉스 앱은 전체 알파벳을 고루 다루느라 정작 안 되는 소리에 시간을 안 쓴다. 그래서 단어 풀을 이 소리쌍으로만 좁히고 듣기에서 끝내지 않고 직접 발음해야 다음으로 넘어가게 했다.",
-      "en": "The English sounds Korean children miss are predictable: f/p, v/b, r/l. Most phonics apps spread evenly across the alphabet and spend little time exactly there. So the word pool was narrowed to those pairs, and listening alone doesn't advance you — you have to say it."
+      "ko": "파닉스 앱은 대개 철자까지만 하고 끝난다. 아이는 단어를 맞게 조립하고도 소리 내 본 적이 없다. 읽기는 결국 입으로 나와야 해서, 한 판을 철자에서 끊지 않고 발음까지 끌고 가기로 했다.",
+      "en": "Most phonics apps stop at spelling — a child assembles the word correctly and never says it. Reading has to come out of the mouth eventually, so a round doesn't end at the letters; it carries through to speaking."
     },
     "flow": [
       {
@@ -1516,20 +1568,12 @@
     ],
     "decisions": [
       {
-        "ko": "발음 평가를 2단으로 짰다. Azure가 음소별 점수를 주지만 토큰 서버가 필요하고 항상 붙는다는 보장이 없다. 붙으면 Azure, 안 붙으면 Web Speech + 편집거리로 근사 평가, 그것도 안 되면 발음 없이 넘어가게 했다. 어떤 환경에서도 아이가 막히지 않는 게 우선이다.",
-        "en": "Assessment is tiered. Azure gives per-phoneme scores but needs a token server that isn't always reachable; when it is, Azure runs, otherwise Web Speech plus edit-distance approximates it, and failing both the child proceeds without speaking. Nothing may dead-end a child."
+        "ko": "점수와 목숨을 숫자가 아니라 별과 하트로 뒀다. 숫자를 못 읽는 나이대에는 개수가 곧 피드백이다.",
+        "en": "Score and lives are stars and hearts, not digits. At this age the count itself is the feedback."
       },
       {
-        "ko": "녹음 중에는 배경음악과 TTS를 정지시킨다. 스피커 소리가 마이크로 들어가 인식률을 떨어뜨렸다. 끝나면 복구한다.",
-        "en": "Music and TTS pause during recording — speaker bleed into the mic was wrecking recognition — and resume afterwards."
-      },
-      {
-        "ko": "'발음해보세요' 안내를 마이크가 실제로 켜진 뒤에만 띄운다. 먼저 띄우면 아이가 말을 시작한 뒤에 녹음이 시작돼 앞부분이 잘렸다.",
-        "en": "The 'say it' prompt appears only after the mic actually opens; showing it earlier meant recording began mid-word and clipped the start."
-      },
-      {
-        "ko": "틀린 소리를 IPA 발음기호로 보여준다. 아이가 읽지는 못하지만 옆에 있는 교사·부모가 무엇을 고쳐줘야 하는지 바로 안다.",
-        "en": "Wrong sounds are shown in IPA. The child can't read it, but the teacher or parent beside them immediately knows what to correct."
+        "ko": "녹음 중에는 배경음악을 낮췄다. 음성 인식이 배경 소리에 물리면 아이는 자기 발음이 틀렸다고 오해한다.",
+        "en": "Music ducks while recording. If the recogniser catches the soundtrack, the child concludes their own pronunciation was wrong."
       }
     ],
     "shot_devices": [
@@ -1587,8 +1631,8 @@
       "en": "Compound word puzzle, ages 5–7"
     },
     "summary": {
-      "ko": "영어 복합어를 설명 없이 두 조각을 직접 합쳐보며 익히는 퍼즐 게임. 성공 기준을 '5세 아이가 어른 도움 없이 혼자 6라운드를 완주하는 것'으로 잡고 그 기준에 맞춰 규칙 설명과 텍스트를 계속 덜어냈다.",
-      "en": "A puzzle game that teaches English compound words by having children fuse two halves — no instructions. Success was defined as a five-year-old finishing six rounds unaided, and text was stripped back until that held."
+      "ko": "영어 복합어를 두 조각을 직접 합쳐보며 익히는 퍼즐 게임. 규칙을 글로 설명하지 않고 카드를 끌어보게 해서 몸으로 익히게 했다. 30개 단어를 모으는 도감이 계속하게 만드는 장치다.",
+      "en": "A puzzle where English compound words are learned by slamming two halves together. No written rules — you drag a card and find out. A thirty-word collection book is what keeps a child going."
     },
     "role": {
       "ko": "게임 기획 · 화면 설계 · 구현",
@@ -1639,6 +1683,28 @@
     "tools": [
       "Claude Code",
       "Midjourney"
+    ],
+    "intent": {
+      "ko": "다섯 살은 게임 설명을 읽지 못한다. 읽어줄 어른이 옆에 있어야 시작되는 게임은 교실 밖에서 쓰이지 않는다. 성공 기준을 '아이가 혼자 6판을 완주하는 것'으로 잡고 그 기준에 맞춰 화면을 덜어냈다.",
+      "en": "A five-year-old can't read the rules. A game that needs an adult to start it doesn't get used outside the classroom. The bar was set at 'a child finishes six rounds alone,' and the screen was stripped back to meet it."
+    },
+    "concept": {
+      "ko": "카드에 글자를 넣지 않았다. 그림만 보고 week 와 end 를 끌어와 겹치면 weekend 일러스트가 터지며 단어가 처음 등장한다 — 글자는 답을 맞힌 뒤의 보상이다. 화면 중앙을 GRAVITY ZONE 이라는 빛나는 원으로 두어 '여기로 끌어와라'를 문장 없이 말했고, 틀려도 카드가 제자리로 돌아갈 뿐 벌점도 실패 화면도 없다.",
+      "en": "The cards carry no text. You drag week and end together on pictures alone, and the weekend illustration bursts out with the word appearing for the first time — letters are the reward for getting it right. A glowing circle called the gravity zone says 'drag here' without a sentence, and a wrong pair just floats back: no penalty, no fail screen."
+    },
+    "decisions": [
+      {
+        "ko": "오답에 벌을 주지 않았다. 카드가 제자리로 돌아갈 뿐이다. 다섯 살이 틀렸다는 화면을 보면 게임을 닫는다.",
+        "en": "Wrong answers aren't punished — the card just drifts back. Show a five-year-old a failure screen and the game closes."
+      },
+      {
+        "ko": "보상을 별·동전·보석 세 층으로 나눴다. 별은 매 판, 동전은 재도전 기회, 보석은 도감 채우기 — 한 판과 한 세트와 오래 하는 것에 각각 이유를 줬다.",
+        "en": "Rewards run three layers: stars each round, coins for retries, gems to fill the book — a reason for one round, one set, and the long haul."
+      },
+      {
+        "ko": "힌트를 글이 아니라 빛으로 줬다. 정답 두 장에 테두리가 켜진다. 설명을 읽을 수 없는 아이에게 힌트 문장은 힌트가 아니다.",
+        "en": "Hints are light, not words — the two right cards glow. To a child who can't read, a hint sentence isn't a hint."
+      }
     ]
   },
   "poly-dashboard": {
@@ -2141,8 +2207,8 @@
       "en": "AI business-analytics platform prototype"
     },
     "summary": {
-      "ko": "학원 운영 데이터를 자연어로 묻고 리포트로 받는 플랫폼의 UI 프로토타입. 로그인부터 채팅·프로젝트·리포트 뷰어까지 12개 화면을 이어 붙였고 색은 전부 토큰으로만 써서 LNB 스위처로 POLY와 CANB 브랜드가 런타임에 교체된다.",
-      "en": "A UI prototype for a platform where academy operations data is queried in natural language and returned as reports. Twelve screens from login to report viewer, with every color drawn from tokens so a switcher swaps the POLY and CANB brands at runtime."
+      "ko": "학원 운영 데이터를 자연어로 묻고 리포트로 받는 플랫폼의 UI 프로토타입. 로그인부터 채팅·프로젝트·리포트 뷰어까지 29개 화면을 실제로 눌러 넘어가게 이었고, 방향을 정하려고 대화 우선·커맨드센터·하이브리드 세 가지 변체를 따로 만들어 비교했다.",
+      "en": "A UI prototype for asking operational data in plain language and getting a report back. Twenty-nine screens — login through chat, projects and the report viewer — wired so they actually click through, plus three separate variants built to settle the direction."
     },
     "role": {
       "ko": "화면 설계 · 디자인 토큰 · 프로토타입 구현",
@@ -2162,7 +2228,7 @@
       "mobile"
     ],
     "contribution": {
-      "plan": 80,
+      "plan": 90,
       "design": 100,
       "build": 100,
       "qa": 70
@@ -2216,6 +2282,28 @@
     "tools": [
       "Claude Code",
       "Gemini"
+    ],
+    "intent": {
+      "ko": "경영 분석 도구는 보통 리포트만 있거나 채팅만 있다. 리포트만 있으면 원하는 각도를 못 묻고, 채팅만 있으면 68개 캠퍼스 피벗 같은 밀도를 담지 못한다. 둘을 어떻게 한 화면에 두느냐가 이 프로젝트의 질문이었다.",
+      "en": "Analytics tools tend to be all report or all chat. Report-only can't answer the angle you actually want; chat-only can't hold a 68-campus pivot. How to put both on one screen was the question here."
+    },
+    "concept": {
+      "ko": "프로젝트를 채팅과 리포트의 상위 그릇으로 뒀다. 질문 하나가 끝나고 사라지는 대신 '목동 학생 감소 원인 분석' 같은 주제 아래 채팅·리포트·지침·데이터 소스가 함께 쌓인다. 추이 리포트에는 표 옆에 폭을 끌어 조절하는 대화 패널을 붙여, 숫자를 보면서 그 자리에서 되물을 수 있게 했다.",
+      "en": "Projects are the container above both chat and report. Instead of a question ending and vanishing, chats, reports, instructions and data sources accumulate under a topic like 'why enrolment fell at Mokdong.' The trend report carries a resizable chat panel beside the table, so you can ask back while looking at the numbers."
+    },
+    "decisions": [
+      {
+        "ko": "방향을 글로 논의하지 않고 변체 3종을 눌러볼 수 있게 만들어 비교했다. 대화 우선·커맨드센터·하이브리드 캔버스를 같은 데이터로 지어 놓으니 취향 논쟁이 아니라 쓰임새 논쟁이 됐다.",
+        "en": "The direction wasn't argued in prose — three clickable variants were built on the same data. Conversational, command centre, hybrid canvas: the debate turned from taste to use."
+      },
+      {
+        "ko": "색을 전부 토큰으로만 썼다. 브랜드가 POLY·CANB로 갈라지는 서비스라 LNB에서 브랜드를 바꾸면 화면 전체가 따라가야 한다.",
+        "en": "Colour lives only in tokens. The service spans POLY and CANB, so switching brand in the nav has to carry the whole screen."
+      },
+      {
+        "ko": "리포트 화면마다 인쇄와 Excel 버튼을 같은 자리에 뒀다. 실무에서 이 표는 결국 회의자료로 나간다.",
+        "en": "Print and Excel sit in the same spot on every report. In practice these tables end up in a meeting deck."
+      }
     ]
   },
   "polyscoop": {
@@ -2228,8 +2316,8 @@
       "en": "Student reporters' web magazine"
     },
     "summary": {
-      "ko": "폴리 학생 기자단이 직접 취재한 기사를 싣는 웹진. 심층탐구·일상기록·세상 속으로 네 개 섹션으로 나누고 영상 기사를 함께 다루며 지난 호를 계속 쌓아가는 구조로 만들었다.",
-      "en": "A web magazine carrying articles reported by Poly's student journalists — four sections, video pieces alongside text, and a back-issue archive that keeps accumulating."
+      "ko": "폴리 학생 기자단이 영어로 취재하고 쓰는 디지털 매거진. 심층탐구·일상기록·세상 속으로 세 갈래로 나누고, 영상 히어로와 투표·리액션으로 읽는 쪽도 참여하게 만들었다. 지난 호는 계속 쌓인다.",
+      "en": "A digital magazine reported and written in English by Poly's student press corps. Three tracks — Insights, Life Log, Inside the World — with a video hero, polls and reactions that pull readers in. Back issues keep stacking."
     },
     "role": {
       "ko": "웹진 구조 설계 · 화면 디자인 · 구현",
@@ -2246,7 +2334,7 @@
       "mobile"
     ],
     "contribution": {
-      "plan": 80,
+      "plan": 90,
       "design": 100,
       "build": 100,
       "qa": 80
@@ -2293,6 +2381,24 @@
     "tools": [
       "Claude Code",
       "Midjourney"
+    ],
+    "intent": {
+      "ko": "학생이 쓴 글을 학교 게시판에 올리면 과제처럼 보인다. 기자단이라는 이름값을 화면이 받쳐주지 못하면 아이들도 그렇게 대한다. 그래서 학급 소식지가 아니라 매거진의 문법으로 지었다.",
+      "en": "Post a child's writing on a school board and it reads as homework. If the screen doesn't carry the weight of the word 'press corps,' the children won't either. So it was built in the grammar of a magazine, not a newsletter."
+    },
+    "concept": {
+      "ko": "기사마다 기자 이름과 캠퍼스를 함께 붙였다 — 'Minho Lee · Gangnam'. 익명의 학생 글이 아니라 이름을 건 기사가 된다. 읽는 쪽에는 투표와 세 가지 리액션을 두어 반응이 숫자로 남게 했고, 영문 메뉴에 한글 부제를 병기해 영어 매거진이면서도 학부모가 길을 잃지 않게 했다.",
+      "en": "Every piece carries a byline with campus — 'Minho Lee · Gangnam.' Not anonymous student writing but an article with a name on it. Readers get polls and three reactions so response shows up as numbers, and English menus carry Korean subtitles so parents don't lose their way in an English magazine."
+    },
+    "decisions": [
+      {
+        "ko": "히어로를 영상으로 깔았다. 첫 화면이 텍스트 목록이면 아무리 좋은 기사도 학교 홈페이지처럼 읽힌다.",
+        "en": "The hero runs video. Lead with a text list and even strong writing reads like a school homepage."
+      },
+      {
+        "ko": "공지는 매거진 톤을 포기하고 번호·제목·날짜·조회수 게시판으로 만들었다. 발대식 안내는 예쁘게 읽히는 것보다 찾기 쉬운 게 낫다.",
+        "en": "Notices drop the magazine tone for a numbered board with dates and view counts. An orientation notice needs finding, not styling."
+      }
     ]
   },
   "LIO": {
