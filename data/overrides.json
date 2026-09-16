@@ -841,7 +841,7 @@
     },
     "tools": [
       "Claude Code",
-      "Midjourney (character)",
+      "Midjourney",
       "Nano Banana"
     ]
   },
@@ -1342,7 +1342,7 @@
     },
     "tools": [
       "Claude Code",
-      "Midjourney (art)"
+      "Midjourney"
     ]
   },
   "phonics-wordmashup": {
