@@ -2600,11 +2600,11 @@
             ]
           },
           {
-            "ko": "영상 기사를 글과 같은 자리에 둔다",
-            "en": "Video stories sit alongside the written ones",
+            "ko": "표지 기사 자리에서 영상이 그대로 돈다",
+            "en": "The cover story plays as video, in the same slot",
             "at": [
-              30,
-              46
+              25,
+              11
             ]
           },
           {
