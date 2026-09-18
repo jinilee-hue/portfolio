@@ -2551,6 +2551,7 @@
       "ko": "Poly Scoop",
       "en": "Poly Scoop"
     },
+    "order": 99999,
     "kicker": {
       "ko": "학생 기자단 웹진",
       "en": "Student reporters' web magazine"
@@ -2639,7 +2640,9 @@
         "ko": "공지는 매거진 톤을 포기하고 번호·제목·날짜·조회수 게시판으로 만들었다. 발대식 안내는 예쁘게 읽히는 것보다 찾기 쉬운 게 낫다.",
         "en": "Notices drop the magazine tone for a numbered board with dates and view counts. An orientation notice needs finding, not styling."
       }
-    ]
+    ],
+    "shot_eval": "(() => new Promise(r => { const pin = () => { try { _heroHovered = true; clearInterval(heroAuto); heroGo(0); } catch (e) {} }; pin(); setTimeout(() => { pin(); setTimeout(r, 1500); }, 1200); }))()",
+    "shot_wait": 4500
   },
   "LIO": {
     "merge_into": "LIO_DESIGN"

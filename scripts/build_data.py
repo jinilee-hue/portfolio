@@ -25,7 +25,7 @@ OWNER = os.environ.get("PORTFOLIO_OWNER", "jinilee-hue")
 API = "https://api.github.com"
 
 # 포트폴리오에 싣지 않을 저장소
-EXCLUDE = {"portfolio", "design-extractor"}
+EXCLUDE = {"portfolio", "design-extractor", "edutech"}
 
 
 def token() -> str | None:
