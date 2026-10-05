@@ -81,6 +81,27 @@
   /* 표제(kick+h1)를 남는 공간의 세로 중앙에 — 위아래 auto 마진이 균형을 잡는다 */
   .open .kick{margin-top:auto}
   .open .hero-wrap{margin-bottom:auto}
+  /* 히어로 배경 사진 — .open 은 .wrap 안이라 좌우 여백이 있다. 뷰포트 전폭으로
+     빼내 화면 끝까지 채운다. 사진이 밝은 흑백이라 흰 표제가 묻히므로
+     어두운 그라데이션을 덧씌워 글자 쪽을 눌러 준다. */
+  .open::before{content:'';position:absolute;z-index:0;pointer-events:none;
+    top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);
+    background:
+      linear-gradient(to right, rgba(10,10,10,.95) 0%, rgba(10,10,10,.88) 45%, rgba(10,10,10,.6) 72%, rgba(10,10,10,.72) 100%),
+      linear-gradient(to bottom, rgba(10,10,10,.72) 0%, rgba(10,10,10,.3) 30%, rgba(10,10,10,.72) 82%, var(--bg) 100%),
+      url('assets/img/hero-bg.jpg') center/cover no-repeat;
+    background-blend-mode:normal,normal,normal}
+  /* 배경 위로 내용이 올라오게 */
+  .open > *{position:relative;z-index:1}
+  /* 라이트 모드는 글자가 검정이라 어두운 오버레이를 쓰면 표제가 묻힌다.
+     같은 사진을 흰 쪽으로 덮어 밝은 바탕으로 뒤집는다. */
+  @media (prefers-color-scheme:light){
+    .open::before{
+      background:
+        linear-gradient(to right, rgba(247,250,249,.95) 0%, rgba(247,250,249,.9) 45%, rgba(247,250,249,.68) 72%, rgba(247,250,249,.8) 100%),
+        linear-gradient(to bottom, rgba(247,250,249,.8) 0%, rgba(247,250,249,.45) 30%, rgba(247,250,249,.8) 82%, var(--bg) 100%),
+        url('assets/img/hero-bg.jpg') center/cover no-repeat}
+  }
   /* 서명 — 표제 위에 흘림체 영문 이름을 크게 겹친다.
      포스터의 사인처럼: 기울고, 핑크, 표제와 살짝 어긋난 위치.
      mix-blend 없이 반투명으로 두어 어떤 배경에서도 읽힘을 해치지 않는다. */
@@ -579,6 +600,10 @@
     .splash-meta .k{font-size:8pt}
 
     /* 보드(화면 상세): 이어지는 장들 — 그림 단위로만 잘리게 */
+    /* 인쇄 지면은 100svh 와 높이가 달라 히어로 배경 끝선이 가로줄처럼 드러난다.
+       지면 끝까지 늘려 경계를 없앤다. */
+    .open::before{top:-14mm;bottom:-14mm;left:-14mm;right:-14mm;
+      width:auto!important;transform:none!important}
     .board{border-radius:0;margin:0;padding:12mm 14mm}
     /* 그림 한 장이 지면 한 쪽을 차지한다 — 위로 몰리지 않게 세로 중앙에 둔다 */
     /* 부모가 grid 면 page-break-after 가 제대로 먹지 않아 도판 사이에
