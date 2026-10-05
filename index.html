@@ -82,25 +82,28 @@
   .open .kick{margin-top:auto}
   .open .hero-wrap{margin-bottom:auto}
   /* 히어로 배경 사진 — .open 은 .wrap 안이라 좌우 여백이 있다. 뷰포트 전폭으로
-     빼내 화면 끝까지 채운다. 사진이 밝은 흑백이라 흰 표제가 묻히므로
-     어두운 그라데이션을 덧씌워 글자 쪽을 눌러 준다. */
+     빼내 화면 끝까지 채운다. 사진은 보정 없이 원본 그대로 깐다. */
   .open::before{content:'';position:absolute;z-index:0;pointer-events:none;
     top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);
-    background:
-      linear-gradient(to right, rgba(10,10,10,.95) 0%, rgba(10,10,10,.88) 45%, rgba(10,10,10,.6) 72%, rgba(10,10,10,.72) 100%),
-      linear-gradient(to bottom, rgba(10,10,10,.72) 0%, rgba(10,10,10,.3) 30%, rgba(10,10,10,.72) 82%, var(--bg) 100%),
-      url('assets/img/hero-bg.jpg') center/cover no-repeat;
-    background-blend-mode:normal,normal,normal}
+    background:url('assets/img/hero-bg.jpg') center/cover no-repeat}
   /* 배경 위로 내용이 올라오게 */
   .open > *{position:relative;z-index:1}
-  /* 라이트 모드는 글자가 검정이라 어두운 오버레이를 쓰면 표제가 묻힌다.
-     같은 사진을 흰 쪽으로 덮어 밝은 바탕으로 뒤집는다. */
+  /* 사진을 원본 그대로 깔기 때문에 흰 표제가 밝은 노트북 화면 위에서 묻힌다.
+     사진은 건드리지 않고 글자 뒤에만 그림자를 깔아 읽히게 한다. */
+  .open .kick,.open h1,.open .counts{
+    text-shadow:0 1px 2px rgba(0,0,0,.55), 0 2px 14px rgba(0,0,0,.45), 0 0 42px rgba(0,0,0,.35)}
+  /* 본문은 표제보다 작아 같은 그림자로는 모자란다 — 더 촘촘히 깐다. */
+  .open .lede{
+    text-shadow:0 1px 2px rgba(0,0,0,.8), 0 1px 8px rgba(0,0,0,.72), 0 0 22px rgba(0,0,0,.6)}
+  .open .sig-name{text-shadow:0 2px 10px rgba(0,0,0,.45), 0 2px 24px rgba(255,95,162,.3)}
+  /* 사진을 원본 그대로 깔기 때문에 히어로 안쪽은 테마와 무관하게 흰 글자로
+     고정한다. 라이트 모드의 검은 글자는 사진 위에서 읽히지 않는다. */
   @media (prefers-color-scheme:light){
-    .open::before{
-      background:
-        linear-gradient(to right, rgba(247,250,249,.95) 0%, rgba(247,250,249,.9) 45%, rgba(247,250,249,.68) 72%, rgba(247,250,249,.8) 100%),
-        linear-gradient(to bottom, rgba(247,250,249,.8) 0%, rgba(247,250,249,.45) 30%, rgba(247,250,249,.8) 82%, var(--bg) 100%),
-        url('assets/img/hero-bg.jpg') center/cover no-repeat}
+    .open h1{color:#F3F6F5}
+    .open .lede p{color:rgba(243,246,245,.88)}
+    .open .counts dt{color:rgba(243,246,245,.62)}
+    .open .counts dd{color:rgba(243,246,245,.85)}
+    .open .counts{border-color:rgba(243,246,245,.22)}
   }
   /* 서명 — 표제 위에 흘림체 영문 이름을 크게 겹친다.
      포스터의 사인처럼: 기울고, 핑크, 표제와 살짝 어긋난 위치.
@@ -604,6 +607,18 @@
        지면 끝까지 늘려 경계를 없앤다. */
     .open::before{top:-14mm;bottom:-14mm;left:-14mm;right:-14mm;
       width:auto!important;transform:none!important}
+    /* PDF 엔진은 번진 text-shadow 를 검은 사각 블록으로 그려 표제를 덮는다.
+       인쇄에서는 그림자를 끄고, 글자 쪽 배경만 어둡게 깔아 대비를 만든다. */
+    .open .kick,.open h1,.open .lede,.open .counts,.open .sig-name{text-shadow:none!important}
+    .open h1{color:#F3F6F5!important}
+    .open .lede p{color:rgba(243,246,245,.9)!important}
+    .open .counts dt{color:rgba(243,246,245,.6)!important}
+    .open .counts dd{color:rgba(243,246,245,.85)!important}
+    .open::before{
+      background:
+        linear-gradient(to right, rgba(10,10,10,.95) 0%, rgba(10,10,10,.88) 46%, rgba(10,10,10,.45) 76%, rgba(10,10,10,.52) 100%),
+        linear-gradient(to bottom, rgba(10,10,10,.1) 0%, rgba(10,10,10,.1) 46%, rgba(10,10,10,.62) 62%, rgba(10,10,10,.68) 100%),
+        url('assets/img/hero-bg.jpg') center/cover no-repeat!important}
     .board{border-radius:0;margin:0;padding:12mm 14mm}
     /* 그림 한 장이 지면 한 쪽을 차지한다 — 위로 몰리지 않게 세로 중앙에 둔다 */
     /* 부모가 grid 면 page-break-after 가 제대로 먹지 않아 도판 사이에
