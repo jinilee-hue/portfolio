@@ -222,6 +222,15 @@ def main() -> int:
     absorbed_ids = {p["id"] for lst in absorbed.values() for p in lst}
     projects = [p for p in projects if p["id"] not in absorbed_ids]
 
+    # overrides 의 hidden: true 는 레포를 지우지 않고 포트폴리오에서만 뺀다.
+    # 사내 사정으로 공개하지 않는 작업이 있어 merge_into 와는 별도의 장치가 필요하다.
+    hidden_ids = {
+        pid for pid, ov in overrides.items()
+        if isinstance(ov, dict) and ov.get("hidden")
+    }
+    if hidden_ids:
+        projects = [p for p in projects if p["id"] not in hidden_ids]
+
     for p in projects:
         parts = absorbed.get(p["id"]) or []
         if not parts:

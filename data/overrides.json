@@ -398,7 +398,10 @@
       "Vanilla JS",
       "gpt-4o-mini-tts",
       "Whisper"
-    ]
+    ],
+    "shot_evals": {
+      "tablet": "(() => new Promise(async r => { const sleep=ms=>new Promise(x=>setTimeout(x,ms)); const pick=re=>{for(const el of document.querySelectorAll('button,[role=button],li,label,div,span')){   const t=(el.textContent||'').trim();   if(re.test(t) && t.length<60 && el.offsetHeight>18 && el.offsetHeight<110){     el.click(); let p=el.parentElement; for(let i=0;i<3&&p;i++,p=p.parentElement) p.click(); return true; }}   return false;}; const next=()=>{for(const n of document.querySelectorAll('button,a')){   if(/NEXT/i.test(n.textContent||'') && !n.disabled){n.click(); return true;}} return false;}; document.querySelector('#gate')?.click(); await sleep(2200); pick(/They were very lonely/i); await sleep(1800); next(); await sleep(2600); pick(/A long, long time/i);     await sleep(1800); next(); await sleep(3000); r();}))()"
+    }
   },
   "KCMS": {
     "featured": true,
@@ -681,7 +684,10 @@
     },
     "tools": [
       "Claude Code"
-    ]
+    ],
+    "shot_paths": {
+      "tablet": "C타입-스틸블루/학생 등록.html"
+    }
   },
   "LIO_DESIGN": {
     "featured": true,
@@ -1064,8 +1070,8 @@
   "AI-Studio": {
     "featured": true,
     "title": {
-      "ko": "Wonder Story Lab",
-      "en": "Wonder Story Lab"
+      "ko": "Story Studio",
+      "en": "Story Studio"
     },
     "kicker": {
       "ko": "7세 대상 AI 스토리 수업",
@@ -1164,7 +1170,7 @@
         "en": "One app split across three places: the child works on a tablet, the teacher watches progress on a PC, and the finished story goes up on the classroom screen for the child to present. Only the presentation screen drops to a dark background with nothing but the picture and the sentence — it has to be read from the back of the room, so it couldn't follow the same rules as the rest."
       }
     ],
-    "shot_path": "student.html",
+    "shot_path": "teacher.html",
     "shot_wait": 3500,
     "concept": {
       "ko": "모든 화면이 같은 골격을 쓴다. 왼쪽 아래는 Back, 오른쪽 아래는 다음 행동, 그 옆에 현재 단계 이름. 아이가 매 화면에서 기억할 것은 '다음은 오른쪽 아래' 하나다. 입력은 말하기가 기본이고 'In my picture, I see ___' 같은 빈칸 문장 틀을 줬다. 마지막 Magic 버튼은 아이가 쓴 문장과 AI가 늘린 문장을 나란히 보여준다 — 고쳐주는 게 아니라 비교하게 두었다.",
@@ -1187,12 +1193,12 @@
         "device": "desktop",
         "wait": 3500,
         "label": {
-          "ko": "교사 화면",
-          "en": "Teacher view"
+          "ko": "출석 — 수업 시작 전",
+          "en": "Attendance — before class"
         },
         "note": {
-          "ko": "학생이 푸는 화면과 짝을 이루는 교사 뷰.",
-          "en": "The teacher counterpart to the student session."
+          "ko": "아이 아홉 명을 띄워 두고 화자 등록이 필요한 사람을 표시한다. 교사는 여기서 수업을 연다.",
+          "en": "Nine children on one screen, flagging who still needs speaker registration. The teacher opens class here."
         },
         "features": [
           {
@@ -1219,7 +1225,8 @@
               88
             ]
           }
-        ]
+        ],
+        "eval": "(() => new Promise(r => { document.querySelector('.mode-card, [class*=card]')?.click(); setTimeout(() => { document.querySelector('#startBtn, button')?.click(); setTimeout(r, 1800); }, 1200); }))()"
       },
       {
         "id": "results",
@@ -1399,7 +1406,10 @@
       "Image generation API"
     ],
     "shot_evals": {
-      "tablet": "(() => new Promise(r => { state.componentResponses = {who:'a boy', where:'a snowy village', happen:'he builds a snowman', when:'in the morning', feel:'excited'}; showScreen('aiMaker'); setTimeout(r, 2200); }))()"
+      "tablet": "(() => new Promise(r => { const go=()=>{const b=[...document.querySelectorAll('button')].find(x=>/Continue/i.test(x.textContent)); if(b) b.click();}; setTimeout(go, 900); setTimeout(r, 3200); }))()"
+    },
+    "shot_paths": {
+      "tablet": "student.html"
     }
   },
   "Phonics-Studio": {
@@ -2272,7 +2282,8 @@
         "ko": "리포트 화면마다 인쇄와 Excel 버튼을 같은 자리에 뒀다. 실무에서 이 표는 결국 회의자료로 나간다.",
         "en": "Print and Excel sit in the same spot on every report. In practice these tables end up in a meeting deck."
       }
-    ]
+    ],
+    "hidden": true
   },
   "polyscoop": {
     "title": {
