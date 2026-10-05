@@ -200,7 +200,7 @@
       "en": "Controls are pared back to paging and playback; the study UI is gone. The test was simple — it should read as a book, not as a worksheet."
     },
     "shot_devices": [
-      "tablet",
+      "tablet-land",
       "desktop"
     ],
     "shot_query": "dev=1",
@@ -535,7 +535,7 @@
     },
     "shot_devices": [
       "desktop",
-      "tablet"
+      "tablet-land"
     ],
     "contribution": {
       "plan": 90,
@@ -1171,7 +1171,7 @@
       "en": "Every screen shares one frame: Back at bottom-left, the next action bottom-right, the current step named beside it. The only thing a child has to remember is 'next is bottom-right.' Input is speech first, with sentence frames like 'In my picture, I see ___.' The Magic button at the end shows the child's sentence and the AI's expanded one side by side — not a correction, a comparison."
     },
     "shot_devices": [
-      "tablet",
+      "tablet-land",
       "desktop"
     ],
     "contribution": {
@@ -1404,16 +1404,16 @@
   },
   "Phonics-Studio": {
     "title": {
-      "ko": "Phonics Studio",
-      "en": "Phonics Studio"
+      "ko": "Phonics Studio · Playground",
+      "en": "Phonics Studio · Playground"
     },
     "kicker": {
-      "ko": "콘텐츠 제작·검수·운영 도구",
-      "en": "Authoring, review and ops console"
+      "ko": "콘텐츠 등록부터 학생 화면까지 한 파이프라인",
+      "en": "One pipeline, from upload to the student's screen"
     },
     "summary": {
-      "ko": "파닉스 콘텐츠를 등록하고 검수하고 게시하는 운영 도구. 창작자·검토자·운영자 세 역할이 한 시스템 안에서 각자의 화면을 갖고, 자동검수 5단계가 근거를 만들면 승인·반려는 사람이 누른다.",
-      "en": "The pipeline tool for phonics content — upload, review, publish. Creator, reviewer and operator each get their own screens, and while a five-stage automatic check builds the evidence, a person makes the call."
+      "ko": "파닉스 콘텐츠를 등록하고 검수하고 게시하는 Studio, 게시된 것이 학생에게 닿는 Playground. 두 앱이 한 파이프라인의 앞뒤다. 창작자가 올리면 자동검수 다섯 단계가 근거를 만들고 사람이 승인하며, 운영자가 게시한 순간 Playground 갤러리에 뜬다. 학생이 남긴 별점과 플레이 기록은 다시 Studio 통계로 돌아온다.",
+      "en": "Studio takes phonics content through upload, review and publishing; Playground is where the published work reaches the student. Two apps, two ends of one pipeline. A creator uploads, five automatic stages build the evidence, a person approves, and the moment an operator publishes it appears in the Playground gallery. The ratings and play logs students leave flow back into Studio's dashboard."
     },
     "role": {
       "ko": "역할별 화면 설계 · 프런트엔드",
@@ -1429,7 +1429,7 @@
     "shot_wait": 3500,
     "shot_devices": [
       "desktop",
-      "tablet"
+      "tablet-land"
     ],
     "contribution": {
       "plan": 90,
@@ -1437,7 +1437,6 @@
       "build": 90,
       "qa": 70
     },
-    "shot_full": true,
     "shot_notes": {
       "desktop": {
         "label": {
@@ -1480,12 +1479,12 @@
       "Claude Code"
     ],
     "intent": {
-      "ko": "콘텐츠를 여러 사람이 만들기 시작하면 '올린 다음 무슨 일이 일어나는가'가 문제가 된다. 누가 보고, 무엇을 기준으로 통과시키고, 언제 학생에게 열리는지가 정해져 있지 않으면 품질이 사람마다 달라진다. 그래서 등록 화면보다 검수와 게시 화면을 먼저 설계했다.",
-      "en": "Once several people start making content, the real question is what happens after upload. Without a set answer to who looks at it, against what, and when it reaches students, quality drifts per person. So the review and publish screens were designed before the upload form."
+      "ko": "콘텐츠를 여러 사람이 만들기 시작하면 '올린 다음 무슨 일이 일어나는가'가 문제가 된다. 누가 보고, 무엇을 기준으로 통과시키고, 언제 학생에게 열리는지가 정해져 있지 않으면 품질이 사람마다 달라진다. 그래서 등록 화면보다 검수와 게시 화면을 먼저 설계했고, 게시 다음에 무엇이 보이는지까지를 같은 프로젝트로 묶었다.",
+      "en": "Once several people start making content, the real question is what happens after upload. Without a set answer to who looks at it, against what, and when it reaches students, quality drifts per person. The review and publish screens were designed before the upload form — and what students see after publishing was treated as part of the same project."
     },
     "concept": {
-      "ko": "AI를 판정자가 아니라 근거 생산자로 두었다. 자동검수는 형식·정적 스캔·메타데이터·품질평가·루브릭 다섯 단계를 돌려 통과/경고/참고로 표시하고, 화면에는 'AI 점수는 참고용이며 최종 판정은 사람이 합니다'를 명시했다. 자동 반려는 형식·정적 검사에서만 나온다. 운영자가 교육성·재미·기술완성도·사용성·안전성 다섯 축의 가중치를 직접 조정할 수 있게 해 기준 자체를 손에 쥐게 했다.",
-      "en": "AI produces evidence, not verdicts. The automatic pass runs five stages — format, static scan, metadata, quality score, rubric — and labels each pass / warning / reference, with the screen stating plainly that AI scores are advisory and a person decides. Only format and static checks can auto-reject. Operators tune the weights across the five rubric axes themselves, so the standard stays in their hands."
+      "ko": "두 앱은 데이터를 공유하되 얼굴은 완전히 갈라야 했다. 학생은 어두운 어드민을 볼 이유가 없고, 운영자는 캐릭터 카드 사이에서 지표를 읽을 수 없다. Studio는 다크 네이비에 텍스트 내비, Playground는 파스텔에 큰 라운드 카드와 캐릭터다. 관리 기능은 지우지 않고 Playground 헤더의 작은 아이콘 알약으로 접어 넣어, 아이 화면을 방해하지 않으면서 운영자가 학생이 보는 그 자리에서 성과를 열 수 있게 했다.\n\n검수에서는 AI를 판정자가 아니라 근거 생산자로 뒀다. 형식·정적 스캔·메타데이터·품질평가·루브릭 다섯 단계가 통과·경고·참고를 표시하고, 화면에 'AI 점수는 참고용이며 최종 판정은 사람이 합니다'를 명시했다. 자동 반려는 형식·정적 검사에서만 나온다.",
+      "en": "The two apps share data but had to split faces. A child has no reason to see a dark admin; an operator can't read metrics between character cards. Studio is dark navy with text nav, Playground pastel with big rounded cards and characters. The admin tools aren't removed but folded into a small icon pill in Playground's header — out of a child's way, yet letting an operator open the numbers from the very screen students use.\n\nIn review, AI produces evidence rather than verdicts. Five stages — format, static scan, metadata, quality score, rubric — label each pass, warning or reference, and the screen states plainly that AI scores are advisory and a person decides. Only format and static checks can auto-reject."
     },
     "decisions": [
       {
@@ -1501,115 +1500,87 @@
         "en": "Six fixed states — open, pending, approved, unpublished, rejected, archived. Vague states mean asking every time whether students can see this yet."
       },
       {
-        "ko": "AI로 만든 콘텐츠는 등록 때 체크하게 하고 목록에 'AI' 배지로 드러냈다. 숨기면 나중에 신뢰 문제가 된다.",
-        "en": "AI-made content is declared at upload and carries an AI badge in every list. Hiding it becomes a trust problem later."
-      }
-    ]
-  },
-  "Phonics-Playground": {
-    "title": {
-      "ko": "Phonics Playground",
-      "en": "Phonics Playground"
-    },
-    "kicker": {
-      "ko": "학생용 게임 클라이언트",
-      "en": "Student-facing game client"
-    },
-    "summary": {
-      "ko": "Studio 에서 게시된 콘텐츠가 학생에게 닿는 쪽 화면. 레벨과 스킬 두 축으로 골라 전체화면으로 실행하고, 끝나면 별점과 감상 칩으로 반응을 남긴다. 같은 계정에 관리자 통계가 숨어 있다.",
-      "en": "Where published content reaches the student. Pick by level and skill, play full-screen, then leave a rating and a reaction chip. An admin dashboard hides behind the same account."
-    },
-    "role": {
-      "ko": "화면 설계 · 프런트엔드",
-      "en": "UI design, front end"
-    },
-    "tags": [
-      "React",
-      "Games",
-      "Sandbox"
-    ],
-    "entry": "",
-    "shot_devices": [
-      "desktop",
-      "tablet"
-    ],
-    "contribution": {
-      "plan": 90,
-      "design": 100,
-      "build": 90,
-      "qa": 70
-    },
-    "shot_notes": {
-      "desktop": {
-        "label": {
-          "ko": "게임 셸",
-          "en": "Game shell"
-        },
-        "note": {
-          "ko": "발행된 파닉스 게임을 고르고 플레이하는 학생용 셸.",
-          "en": "A student shell for browsing and playing published phonics games."
-        },
-        "features": [
-          {
-            "ko": "발행된 게임을 갤러리에서 고른다",
-            "en": "Pick a published game from the gallery",
-            "at": [
-              13,
-              4
-            ]
-          },
-          {
-            "ko": "레벨·종류로 목록을 좁힌다",
-            "en": "Filter by level and game type",
-            "at": [
-              68,
-              4
-            ]
-          },
-          {
-            "ko": "카드형과 리스트형을 바꿔 본다",
-            "en": "Switch between card and list view",
-            "at": [
-              89,
-              4
-            ]
-          },
-          {
-            "ko": "카드마다 레벨·태그와 평점이 붙는다",
-            "en": "Every card carries its level, tags and rating",
-            "at": [
-              10,
-              34
-            ]
-          }
-        ]
-      }
-    },
-    "tools": [
-      "Claude Code"
-    ],
-    "intent": {
-      "ko": "제작 도구와 학생 화면을 하나로 합치면 둘 다 어정쩡해진다. 데이터는 공유하되 얼굴은 완전히 갈라야 했다. 학생은 어두운 어드민을 볼 이유가 없고, 운영자는 캐릭터 카드 사이에서 지표를 읽을 수 없다.",
-      "en": "Merge the authoring tool with the student view and both end up half-right. Share the data, split the face. A child has no reason to see a dark admin, and an operator can't read metrics between character cards."
-    },
-    "concept": {
-      "ko": "Studio 가 다크 네이비에 텍스트 내비라면 이쪽은 파스텔에 큰 라운드 카드와 캐릭터다. 관리 기능은 지우지 않고 헤더의 작은 아이콘 알약으로 접어 넣어, 아이 화면을 방해하지 않으면서 운영자가 학생이 보는 그 자리에서 성과를 열 수 있게 했다. 실행은 페이지 이동이 아니라 검은 전체화면 오버레이라 콘텐츠 밖의 UI가 사라진다.",
-      "en": "Where Studio is dark navy with text nav, this is pastel with big rounded cards and characters. The admin tools aren't removed but folded into a small icon pill in the header — out of a child's way, yet letting an operator open the numbers from the very screen students use. Content runs in a black full-screen overlay, so the surrounding UI disappears."
-    },
-    "decisions": [
-      {
         "ko": "콘텐츠를 iframe 안에 격리하고 이벤트만 주고받게 했다. 게임과 셸을 따로 배포할 수 있어 게임 하나 고치자고 앱 전체를 다시 올리지 않는다.",
         "en": "Content is isolated in an iframe, exchanging only events. Games and shell deploy separately, so fixing one game doesn't mean shipping the whole app."
       },
       {
-        "ko": "평가를 별점만으로 받지 않고 '재밌어요/어려워요/또 하고 싶어요' 칩을 붙였다. 아이는 별 개수보다 말로 고르는 게 빠르다.",
-        "en": "Feedback isn't stars alone — chips like fun, hard, again. Children pick words faster than they weigh stars."
+        "ko": "학생 평가를 별점만으로 받지 않고 '재밌어요/어려워요/또 하고 싶어요' 칩을 붙였다. 아이는 별 개수보다 말로 고르는 게 빠르다.",
+        "en": "Student feedback isn't stars alone — chips like fun, hard, again. Children pick words faster than they weigh stars."
       },
       {
-        "ko": "레벨과 스킬을 독립된 두 축으로 뒀다. 한 줄 카테고리로 합치면 '단모음 a를 ECP2에서' 같은 실제 수업 단위를 못 찾는다.",
-        "en": "Level and skill stay two independent axes. Collapse them into one list and you can't find a real lesson unit like short-a at ECP2."
+        "ko": "AI로 만든 콘텐츠는 등록 때 체크하게 하고 양쪽 목록 모두에 'AI' 배지로 드러냈다. 숨기면 나중에 신뢰 문제가 된다.",
+        "en": "AI-made content is declared at upload and carries an AI badge in both apps' lists. Hiding it becomes a trust problem later."
+      }
+    ],
+    "shot_evals": {},
+    "shot_paths": {
+      "tablet": "studio"
+    },
+    "scenes": [
+      {
+        "id": "review",
+        "device": "desktop",
+        "wait": 3500,
+        "path": "review",
+        "label": {
+          "ko": "검수 — 근거는 AI, 판정은 사람",
+          "en": "Review — AI gives evidence, a person decides"
+        },
+        "note": {
+          "ko": "자동검수 다섯 단계가 통과·경고·참고로 결과를 쌓고, 루브릭 가중합과 함께 보여준다. 승인과 반려 버튼은 사람 몫이다.",
+          "en": "Five automatic stages stack up as pass, warning or reference alongside the weighted rubric score. Approve and reject stay in human hands."
+        },
+        "features": []
+      },
+      {
+        "id": "rules",
+        "device": "desktop",
+        "wait": 3200,
+        "path": "ops/settings",
+        "label": {
+          "ko": "검수 규칙 — 기준을 손에 쥐게",
+          "en": "Rubric settings — the standard stays yours"
+        },
+        "note": {
+          "ko": "교육성·재미·기술완성도·사용성·안전성 다섯 축의 가중치와 하드게이트 임계를 운영자가 직접 조정한다.",
+          "en": "Operators tune the weights across five axes — pedagogy, fun, craft, usability, safety — and the hard-gate threshold themselves."
+        },
+        "features": []
+      },
+      {
+        "id": "gallery",
+        "device": "desktop",
+        "wait": 3500,
+        "src": "assets/shots/Phonics-Playground.jpg",
+        "label": {
+          "ko": "Playground — 게시된 것이 학생에게",
+          "en": "Playground — published, and in front of a student"
+        },
+        "note": {
+          "ko": "게시한 순간 갤러리에 뜬다. 레벨과 스킬 두 축으로 골라 전체화면으로 실행하고, 끝나면 별점과 감상 칩을 남긴다.",
+          "en": "Publishing puts it in the gallery. Pick by level and skill, run it full-screen, then leave a rating and a reaction chip."
+        },
+        "features": []
+      },
+      {
+        "id": "play",
+        "device": "tablet-land",
+        "wait": 3500,
+        "src": "assets/shots/Phonics-Playground--tablet.jpg",
+        "label": {
+          "ko": "학생 화면 — 어드민과 정반대 얼굴",
+          "en": "The student's face of it"
+        },
+        "note": {
+          "ko": "같은 데이터 위에 파스텔과 캐릭터. 관리 기능은 헤더의 작은 아이콘으로 접혀 아이 화면을 방해하지 않는다.",
+          "en": "Same data, pastel and characters on top. Admin tools fold into small header icons and stay out of a child's way."
+        },
+        "features": []
       }
     ]
+  },
+  "Phonics-Playground": {
+    "merge_into": "Phonics-Studio"
   },
   "Sound-Safari": {
     "title": {
@@ -1718,7 +1689,7 @@
       }
     ],
     "shot_devices": [
-      "tablet",
+      "tablet-land",
       "desktop"
     ],
     "contribution": {
@@ -1857,7 +1828,7 @@
     ],
     "entry": "",
     "shot_devices": [
-      "tablet",
+      "tablet-land",
       "desktop"
     ],
     "contribution": {
@@ -1945,16 +1916,16 @@
   },
   "poly-dashboard": {
     "title": {
-      "ko": "Poly Dashboard Kit",
-      "en": "Poly Dashboard Kit"
+      "ko": "Dashboard Kit — POLY · CANB",
+      "en": "Dashboard Kit — POLY · CANB"
     },
     "kicker": {
-      "ko": "사내 배포 디자인 킷 · v1.2 · 6개 파일",
-      "en": "Internally distributed design kit · v1.2 · six files"
+      "ko": "사내 배포 디자인 킷 · 두 브랜드 · 개발자 6명 사용",
+      "en": "In-house design kit · two brands · used by six developers"
     },
     "summary": {
-      "ko": "캠퍼스 관리 대시보드를 만들면서 나온 토큰·컴포넌트·레이아웃을 6개 파일 40KB 킷으로 묶어 사내에 배포했다. AI 개발 에이전트에 그대로 붙여넣는 UI 규약 프롬프트를 함께 넣어 개발자가 규칙을 설명받지 않고도 같은 톤의 화면을 만들 수 있게 했다. 이 킷으로 LeaveERP 연차 관리 등 다른 시스템이 파생됐다.",
-      "en": "Tokens, components and layout extracted from a campus dashboard, packaged as a six-file 40KB kit and distributed internally. It ships with a UI-contract prompt to paste straight into AI coding agents, so developers produce on-brand screens without being briefed on the rules — and other systems, such as a leave-management ERP, were built from it."
+      "ko": "캠퍼스 관리 대시보드를 만들며 나온 토큰·컴포넌트·레이아웃을 6개 파일 40KB 킷으로 묶어 사내에 배포했다. AI 개발 에이전트에 그대로 붙여넣는 UI 규약 프롬프트를 함께 넣어 개발자가 설명을 듣지 않고도 같은 톤의 화면을 만든다. 두 번째 브랜드 CANB를 같은 킷 위에 올려 '토큰으로 만들었으니 교체가 쉽다'는 말을 실제로 검증했고, LeaveERP 연차 관리처럼 다른 시스템도 여기서 파생됐다.",
+      "en": "The tokens, components and layouts behind the campus dashboards were packed into a six-file, 40KB kit and shipped inside the company, together with a UI-contract prompt that drops straight into an AI coding agent so developers hit the same tone without being briefed. A second brand, CANB, was then built on the same kit to test the claim that tokens make rebranding easy. Other systems, like the LeaveERP leave tracker, grew out of it."
     },
     "role": {
       "ko": "디자인 시스템 정의 · 킷 제작 · 문서화 · 사내 배포",
@@ -1971,12 +1942,12 @@
     "shot_wait": 4000,
     "featured": true,
     "intent": {
-      "ko": "대시보드 하나를 잘 만들어도 다음 사람이 그것을 다시 만든다. 색을 어디서 가져올지, 차트 두께를 얼마로 할지 매번 물어보게 되고 물어보지 않으면 제각각이 된다. 그래서 화면이 아니라 화면을 만드는 재료를 산출물로 삼았다. 개발자가 나에게 묻지 않고도 같은 결과에 도달하는 게 목표였다.",
-      "en": "Building one good dashboard doesn't help the next person, who rebuilds it. Where does this colour come from, how thick should the chart line be — asked every time, and when unasked, answered differently. So the deliverable became the materials rather than the screens: the goal was for a developer to reach the same result without asking me."
+      "ko": "대시보드 하나를 잘 만들어도 다음 사람이 그것을 다시 만든다. 색을 어디서 가져올지, 차트 두께를 얼마로 할지 매번 물어보게 되고 물어보지 않으면 제각각이 된다. 그래서 화면이 아니라 화면을 만드는 재료를 산출물로 삼았다. 개발자가 나에게 묻지 않고도 같은 결과에 도달하는 것이 목표였다.",
+      "en": "Build one dashboard well and the next person rebuilds it. Where does the colour come from, how thick is the chart line — they ask every time, and when they stop asking the screens drift apart. So the deliverable became the materials, not the screen. The goal was a developer reaching the same result without asking me."
     },
     "concept": {
-      "ko": "Poly Blue #0066FF 하나만 쓰고 나머지는 투명도로 구분하는 톤온톤 시스템. 색을 고르는 결정 자체를 없앤 게 핵심이다. 차트도 빨강·주황 같은 시맨틱 색을 금지하고 블루 투명도 6단계(--chart-1~6)로만 그린다. 대시보드는 숫자를 읽는 화면이라 색이 늘어날수록 무엇이 중요한지 흐려진다.",
-      "en": "One colour — Poly Blue #0066FF — separated only by opacity. The point is to remove colour decisions altogether. Charts ban semantic reds and oranges and draw from six blue opacity steps, because on a screen made for reading numbers every extra hue blurs what matters."
+      "ko": "POLY는 Poly Blue #0066FF 하나만 쓰고 나머지는 투명도로 구분하는 톤온톤이다. 색을 고르는 결정 자체를 없앤 게 핵심이고, 차트도 시맨틱 색을 금지하고 블루 투명도 6단계로만 그린다.\n\nCANB에서 배운 건 구조는 복제돼도 색을 쓰는 방식은 복제되지 않는다는 것이다. 블루는 넓게 깔아도 버티지만 마젠타(#BC216D)를 같은 식으로 쓰면 화면이 색에 먹힌다. 그래서 배경·테두리·텍스트는 전부 중립 회색으로 두고 마젠타는 차트·KPI·활성 상태처럼 눈이 가야 할 자리에만 점으로 찍었다. 브랜드 교체는 변수 하나로 끝나지 않는다.",
+      "en": "POLY runs tone-on-tone: one Poly Blue (#0066FF) with opacity doing the rest. The point is removing the decision of which colour; even charts ban semantic hues and draw in six steps of blue.\n\nCANB taught that structure copies but colour behaviour doesn't. Blue survives being spread wide; magenta (#BC216D) used the same way swallows the screen. So backgrounds, borders and text went neutral grey and the magenta lands only where the eye should go — charts, KPIs, active states. Rebranding isn't one variable."
     },
     "flow": [
       {
@@ -2050,15 +2021,23 @@
     "decisions": [
       {
         "ko": "AI 에이전트용 프롬프트를 킷에 넣었다. 요즘 개발자는 Cursor 같은 도구로 화면을 만드는데, 규칙을 사람에게만 설명하면 에이전트가 그것을 모른 채 기본값으로 그린다. 규약을 프롬프트로 만들어 넣으니 에이전트가 처음부터 브랜드 안에서 생성한다.",
-        "en": "An agent prompt ships inside the kit. Developers now build through tools like Cursor, and a rule explained only to humans is invisible to the agent, which falls back to its defaults. Encoding the contract as a prompt keeps generation inside the brand from the first line."
+        "en": "The kit ships a prompt for AI agents. Developers build with tools like Cursor now, and a rule explained only to people leaves the agent drawing defaults. As a prompt, the contract keeps generation inside the brand from the first line."
       },
       {
         "ko": "빌드를 없앴다. Node·번들러·설치가 필요하면 급한 사람은 그냥 안 쓴다. CDN 4줄로 시작하게 만든 뒤에야 실제로 쓰이기 시작했다.",
-        "en": "No build step. If it needs Node, a bundler and an install, the person in a hurry simply won't use it. Adoption started only once it began with four CDN lines."
+        "en": "No build step. Require Node, a bundler and an install and whoever is in a hurry simply won't use it. Adoption started only once four CDN lines were enough."
       },
       {
         "ko": "삭제 버튼에 빨강을 쓰지 않기로 했다. 톤온톤 시스템에 경고색이 하나 들어오면 그 색이 화면에서 가장 강해져 실제 중요한 지표를 이긴다.",
-        "en": "Delete actions don't use red. In a tone-on-tone system a single alert colour becomes the loudest thing on screen and outshouts the metrics that actually matter."
+        "en": "Delete buttons aren't red. Let one alert colour into a tone-on-tone system and it becomes the loudest thing on screen, beating the metric that actually matters."
+      },
+      {
+        "ko": "브랜드 전환을 런타임 스위처로 만들었다. 빌드로 분기하면 두 브랜드가 서서히 다른 코드가 되지만, 같은 코드에서 토큰만 갈리면 한쪽에서 고친 게 다른 쪽에도 남는다.",
+        "en": "Brand switching happens at runtime. Fork at build time and the two brands quietly become different codebases; swap only tokens in one codebase and a fix on one side stays fixed on the other."
+      },
+      {
+        "ko": "두 번째 브랜드를 올리는 과정 자체가 감사였다. 색이 하드코딩된 자리는 브랜드를 바꾸는 순간 티가 나므로 그때마다 토큰으로 회수했다.",
+        "en": "Standing up the second brand was the audit. Hardcoded colour announces itself the moment the brand changes, and each one got pulled back into a token as it surfaced."
       }
     ],
     "shot_devices": [
@@ -2075,83 +2054,62 @@
     "scenes": [
       {
         "id": "students",
-        "path": "students.html",
         "device": "desktop",
-        "wait": 3500,
+        "wait": 3200,
+        "path": "students.html",
         "label": {
-          "ko": "학생 목록",
-          "en": "Students"
+          "ko": "학생 목록 — POLY",
+          "en": "Students — POLY"
         },
         "note": {
-          "ko": "캠퍼스 운영의 실제 업무 화면. 목록·필터·상태가 킷 토큰을 그대로 쓴다.",
-          "en": "An operations screen: list, filter and status all draw from the kit tokens."
+          "ko": "블루 하나로 깔린 톤온톤. 상태도 색이 아니라 농도로 구분한다.",
+          "en": "Tone-on-tone in a single blue; even status reads as density, not hue."
         },
-        "features": [
-          {
-            "ko": "학생 목록을 필터로 좁힌다",
-            "en": "Filter the student list",
-            "at": [
-              70,
-              41
-            ]
-          },
-          {
-            "ko": "상태값이 행마다 붙어 있다",
-            "en": "Status sits on each row",
-            "at": [
-              82,
-              62
-            ]
-          },
-          {
-            "ko": "행 높이·숫자가 킷 규칙을 따른다",
-            "en": "Row height and figures follow the kit",
-            "at": [
-              24,
-              62
-            ]
-          }
-        ]
+        "features": []
+      },
+      {
+        "id": "canb",
+        "device": "desktop",
+        "wait": 3200,
+        "src": "assets/shots/canb-dashboard.jpg",
+        "label": {
+          "ko": "같은 킷, CANB 마젠타",
+          "en": "Same kit, CANB magenta"
+        },
+        "note": {
+          "ko": "구조는 그대로 두고 토큰만 교체했다. 중립 회색 위에 마젠타를 점으로 찍어 색이 화면을 삼키지 않게 했다.",
+          "en": "Same structure, tokens swapped. Magenta lands as points on neutral grey so the colour never swallows the screen."
+        },
+        "features": []
+      },
+      {
+        "id": "teacher",
+        "device": "desktop",
+        "wait": 3200,
+        "src": "assets/shots/canb-dashboard--teacher.jpg",
+        "label": {
+          "ko": "강사용 화면 — 새 도메인",
+          "en": "Instructor view — a new domain"
+        },
+        "note": {
+          "ko": "킷이 색 교체만이 아니라 처음 보는 도메인까지 감당하는지 보려고 강사용 화면 5종을 새로 얹었다.",
+          "en": "Five instructor screens were added to see whether the kit could carry a domain it had never seen, not just a new palette."
+        },
+        "features": []
       },
       {
         "id": "leave",
-        "path": "leave-erp/index.html",
         "device": "desktop",
-        "wait": 3500,
+        "wait": 3200,
         "label": {
-          "ko": "연차 ERP",
-          "en": "Leave ERP"
+          "ko": "파생 — LeaveERP 연차 관리",
+          "en": "Derived — LeaveERP"
         },
         "note": {
-          "ko": "같은 킷에서 파생된 연차 관리. 대시보드를 잘 만드는 대신 재료를 남긴 이유.",
-          "en": "Leave management derived from the same kit — the point of shipping materials, not just screens."
+          "ko": "킷에서 파생된 다른 시스템. 대시보드가 아닌 업무에도 같은 재료가 쓰인다.",
+          "en": "Another system grown from the kit — the same materials outside a dashboard."
         },
-        "features": [
-          {
-            "ko": "연차 신청·승인 흐름",
-            "en": "Request and approve leave",
-            "at": [
-              8,
-              18
-            ]
-          },
-          {
-            "ko": "대시보드와 같은 토큰·컴포넌트를 쓴다",
-            "en": "Same tokens and components as the dashboard",
-            "at": [
-              40,
-              52
-            ]
-          },
-          {
-            "ko": "도메인이 바뀌어도 킷을 다시 그리지 않는다",
-            "en": "A new domain does not mean redrawing the kit",
-            "at": [
-              50,
-              40
-            ]
-          }
-        ]
+        "features": []
       }
     ],
     "shot_notes": {
@@ -2205,237 +2163,7 @@
     ]
   },
   "canb-dashboard": {
-    "title": {
-      "ko": "CANB Dashboard Kit",
-      "en": "CANB Dashboard Kit"
-    },
-    "kicker": {
-      "ko": "같은 킷, 브랜드만 교체 · 강사용 화면 5종 추가",
-      "en": "Same kit, brand swapped · five instructor screens added"
-    },
-    "summary": {
-      "ko": "Poly Dashboard Kit의 구조를 그대로 두고 토큰 계층만 마젠타(#BC216D)로 교체한 자매 킷. 브랜드가 하나 늘어날 때 화면을 다시 그려야 하는지를 실제로 검증한 사례이고 여기에 강사용 화면 5종을 더해 킷이 새 도메인까지 감당하는지 확인했다.",
-      "en": "A sibling kit that keeps the Poly structure and swaps only the token layer to magenta (#BC216D) — a real test of whether adding a brand means redrawing screens. Five instructor-facing screens were added to check the kit holds up in a new domain."
-    },
-    "role": {
-      "ko": "토큰 재정의 · 강사 화면 설계 · 킷 배포",
-      "en": "Token re-definition, instructor screens, kit distribution"
-    },
-    "tags": [
-      "Design Tokens",
-      "Multi-brand",
-      "Developer Kit",
-      "Dashboard"
-    ],
-    "entry": "",
-    "shot_path": "download.html",
-    "shot_wait": 4000,
-    "intent": {
-      "ko": "'토큰으로 만들었으니 브랜드 교체는 쉽다'는 말은 실제로 갈아끼워 보기 전엔 주장일 뿐이다. CANB로 두 번째 브랜드를 올려 어디가 진짜로 토큰이었고 어디에 색이 박혀 있었는지 확인했다.",
-      "en": "'It's tokenised, so rebranding is easy' is a claim until you actually swap it. Standing up CANB as a second brand revealed what was genuinely tokenised and where colour had been baked in."
-    },
-    "concept": {
-      "ko": "Poly는 블루 하나를 넓게 깔아도 버티지만, 마젠타를 같은 방식으로 쓰면 화면이 색에 먹힌다. 그래서 톤온톤을 복제하지 않고 배경·테두리·텍스트·그림자는 전부 중립 회색으로 두고 #BC216D는 차트·KPI·활성 상태처럼 눈이 가야 할 자리에만 점으로 찍었다. 구조는 같아도 색이 바뀌면 색을 쓰는 방식까지 바뀌어야 한다는 게 두 번째 브랜드에서 확인한 것이다. 성공 상태의 녹색도 브랜드색으로 회수해 화면에 남는 색을 하나로 줄였고, 흰 배경에서 채도가 죽는 문제 때문에 차트 기저색만 라이트 모드에서 한 단계 올려 다크 모드의 원색과 따로 관리한다.",
-      "en": "Poly survives having one blue spread across the whole screen; magenta used the same way takes the screen over. So the tone-on-tone system was not copied — backgrounds, borders, text and shadows stay neutral grey, and #BC216D appears only as points where the eye should land: charts, KPIs, active states. The second brand proved that keeping the structure does not mean keeping the colour strategy. Even the success state was reclaimed to the brand colour so only one hue remains on screen, and because magenta loses saturation against white, the chart base colour alone is stepped up in light mode and kept separate from the dark-mode original."
-    },
-    "flow": [
-      {
-        "step": "01",
-        "ko": "Poly 킷 구조를 그대로 가져오기",
-        "en": "Take the Poly kit structure as-is"
-      },
-      {
-        "step": "02",
-        "ko": "토큰 계층만 마젠타로 재정의",
-        "en": "Redefine only the token layer to magenta"
-      },
-      {
-        "step": "03",
-        "ko": "하드코딩된 색 찾아내 토큰으로 회수",
-        "en": "Find hardcoded colours and reclaim them as tokens"
-      },
-      {
-        "step": "04",
-        "ko": "강사용 화면 5종 추가 검증",
-        "en": "Add and validate five instructor screens"
-      }
-    ],
-    "stack": [
-      {
-        "group": "킷 구성",
-        "items": [
-          "Poly 킷과 동일 구조",
-          "tokens.css 만 재정의 (CANB Magenta #BC216D)"
-        ]
-      },
-      {
-        "group": "추가 화면",
-        "items": [
-          "강사 대시보드",
-          "수업 · 일정 · 학생 · 리포트"
-        ]
-      },
-      {
-        "group": "배포",
-        "items": [
-          "canb-dashboard-kit.zip",
-          "canb-dashboard.skill",
-          "다운로드 페이지"
-        ]
-      }
-    ],
-    "decisions": [
-      {
-        "ko": "브랜드 전환을 런타임 스위처로 만들었다. 빌드로 분기하면 두 브랜드가 서서히 다른 코드가 되지만 같은 코드에서 토큰만 갈리면 한쪽에서 고친 게 다른 쪽에도 남는다.",
-        "en": "Brand switching happens at runtime. Branching at build time lets the two brands slowly become different codebases; swapping tokens in one codebase means a fix on one side stays fixed on the other."
-      },
-      {
-        "ko": "두 번째 브랜드를 올리는 과정 자체가 감사였다. 색이 하드코딩된 자리는 브랜드를 바꾸는 순간 티가 나므로 그때마다 토큰으로 회수했다.",
-        "en": "Standing up the second brand was itself the audit: any hardcoded colour announces itself the moment the brand changes, and each one was reclaimed as a token."
-      }
-    ],
-    "shot_devices": [
-      "desktop",
-      "mobile"
-    ],
-    "contribution": {
-      "plan": 90,
-      "design": 100,
-      "build": 100,
-      "qa": 90
-    },
-    "shot_full": true,
-    "scenes": [
-      {
-        "id": "students",
-        "path": "students.html",
-        "device": "desktop",
-        "wait": 3500,
-        "label": {
-          "ko": "학생 목록",
-          "en": "Students"
-        },
-        "note": {
-          "ko": "CANB 브랜드로 다시 칠한 같은 뼈대.",
-          "en": "The same skeleton in CANB colour."
-        },
-        "features": [
-          {
-            "ko": "Poly와 같은 목록·필터·상태",
-            "en": "The same list, filter and status as Poly",
-            "at": [
-              70,
-              41
-            ]
-          },
-          {
-            "ko": "토큰만 바꾸면 화면이 따라온다",
-            "en": "Change the tokens, the screens follow",
-            "at": [
-              82,
-              62
-            ]
-          },
-          {
-            "ko": "하드코딩된 색 없이 토큰만 쓴다",
-            "en": "No hardcoded colour — tokens only",
-            "at": [
-              94,
-              11
-            ]
-          }
-        ]
-      },
-      {
-        "id": "teacher",
-        "path": "teacher-dashboard.html",
-        "device": "desktop",
-        "wait": 3500,
-        "label": {
-          "ko": "교사 대시보드",
-          "en": "Teacher dashboard"
-        },
-        "note": {
-          "ko": "교사 역할의 첫 화면. 역할이 바뀌어도 간격과 타입은 킷 안에 있다.",
-          "en": "The teacher’s home: role changes, spacing and type stay inside the kit."
-        },
-        "features": [
-          {
-            "ko": "수업 · 일정 · 학생 · 리포트를 한 홈에서 본다",
-            "en": "Classes, schedule, students and reports on one home",
-            "at": [
-              50,
-              42
-            ]
-          },
-          {
-            "ko": "역할이 바뀌어도 간격·타입은 킷을 따른다",
-            "en": "Role changes, spacing and type stay in the kit",
-            "at": [
-              8,
-              22
-            ]
-          },
-          {
-            "ko": "강사용 화면 5종으로 킷이 새 도메인을 감당하는지 본다",
-            "en": "Five instructor screens test whether the kit holds a new domain",
-            "at": [
-              22,
-              28
-            ]
-          }
-        ]
-      }
-    ],
-    "shot_notes": {
-      "desktop": {
-        "label": {
-          "ko": "킷 배포",
-          "en": "Kit download"
-        },
-        "note": {
-          "ko": "같은 다운로드 구조에 마젠타 토큰만 갈아끼운 페이지.",
-          "en": "The same download structure with only the magenta token layer swapped."
-        },
-        "features": [
-          {
-            "ko": "Poly 킷 구조 그대로 ZIP을 내려받는다",
-            "en": "Same kit structure as Poly, downloaded as a ZIP",
-            "at": [
-              43,
-              13
-            ]
-          },
-          {
-            "ko": "CANB 캠퍼스 데모로 확인한다",
-            "en": "Check it in the CANB campus demo",
-            "at": [
-              56,
-              13
-            ]
-          },
-          {
-            "ko": "토큰 계층만 마젠타(#BC216D)로 바꾼다",
-            "en": "Only the token layer switches to magenta",
-            "at": [
-              26,
-              45
-            ]
-          },
-          {
-            "ko": "컴포넌트는 손대지 않고 그대로 쓴다",
-            "en": "Components carry over untouched",
-            "at": [
-              74,
-              26
-            ]
-          }
-        ]
-      }
-    },
-    "tools": [
-      "Claude Code"
-    ]
+    "merge_into": "poly-dashboard"
   },
   "poly-ai-agent": {
     "title": {

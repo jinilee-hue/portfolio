@@ -109,6 +109,11 @@ def main() -> int:
             # 기기마다 다른 화면을 찍어야 할 때가 있다(데스크톱=표지, 태블릿=본문).
             # shot_evals: {"tablet": "...", "desktop": "..."} 가 있으면 기기별로 갈아낀다.
             "evals": {k: (v or "").strip() for k, v in (p.get("shot_evals") or {}).items()},
+            # 기기별로 아예 다른 경로를 찍어야 할 때도 있다 — 긴 대시보드는 가로 태블릿에
+            # 안 담기므로 그 기기만 짧은 화면으로 돌린다. shot_paths: {"tablet": "review"}
+            "paths": {k: (v or "").strip() for k, v in (p.get("shot_paths") or {}).items()},
+            "shot_path": (p.get("shot_path") or "").strip(),
+            "base": url,
             "dest": None,
         })
         live = p["auto"].get("live") or ""
@@ -157,7 +162,17 @@ def main() -> int:
                 page = ctx.new_page()
                 page.set_default_timeout(30_000)
                 try:
-                    page.goto(job["url"], wait_until="load", timeout=30_000)
+                    alias_dev = "tablet" if dev in ("tablet", "tablet-land") else dev
+                    path_override = (job.get("paths") or {}).get(dev) \
+                        or (job.get("paths") or {}).get(alias_dev)
+                    target_url = job["url"]
+                    if path_override:
+                        # 사이트 루트 = 현재 url 에서 shot_path 부분만 떼어낸 것
+                        base = (job.get("base") or job["url"]).split("?")[0]
+                        old_path = (job.get("shot_path") or "").strip("/")
+                        root = base[: -len(old_path)] if old_path and base.rstrip("/").endswith(old_path) else base
+                        target_url = root.rstrip("/") + "/" + path_override.lstrip("/")
+                    page.goto(target_url, wait_until="load", timeout=30_000)
                     try:
                         page.wait_for_load_state("networkidle", timeout=NETWORK_IDLE_MS)
                     except Exception:

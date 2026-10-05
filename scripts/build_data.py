@@ -265,7 +265,10 @@ def main() -> int:
             "mobile": f"assets/shots/{p['id']}--mobile.jpg",
         }
         for sc in p.get("scenes") or []:
-            sc["src"] = f"assets/shots/{p['id']}--{sc['id']}.jpg"
+            # 병합된 프로젝트는 다른 레포의 컷을 끌어와야 해서 src 를 직접 적는다.
+            # 적혀 있으면 그대로 두고, 없을 때만 자기 id 기준 경로를 만든다.
+            if not (sc.get("src") or "").strip():
+                sc["src"] = f"assets/shots/{p['id']}--{sc['id']}.jpg"
         # 썸네일 촬영 대상: shot_path 가 있으면 그 화면, 없으면 라이브 첫 화면.
         # 인트로·로그인 화면보다 실제 작업이 보이는 화면이 포트폴리오에서 훨씬 강하다.
         base = p["auto"]["live"]
