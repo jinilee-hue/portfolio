@@ -229,27 +229,27 @@
         },
         "features": [
           {
-            "ko": "단어를 누르면 사전 카드",
-            "en": "Tap a word for a glossary card",
+            "ko": "단어를 누르면 사전 카드가 열린다",
+            "en": "Tap a word and a dictionary card opens",
             "at": [
-              75,
-              9
+              70,
+              11
             ]
           },
           {
-            "ko": "영어 단어와 한국어 뜻",
-            "en": "English term with Korean gloss",
+            "ko": "영어 단어와 한국어 뜻을 함께 준다",
+            "en": "The English word with its Korean meaning",
             "at": [
-              83,
-              19
+              93,
+              16
             ]
           },
           {
-            "ko": "카드에서 바로 발음",
-            "en": "Play the word from the card",
+            "ko": "카드에서 바로 발음을 듣는다",
+            "en": "Hear it pronounced right from the card",
             "at": [
-              80,
-              13
+              78,
+              16
             ]
           }
         ]
@@ -298,7 +298,7 @@
         "id": "follow",
         "device": "desktop",
         "wait": 2800,
-        "eval": "(() => new Promise((resolve) => { const sw = document.querySelector(\"#psw\"); if (sw) { const b = document.createElement(\"button\"); b.dataset.p = \"0\"; sw.appendChild(b); b.click(); } document.getElementById(\"dev\")?.remove(); document.getElementById(\"devtoggle\")?.remove(); setTimeout(() => { const app = document.getElementById(\"app\"); if (app) app.dataset.hl = \"reading\"; const wds = [...document.querySelectorAll(\"#body .wd\")]; wds.forEach((el, i) => { el.classList.remove(\"said\", \"now\"); if (i < 10) el.classList.add(\"said\"); else if (i < 14) el.classList.add(\"now\"); }); resolve(); }, 1200);}))()",
+        "eval": "(() => new Promise(async r => { const sleep=ms=>new Promise(x=>setTimeout(x,ms)); document.querySelector('#gate')?.click(); await sleep(2200); document.querySelector('#hl')?.click(); await sleep(900); document.querySelector('#play')?.click(); await sleep(3400); r(); }))()",
         "label": {
           "ko": "TTS 따라 읽기",
           "en": "Read-along highlight"
@@ -347,43 +347,43 @@
         },
         "features": [
           {
-            "ko": "이전 · 다음 쪽으로 11쪽을 넘긴다",
-            "en": "Page through all 11 spreads",
+            "ko": "이전 · 다음으로 11쪽을 넘긴다",
+            "en": "Page through all eleven spreads",
             "at": [
-              33,
-              95
+              70,
+              74
             ]
           },
           {
-            "ko": "단어장을 열어 뜻을 확인한다",
-            "en": "Open the glossary panel",
+            "ko": "단어장을 열어 모은 단어를 본다",
+            "en": "Open the word bank you've collected",
             "at": [
-              42,
-              95
+              74,
+              74
             ]
           },
           {
-            "ko": "접은 책을 다시 펴는 자리",
-            "en": "Where the folded book opens again",
+            "ko": "책을 접어 삽화만 크게 본다",
+            "en": "Fold the text away and keep the art",
             "at": [
-              48,
-              95
+              78,
+              74
             ]
           },
           {
             "ko": "따라 읽기로 읽는 단어를 짚는다",
-            "en": "Read-along highlights each word",
+            "en": "Read-along highlights the word being spoken",
             "at": [
-              55,
-              95
+              82,
+              74
             ]
           },
           {
             "ko": "소리를 켜고 끈다",
-            "en": "Toggle narration audio",
+            "en": "Sound on or off",
             "at": [
-              64,
-              95
+              85,
+              74
             ]
           }
         ]
@@ -573,16 +573,16 @@
             "ko": "AI 에이전트용 규약 프롬프트가 같이 간다",
             "en": "Ships with a UI-contract prompt for AI agents",
             "at": [
-              28,
-              58
+              27,
+              62
             ]
           },
           {
             "ko": "토큰·컴포넌트가 실제 화면 CSS에서 나왔다",
             "en": "Tokens and components extracted from the live CSS",
             "at": [
-              50,
-              58
+              48,
+              62
             ]
           }
         ]
@@ -602,27 +602,27 @@
         },
         "features": [
           {
-            "ko": "목록 · 필터 · 액션이 같은 규칙",
-            "en": "List, filter and action under one rule",
+            "ko": "충원·전환·신규를 도넛 셋으로 먼저 본다",
+            "en": "Three donuts read first: filled, converted, new",
             "at": [
-              55,
-              14
+              42,
+              66
             ]
           },
           {
-            "ko": "충원율을 큰 숫자와 도넛으로 먼저 본다",
-            "en": "Fill rate reads first as a big number and a ring",
+            "ko": "목록 · 필터 · 액션이 킷과 같은 규칙",
+            "en": "List, filter and action follow the same kit rules",
             "at": [
-              26,
-              28
+              18,
+              61
             ]
           },
           {
             "ko": "교시 × 요일 매트릭스로 가동률을 훑는다",
-            "en": "A period-by-weekday matrix for utilisation",
+            "en": "Period-by-weekday matrix scans utilisation",
             "at": [
               27,
-              84
+              90
             ]
           }
         ]
@@ -659,7 +659,7 @@
             "ko": "4,932명을 한 테이블에서 훑는다",
             "en": "Scan 4,932 records in one table",
             "at": [
-              7,
+              14,
               42
             ]
           },
@@ -986,27 +986,27 @@
       "desktop": {
         "features": [
           {
-            "ko": "워드마크와 sparkle — 깨달음의 순간을 점 하나로",
-            "en": "Wordmark and a single sparkle for the moment it clicks",
+            "ko": "워드마크의 O 에 갈기를 금색 호로 심었다",
+            "en": "The mane becomes a gold arc inside the O",
             "at": [
-              62,
-              33
+              72,
+              32
             ]
           },
           {
-            "ko": "직접 만든 사자 캐릭터, 목에 LIO 밴드너",
-            "en": "The lion, with the LIO bandana tying brand to character",
+            "ko": "sparkle 하나로 깨달음의 순간을 표시한다",
+            "en": "A single sparkle marks the moment it clicks",
+            "at": [
+              82,
+              26
+            ]
+          },
+          {
+            "ko": "목에 두른 LIO 밴드너가 캐릭터와 브랜드를 묶는다",
+            "en": "The bandana ties character to wordmark",
             "at": [
               27,
-              38
-            ]
-          },
-          {
-            "ko": "캐릭터와 화면이 같은 파랑 — 스티커처럼 얹히지 않게",
-            "en": "Character and screen share one blue so it never looks pasted on",
-            "at": [
-              50,
-              72
+              45
             ]
           }
         ],
@@ -1025,24 +1025,24 @@
             "ko": "지문에서 근거 문장을 직접 짚는다",
             "en": "Tap the sentence in the passage that proves it",
             "at": [
-              25,
-              30
+              23,
+              22
             ]
           },
           {
-            "ko": "LIO 가 그 자리에서 코칭한다",
-            "en": "LIO coaches right there, turn by turn",
+            "ko": "LIO 가 그 선택을 두고 바로 답한다",
+            "en": "LIO answers that choice on the spot",
             "at": [
-              73,
-              25
+              72,
+              53
             ]
           },
           {
             "ko": "영어가 막히면 KR 로 같은 말을 듣는다",
             "en": "KR replays the same line in Korean",
             "at": [
-              78,
-              44
+              88,
+              40
             ]
           }
         ],
@@ -1193,40 +1193,14 @@
         "device": "desktop",
         "wait": 3500,
         "label": {
-          "ko": "출석 — 수업 시작 전",
-          "en": "Attendance — before class"
+          "ko": "표지 — Start 하나로 들어간다",
+          "en": "Cover — one Start, nothing else"
         },
         "note": {
-          "ko": "아이 아홉 명을 띄워 두고 화자 등록이 필요한 사람을 표시한다. 교사는 여기서 수업을 연다.",
-          "en": "Nine children on one screen, flagging who still needs speaker registration. The teacher opens class here."
+          "ko": "고를 것을 없애고 Start 하나만 남겼다. 수업은 교사가 이미 정해 두었으니 아이가 화면에서 또 고를 이유가 없다.",
+          "en": "Choices removed, one Start left. The teacher has already decided the class, so there's nothing for the child to pick."
         },
-        "features": [
-          {
-            "ko": "그림 만들기와 이야기 짓기 중 고른다",
-            "en": "Pick Picture Maker or Story Builder",
-            "at": [
-              50,
-              64
-            ]
-          },
-          {
-            "ko": "활동마다 무엇을 하는지 한 줄로 말해준다",
-            "en": "Each activity says what it does in one line",
-            "at": [
-              38,
-              70
-            ]
-          },
-          {
-            "ko": "스크롤 없이 한 화면에서 시작한다",
-            "en": "Everything starts on one screen, no scrolling",
-            "at": [
-              50,
-              88
-            ]
-          }
-        ],
-        "eval": "(() => new Promise(r => { document.querySelector('.mode-card, [class*=card]')?.click(); setTimeout(() => { document.querySelector('#startBtn, button')?.click(); setTimeout(r, 1800); }, 1200); }))()"
+        "features": []
       },
       {
         "id": "results",
@@ -1245,34 +1219,26 @@
         "features": [
           {
             "ko": "제출 수를 한 줄로 센다 (7/9)",
-            "en": "Submissions counted in one line (7 of 9)",
+            "en": "Submissions counted in one line (7/9)",
             "at": [
-              87,
-              14
+              72,
+              13
             ]
           },
           {
             "ko": "아이 이름 아래 실제 결과물이 올라온다",
-            "en": "Each child's actual work sits under their name",
+            "en": "The actual work sits under each name",
             "at": [
-              39,
-              31
+              20,
+              30
             ]
           },
           {
             "ko": "아직 안 낸 아이는 빈 칸으로 남는다",
-            "en": "A child who hasn't submitted stays an empty slot",
+            "en": "Who hasn't handed in stays an empty card",
             "at": [
-              83,
-              56
-            ]
-          },
-          {
-            "ko": "완성한 이야기는 내려받아 남긴다",
-            "en": "Finished stories download for the record",
-            "at": [
-              86,
-              95
+              79,
+              30
             ]
           }
         ]
@@ -1344,58 +1310,33 @@
           "en": ""
         },
         "features": []
-      },
-      {
-        "id": "f5",
-        "device": "desktop",
-        "wait": 3600,
-        "path": "student.html",
-        "eval": "(() => new Promise(r => { state.componentResponses={who:'a boy',where:'a snowy village',happen:'he builds a snowman',when:'in the morning',feel:'excited'};state.aiOptionsGenerated=true;state.selectedAiSceneId=aiOptions[0].id;state.storySlots=[baseScenes[0].id,state.selectedAiSceneId,baseScenes[1].id];state.storyOrderSaved=true;state.savedSentences={};state.savedSentences[baseScenes[0].id]='In my picture, I see a snowy village at night. The houses have warm lights.';state.savedSentences[state.selectedAiSceneId]='A boy builds a big snowman. He is very excited.';state.savedSentences[baseScenes[1].id]='The boy puts a red hat on the snowman. They are friends now.'; state.portfolio=[{id:1,studentName:state.studentName,sceneIds:getFinalSceneIds(),paragraph:getFinalParagraph()}];state.presentationStoryIndex=0;state.presentationSceneIndex=0;showScreen('presentation');  setTimeout(r, 2400); }))()",
-        "flow": true,
-        "label": {
-          "ko": "교실 화면에 띄워 발표한다",
-          "en": "Present it on the classroom screen"
-        },
-        "note": {
-          "ko": "",
-          "en": ""
-        },
-        "features": []
       }
     ],
     "shot_notes": {
       "tablet": {
         "label": {
-          "ko": "학생 수업 — 질문에 답하면 AI가 그린다",
-          "en": "Student lesson — answer the questions, the AI draws"
+          "ko": "학생 수업 — 그림이 화면을 가진다",
+          "en": "The lesson — the pictures own the screen"
         },
         "note": {
-          "ko": "프롬프트를 쓰는 대신 Who·Where·What happens 로 쪼갠 질문에 답한다. 필수 셋을 채워야 그림 생성 버튼이 열리고, 나머지 둘은 optional 배지로 갈라 느린 아이가 막히지 않게 했다. 스크롤 없이 활동 전체가 한 화면에 들어온다.",
-          "en": "Instead of writing a prompt, the child answers Who, Where and What happens. The three required answers unlock the generate button; the other two carry an optional badge so a slower child never stalls. The whole activity stays on one screen, nothing scrolls."
+          "ko": "질문 패널을 걷어내고 그림 두 장만 크게 남겼다. 일곱 살에게는 읽을 것이 적을수록 보는 데 집중한다.",
+          "en": "The question panel came off and two large pictures stayed. For a seven-year-old, less to read means more looking."
         },
         "features": [
           {
-            "ko": "프롬프트 대신 다섯 질문에 답한다",
-            "en": "Five questions instead of a prompt",
+            "ko": "두 장면을 나란히 놓고 차이를 찾는다",
+            "en": "Two scenes side by side, to spot the difference",
             "at": [
-              50,
-              28
+              30,
+              45
             ]
           },
           {
-            "ko": "When·How feel 둘은 optional 배지로 갈랐다",
-            "en": "When and How they feel are badged optional",
+            "ko": "읽을 것을 줄여 보는 데 집중하게 했다",
+            "en": "Less text so the looking gets the attention",
             "at": [
-              41,
-              52
-            ]
-          },
-          {
-            "ko": "필수 셋을 채우면 그림 생성 버튼이 열린다",
-            "en": "Fill the three required and the generate button opens",
-            "at": [
-              79,
-              96
+              70,
+              45
             ]
           }
         ]
@@ -1459,27 +1400,27 @@
         },
         "features": [
           {
-            "ko": "creator · reviewer · ops 세 역할로 메뉴가 갈린다",
-            "en": "Menus split across creator, reviewer and ops",
+            "ko": "창작자 · 검토자 · 운영자 메뉴가 그룹으로 갈린다",
+            "en": "Creator, reviewer and operator menus stand as groups",
             "at": [
-              42,
-              2
+              40,
+              4
             ]
           },
           {
-            "ko": "검수대기·게시중단·반려를 한 줄에서 본다",
-            "en": "Review queue, holds and rejects on one row",
+            "ko": "OPEN · 검수대기 · 반려를 한 줄에서 본다",
+            "en": "Open, pending and rejected read in one row",
             "at": [
-              45,
-              24
+              50,
+              54
             ]
           },
           {
-            "ko": "미리보기로 게시 전에 확인한다",
-            "en": "Preview before anything is published",
+            "ko": "플레이 수와 별점이 창작자에게 돌아온다",
+            "en": "Plays and ratings come back to the creator",
             "at": [
-              36,
-              62
+              26,
+              83
             ]
           }
         ]
@@ -1721,34 +1662,34 @@
         "features": [
           {
             "ko": "글자 카드를 끌어 세 칸을 채운다",
-            "en": "Drag the letter tiles into three slots",
+            "en": "Drag letter tiles into the three slots",
             "at": [
-              30,
-              66
+              45,
+              93
             ]
           },
           {
-            "ko": "완성되면 마지막 소리와 단어를 읽어준다",
-            "en": "Once complete it reads the last sound, then the word",
+            "ko": "그림 대신 소리로도 문제를 파악한다",
+            "en": "The speaker reads the word aloud",
             "at": [
               78,
-              53
+              78
             ]
           },
           {
             "ko": "단어를 완성해야 마이크가 열린다",
-            "en": "The mic unlocks only after the word is finished",
+            "en": "The mic unlocks only once the word is built",
             "at": [
               78,
-              46
+              70
             ]
           },
           {
             "ko": "맞힌 문제만 하트가 채워진다",
-            "en": "Only solved rounds fill a heart",
+            "en": "Hearts fill only on correct answers",
             "at": [
               50,
-              32
+              38
             ]
           }
         ]
@@ -1780,34 +1721,34 @@
         "features": [
           {
             "ko": "음소마다 점수를 매겨 색으로 가른다",
-            "en": "Each phoneme is scored and colour-coded",
+            "en": "Each phoneme gets a score, split by colour",
             "at": [
-              50,
-              51
+              42,
+              50
             ]
           },
           {
             "ko": "틀린 소리만 IPA로 집어 말해준다",
-            "en": "Only the weak sound is named, in IPA",
+            "en": "Only the missed sound is named in IPA",
             "at": [
-              44,
-              55
+              63,
+              54
             ]
           },
           {
-            "ko": "발음한 뒤에야 Next가 열린다",
-            "en": "Next opens only after speaking",
+            "ko": "발음한 뒤에야 Next 가 열린다",
+            "en": "Next opens only after you've spoken",
             "at": [
-              89,
-              66
+              85,
+              63
             ]
           },
           {
             "ko": "다시 하기로 같은 단어를 또 말해본다",
-            "en": "Try again repeats the same word",
+            "en": "Try the same word again",
             "at": [
-              44,
-              66
+              42,
+              63
             ]
           }
         ]
@@ -1860,34 +1801,34 @@
         "features": [
           {
             "ko": "두 조각을 링에 넣어 합성어를 만든다",
-            "en": "Two pieces go into the ring to form a compound",
+            "en": "Drop two halves into the ring to fuse a word",
             "at": [
               50,
-              47
+              33
             ]
           },
           {
             "ko": "카드에는 그림과 단어만 있다",
-            "en": "A card carries only a picture and its word",
+            "en": "Cards carry a picture and a word, nothing else",
             "at": [
               16,
-              26
+              19
             ]
           },
           {
             "ko": "설명 문장 대신 Hint 버튼 하나만 둔다",
-            "en": "One Hint button stands in for any written rule",
+            "en": "No instructions — just one Hint button",
             "at": [
               57,
-              92
+              84
             ]
           },
           {
-            "ko": "6라운드를 혼자 끝내는 것이 성공 기준이다",
-            "en": "Finishing six rounds unaided is the bar",
+            "ko": "모은 단어는 도감에 쌓인다 (1/6)",
+            "en": "Collected words stack up in the book (1/6)",
             "at": [
-              19,
-              4
+              20,
+              11
             ]
           }
         ]
@@ -2135,34 +2076,34 @@
         "features": [
           {
             "ko": "6개 파일 ZIP(40KB)을 내려받는다",
-            "en": "Download the 6-file ZIP (40KB)",
+            "en": "Six files, 40KB, one ZIP",
             "at": [
-              43,
-              13
+              42,
+              88
             ]
           },
           {
             "ko": "캠퍼스 데모로 바로 확인한다",
-            "en": "Open the campus demo to see it running",
+            "en": "Open the campus demo straight away",
             "at": [
-              56,
-              13
+              54,
+              88
             ]
           },
           {
             "ko": "AI 에이전트용 UI 규약 프롬프트가 같이 간다",
             "en": "Ships with a UI-contract prompt for AI agents",
             "at": [
-              26,
-              25
+              48,
+              72
             ]
           },
           {
-            "ko": "디자인 토큰과 컴포넌트 스타일이 킷 안에 있다",
-            "en": "Tokens and component styles live in the kit",
+            "ko": "v1.2 · Vanilla JS · 빌드 불필요",
+            "en": "v1.2 · vanilla JS · no build step",
             "at": [
-              74,
-              25
+              48,
+              83
             ]
           }
         ]
@@ -2332,27 +2273,35 @@
         },
         "features": [
           {
-            "ko": "심층탐구 · 일상기록 · 세상 속으로 섹션을 나눈다",
-            "en": "Insights, Life Log and Inside the World",
+            "ko": "심층탐구 · 일상기록 · 세상 속으로 세 갈래",
+            "en": "Three tracks: Insights, Life Log, Inside the World",
             "at": [
-              34,
-              1
+              30,
+              4.5
             ]
           },
           {
             "ko": "표지 기사 자리에서 영상이 그대로 돈다",
-            "en": "The cover story plays as video, in the same slot",
+            "en": "The cover story plays as video in place",
             "at": [
-              25,
-              11
+              66,
+              22
             ]
           },
           {
-            "ko": "지난 호를 계속 쌓아 아카이브로 남긴다",
-            "en": "Past issues stack up as an archive",
+            "ko": "기자 이름과 캠퍼스를 함께 적는다",
+            "en": "Each piece carries a byline with campus",
             "at": [
-              88,
-              86
+              11,
+              56
+            ]
+          },
+          {
+            "ko": "독자 반응이 세 가지 이모지 수치로 남는다",
+            "en": "Reader response lands as three emoji counts",
+            "at": [
+              44,
+              56
             ]
           }
         ]
