@@ -85,12 +85,14 @@
      포스터의 사인처럼: 기울고, 핑크, 표제와 살짝 어긋난 위치.
      mix-blend 없이 반투명으로 두어 어떤 배경에서도 읽힘을 해치지 않는다. */
   .hero-wrap{position:relative}
-  .sig-name{position:absolute;left:clamp(-28px,-2vw,0);bottom:-12%;z-index:2;pointer-events:none;
+  /* bottom:-12% 는 표제 둘째 줄 한가운데에 서명을 얹어 민트색 강조 글자와
+     핑크 서명이 서로를 못 읽게 만들었다. 표제 아래로 완전히 내린다. */
+  .sig-name{position:absolute;left:clamp(-28px,-2vw,0);bottom:-30%;z-index:2;pointer-events:none;
     font-family:'Caveat',cursive;font-weight:700;
     font-size:clamp(3.2rem,9vw,7.8rem);line-height:1;color:#FF5FA2;
     transform:rotate(-6deg) translateX(-12px);opacity:.9;
     text-shadow:0 2px 24px rgba(255,95,162,.3)}
-  @media(max-width:900px){.sig-name{left:0;bottom:-8%;font-size:clamp(2.4rem,12vw,4.2rem)}}
+  @media(max-width:900px){.sig-name{left:0;bottom:-24%;font-size:clamp(2.4rem,12vw,4.2rem)}}
   /* 인쇄에서는 표제 글자 크기가 화면과 달라 서명이 본문을 덮는다.
      아래로 더 내리고 살짝 투명하게 — 표제 가독이 우선이다. */
   /* 인쇄에서도 화면과 같은 크기로 둔다. 종이 폭(A4 가로)이 1440px 뷰포트보다
@@ -591,7 +593,14 @@
     .board .k{font-size:8pt;break-after:avoid;page-break-after:avoid}
     /* 제목만 남고 도판이 다음 장으로 밀리는 것을 막는다 —
        첫 도판은 제목과 같은 장에 붙인다. */
-    .feats figure:first-child{break-before:avoid;page-break-before:avoid;padding:4mm 0}
+    /* 'SCREENS' 제목 바로 뒤에 올 때만 붙인다. 흐름 컷(.flowstrip)이 사이에
+       있으면 break-before:avoid 가 흐름의 쪽 넘김과 부딪쳐 빈 장이 생긴다. */
+    .k + .feats figure:first-child{break-before:avoid;page-break-before:avoid;padding:4mm 0}
+    /* 흐름 컷(SCREENS 학습 흐름)에 인쇄 규칙이 없어 제목·그림과 설명이
+       쪽 경계에서 갈라졌다. 한 덩어리로 묶는다. */
+    .flowstrip{break-inside:avoid;page-break-inside:avoid;margin-top:6mm}
+    .flowstrip .k{break-after:avoid;page-break-after:avoid}
+    .flowstrip li{break-inside:avoid;page-break-inside:avoid}
     .feats{gap:6mm}
     .feats figure{break-inside:avoid;gap:5mm}
     .feats .ph .shot img{max-height:128mm!important}

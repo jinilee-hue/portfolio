@@ -140,7 +140,10 @@ def blank_pages(pdf_path: str) -> list[int]:
             continue
         # 배경 이미지만 깔린 쪽도 빈 쪽이다 — 그림 유무로 봐주면
         # 배경색이 칠해진 공백 장을 놓친다. 글자를 기준으로 판정한다.
-        if len(text) < 12:
+        #
+        # 기준이 12자면 설명이 날아가고 핀 문구 한 줄(26자)만 남은 쪽을
+        # 놓친다. 그런 토막 쪽도 레이아웃이 깨진 것이므로 함께 잡는다.
+        if len(text) < 60:
             blanks.append(i)
     return blanks
 
