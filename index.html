@@ -553,7 +553,11 @@
     /* 무대(기기 목업+개요): 프로젝트당 첫 장 */
     .splash{display:grid!important;grid-template-columns:1.35fr 1fr;
       grid-template-rows:1fr auto;grid-template-areas:"fly copy" "meta meta"!important;
-      gap:6mm;align-items:stretch;min-height:210mm;padding:12mm 14mm;
+      /* 지면이 210mm 인데 min-height 를 210mm 로 두면 반올림 1px 에도 넘쳐
+         빈 장이 따라붙는다. 안쪽 여백을 뺀 값으로 잡아 안전 여유를 남긴다.
+         위아래 패딩(12mm)은 같게 두어 지면 균형을 맞춘다. */
+      gap:6mm;align-items:stretch;min-height:186mm;padding:12mm 14mm;
+      box-sizing:border-box;
       page-break-before:always;page-break-after:always;break-inside:avoid}
     .fly{position:relative;grid-area:fly;height:auto!important;min-height:95mm;order:0;
       --neck:6mm;--base:1.2mm;--head:0mm}
@@ -578,14 +582,20 @@
     /* 부모가 grid 면 page-break-after 가 제대로 먹지 않아 도판 사이에
        빈 장이 끼어든다. 인쇄에서는 block 흐름으로 되돌린 뒤 쪽을 나눈다. */
     .feats{display:block!important;gap:0!important}
+    /* 도판 한 장이 한 쪽을 쓴다. 위아래 패딩을 같게 주어 지면에 붙지 않게 하고,
+       높이 상한을 지면에서 그 패딩을 뺀 값으로 묶어 잘리지 않게 한다. */
     .feats figure{align-content:center;page-break-after:always;
-      break-inside:avoid;page-break-inside:avoid;margin:0}
+      break-inside:avoid;page-break-inside:avoid;margin:0;
+      padding:10mm 0;box-sizing:border-box;max-height:190mm;overflow:hidden}
     .feats figure:last-child{page-break-after:auto}
     .board .k{font-size:8pt;break-after:avoid;page-break-after:avoid}
+    /* 제목만 남고 도판이 다음 장으로 밀리는 것을 막는다 —
+       첫 도판은 제목과 같은 장에 붙인다. */
+    .feats figure:first-child{break-before:avoid;page-break-before:avoid;padding:4mm 0}
     .feats{gap:6mm}
     .feats figure{break-inside:avoid;gap:5mm}
-    .feats .ph .shot img{max-height:140mm!important}
-    .feats .ph .shot.is-portrait img{max-height:150mm!important}
+    .feats .ph .shot img{max-height:128mm!important}
+    .feats .ph .shot.is-portrait img{max-height:138mm!important}
     /* 좁은 뷰포트로 인쇄하면 max-width:879px 모바일 분기가 걸려 주석이 한 줄로 쌓이고
        점선(svg.wires)이 사라진다. 지면은 항상 가로 A4 이므로 데스크톱 배치를 되살린다. */
     .feats .stage{display:grid!important;

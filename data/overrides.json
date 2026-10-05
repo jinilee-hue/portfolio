@@ -1376,7 +1376,7 @@
       "Role-based"
     ],
     "entry": "",
-    "shot_path": "studio/mine",
+    "shot_path": "ops/stats",
     "shot_wait": 3500,
     "shot_devices": [
       "desktop",
@@ -1391,36 +1391,36 @@
     "shot_notes": {
       "desktop": {
         "label": {
-          "ko": "제작 콘솔",
-          "en": "Authoring console"
+          "ko": "운영 통계 — 파이프라인이 숫자로 보인다",
+          "en": "Operations — the pipeline as numbers"
         },
         "note": {
-          "ko": "파닉스 콘텐츠를 만들고 검수하고 운영하는 콘솔.",
-          "en": "The console for authoring, reviewing and running phonics content."
+          "ko": "등록·검수·게시가 어디서 막히는지 상태 분포로 본다. 학생 플레이 지표는 Playground에서 받아 온다.",
+          "en": "Where upload, review and publishing stall, read as a status split. Play metrics come back from Playground."
         },
         "features": [
           {
-            "ko": "창작자 · 검토자 · 운영자 메뉴가 그룹으로 갈린다",
-            "en": "Creator, reviewer and operator menus stand as groups",
+            "ko": "승인율로 검수가 얼마나 걸러내는지 본다",
+            "en": "The approval rate shows how much review filters",
             "at": [
-              40,
-              4
+              60,
+              24
             ]
           },
           {
-            "ko": "OPEN · 검수대기 · 반려를 한 줄에서 본다",
-            "en": "Open, pending and rejected read in one row",
+            "ko": "OPEN·검수대기·반려를 도넛 한 장으로",
+            "en": "Open, pending and rejected in one donut",
             "at": [
-              50,
-              54
+              31,
+              55
             ]
           },
           {
-            "ko": "플레이 수와 별점이 창작자에게 돌아온다",
-            "en": "Plays and ratings come back to the creator",
+            "ko": "상태마다 어떤 콘텐츠인지 바로 짚는다",
+            "en": "Each state names the content behind it",
             "at": [
-              26,
-              83
+              69,
+              55
             ]
           }
         ]
@@ -1889,7 +1889,7 @@
       "AI Agent Prompt"
     ],
     "entry": "",
-    "shot_path": "download.html",
+    "shot_path": "index.html",
     "shot_wait": 4000,
     "featured": true,
     "intent": {
@@ -2004,6 +2004,21 @@
     "shot_full": true,
     "scenes": [
       {
+        "id": "kit",
+        "device": "desktop",
+        "wait": 3000,
+        "path": "download.html",
+        "label": {
+          "ko": "킷 배포 — 6개 파일 40KB",
+          "en": "The kit — six files, 40KB"
+        },
+        "note": {
+          "ko": "사내에 이 주소로 배포했다. CDN 4줄로 시작하고 AI 에이전트용 규약 프롬프트가 함께 간다.",
+          "en": "Shipped in-house at this address: four CDN lines to start, with a UI-contract prompt for AI agents."
+        },
+        "features": []
+      },
+      {
         "id": "students",
         "device": "desktop",
         "wait": 3200,
@@ -2066,44 +2081,36 @@
     "shot_notes": {
       "desktop": {
         "label": {
-          "ko": "킷 배포",
-          "en": "Kit download"
+          "ko": "캠퍼스 대시보드 — 킷이 실제로 쓰인 화면",
+          "en": "Campus dashboard — the kit in use"
         },
         "note": {
-          "ko": "화면이 아니라 화면을 만드는 재료를 내려받는 페이지.",
-          "en": "A page for downloading the materials that make screens, not a single dashboard."
+          "ko": "킷의 토큰과 컴포넌트로 지은 운영 화면. 라이트와 다크를 같은 토큰으로 전환한다.",
+          "en": "An operations screen built from the kit's tokens and components, switching light and dark on the same variables."
         },
         "features": [
           {
-            "ko": "6개 파일 ZIP(40KB)을 내려받는다",
-            "en": "Six files, 40KB, one ZIP",
+            "ko": "KPI 넷을 한 줄로 먼저 읽는다",
+            "en": "Four KPIs read first, in one row",
             "at": [
-              42,
-              88
+              50,
+              25
             ]
           },
           {
-            "ko": "캠퍼스 데모로 바로 확인한다",
-            "en": "Open the campus demo straight away",
+            "ko": "차트도 블루 투명도만 쓴다 — 시맨틱 색 금지",
+            "en": "Charts use blue opacity only; semantic colour is banned",
             "at": [
-              54,
-              88
+              38,
+              62
             ]
           },
           {
-            "ko": "AI 에이전트용 UI 규약 프롬프트가 같이 간다",
-            "en": "Ships with a UI-contract prompt for AI agents",
+            "ko": "라이트·다크를 같은 토큰으로 뒤집는다",
+            "en": "Light and dark flip on the same tokens",
             "at": [
-              48,
-              72
-            ]
-          },
-          {
-            "ko": "v1.2 · Vanilla JS · 빌드 불필요",
-            "en": "v1.2 · vanilla JS · no build step",
-            "at": [
-              48,
-              83
+              90,
+              3
             ]
           }
         ]
@@ -2111,7 +2118,8 @@
     },
     "tools": [
       "Claude Code"
-    ]
+    ],
+    "shot_eval": "(() => new Promise(r => { const b=[...document.querySelectorAll('button')].find(x=>/다크 모드/.test((x.getAttribute('aria-label')||'')+(x.title||''))); if(b) b.click(); setTimeout(r,2200); }))()"
   },
   "canb-dashboard": {
     "merge_into": "poly-dashboard"

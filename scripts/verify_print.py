@@ -205,6 +205,30 @@ def run(url: str, pdf_out: str | None) -> int:
             if bad_radius:
                 fails.append(f"{tag} 목업 모서리 어긋남: {', '.join(bad_radius[:3])}")
 
+            # 지면 넘침·여백 비대칭: A4 가로 인쇄영역은 210mm(≈794px).
+            # 블록이 그보다 크면 잘리거나 빈 장이 따라붙고, 위아래 패딩이
+            # 다르면 지면에서 한쪽으로 쏠려 보인다.
+            page_issues = page.evaluate("""(() => {
+              const PAGE = 210 / 25.4 * 96;      // 210mm → px
+              const out = [];
+              document.querySelectorAll('.splash, .band, .feats figure').forEach(e => {
+                const r = e.getBoundingClientRect();
+                if (r.height < 40) return;
+                const name = (e.className || e.tagName).toString().trim().slice(0, 24);
+                if (r.height > PAGE + 2) {
+                  out.push(name + ' 높이 ' + Math.round(r.height / 96 * 25.4) + 'mm > 210mm');
+                }
+                const cs = getComputedStyle(e);
+                const pt = parseFloat(cs.paddingTop), pb = parseFloat(cs.paddingBottom);
+                if (pt + pb > 0 && Math.abs(pt - pb) > 4) {
+                  out.push(name + ' 위아래 여백 ' + Math.round(pt) + '/' + Math.round(pb) + 'px');
+                }
+              });
+              return [...new Set(out)];
+            })()""")
+            if page_issues:
+                fails.append(f"{tag} 지면 문제: {'; '.join(page_issues[:4])}")
+
             if scheme == "light" and pdf_out:
                 page.pdf(path=pdf_out, landscape=True, print_background=True,
                          prefer_css_page_size=True)
