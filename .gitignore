@@ -9,3 +9,4 @@ _pdfcheck.html
 .venv/
 _pc.pdf
 _pv.html
+_audit*.html

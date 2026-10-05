@@ -232,24 +232,24 @@
             "ko": "단어를 누르면 사전 카드가 열린다",
             "en": "Tap a word and a dictionary card opens",
             "at": [
-              70,
-              11
+              69.5,
+              12.8
             ]
           },
           {
             "ko": "영어 단어와 한국어 뜻을 함께 준다",
             "en": "The English word with its Korean meaning",
             "at": [
-              93,
-              16
+              74.5,
+              16.8
             ]
           },
           {
             "ko": "카드에서 바로 발음을 듣는다",
             "en": "Hear it pronounced right from the card",
             "at": [
-              78,
-              16
+              79.3,
+              14.3
             ]
           }
         ]
@@ -272,24 +272,24 @@
             "ko": "문장을 누르면 번역 카드",
             "en": "Tap a sentence for its translation",
             "at": [
-              84,
-              12
+              72.5,
+              8.8
             ]
           },
           {
             "ko": "영어 원문과 한국어",
             "en": "English line with Korean",
             "at": [
-              84,
-              24
+              72.5,
+              13.0
             ]
           },
           {
             "ko": "문장 단위로 다시 듣기",
             "en": "Replay the sentence from the card",
             "at": [
-              91,
-              14
+              90.0,
+              8.5
             ]
           }
         ]
@@ -312,24 +312,24 @@
             "ko": "지금 읽는 단어 하이라이트",
             "en": "The current word lights up",
             "at": [
-              88,
-              10
+              78.0,
+              23.0
             ]
           },
           {
             "ko": "지나온 단어는 중간 밝기",
             "en": "Passed words stay half-lit",
             "at": [
-              74,
-              11
+              72.0,
+              35.0
             ]
           },
           {
             "ko": "아직 안 읽은 문장은 어둡게 둔다",
             "en": "Sentences not yet read stay dim",
             "at": [
-              80,
-              22
+              80.0,
+              81.0
             ]
           }
         ]
@@ -350,40 +350,40 @@
             "ko": "이전 · 다음으로 11쪽을 넘긴다",
             "en": "Page through all eleven spreads",
             "at": [
-              70,
-              74
+              70.0,
+              75.2
             ]
           },
           {
             "ko": "단어장을 열어 모은 단어를 본다",
             "en": "Open the word bank you've collected",
             "at": [
-              74,
-              74
+              73.9,
+              75.2
             ]
           },
           {
             "ko": "책을 접어 삽화만 크게 본다",
             "en": "Fold the text away and keep the art",
             "at": [
-              78,
-              74
+              77.7,
+              75.2
             ]
           },
           {
             "ko": "따라 읽기로 읽는 단어를 짚는다",
             "en": "Read-along highlights the word being spoken",
             "at": [
-              82,
-              74
+              81.6,
+              75.2
             ]
           },
           {
             "ko": "소리를 켜고 끈다",
             "en": "Sound on or off",
             "at": [
-              85,
-              74
+              85.4,
+              75.2
             ]
           }
         ]
@@ -565,8 +565,8 @@
             "ko": "킷을 ZIP 하나로 내려받는다",
             "en": "The whole kit downloads as one ZIP",
             "at": [
-              22,
-              30
+              22.8,
+              50.6
             ]
           },
           {
@@ -605,24 +605,24 @@
             "ko": "충원·전환·신규를 도넛 셋으로 먼저 본다",
             "en": "Three donuts read first: filled, converted, new",
             "at": [
-              42,
-              66
+              50.0,
+              15.0
             ]
           },
           {
             "ko": "목록 · 필터 · 액션이 킷과 같은 규칙",
             "en": "List, filter and action follow the same kit rules",
             "at": [
-              18,
-              61
+              16.0,
+              31.5
             ]
           },
           {
             "ko": "교시 × 요일 매트릭스로 가동률을 훑는다",
             "en": "Period-by-weekday matrix scans utilisation",
             "at": [
-              27,
-              90
+              18.0,
+              34.6
             ]
           }
         ]
@@ -675,8 +675,8 @@
             "ko": "저장·수납·전환이 같은 줄에 있다",
             "en": "Save, billing and transfer sit on one row",
             "at": [
-              79,
-              23
+              78.0,
+              26.0
             ]
           }
         ]
@@ -989,24 +989,24 @@
             "ko": "워드마크의 O 에 갈기를 금색 호로 심었다",
             "en": "The mane becomes a gold arc inside the O",
             "at": [
-              72,
-              32
+              77.4,
+              43.4
             ]
           },
           {
             "ko": "sparkle 하나로 깨달음의 순간을 표시한다",
             "en": "A single sparkle marks the moment it clicks",
             "at": [
-              82,
-              26
+              83.2,
+              33.5
             ]
           },
           {
             "ko": "목에 두른 LIO 밴드너가 캐릭터와 브랜드를 묶는다",
             "en": "The bandana ties character to wordmark",
             "at": [
-              27,
-              45
+              28.0,
+              60.6
             ]
           }
         ],
@@ -1221,8 +1221,8 @@
             "ko": "제출 수를 한 줄로 센다 (7/9)",
             "en": "Submissions counted in one line (7/9)",
             "at": [
-              72,
-              13
+              93.5,
+              13.0
             ]
           },
           {
@@ -1237,8 +1237,8 @@
             "ko": "아직 안 낸 아이는 빈 칸으로 남는다",
             "en": "Who hasn't handed in stays an empty card",
             "at": [
-              79,
-              30
+              30.0,
+              72.0
             ]
           }
         ]
@@ -1664,32 +1664,32 @@
             "ko": "글자 카드를 끌어 세 칸을 채운다",
             "en": "Drag letter tiles into the three slots",
             "at": [
-              45,
-              93
+              49.5,
+              81.5
             ]
           },
           {
             "ko": "그림 대신 소리로도 문제를 파악한다",
             "en": "The speaker reads the word aloud",
             "at": [
-              78,
-              78
+              77.5,
+              57.0
             ]
           },
           {
             "ko": "단어를 완성해야 마이크가 열린다",
             "en": "The mic unlocks only once the word is built",
             "at": [
-              78,
-              70
+              77.5,
+              42.0
             ]
           },
           {
             "ko": "맞힌 문제만 하트가 채워진다",
             "en": "Hearts fill only on correct answers",
             "at": [
-              50,
-              38
+              50.0,
+              17.5
             ]
           }
         ]
@@ -1731,8 +1731,8 @@
             "ko": "틀린 소리만 IPA로 집어 말해준다",
             "en": "Only the missed sound is named in IPA",
             "at": [
-              63,
-              54
+              41.0,
+              56.8
             ]
           },
           {
@@ -1747,8 +1747,8 @@
             "ko": "다시 하기로 같은 단어를 또 말해본다",
             "en": "Try the same word again",
             "at": [
-              42,
-              63
+              37.5,
+              67.8
             ]
           }
         ]
@@ -1803,32 +1803,32 @@
             "ko": "두 조각을 링에 넣어 합성어를 만든다",
             "en": "Drop two halves into the ring to fuse a word",
             "at": [
-              50,
-              33
+              50.0,
+              37.0
             ]
           },
           {
             "ko": "카드에는 그림과 단어만 있다",
             "en": "Cards carry a picture and a word, nothing else",
             "at": [
-              16,
-              19
+              16.0,
+              26.0
             ]
           },
           {
             "ko": "설명 문장 대신 Hint 버튼 하나만 둔다",
             "en": "No instructions — just one Hint button",
             "at": [
-              57,
-              84
+              56.5,
+              89.5
             ]
           },
           {
             "ko": "모은 단어는 도감에 쌓인다 (1/6)",
             "en": "Collected words stack up in the book (1/6)",
             "at": [
-              20,
-              11
+              20.5,
+              4.0
             ]
           }
         ]
@@ -2093,8 +2093,8 @@
             "ko": "KPI 넷을 한 줄로 먼저 읽는다",
             "en": "Four KPIs read first, in one row",
             "at": [
-              50,
-              25
+              58.0,
+              20.0
             ]
           },
           {
@@ -2284,32 +2284,32 @@
             "ko": "심층탐구 · 일상기록 · 세상 속으로 세 갈래",
             "en": "Three tracks: Insights, Life Log, Inside the World",
             "at": [
-              30,
-              4.5
+              30.5,
+              0.82
             ]
           },
           {
             "ko": "표지 기사 자리에서 영상이 그대로 돈다",
             "en": "The cover story plays as video in place",
             "at": [
-              66,
-              22
+              50.0,
+              10.9
             ]
           },
           {
             "ko": "기자 이름과 캠퍼스를 함께 적는다",
             "en": "Each piece carries a byline with campus",
             "at": [
-              11,
-              56
+              10.8,
+              30.4
             ]
           },
           {
             "ko": "독자 반응이 세 가지 이모지 수치로 남는다",
             "en": "Reader response lands as three emoji counts",
             "at": [
-              44,
-              56
+              24.2,
+              30.4
             ]
           }
         ]
