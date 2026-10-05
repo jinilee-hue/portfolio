@@ -45,6 +45,7 @@
      사진에는 딤이 깔려 있어 흰 글자 그대로 읽힌다. 스크롤해 히어로를
      벗어나면 본문과 겹치므로 배경을 되돌린다(.is-over 는 스크립트가 붙인다). */
   header.is-over{background:transparent;border-bottom-color:transparent}
+  header.is-over{--accent:#2AF0CE}
   header.is-over .mark,header.is-over a,header.is-over button{color:#F3F6F5}
   /* 모바일: 좁은 폭에서 이름과 내비가 겹치고 본문 위에 올라탄다.
      흐름에 맞춰 두 줄로 내리고, blend mode 대신 배경을 깔아 가독성을 확보한다. */
@@ -100,6 +101,9 @@
   /* 사진을 원본 그대로 깔기 때문에 히어로 안쪽은 테마와 무관하게 흰 글자로
      고정한다. 라이트 모드의 검은 글자는 사진 위에서 읽히지 않는다. */
   @media (prefers-color-scheme:light){
+    /* 라이트 모드 강조색(#00655A 진녹색)은 어두운 딤 위에서 묻힌다.
+       히어로 안에서만 다크 모드와 같은 민트로 돌린다. */
+    .open{--accent:#2AF0CE}
     .open h1{color:#F3F6F5}
     .open .lede p{color:rgba(243,246,245,.88)}
     .open .counts dt{color:rgba(243,246,245,.62)}
@@ -112,18 +116,18 @@
   .hero-wrap{position:relative}
   /* bottom:-12% 는 표제 둘째 줄 한가운데에 서명을 얹어 민트색 강조 글자와
      핑크 서명이 서로를 못 읽게 만들었다. 표제 아래로 완전히 내린다. */
-  .sig-name{position:absolute;left:clamp(-28px,-2vw,0);bottom:-30%;z-index:2;pointer-events:none;
+  .sig-name{position:absolute;left:clamp(-28px,-2vw,0);bottom:-20%;z-index:2;pointer-events:none;
     font-family:'Caveat',cursive;font-weight:700;
     font-size:clamp(3.2rem,9vw,7.8rem);line-height:1;color:#FF5FA2;
     transform:rotate(-6deg) translateX(-12px);opacity:.9;
     text-shadow:0 2px 24px rgba(255,95,162,.3)}
-  @media(max-width:900px){.sig-name{left:0;bottom:-24%;font-size:clamp(2.4rem,12vw,4.2rem)}}
+  @media(max-width:900px){.sig-name{left:0;bottom:-16%;font-size:clamp(2.4rem,12vw,4.2rem)}}
   /* 인쇄에서는 표제 글자 크기가 화면과 달라 서명이 본문을 덮는다.
      아래로 더 내리고 살짝 투명하게 — 표제 가독이 우선이다. */
   /* 인쇄에서도 화면과 같은 크기로 둔다. 종이 폭(A4 가로)이 1440px 뷰포트보다
      좁아 vw 기반 clamp 가 자동으로 줄어드는데, 여기서 또 줄이면 표지에서
      서명만 유독 작아진다. 그림자만 빼고 크기는 건드리지 않는다. */
-  @media print{.sig-name{text-shadow:none;bottom:-34%;opacity:.55}}
+  @media print{.sig-name{text-shadow:none;bottom:-24%;opacity:.55}}
   .kick{font-family:var(--grot);font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
     color:var(--accent);margin:0 0 18px}
   h1{font-family:var(--disp);font-weight:400;font-variation-settings:'opsz' 120;
