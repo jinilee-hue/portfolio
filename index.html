@@ -39,7 +39,13 @@
     display:flex;justify-content:space-between;align-items:center;gap:12px;
     padding:14px clamp(16px,4vw,56px);color:var(--fg);pointer-events:none;
     background:var(--bg);
-    border-bottom:1px solid var(--line)}
+    border-bottom:1px solid var(--line);
+    transition:background .25s ease, border-color .25s ease}
+  /* 히어로 사진 위에서는 배경을 걷어 사진이 화면 맨 위까지 닿게 한다.
+     사진에는 딤이 깔려 있어 흰 글자 그대로 읽힌다. 스크롤해 히어로를
+     벗어나면 본문과 겹치므로 배경을 되돌린다(.is-over 는 스크립트가 붙인다). */
+  header.is-over{background:transparent;border-bottom-color:transparent}
+  header.is-over .mark,header.is-over a,header.is-over button{color:#F3F6F5}
   /* 모바일: 좁은 폭에서 이름과 내비가 겹치고 본문 위에 올라탄다.
      흐름에 맞춰 두 줄로 내리고, blend mode 대신 배경을 깔아 가독성을 확보한다. */
   @media(max-width:720px){
@@ -69,7 +75,7 @@
   header a:hover,header button:hover{opacity:1}
   header a:focus-visible,header button:focus-visible{outline:2px solid currentColor;outline-offset:2px;opacity:1}
   @media (prefers-color-scheme:light){
-    header a,header button{color:#000}
+    header:not(.is-over) a,header:not(.is-over) button{color:#000}
   }
   #lang{margin-left:4px}
 
@@ -1516,6 +1522,22 @@ window.addEventListener('beforeprint',()=>{
   document.title = (lang()==='ko'?'이진희 포트폴리오 — ':'Jinhee Lee Portfolio — ')
     + new Date().toISOString().slice(0,10);
 });
+/* 헤더는 히어로 사진 위에서만 투명하다. 사진을 벗어나면 본문 글과 겹쳐
+   읽히지 않으므로 배경을 되돌린다. 스크롤 이벤트 대신 교차 관찰자를 써서
+   매 프레임 계산을 피한다. */
+(() => {
+  const hd = document.querySelector('header');
+  const hero = document.querySelector('.open');
+  if (!hd || !hero) return;
+  const sync = over => hd.classList.toggle('is-over', over);
+  sync(true);
+  // 헤더 높이만큼 위를 잘라 관찰한다 — 히어로 아래끝이 헤더에 닿는 순간 전환.
+  new IntersectionObserver(
+    ([e]) => sync(e.isIntersecting),
+    { rootMargin: `-${hd.offsetHeight + 4}px 0px 0px 0px`, threshold: 0 }
+  ).observe(hero);
+})();
+
 loadProjects().then(d=>{DATA=d;draw();}).catch(e=>{room.textContent='데이터 로드 실패: '+e.message;});
 </script>
 </body>
