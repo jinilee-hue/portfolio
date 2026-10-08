@@ -1161,8 +1161,8 @@
       },
       {
         "step": "10",
-        "ko": "완성한 이야기가 라이브러리에 남고, 교사가 출력해 건넨다",
-        "en": "The story lands in the library; the teacher prints it and hands it back"
+        "ko": "교사가 결과물을 출력해 건넨다",
+        "en": "The teacher prints the result and hands it back"
       }
     ],
     "stack": [
@@ -1240,8 +1240,8 @@
         "device": "desktop",
         "wait": 3500,
         "label": {
-          "ko": "표지 — 계절이 바뀌어도 들어가는 문은 Start 하나",
-          "en": "Cover — the season changes, the way in stays one Start"
+          "ko": "표지 — Start 하나로 들어간다",
+          "en": "Cover — one Start and you are in"
         },
         "note": {
           "ko": "고를 것을 없애고 Start 하나만 남겼다. 수업은 교사가 이미 정해 두었으니 아이가 화면에서 또 고를 이유가 없다.",
@@ -1379,24 +1379,12 @@
       {
         "id": "f8",
         "device": "desktop",
-        "wait": 4200,
-        "path": "student.html",
-        "eval": "(() => new Promise(r => { state.componentResponses={who:'a boy',where:'a snowy village',happen:'he builds a snowman',when:'in the morning',feel:'excited'};state.aiOptionsGenerated=true;state.selectedAiSceneId=aiOptions[0].id;state.storySlots=[baseScenes[0].id,state.selectedAiSceneId,baseScenes[1].id];state.storyOrderSaved=true;state.savedSentences={};state.savedSentences[baseScenes[0].id]='In my picture, I see a snowy village at night. The houses have warm lights.';state.savedSentences[state.selectedAiSceneId]='A boy builds a big snowman. He is very excited.';state.savedSentences[baseScenes[1].id]='The boy puts a red hat on the snowman. They are friends now.'; state.storySubmitted=true;state.portfolio=[{id:Date.now(),studentName:state.studentName,sceneIds:getFinalSceneIds(),paragraph:Object.values(state.savedSentences).join(' '),sentences:Object.assign({},state.savedSentences),createdAt:Date.now()}];showScreen('presentation');  setTimeout(r, 2400); }))()",
+        "wait": 4600,
+        "path": "teacher.html",
+        "eval": "(() => new Promise(r => {const click=(re)=>{const b=[...document.querySelectorAll('button,a')].find(x=>re.test((x.innerText||'').trim())); if(b) b.click();};click(/^start/i);setTimeout(()=>{ click(/student results/i); setTimeout(()=>{ const img=document.querySelector('[class*=card] img, .result-card img');  if(img) (img.closest('[class*=card]')||img).click();  setTimeout(()=>{ document.querySelectorAll('button').forEach(b=>{   if(/back|download/i.test(b.innerText)||!b.innerText.trim()) b.style.visibility='hidden'; });   r(); }, 1500); }, 1200); }, 1200); }))()",
         "label": {
-          "ko": "친구들 앞에서 발표한다",
-          "en": "Present it to the class"
-        },
-        "flow": true
-      },
-      {
-        "id": "f9",
-        "device": "desktop",
-        "wait": 4200,
-        "path": "student.html",
-        "eval": "(() => new Promise(r => { state.componentResponses={who:'a boy',where:'a snowy village',happen:'he builds a snowman',when:'in the morning',feel:'excited'};state.aiOptionsGenerated=true;state.selectedAiSceneId=aiOptions[0].id;state.storySlots=[baseScenes[0].id,state.selectedAiSceneId,baseScenes[1].id];state.storyOrderSaved=true;state.savedSentences={};state.savedSentences[baseScenes[0].id]='In my picture, I see a snowy village at night. The houses have warm lights.';state.savedSentences[state.selectedAiSceneId]='A boy builds a big snowman. He is very excited.';state.savedSentences[baseScenes[1].id]='The boy puts a red hat on the snowman. They are friends now.'; state.storySubmitted=true;state.portfolio=[{id:Date.now(),studentName:state.studentName,sceneIds:getFinalSceneIds(),paragraph:Object.values(state.savedSentences).join(' '),sentences:Object.assign({},state.savedSentences),createdAt:Date.now()}];showScreen('portfolio');  setTimeout(r, 2400); }))()",
-        "label": {
-          "ko": "완성한 이야기가 라이브러리에 남는다",
-          "en": "The finished story lands in the library"
+          "ko": "완성한 이야기를 띄워 친구들 앞에서 발표한다",
+          "en": "The finished story goes up, and the child presents"
         },
         "flow": true
       }
