@@ -26,7 +26,7 @@ import json
 import os
 import sys
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, unquote
 
 ROOT = Path(__file__).resolve().parent.parent
 SHOTS = ROOT / "assets" / "shots"
@@ -94,6 +94,18 @@ def main() -> int:
         url = p.get("shot_url") or p["auto"].get("live")
         if not url:
             continue
+        # shot_path 는 대표 샷이 찍을 하위 경로다. URL 에 붙이지 않으면 표지에서
+        # 찍히고, 화면을 바꾸는 shot_eval 도 엉뚱한 페이지에서 돌아 아무 일도 안 난다.
+        # live 가 이미 그 경로를 가리키는 경우가 있으므로, 비교는 디코딩한 값으로
+        # 하고(한글·공백 경로가 있다) 붙일 때만 인코딩한다.
+        shot_path = (p.get("shot_path") or "").strip().lstrip("/")
+        site_root = url.rstrip("/")          # shot_paths 가 기준으로 삼을 사이트 루트
+        if shot_path:
+            plain = unquote(url.split("?")[0]).rstrip("/")
+            if plain.endswith(shot_path):
+                site_root = plain[: -len(shot_path)].rstrip("/")
+            else:
+                url = url.rstrip("/") + "/" + quote(shot_path)
         wanted = p.get("shot_devices") or list(DEVICES)
         jobs.append({
             "id": p["id"],
@@ -113,7 +125,7 @@ def main() -> int:
             # 안 담기므로 그 기기만 짧은 화면으로 돌린다. shot_paths: {"tablet": "review"}
             "paths": {k: (v or "").strip() for k, v in (p.get("shot_paths") or {}).items()},
             "shot_path": (p.get("shot_path") or "").strip(),
-            "base": url,
+            "base": site_root,
             "dest": None,
         })
         live = p["auto"].get("live") or ""
@@ -167,11 +179,11 @@ def main() -> int:
                         or (job.get("paths") or {}).get(alias_dev)
                     target_url = job["url"]
                     if path_override:
-                        # 사이트 루트 = 현재 url 에서 shot_path 부분만 떼어낸 것
-                        base = (job.get("base") or job["url"]).split("?")[0]
-                        old_path = (job.get("shot_path") or "").strip("/")
-                        root = base[: -len(old_path)] if old_path and base.rstrip("/").endswith(old_path) else base
-                        target_url = root.rstrip("/") + "/" + path_override.lstrip("/")
+                        # 사이트 루트는 live URL 이다. shot_path 를 떼어내려 문자열을
+                        # 자르면 인코딩 여부가 섞여 어긋나므로, 애초에 붙이기 전의
+                        # base 를 그대로 쓴다.
+                        root = (job.get("base") or job["url"]).split("?")[0]
+                        target_url = root.rstrip("/") + "/" + quote(path_override.lstrip("/"))
                     page.goto(target_url, wait_until="load", timeout=30_000)
                     try:
                         page.wait_for_load_state("networkidle", timeout=NETWORK_IDLE_MS)
@@ -193,8 +205,9 @@ def main() -> int:
                         try:
                             page.evaluate(script)
                             page.wait_for_timeout(500)
-                        except Exception:
-                            pass
+                        except Exception as e:
+                            # eval 이 조용히 실패하면 엉뚱한 화면이 찍힌다 — 반드시 남긴다.
+                            failed.append((f"{job['id']}/{dev} eval", str(e)[:60]))
                     page.wait_for_timeout(max(SETTLE_MS, job["wait"]))
                     target = page
                     if job["selector"]:
