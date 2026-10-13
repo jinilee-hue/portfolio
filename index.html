@@ -423,6 +423,50 @@
 
   .band{padding:clamp(48px,5vw,80px) 0}
   #career{margin-top:clamp(24px,4vw,56px)}
+
+  /* ── ARCHIVE — 같은 제품을 Figma 시안으로 만들던 시기의 결과물.
+     지금 작업(실제로 열리는 URL)과 달리 이 줄은 '이미지'다. 그 차이를 숨기지 않고
+     가로 필름스트립으로 흘려 보여 준다. 높이를 맞추고 폭은 원본 비율대로 둔다. */
+  .arc-note{margin:10px 0 0;max-width:56ch;color:var(--fg-55);font-size:.97rem;line-height:1.7;word-break:keep-all}
+  .arcrail{list-style:none;margin:clamp(22px,3vw,34px) 0 0;padding:0 0 14px;display:flex;
+    gap:clamp(12px,1.4vw,20px);overflow-x:auto;scroll-snap-type:x proximity;
+    scrollbar-width:thin;scrollbar-color:var(--fg-28) transparent;
+    /* 오른쪽으로만 흘려보낸다 — 첫 장은 표제와 같은 선에서 시작하고, 끝은 화면 밖으로 이어져
+       '더 있다'가 보인다. 좌우로 흘리면(음수 margin + padding) 크롬의 스냅이 첫 장을
+       화면 끝에 붙여 표제와 어긋난다. */
+    margin-inline-end:calc(-1 * clamp(16px,4vw,56px));
+    padding-inline-end:clamp(16px,4vw,56px)}
+  .arcrail::-webkit-scrollbar{height:6px;background:transparent}
+  .arcrail::-webkit-scrollbar-thumb{background:var(--fg-28);border-radius:3px}
+  .arcrail li{flex:none;scroll-snap-align:start}
+  .arcrail a{display:block;position:relative;border-radius:10px;overflow:hidden;text-decoration:none;
+    background:var(--card-bg,#111);box-shadow:0 14px 34px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.1);
+    transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+  .arcrail a:hover,.arcrail a:focus-visible{transform:translateY(-4px);
+    box-shadow:0 22px 48px rgba(0,0,0,.5),inset 0 0 0 1px #2AF0CE;outline:none}
+  .arcrail img{display:block;height:clamp(230px,27vw,330px);width:auto;object-fit:contain}
+  .arcrail figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 11px;
+    display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
+    background:linear-gradient(to top,rgba(0,0,0,.82),rgba(0,0,0,0));
+    font-family:var(--grot);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#F3F6F5}
+  /* 캡션은 테마와 무관하게 어두운 그라데이션 위에 놓인다 — 라이트 모드의 진녹색 강조색을
+     쓰면 연도가 묻힌다. 히어로와 같은 고정 민트로 둔다. */
+  .arcrail .ac-y{color:#2AF0CE;font-weight:700}
+  .arcrail .ac-t{font-weight:600}
+  @media(max-width:720px){.arcrail img{height:200px}}
+  @media print{
+    /* 인쇄에서는 가로 스크롤이 없다 — 격자로 펼친다.
+       A4 가로 1면(210mm) 안에 머물도록 4열 × 2줄, 칸 높이를 고정한다.
+       page-break-before 를 주면 앞 페이지가 비는 일이 생겨 쓰지 않는다. */
+    #archive{break-inside:avoid;page-break-inside:avoid}
+    .arcrail{display:grid!important;grid-template-columns:repeat(4,1fr);gap:4mm;overflow:visible!important;
+      margin:6mm 0 0!important;padding:0!important}
+    .arcrail li{display:block}
+    .arcrail a{display:block;height:46mm;box-shadow:none;border:.3mm solid rgba(0,0,0,.18)}
+    .arcrail figure{height:100%}
+    .arcrail img{height:100%!important;width:100%!important;object-fit:contain}
+    .arcrail figcaption{position:absolute;padding:8mm 2mm 1.5mm;font-size:6.5pt}
+  }
   .band + .band{margin-top:0}
   .band h2{font-family:var(--disp);font-weight:400;font-size:clamp(1.6rem,4vw,2.8rem);
     letter-spacing:-.02em;margin:0 0 clamp(24px,3vw,44px);max-width:20ch}
@@ -845,6 +889,11 @@
 <div class="room" id="room"></div>
 
 <div class="wrap">
+<section class="band" id="archive">
+  <h2 id="arc-h"></h2>
+  <p class="arc-note" id="arc-note"></p>
+  <ul class="arcrail" id="arcrail"></ul>
+</section>
 <section class="band" id="career">
   <h2 id="car-h"></h2>
   <ol class="ctime" id="cv"></ol>
@@ -898,6 +947,9 @@ const COPY={
     // 한글로 쓰면 그 열만 톤이 튄다.
     dev:{desktop:'Desktop',tablet:'Tablet',mobile:'Mobile'},
     tlH:'작업 타임라인', tlNote:'첫 커밋 – 마지막 커밋 · 프로젝트 {n}개',
+    arcH:'그 전에는 화면을 그렸다',
+    arcNote:'같은 제품(POLY · CANB · NAC)을 Figma와 XD에서 시안으로 만들던 시기. 결과물은 개발자에게 넘기는 이미지였다. 지금은 같은 화면을 직접 만들어 URL로 연다.',
+    arcAt:'Behance에서 보기',
     carH:'커리어',
     jobs:[
       {current:true, when:'2023.07 — 재직중', since:'2023-07', title:'폴리인스퍼레이션', org:'IT사업본부 AI Product팀 · 차장', note:'POLY · CANB · NAC 학습 화면 및 캠퍼스 운영 도구 설계, 프로토타입 구축·배포', groups:[
@@ -1060,6 +1112,9 @@ const COPY={
     mTools:'AI tools', mStack:'Tech stack', mResp:'Responsive',
     dev:{desktop:'Desktop',tablet:'Tablet',mobile:'Mobile'},
     tlH:'Timeline', tlNote:'first – last commit · {n} projects',
+    arcH:'Before this, I drew the screens',
+    arcNote:'The same products — POLY, CANB, NAC — when the deliverable was a Figma or XD comp handed to a developer. Today I build those screens myself and ship them as a URL.',
+    arcAt:'View on Behance',
     carH:'Career',
     jobs:[
       {current:true, when:'2023.07 — Now', since:'2023-07', title:'PolyInspiration', org:'IT Division, AI Product team · Manager', note:'POLY, CANB and NAC — from learner-facing lessons to campus ops tools, shipped as URLs that open.', groups:[
@@ -1486,7 +1541,7 @@ function draw(){
   };
   document.getElementById('pg-prev').onclick=()=>go(cur-1,true);
   document.getElementById('pg-next').onclick=()=>go(cur+1,true);
-  const PAGE_HASH=new Set(['room','career']);
+  const PAGE_HASH=new Set(['room','career','archive']);
   const fromHash=()=>{
     const id=decodeURIComponent((location.hash||'').slice(1));
     if(id==='principles'){
@@ -1522,6 +1577,30 @@ function draw(){
         "dateModified":p.pushed}}))
   });
   document.getElementById('car-h').textContent=c.carH;
+
+  // ── ARCHIVE — Figma·XD 시안 시기의 결과물. 데이터는 이미지 한 줄이 전부라 여기 둔다.
+  const ARC=[
+    {f:'mil-icon',    y:'2024', ko:'MIL 학부모앱 · 아이콘',     en:'MIL parent app · icon',        g:'201835923', bg:'#481870'},
+    {f:'mil-phone',   y:'2024', ko:'MIL 학부모앱 · 알림장',     en:'MIL parent app · daily log',   g:'201835923', bg:'#481870'},
+    {f:'mpoly-icon',  y:'2024', ko:'MPOLY 학생앱 · 아이콘',     en:'MPOLY student app · icon',     g:'201835197', bg:'#0098D8'},
+    {f:'mpoly-phone', y:'2024', ko:'MPOLY 학생앱 · 표지',       en:'MPOLY student app · cover',    g:'201835197', bg:'#0088D8'},
+    {f:'nac-icons',   y:'2024', ko:'NAC 학부모앱 · 아이콘 15종', en:'NAC parent app · 15 icons',    g:'207113325', bg:'#F8F8F8'},
+    {f:'pond-bubble', y:'2024', ko:'POND+ · 학습 허브',         en:'POND+ · learning hub',         g:'201838849', bg:'#D8E8F8'},
+    {f:'pond-dash',   y:'2024', ko:'POND+ · 대시보드',          en:'POND+ · dashboard',            g:'201838849', bg:'#003090'},
+    {f:'mil-report',  y:'2024', ko:'MIL · 성적 리포트',         en:'MIL · grade report',           g:'201841581', bg:'#F0F0F0'},
+  ];
+  document.getElementById('arc-h').textContent=c.arcH;
+  document.getElementById('arc-note').textContent=c.arcNote;
+  document.getElementById('arcrail').innerHTML=ARC.map(a=>{
+    const t=L==='ko'?a.ko:a.en;
+    return `<li><a href="https://www.behance.net/gallery/${a.g}/x" target="_blank" rel="noopener"
+      style="--card-bg:${a.bg}" title="${esc(t)} — ${esc(c.arcAt)}">
+      <figure style="margin:0">
+        <img src="archive/img/${a.f}.webp" alt="${esc(t)}" loading="lazy" decoding="async">
+        <figcaption><b class="ac-y">${a.y}</b><span class="ac-t">${esc(t)}</span></figcaption>
+      </figure></a></li>`;
+  }).join('');
+
   document.getElementById('cv').innerHTML=c.jobs.map((j,i)=>`<li${j.current?' class="now"':''}>
       <span class="rail">${(j.groups||[]).some(g=>(g.items||[]).length)
         ? `<button type="button" class="dot-b" data-j="${i}" aria-label="${esc(j.title)} ${esc(c.moreJ)}"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 6.5v11M6.5 12h11" stroke="currentColor" stroke-width="3.8" stroke-linecap="round"/></svg></button>`
