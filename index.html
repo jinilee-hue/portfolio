@@ -783,14 +783,17 @@
 </style>
 <script>
 /* 첫 화면 쇼릴 — 첫 페인트 전에 켤지 정한다(히어로가 한 번 보였다 사라지는 깜빡임 방지).
-   가로로 넓은 화면 · 움직임 줄이기 꺼짐 · 해시 없이 처음 연 경우 · 탭(세션)마다 한 번.
+   가로로 넓은 화면 · 움직임 줄이기 꺼짐 · 탭(세션)마다 한 번.
+   해시(#AI-Studio 등)가 있어도 재생한다 — 사이트가 작업을 넘길 때마다 해시를 쓰기 때문에
+   해시를 막으면 두 번째 방문부터는 쇼릴이 영영 안 나온다. 해시가 가리키는 작업은
+   쇼릴이 도는 동안 아래에 미리 펼쳐 두고, 착지 뒤 스크롤하면 바로 보이게 한다.
    ?intro=0 끔, ?intro=1 강제(검수·재생용). */
 (() => {
   try {
     const q = new URLSearchParams(location.search), f = q.get('intro');
     if (f === '0') return;
     if (f !== '1') {
-      if (location.hash || innerWidth < 900 || innerWidth / innerHeight < 1.3 ||
+      if (innerWidth < 900 || innerWidth / innerHeight < 1.3 ||
           matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.webdriver ||
           sessionStorage.getItem('pf-intro')) return;
     }

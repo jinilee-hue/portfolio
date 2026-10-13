@@ -16,8 +16,15 @@
   const TEST = qs.has('introtest');           // 검수용: 시계·소리 없이 __intro.seek(t) 로만 그린다
   const lang = localStorage.getItem('pf-lang') === 'en' ? 'en' : 'ko';
 
+  let win = null, running = false, done = false, t0 = 0, raf = 0;
+
   try { history.scrollRestoration = 'manual'; } catch (e) {}
   scrollTo(0, 0);
+  /* 해시(#AI-Studio)가 있으면 사이트 본문 스크립트가 그 작업으로 scrollIntoView 한다.
+     html{overflow:hidden} 으로도 프로그램 스크롤은 막히지 않아 쇼릴 뒤 페이지가 중간에 가 있게 된다.
+     쇼릴이 도는 동안은 맨 위에 고정하고, 해당 작업은 아래에 펼쳐진 채로 둔다. */
+  const pin = () => { if (!done && (scrollX || scrollY)) scrollTo(0, 0); };
+  addEventListener('scroll', pin, { passive: true });
 
   const ov = document.createElement('div');
   ov.id = 'intro';
@@ -31,8 +38,6 @@
 
   const audio = new Audio('intro/reel.mp3');
   audio.preload = 'auto';
-
-  let win = null, running = false, done = false, t0 = 0, raf = 0;
 
   /* ---- 착지 목표: 실제 히어로의 벤 원 네 개 · 리드 첫 줄 (뷰포트 px) ---- */
   function targets() {
@@ -130,6 +135,7 @@
   };
   function off() {
     removeEventListener('wheel', skip); removeEventListener('touchmove', skip); removeEventListener('keydown', onKey);
+    removeEventListener('scroll', pin);
   }
   skipBtn.addEventListener('click', skip);
   addEventListener('wheel', skip, { passive: true });
