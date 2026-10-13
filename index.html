@@ -424,65 +424,75 @@
   .band{padding:clamp(48px,5vw,80px) 0}
   #career{margin-top:clamp(24px,4vw,56px)}
 
-  /* ── ARCHIVE — 같은 제품을 Figma·XD 시안으로 만들던 시기의 결과물.
-     지금 작업(실제로 열리는 URL)과 달리 이 줄은 '이미지'다. 한 번에 한 장씩,
-     영역을 꽉 채워 보여 주고 좌우 버튼으로 넘긴다(가로 스크롤 없음). */
+  /* ── ARCHIVE — Figma·XD 시안 시기의 결과물.
+     연도별로 묶어 작은 썸네일을 한 줄에 늘어놓는다(가로 스크롤 없음, 남으면 다음 줄).
+     누르면 그 장을 크게 띄운다(.arclb). */
   .arc-note{margin:10px 0 0;max-width:56ch;color:var(--fg-55);font-size:.97rem;line-height:1.7;word-break:keep-all}
-  .arcbar{display:flex;align-items:center;justify-content:space-between;gap:16px;
-    margin:clamp(20px,2.6vw,30px) 0 12px}
-  .arcmeta{display:flex;align-items:baseline;gap:12px;min-width:0}
-  .arcmeta .ac-y{font-family:var(--grot);font-size:13px;font-weight:700;letter-spacing:.14em;color:var(--accent);flex:none}
-  .arcmeta .ac-t{font-family:var(--sans);font-weight:600;font-size:clamp(1rem,1.5vw,1.2rem);
-    letter-spacing:-.02em;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .arcnav{display:flex;align-items:center;gap:10px;flex:none}
-  .arcnav .count{font-family:var(--grot);font-size:12.5px;font-weight:700;letter-spacing:.12em;
-    font-variant-numeric:tabular-nums;color:var(--fg-55)}
-  .arcnav button{width:36px;height:36px;padding:0;display:grid;place-items:center;border-radius:12px;
-    background:none;border:1px solid var(--line);color:var(--fg);cursor:pointer}
-  .arcnav button svg{width:16px;height:16px;display:block}
-  .arcnav button:hover{background:var(--accent);border-color:var(--accent);color:#04120F}
-  .arcnav button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .arcyear{margin:clamp(26px,3vw,38px) 0 0}
+  .arcyear > h3{display:flex;align-items:center;gap:14px;margin:0 0 14px;
+    font-family:var(--grot);font-size:13px;font-weight:700;letter-spacing:.16em;color:var(--accent)}
+  .arcyear > h3::after{content:'';flex:1;height:1px;background:var(--line)}
+  .arcyear > h3 .n{color:var(--fg-28);font-size:11px;letter-spacing:.12em}
+  .arcgrid{list-style:none;margin:0;padding:0;display:grid;
+    /* 한 해가 한 줄에 들어가도록 작게 — 1440px에서 8칸 */
+    grid-template-columns:repeat(auto-fill,minmax(clamp(112px,10.2vw,150px),1fr));
+    gap:clamp(8px,.9vw,13px)}
+  .arcgrid button{display:block;width:100%;padding:0;border:0;cursor:pointer;background:none;
+    text-align:left;color:inherit;transition:transform .32s var(--ease)}
+  .arcgrid button:hover,.arcgrid button:focus-visible{transform:translateY(-3px);outline:none}
+  /* 그림 칸 — 비율이 제각각이라 같은 이미지를 흐리게 깔아 칸을 채운다 */
+  .arcgrid .ph{display:block;position:relative;aspect-ratio:4/3;border-radius:9px;overflow:hidden;background:#0d0d0d;
+    box-shadow:0 10px 24px rgba(0,0,0,.34),inset 0 0 0 1px rgba(255,255,255,.1);
+    transition:box-shadow .32s var(--ease)}
+  .arcgrid button:hover .ph,.arcgrid button:focus-visible .ph{
+    box-shadow:0 18px 36px rgba(0,0,0,.46),inset 0 0 0 1px #2AF0CE}
+  .arcgrid .bk{position:absolute;inset:-8%;background-position:center;background-size:cover;
+    filter:blur(22px) saturate(1.2) brightness(.5)}
+  .arcgrid img{position:absolute;inset:0;margin:auto;max-width:88%;max-height:88%;width:auto;height:auto;
+    object-fit:contain;display:block}
+  /* 이름은 그림 밖에 둔다 — 작은 썸네일 위에 얹으면 아이콘과 겹친다 */
+  .arcgrid figcaption{margin:7px 1px 0;font-family:var(--sans);font-size:11px;font-weight:600;
+    letter-spacing:-.01em;color:var(--fg-55);line-height:1.35;word-break:keep-all;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .arcgrid button:hover figcaption,.arcgrid button:focus-visible figcaption{color:var(--fg)}
 
-  /* 무대 — 폭을 꽉 채우고 높이는 화면에 맞춘다.
-     비율이 제각각(정사각 아이콘 / 세로 폰 / 가로 대시보드 / 긴 웹시안)이라
-     contain 만 쓰면 양옆에 빈 띠가 생긴다. 같은 이미지를 흐리게 깔아 채운다. */
-  .arcstage{position:relative;display:block;border-radius:12px;overflow:hidden;text-decoration:none;
-    background:#0b0b0b;height:clamp(300px,52svh,620px);
-    box-shadow:0 18px 44px rgba(0,0,0,.42),inset 0 0 0 1px rgba(255,255,255,.1)}
-  .arcstage .bk{position:absolute;inset:-6%;background-position:center;background-size:cover;
-    filter:blur(42px) saturate(1.25) brightness(.52);opacity:0;transition:opacity .45s var(--ease)}
-  .arcstage .bk.on{opacity:1}
-  .arcstage img{position:absolute;inset:0;margin:auto;max-width:92%;max-height:92%;width:auto;height:auto;
-    object-fit:contain;opacity:0;transition:opacity .45s var(--ease)}
-  .arcstage img.on{opacity:1}
-  .arcstage .ac-src{position:absolute;right:14px;bottom:12px;padding:7px 12px;border-radius:999px;
-    font-family:var(--grot);font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-    color:#F3F6F5;background:rgba(10,10,10,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
-    opacity:0;transition:opacity .3s var(--ease)}
-  .arcstage:hover .ac-src,.arcstage:focus-visible .ac-src{opacity:1}
-  .arcstage:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-  /* 연도 눈금 — 어느 해를 보고 있는지 */
-  .arcyears{display:flex;gap:18px;margin:14px 0 0;padding:0;list-style:none}
-  .arcyears button{background:none;border:0;padding:4px 0;cursor:pointer;
-    font-family:var(--grot);font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--fg-28);
-    border-bottom:2px solid transparent}
-  .arcyears button[aria-current="true"]{color:var(--accent);border-bottom-color:var(--accent)}
-  .arcyears button:hover{color:var(--fg)}
-  .arcyears button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-  @media(max-width:720px){
-    .arcstage{height:clamp(220px,38svh,360px)}
-    .arcmeta .ac-t{font-size:.95rem}
-  }
+  /* 크게 보기 */
+  .arclb{border:0;padding:0;background:none;max-width:none;max-height:none;width:100%;height:100%}
+  .arclb::backdrop{background:rgba(5,5,5,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  .arclb-in{position:fixed;inset:0;display:grid;grid-template-rows:auto 1fr auto;gap:14px;
+    padding:clamp(14px,2.4vw,30px);box-sizing:border-box}
+  .arclb-top{display:flex;align-items:center;justify-content:space-between;gap:16px;color:#F3F6F5}
+  .arclb-t{display:flex;align-items:baseline;gap:12px;min-width:0}
+  .arclb-t b{font-family:var(--grot);font-size:12px;font-weight:700;letter-spacing:.14em;color:#2AF0CE;flex:none}
+  .arclb-t span{font-family:var(--sans);font-weight:600;font-size:clamp(.95rem,1.5vw,1.15rem);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .arclb-nav{display:flex;align-items:center;gap:10px;flex:none}
+  .arclb-nav .count{font-family:var(--grot);font-size:12px;font-weight:700;letter-spacing:.12em;
+    font-variant-numeric:tabular-nums;color:rgba(243,246,245,.62)}
+  .arclb-nav button{width:38px;height:38px;padding:0;display:grid;place-items:center;border-radius:12px;
+    background:none;border:1px solid rgba(243,246,245,.4);color:#F3F6F5;cursor:pointer}
+  .arclb-nav button svg{width:17px;height:17px;display:block}
+  .arclb-nav button:hover{background:#2AF0CE;border-color:#2AF0CE;color:#04120F}
+  .arclb-nav button:focus-visible{outline:2px solid #2AF0CE;outline-offset:2px}
+  .arclb-fig{position:relative;min-height:0;display:grid;place-items:center}
+  .arclb-fig img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;
+    border-radius:6px;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+  .arclb-foot{display:flex;justify-content:flex-end}
+  .arclb-foot a{font-family:var(--grot);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(243,246,245,.72);text-decoration:none;padding:8px 12px;border:1px solid rgba(243,246,245,.3);border-radius:999px}
+  .arclb-foot a:hover{color:#04120F;background:#2AF0CE;border-color:#2AF0CE}
   @media print{
-    /* 인쇄에는 버튼이 없다 — 전부 격자로 펼친다(A4 가로 한 면, 4열) */
+    /* 인쇄 — 그리드 그대로, 그림자·흐린 바탕 없이 */
     #archive{break-inside:avoid;page-break-inside:avoid}
-    .arcbar,.arcnav,.arcyears,.arcstage .bk{display:none!important}
-    .arcstage{display:grid!important;grid-template-columns:repeat(4,1fr);gap:4mm;height:auto!important;
-      background:none!important;box-shadow:none!important;border-radius:0;margin-top:6mm}
-    .arcstage img{position:static!important;opacity:1!important;max-width:none!important;max-height:none!important;
-      width:100%!important;height:40mm!important;
-      object-fit:contain;border:.3mm solid rgba(0,0,0,.18);border-radius:1mm;background:#fff}
-    .arcstage .ac-src{display:none}
+    .arclb{display:none!important}
+    /* A4 가로 한 면(210mm)에 맞춘다 — 칸을 더 작게, 여백을 줄인다 */
+    .arcyear{margin-top:5mm}
+    .arcyear > h3{margin-bottom:2.5mm;font-size:8pt}
+    .arcgrid{grid-template-columns:repeat(8,1fr);gap:2.4mm}
+    .arcgrid button{transform:none!important}
+    .arcgrid .ph{box-shadow:none;border:.3mm solid rgba(0,0,0,.18);background:#fff;aspect-ratio:4/3}
+    .arcgrid .bk{display:none}
+    .arcgrid figcaption{color:#000;font-size:5.4pt;margin-top:.8mm;line-height:1.25}
   }
   .band + .band{margin-top:0}
   .band h2{font-family:var(--disp);font-weight:400;font-size:clamp(1.6rem,4vw,2.8rem);
@@ -909,16 +919,7 @@
 <section class="band" id="archive">
   <h2 id="arc-h"></h2>
   <p class="arc-note" id="arc-note"></p>
-  <div class="arcbar">
-    <p class="arcmeta"><b class="ac-y" id="arc-y"></b><span class="ac-t" id="arc-t"></span></p>
-    <div class="arcnav">
-      <span class="count" id="arc-count"></span>
-      <button type="button" id="arc-prev" aria-label="이전"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6.5 8 12l7 5.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <button type="button" id="arc-next" aria-label="다음"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6.5 16 12l-7 5.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    </div>
-  </div>
-  <a class="arcstage" id="arc-stage" target="_blank" rel="noopener"><span class="ac-src" id="arc-src"></span></a>
-  <ul class="arcyears" id="arc-years"></ul>
+  <div id="arc-years"></div>
 </section>
 <section class="band" id="career">
   <h2 id="car-h"></h2>
@@ -932,6 +933,22 @@
 </section>
 </div>
 </main>
+
+<dialog class="arclb" id="arclb" aria-label="Archive">
+  <div class="arclb-in">
+    <div class="arclb-top">
+      <p class="arclb-t"><b id="alb-y"></b><span id="alb-t"></span></p>
+      <div class="arclb-nav">
+        <span class="count" id="alb-count"></span>
+        <button type="button" id="alb-prev" aria-label="이전"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6.5 8 12l7 5.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" id="alb-next" aria-label="다음"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6.5 16 12l-7 5.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" id="alb-x" aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      </div>
+    </div>
+    <figure class="arclb-fig"><img id="alb-img" alt=""></figure>
+    <div class="arclb-foot"><a id="alb-src" target="_blank" rel="noopener"></a></div>
+  </div>
+</dialog>
 
 <dialog class="jdlg" id="jobdlg" aria-labelledby="jdlg-t">
   <div class="jdlg-in">
@@ -1621,48 +1638,46 @@ function draw(){
   document.getElementById('arc-h').textContent=c.arcH;
   document.getElementById('arc-note').textContent=c.arcNote;
   {
-    const stage=document.getElementById('arc-stage'), yEl=document.getElementById('arc-y'),
-          tEl=document.getElementById('arc-t'), cEl=document.getElementById('arc-count'),
-          srcEl=document.getElementById('arc-src'), yearsEl=document.getElementById('arc-years');
-    // 이미지는 한 번만 만들어 두고 보이는 것만 바꾼다 — 넘길 때 깜빡이지 않는다.
-    // 뒤에는 같은 이미지를 흐리게 깔아 빈 띠를 없앤다.
-    stage.querySelectorAll('img,.bk').forEach(i=>i.remove());
-    ARC.forEach((a,i)=>{
-      const bk=document.createElement('i');
-      bk.className='bk'; bk.style.backgroundImage=`url("archive/img/${a.f}.webp")`;
-      stage.insertBefore(bk, srcEl);
-    });
-    ARC.forEach((a,i)=>{
-      const im=new Image();
-      im.src=`archive/img/${a.f}.webp`; im.alt=L==='ko'?a.ko:a.en;
-      im.loading=i<2?'eager':'lazy'; im.decoding='async';
-      stage.insertBefore(im, srcEl);
-    });
-    const imgs=[...stage.querySelectorAll('img')], bks=[...stage.querySelectorAll('.bk')];
+    const wrap=document.getElementById('arc-years');
     const years=[...new Set(ARC.map(a=>a.y))];
-    yearsEl.innerHTML=years.map(y=>`<li><button type="button" data-y="${y}">${y}</button></li>`).join('');
+    const lbl=a=>L==='ko'?a.ko:a.en;
+    wrap.innerHTML=years.map(y=>{
+      const items=ARC.map((a,i)=>({a,i})).filter(o=>o.a.y===y);
+      return `<section class="arcyear"><h3>${y}<span class="n">${items.length}</span></h3>
+        <ul class="arcgrid">${items.map(({a,i})=>`
+          <li><button type="button" data-i="${i}" title="${esc(lbl(a))}">
+            <span class="ph">
+              <i class="bk" style="background-image:url('archive/img/${a.f}.webp')"></i>
+              <img src="archive/img/${a.f}.webp" alt="${esc(lbl(a))}" loading="lazy" decoding="async">
+            </span>
+            <figcaption>${esc(lbl(a))}</figcaption>
+          </button></li>`).join('')}</ul></section>`;
+    }).join('');
+
+    // 크게 보기 — 썸네일을 누르면 열리고, 좌우로 넘긴다
+    const dlg=document.getElementById('arclb'), img=document.getElementById('alb-img'),
+          yEl=document.getElementById('alb-y'), tEl=document.getElementById('alb-t'),
+          cEl=document.getElementById('alb-count'), srcEl=document.getElementById('alb-src');
     let ai=0;
     const show=n=>{
       ai=(n+ARC.length)%ARC.length;
       const a=ARC[ai];
-      imgs.forEach((im,i)=>im.classList.toggle('on',i===ai));
-      bks.forEach((b,i)=>b.classList.toggle('on',i===ai));
-      stage.href=`https://www.behance.net/gallery/${a.g}/x`;
-      yEl.textContent=a.y; tEl.textContent=L==='ko'?a.ko:a.en;
-      stage.title=`${L==='ko'?a.ko:a.en} — ${c.arcAt}`;
-      srcEl.textContent=c.arcAt;
+      img.src=`archive/img/${a.f}.webp`; img.alt=lbl(a);
+      yEl.textContent=a.y; tEl.textContent=lbl(a);
       cEl.textContent=`${String(ai+1).padStart(2,'0')} / ${String(ARC.length).padStart(2,'0')}`;
-      yearsEl.querySelectorAll('button').forEach(b=>b.setAttribute('aria-current', String(b.dataset.y===a.y)));
+      srcEl.href=`https://www.behance.net/gallery/${a.g}/x`; srcEl.textContent=c.arcAt;
     };
-    document.getElementById('arc-prev').onclick=()=>show(ai-1);
-    document.getElementById('arc-next').onclick=()=>show(ai+1);
-    yearsEl.onclick=e=>{const b=e.target.closest('button'); if(b) show(ARC.findIndex(a=>a.y===b.dataset.y));};
-    // 좌우 화살표 — 아카이브가 화면에 보일 때만
-    document.getElementById('archive').addEventListener('keydown',e=>{
+    wrap.onclick=e=>{const b=e.target.closest('button[data-i]'); if(!b) return;
+      show(+b.dataset.i); if(!dlg.open) dlg.showModal();};
+    document.getElementById('alb-prev').onclick=()=>show(ai-1);
+    document.getElementById('alb-next').onclick=()=>show(ai+1);
+    document.getElementById('alb-x').onclick=()=>dlg.close();
+    dlg.addEventListener('keydown',e=>{
       if(e.key==='ArrowLeft'){show(ai-1);e.preventDefault();}
       if(e.key==='ArrowRight'){show(ai+1);e.preventDefault();}
     });
-    show(0);
+    // 바깥(배경) 클릭으로 닫기 — .arclb-in 안쪽은 제외
+    dlg.addEventListener('click',e=>{if(e.target===dlg) dlg.close();});
   }
 
   document.getElementById('cv').innerHTML=c.jobs.map((j,i)=>`<li${j.current?' class="now"':''}>
