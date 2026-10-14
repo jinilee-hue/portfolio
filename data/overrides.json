@@ -1096,8 +1096,8 @@
       "en": "An in-class AI story lesson for seven-year-olds"
     },
     "summary": {
-      "ko": "일곱 살이 AI와 함께 자기 이야기를 짓는 인클래스 웹앱. Class 1 Picture Maker 는 주어진 그림 두 장 사이에 들어갈 한 장을 만든다 — 다섯 질문에 말이나 글로 답하면 AI가 그 장면을 그리고, 세 장의 순서를 잡는다. Class 2 Story Builder 는 세 장을 영어로 말하거나 써서 나만의 이야기로 잇는다. 완성하면 발표하고, 교사가 결과물을 출력해 아이에게 준다.",
-      "en": "An in-class web app where seven-year-olds build their own story with AI. Class 1, Picture Maker: the child makes the picture that belongs between two given scenes — answering five questions by voice or in writing, watching the AI draw it, then ordering all three. Class 2, Story Builder: narrating those three in English, speaking or writing. They present it, and the teacher prints the result to hand back."
+      "ko": "일곱 살이 AI와 함께 자기 이야기를 짓는 인클래스 웹앱. 그림을 만드는 Class 1, 그 그림에 영어 문장을 붙이는 Class 2 두 차시로 돌아간다. 아이는 태블릿, 교사는 PC를 쓴다.",
+      "en": "An in-class web app where seven-year-olds build their own story with AI. It runs as two lessons — Class 1 makes the picture, Class 2 puts English sentences to it. The child works on a tablet, the teacher on a PC."
     },
     "role": {
       "ko": "수업 흐름 설계 · UI · 구현",
@@ -1110,8 +1110,8 @@
     ],
     "entry": "",
     "intent": {
-      "ko": "아이에게 'AI로 그림을 만들어봐'라고 하면 아무 일도 일어나지 않는다. 무엇을 말해야 그림이 나오는지를 모르기 때문이다. 그래서 프롬프트를 쓰게 하는 대신 Who·Where·What happens 로 쪼개고, 앞뒤 그림 두 장을 먼저 주었다. 사이에 무슨 일이 있었는지는 아이가 답할 수 있다. 답은 말로 해도 되고 써도 된다.",
-      "en": "Tell a child to make a picture with AI and nothing happens — they don't know what to say. So the ask is broken into Who, Where, What happens, and two pictures come first, before and after. What happened in between is something a child can answer — out loud or on the page."
+      "ko": "중점은 '아이가 무엇을 말해야 할지 아는 상태'를 만드는 데 두었다. 일곱 살에게 빈 프롬프트 칸을 주면 아무 일도 일어나지 않는다. 그래서 앞뒤 그림 두 장을 먼저 주고, 그 사이에 들어갈 한 장을 묻는다. 질문도 Who·Where·What happens 세 칸으로 쪼갰다. 무에서 묘사하는 일은 못 해도, 두 장면 사이에 누가 무엇을 했는지는 답할 수 있다. 답은 말로 해도 되고 써도 된다 — 한 교실에 입이 먼저 트인 아이와 손이 먼저 나가는 아이가 같이 있기 때문이다.",
+      "en": "The focus was getting the child to a point where they know what to say. Give a seven-year-old a blank prompt box and nothing happens. So two pictures come first, before and after, and the ask is for the one in between — split again into Who, Where and What happens. A child who cannot describe from nothing can still answer what someone did between two scenes. Answers go in by voice or by keyboard, because one classroom holds the child who speaks first and the child who writes first."
     },
     "flow": [
       {
@@ -1220,8 +1220,8 @@
     "shot_path": "teacher.html",
     "shot_wait": 4200,
     "concept": {
-      "ko": "모든 화면이 같은 골격을 쓴다. 왼쪽 아래는 Back, 오른쪽 아래는 다음 행동, 그 옆에 현재 단계 이름. 아이가 매 화면에서 기억할 것은 '다음은 오른쪽 아래' 하나다. 입력은 말하기가 기본이고 'In my picture, I see ___' 같은 빈칸 문장 틀을 줬다. 마지막 Magic 버튼은 아이가 쓴 문장과 AI가 늘린 문장을 나란히 보여준다 — 고쳐주는 게 아니라 비교하게 두었다.",
-      "en": "Every screen shares one frame: Back at bottom-left, the next action bottom-right, the current step named beside it. The only thing a child has to remember is 'next is bottom-right.' Input is speech first, with sentence frames like 'In my picture, I see ___.' The Magic button at the end shows the child's sentence and the AI's expanded one side by side — not a correction, a comparison."
+      "ko": "디자인은 모든 화면이 같은 골격을 쓰게 했다. 왼쪽 아래 Back, 오른쪽 아래 다음 행동, 가운데 아래에 지금 단계와 점. 아이가 화면마다 새로 익힐 것은 없고 '다음은 오른쪽 아래' 하나만 남는다. 그림은 언제나 정사각, 아이가 쓴 문장은 화면에서 가장 진한 먹으로 둔다 — 회색으로 두면 자기 말이 가장 흐린 요소가 된다. AI가 늘린 문장은 아이 문장을 덮지 않고 나란히 놓는다. 발표 연습은 목록이 아니라 펼친 책 모양으로 만들어, 무엇을 하는 자리인지 설명 없이 알게 했다.",
+      "en": "Every screen is built on one frame: Back at the bottom left, the next action at the bottom right, the current step and its dots between them. Nothing new to learn per screen — only 'forward is bottom right'. Pictures are always square, and the child's own sentence is set in the darkest ink on the page; in grey it becomes the faintest thing there. The AI's tidied line sits beside the child's, never over it. Rehearsal is shaped as an open book rather than a list of takes, so the screen needs no explaining."
     },
     "shot_devices": [
       "desktop",
@@ -1277,81 +1277,275 @@
         "flow": false
       },
       {
-        "id": "c1a",
+        "id": "d-ask",
+        "path": "student.html",
         "device": "desktop",
         "wait": 4200,
-        "path": "student.html",
-        "eval": "(() => new Promise(r => { state.componentResponses={who:'a boy',where:'a snowy village',happen:'he builds a snowman',when:'in the morning',feel:'excited'};state.aiOptionsGenerated=true;state.selectedAiSceneId=aiOptions[0].id;state.storySlots=[baseScenes[0].id,state.selectedAiSceneId,baseScenes[1].id];state.storyOrderSaved=true;state.savedSentences={};state.savedSentences[baseScenes[0].id]='In my picture, I see a snowy village at night. The houses have warm lights.';state.savedSentences[state.selectedAiSceneId]='A boy builds a big snowman. He is very excited.';state.savedSentences[baseScenes[1].id]='The boy puts a red hat on the snowman. They are friends now.';state.storySlots=[baseScenes[0].id,baseScenes[1].id,null];state.storyOrderSaved=false; showScreen('firstSequence'); setTimeout(r, 2400); }))()",
-        "label": {
-          "ko": "받은 그림 두 장의 순서를 맞추고, 내 그림이 들어갈 자리를 비워 둔다",
-          "en": "Order the two given pictures and leave the gap my picture will fill"
-        },
-        "group": "Class 1",
-        "flow": true
-      },
-      {
-        "id": "c1b",
-        "device": "desktop",
-        "wait": 4200,
-        "path": "student.html",
         "eval": "(() => new Promise(r => { state.componentResponses={who:'a boy',where:'a snowy village',happen:'he builds a snowman',when:'in the morning',feel:'excited'};state.aiOptionsGenerated=true;state.selectedAiSceneId=aiOptions[0].id;state.storySlots=[baseScenes[0].id,state.selectedAiSceneId,baseScenes[1].id];state.storyOrderSaved=true;state.savedSentences={};state.savedSentences[baseScenes[0].id]='In my picture, I see a snowy village at night. The houses have warm lights.';state.savedSentences[state.selectedAiSceneId]='A boy builds a big snowman. He is very excited.';state.savedSentences[baseScenes[1].id]='The boy puts a red hat on the snowman. They are friends now.'; showScreen('aiMaker'); setTimeout(r, 2400); }))()",
+        "flow": false,
         "label": {
-          "ko": "그림을 설명하는 다섯 가지를 골라 말하거나 쓴다",
-          "en": "Describe the picture in five choices, spoken or written"
+          "ko": "묻는 방식 — 빈 칸 하나 대신 다섯 칸",
+          "en": "How it asks — five fields instead of one blank box"
         },
-        "group": "Class 1",
-        "flow": true
+        "note": {
+          "ko": "일곱 살에게 '그림을 설명해 봐'라고 하면 아무것도 못 쓴다. 그래서 Who·Where·What happens 세 칸을 필수로, When·How do they feel 두 칸을 선택으로 나눴다. 칸마다 말하기와 쓰기가 같이 있어 입이 먼저 트인 아이와 손이 먼저 나가는 아이가 같은 화면을 쓴다.",
+          "en": "Ask a seven-year-old to describe a picture and nothing comes. So the ask splits into three required fields — Who, Where, What happens — and two optional ones. Each field offers a mic and a keyboard, so the child who speaks first and the child who writes first use the same screen."
+        },
+        "features": [
+          {
+            "ko": "필수 세 칸 — 누가 · 어디서 · 무슨 일이",
+            "en": "Three required — who, where, what happens",
+            "at": [
+              50.0,
+              31.6
+            ]
+          },
+          {
+            "ko": "선택 두 칸은 answered 표시로 구분한다",
+            "en": "Two optional fields, marked as such",
+            "at": [
+              64.7,
+              69.9
+            ]
+          },
+          {
+            "ko": "답한 내용이 칸 안에 그대로 남는다",
+            "en": "The answer stays in the field",
+            "at": [
+              20.5,
+              42.7
+            ]
+          },
+          {
+            "ko": "아래 점으로 지금 어디쯤인지 센다",
+            "en": "Dots count how far along we are",
+            "at": [
+              53.3,
+              94.6
+            ]
+          }
+        ]
       },
       {
-        "id": "c1c",
+        "id": "d-pick",
+        "path": "student.html",
         "device": "desktop",
         "wait": 4200,
-        "path": "student.html",
         "eval": "(() => new Promise(r => { state.componentResponses={who:'a boy',where:'a snowy village',happen:'he builds a snowman',when:'in the morning',feel:'excited'};state.aiOptionsGenerated=true;state.selectedAiSceneId=aiOptions[0].id;state.storySlots=[baseScenes[0].id,state.selectedAiSceneId,baseScenes[1].id];state.storyOrderSaved=true;state.savedSentences={};state.savedSentences[baseScenes[0].id]='In my picture, I see a snowy village at night. The houses have warm lights.';state.savedSentences[state.selectedAiSceneId]='A boy builds a big snowman. He is very excited.';state.savedSentences[baseScenes[1].id]='The boy puts a red hat on the snowman. They are friends now.'; showScreen('aiScene'); setTimeout(r, 2400); }))()",
+        "flow": false,
         "label": {
-          "ko": "AI가 그린 그림을 보고 쓸지 다시 그릴지 정한다",
-          "en": "See what the AI drew, keep it or draw again"
+          "ko": "AI 결과 — 쓸지 다시 그릴지는 아이가 정한다",
+          "en": "The AI's picture — the child decides to keep or redraw"
         },
-        "group": "Class 1",
-        "flow": true
+        "note": {
+          "ko": "AI가 그린 그림을 그대로 받아들이게 하지 않았다. Use This · Try again · Edit prompt 셋을 같은 줄에 두어, 마음에 안 들면 되돌아가 답을 고칠 수 있게 했다. 다시 그리기가 버튼 하나로 끝나야 아이가 'AI가 준 것'이 아니라 '내가 고른 것'으로 받아들인다.",
+          "en": "The child is not made to accept what the AI drew. Use This, Try again and Edit prompt sit on one line, so a picture that misses can be sent back or the answers rewritten. Redrawing has to cost one tap, or the picture stays the AI's rather than the child's."
+        },
+        "features": [
+          {
+            "ko": "답을 고치러 돌아간다",
+            "en": "Go back and change the answers",
+            "at": [
+              41.6,
+              81.9
+            ]
+          },
+          {
+            "ko": "같은 답으로 다시 그린다",
+            "en": "Draw again from the same answers",
+            "at": [
+              59.5,
+              81.9
+            ]
+          },
+          {
+            "ko": "이걸로 정한다",
+            "en": "Keep this one",
+            "at": [
+              85.9,
+              94.6
+            ]
+          }
+        ]
       },
       {
-        "id": "c2a",
+        "id": "d-write",
+        "path": "student.html",
         "device": "desktop",
         "wait": 4200,
-        "path": "student.html",
         "eval": "(() => new Promise(r => { state.componentResponses={who:'a boy',where:'a snowy village',happen:'he builds a snowman',when:'in the morning',feel:'excited'};state.aiOptionsGenerated=true;state.selectedAiSceneId=aiOptions[0].id;state.storySlots=[baseScenes[0].id,state.selectedAiSceneId,baseScenes[1].id];state.storyOrderSaved=true;state.savedSentences={};state.savedSentences[baseScenes[0].id]='In my picture, I see a snowy village at night. The houses have warm lights.';state.savedSentences[state.selectedAiSceneId]='A boy builds a big snowman. He is very excited.';state.savedSentences[baseScenes[1].id]='The boy puts a red hat on the snowman. They are friends now.'; showScreen('storyBuilder'); setTimeout(r, 2400); }))()",
+        "flow": false,
         "label": {
-          "ko": "세 장면을 차례로 넘기며 장면마다 문장을 쓰거나 말한다",
-          "en": "Step through the three scenes, writing or speaking a sentence for each"
+          "ko": "문장 쌓기 — 그림 한 장에 문장 여러 개",
+          "en": "Building sentences — several per picture"
         },
-        "group": "Class 2",
-        "flow": true
+        "note": {
+          "ko": "그림 한 장에 문장 하나로 묶지 않았다. 한 장면에 두 문장, 세 문장을 붙일 수 있어야 '이야기'가 된다. 왼쪽은 지금 보는 장면, 오른쪽은 그 장면에 쌓인 문장이다. 화살표로 장면을 넘기면 오른쪽 목록도 그 장면 것으로 바뀐다.",
+          "en": "One picture is not locked to one sentence. A scene that can hold two or three is what turns pictures into a story. The scene sits on the left, the sentences gathered for it on the right; stepping to the next scene swaps the list with it."
+        },
+        "features": [
+          {
+            "ko": "지금 쓰는 장면 하나만 크게",
+            "en": "Only the scene in hand, shown large",
+            "at": [
+              28.3,
+              50.8
+            ]
+          },
+          {
+            "ko": "화살표로 장면을 넘긴다",
+            "en": "Arrows step between scenes",
+            "at": [
+              38.0,
+              18.6
+            ]
+          },
+          {
+            "ko": "한 장면에 문장을 여러 개 쌓는다",
+            "en": "Several sentences stack on one scene",
+            "at": [
+              73.3,
+              50.8
+            ]
+          },
+          {
+            "ko": "문장은 언제든 더 붙일 수 있다",
+            "en": "Another sentence can always be added",
+            "at": [
+              73.3,
+              76.0
+            ]
+          }
+        ]
       },
       {
-        "id": "c2b",
-        "device": "desktop",
-        "wait": 4200,
+        "id": "d-read",
         "path": "student.html",
+        "device": "desktop",
+        "wait": 4600,
         "eval": "(() => new Promise(r => { state.componentResponses={who:'a boy',where:'a snowy village',happen:'he builds a snowman',when:'in the morning',feel:'excited'};state.aiOptionsGenerated=true;state.selectedAiSceneId=aiOptions[0].id;state.storySlots=[baseScenes[0].id,state.selectedAiSceneId,baseScenes[1].id];state.storyOrderSaved=true;state.savedSentences={};state.savedSentences[baseScenes[0].id]='In my picture, I see a snowy village at night. The houses have warm lights.';state.savedSentences[state.selectedAiSceneId]='A boy builds a big snowman. He is very excited.';state.savedSentences[baseScenes[1].id]='The boy puts a red hat on the snowman. They are friends now.'; showScreen('storyPractice'); setTimeout(r, 2400); }))()",
+        "flow": false,
         "label": {
-          "ko": "펼친 책에서 한 장씩 녹음하며 발표를 연습한다",
-          "en": "Rehearse page by page, recording each one"
+          "ko": "연습 — 펼친 책에서 한 장씩 녹음한다",
+          "en": "Practice — recording page by page in an open book"
         },
-        "group": "Class 2",
-        "flow": true
+        "note": {
+          "ko": "발표 연습을 목록이 아니라 펼친 책으로 만들었다. 왼쪽은 그림, 오른쪽은 내가 쓴 문장. 녹음과 듣기 버튼 두 개만 두고, 페이지를 넘기면 다음 장면으로 간다. 책을 읽는 일과 같은 모양이어야 아이가 무엇을 하는지 설명 없이 안다.",
+          "en": "Rehearsal is an open book, not a list of takes. Art on the left leaf, the child's own sentence on the right; two keys, record and listen; turning the page moves to the next scene. Shaped like reading a book, it needs no explaining."
+        },
+        "features": [
+          {
+            "ko": "녹음과 듣기, 둘뿐이다",
+            "en": "Two keys only — record and listen",
+            "at": [
+              70.3,
+              75.0
+            ]
+          },
+          {
+            "ko": "페이지를 넘겨 다음 장면으로",
+            "en": "Turn the page to the next scene",
+            "at": [
+              58.8,
+              94.6
+            ]
+          }
+        ]
       },
       {
-        "id": "c2c",
+        "id": "f1",
         "device": "desktop",
         "wait": 4200,
         "path": "student.html",
-        "eval": "(() => new Promise(r => { state.componentResponses={who:'a boy',where:'a snowy village',happen:'he builds a snowman',when:'in the morning',feel:'excited'};state.aiOptionsGenerated=true;state.selectedAiSceneId=aiOptions[0].id;state.storySlots=[baseScenes[0].id,state.selectedAiSceneId,baseScenes[1].id];state.storyOrderSaved=true;state.savedSentences={};state.savedSentences[baseScenes[0].id]='In my picture, I see a snowy village at night. The houses have warm lights.';state.savedSentences[state.selectedAiSceneId]='A boy builds a big snowman. He is very excited.';state.savedSentences[baseScenes[1].id]='The boy puts a red hat on the snowman. They are friends now.';state.portfolio=[{id:1,studentName:state.studentName,sceneIds:[baseScenes[0].id,state.selectedAiSceneId,baseScenes[1].id],paragraph:'In my picture, I see a snowy village at night. The houses have warm lights. A boy builds a big snowman. He is very excited. The boy puts a red hat on the snowman. They are friends now.'}];state.presentationStoryIndex=0;state.presentationSceneIndex=0; showScreen('presentation'); setTimeout(r, 2400); }))()",
+        "eval": "(() => new Promise(r => { state.componentResponses={who:'a boy',where:'a snowy village',happen:'he builds a snowman',when:'in the morning',feel:'excited'};state.aiOptionsGenerated=true;state.selectedAiSceneId=aiOptions[0].id;state.storySlots=[baseScenes[0].id,state.selectedAiSceneId,baseScenes[1].id];state.storyOrderSaved=true;state.savedSentences={};state.savedSentences[baseScenes[0].id]='In my picture, I see a snowy village at night. The houses have warm lights.';state.savedSentences[state.selectedAiSceneId]='A boy builds a big snowman. He is very excited.';state.savedSentences[baseScenes[1].id]='The boy puts a red hat on the snowman. They are friends now.'; showScreen('baseScenes');  setTimeout(r, 2400); }))()",
         "label": {
-          "ko": "완성한 이야기를 크게 띄우고 친구들 앞에서 발표한다",
-          "en": "The finished story goes up, and the child presents it"
+          "ko": "주어진 두 장면을 관찰한다",
+          "en": "Study the two given scenes"
         },
-        "group": "Class 2",
+        "flow": true
+      },
+      {
+        "id": "f2",
+        "device": "desktop",
+        "wait": 4200,
+        "path": "student.html",
+        "eval": "(() => new Promise(r => { state.componentResponses={who:'a boy',where:'a snowy village',happen:'he builds a snowman',when:'in the morning',feel:'excited'};state.aiOptionsGenerated=true;state.selectedAiSceneId=aiOptions[0].id;state.storySlots=[baseScenes[0].id,state.selectedAiSceneId,baseScenes[1].id];state.storyOrderSaved=true;state.savedSentences={};state.savedSentences[baseScenes[0].id]='In my picture, I see a snowy village at night. The houses have warm lights.';state.savedSentences[state.selectedAiSceneId]='A boy builds a big snowman. He is very excited.';state.savedSentences[baseScenes[1].id]='The boy puts a red hat on the snowman. They are friends now.'; state.storySlots=[baseScenes[0].id,baseScenes[1].id,null];state.storyOrderSaved=false;showScreen('firstSequence');  setTimeout(r, 2400); }))()",
+        "label": {
+          "ko": "내가 만들 그림의 자리를 먼저 정한다",
+          "en": "Place my picture before it exists"
+        },
+        "flow": true
+      },
+      {
+        "id": "f3",
+        "device": "desktop",
+        "wait": 4200,
+        "path": "student.html",
+        "eval": "(() => new Promise(r => { state.componentResponses={who:'a boy',where:'a snowy village',happen:'he builds a snowman',when:'in the morning',feel:'excited'};state.aiOptionsGenerated=true;state.selectedAiSceneId=aiOptions[0].id;state.storySlots=[baseScenes[0].id,state.selectedAiSceneId,baseScenes[1].id];state.storyOrderSaved=true;state.savedSentences={};state.savedSentences[baseScenes[0].id]='In my picture, I see a snowy village at night. The houses have warm lights.';state.savedSentences[state.selectedAiSceneId]='A boy builds a big snowman. He is very excited.';state.savedSentences[baseScenes[1].id]='The boy puts a red hat on the snowman. They are friends now.'; showScreen('aiMaker');  setTimeout(r, 2400); }))()",
+        "label": {
+          "ko": "다섯 질문에 말하거나 써서 답한다",
+          "en": "Answer five questions, aloud or in writing"
+        },
+        "flow": true
+      },
+      {
+        "id": "f4",
+        "device": "desktop",
+        "wait": 4200,
+        "path": "student.html",
+        "eval": "(() => new Promise(r => { state.componentResponses={who:'a boy',where:'a snowy village',happen:'he builds a snowman',when:'in the morning',feel:'excited'};state.aiOptionsGenerated=true;state.selectedAiSceneId=aiOptions[0].id;state.storySlots=[baseScenes[0].id,state.selectedAiSceneId,baseScenes[1].id];state.storyOrderSaved=true;state.savedSentences={};state.savedSentences[baseScenes[0].id]='In my picture, I see a snowy village at night. The houses have warm lights.';state.savedSentences[state.selectedAiSceneId]='A boy builds a big snowman. He is very excited.';state.savedSentences[baseScenes[1].id]='The boy puts a red hat on the snowman. They are friends now.'; showScreen('aiScene');  setTimeout(r, 2400); }))()",
+        "label": {
+          "ko": "AI가 그린 장면을 보고 고른다",
+          "en": "See the AI's scene and choose"
+        },
+        "flow": true
+      },
+      {
+        "id": "f5",
+        "device": "desktop",
+        "wait": 4200,
+        "path": "student.html",
+        "eval": "(() => new Promise(r => { state.componentResponses={who:'a boy',where:'a snowy village',happen:'he builds a snowman',when:'in the morning',feel:'excited'};state.aiOptionsGenerated=true;state.selectedAiSceneId=aiOptions[0].id;state.storySlots=[baseScenes[0].id,state.selectedAiSceneId,baseScenes[1].id];state.storyOrderSaved=true;state.savedSentences={};state.savedSentences[baseScenes[0].id]='In my picture, I see a snowy village at night. The houses have warm lights.';state.savedSentences[state.selectedAiSceneId]='A boy builds a big snowman. He is very excited.';state.savedSentences[baseScenes[1].id]='The boy puts a red hat on the snowman. They are friends now.'; showScreen('storyBuilder');  setTimeout(r, 2400); }))()",
+        "label": {
+          "ko": "그림마다 한 문장씩 영어로 말한다",
+          "en": "One English sentence per picture"
+        },
+        "flow": true
+      },
+      {
+        "id": "f6",
+        "device": "desktop",
+        "wait": 4200,
+        "path": "student.html",
+        "eval": "(() => new Promise(r => { state.componentResponses={who:'a boy',where:'a snowy village',happen:'he builds a snowman',when:'in the morning',feel:'excited'};state.aiOptionsGenerated=true;state.selectedAiSceneId=aiOptions[0].id;state.storySlots=[baseScenes[0].id,state.selectedAiSceneId,baseScenes[1].id];state.storyOrderSaved=true;state.savedSentences={};state.savedSentences[baseScenes[0].id]='In my picture, I see a snowy village at night. The houses have warm lights.';state.savedSentences[state.selectedAiSceneId]='A boy builds a big snowman. He is very excited.';state.savedSentences[baseScenes[1].id]='The boy puts a red hat on the snowman. They are friends now.'; showScreen('storyReview');  setTimeout(r, 2400); }))()",
+        "label": {
+          "ko": "내 문장과 AI 문장을 나란히 본다",
+          "en": "My sentences beside the AI's"
+        },
+        "flow": true
+      },
+      {
+        "id": "f7",
+        "device": "desktop",
+        "wait": 4200,
+        "path": "student.html",
+        "eval": "(() => new Promise(r => { state.componentResponses={who:'a boy',where:'a snowy village',happen:'he builds a snowman',when:'in the morning',feel:'excited'};state.aiOptionsGenerated=true;state.selectedAiSceneId=aiOptions[0].id;state.storySlots=[baseScenes[0].id,state.selectedAiSceneId,baseScenes[1].id];state.storyOrderSaved=true;state.savedSentences={};state.savedSentences[baseScenes[0].id]='In my picture, I see a snowy village at night. The houses have warm lights.';state.savedSentences[state.selectedAiSceneId]='A boy builds a big snowman. He is very excited.';state.savedSentences[baseScenes[1].id]='The boy puts a red hat on the snowman. They are friends now.'; showScreen('storyPractice');  setTimeout(r, 2400); }))()",
+        "label": {
+          "ko": "펼친 책에서 내 문장을 녹음하고 들어본다",
+          "en": "Record and replay my sentence inside an open book"
+        },
+        "flow": true
+      },
+      {
+        "id": "f8",
+        "device": "desktop",
+        "wait": 4600,
+        "path": "teacher.html",
+        "eval": "(() => new Promise(r => {const click=(re)=>{const b=[...document.querySelectorAll('button,a')].find(x=>re.test((x.innerText||'').trim())); if(b) b.click();};click(/^start/i);setTimeout(()=>{ click(/student results/i); setTimeout(()=>{ const img=document.querySelector('[class*=card] img, .result-card img');  if(img) (img.closest('[class*=card]')||img).click();  setTimeout(()=>{ document.querySelectorAll('button').forEach(b=>{   if(/back|download/i.test(b.innerText)||!b.innerText.trim()) b.style.visibility='hidden'; });   r(); }, 1500); }, 1200); }, 1200); }))()",
+        "label": {
+          "ko": "완성한 이야기를 띄워 친구들 앞에서 발표한다",
+          "en": "The finished story goes up, and the child presents"
+        },
         "flow": true
       }
     ],
@@ -1406,6 +1600,48 @@
     "shot_evals": {
       "desktop": "(() => new Promise(r => { const v=document.querySelector('video.wl-bg'); if(!v){ setTimeout(r,400); return; } const seek=()=>{ v.pause();   const done=()=>{ v.pause(); setTimeout(r,500); };   v.addEventListener('seeked',done,{once:true});   v.currentTime=0.1; }; if(isFinite(v.duration)&&v.duration>0) seek(); else v.addEventListener('loadedmetadata',seek,{once:true}); setTimeout(r,4000); }))()",
       "tablet": "(() => new Promise(r => { const v=document.querySelector('video.wl-bg'); if(!v){ setTimeout(r,400); return; } const seek=()=>{ v.pause();   const done=()=>{ v.pause(); setTimeout(r,500); };   v.addEventListener('seeked',done,{once:true});   v.currentTime=0.1; }; if(isFinite(v.duration)&&v.duration>0) seek(); else v.addEventListener('loadedmetadata',seek,{once:true}); setTimeout(r,4000); }))()"
+    },
+    "seasons": [
+      {
+        "k": "SPRING",
+        "label": {
+          "ko": "봄",
+          "en": "Spring"
+        },
+        "src": "assets/cover/spring.mp4",
+        "poster": "assets/cover/spring.jpg"
+      },
+      {
+        "k": "SUMMER",
+        "label": {
+          "ko": "여름",
+          "en": "Summer"
+        },
+        "src": "assets/cover/summer.mp4",
+        "poster": "assets/cover/summer.jpg"
+      },
+      {
+        "k": "FALL",
+        "label": {
+          "ko": "가을",
+          "en": "Autumn"
+        },
+        "src": "assets/cover/fall.mp4",
+        "poster": "assets/cover/fall.jpg"
+      },
+      {
+        "k": "WINTER",
+        "label": {
+          "ko": "겨울",
+          "en": "Winter"
+        },
+        "src": "assets/cover/winter.mp4",
+        "poster": "assets/cover/winter.jpg"
+      }
+    ],
+    "tech": {
+      "ko": "기술은 빌드 도구 없이 바닐라로만 썼다 — 정적 파일이라 교실 PC에서 설치 없이 열린다. 말하기는 Web Speech API, 발표 녹음은 MediaRecorder 로 받고 안 되는 브라우저에서는 쓰기로 자동 전환한다. 화면은 100dvh 를 grid 행으로 나눠 스크롤을 없앴다 — 태블릿에서 아이가 화면을 밀다 길을 잃지 않게 하는 구조다. 결과물은 canvas 로 다시 그려 A4 가로 PDF 로 내보내므로 화면과 출력물이 같다.",
+      "en": "Built with no toolchain — static files, so a classroom PC opens it with nothing to install. Speech input runs on the Web Speech API and rehearsal recording on MediaRecorder, both falling back to typing where the browser lacks them. Each screen divides 100dvh into grid rows so nothing scrolls, which is what stops a child losing their place by dragging the page. The result is redrawn on a canvas and exported as an A4 landscape PDF, so screen and print match."
     }
   },
   "Phonics-Studio": {

@@ -98,6 +98,7 @@ export function pick(p) {
     // 케이스 스터디 (overrides.json 에서 사람이 쓴 값)
     intent: t(p.intent),
     concept: t(p.concept),
+    tech: t(p.tech),      // Overview 의 기술 문단 (없으면 빠진다)
     flow: p.flow || [],
     stack: p.stack || [],
     stackLine: Array.isArray(p.stack_line) ? p.stack_line.map(x=>t(x)).filter(Boolean) : [],
@@ -108,6 +109,13 @@ export function pick(p) {
     deps: a.deps || [],
     langBytes: a.lang_bytes || {},
     contribution: p.contribution || null,   // 관여도 0~100 개별 (사람이 쓴 값)
+    // 계절 표지 영상 — [{k, label, src, poster}] (Story Studio 전용)
+    seasons: (p.seasons || []).map(s => ({
+      k: s.k || '',
+      label: t(s.label),
+      src: asset(s.src),
+      poster: asset(s.poster || ''),
+    })),
     tools: p.tools || [],                    // 실제 사용한 AI 툴
     devices: p.shot_devices || [],           // 대응 기기 (반응형 표기용)
     also: a.also || [],   // 한 프로젝트로 합친 다른 저장소들
