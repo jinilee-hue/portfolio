@@ -340,6 +340,15 @@
     .flowstrip ol{grid-template-columns:repeat(3,1fr)}
     .flowstrip li:not(:last-child) .cut::after{display:none}
   }
+  /* Class 1 / Class 2 처럼 흐름이 다시 묶일 때 — 묶음마다 제 줄을 쓴다 */
+  .flowstrip.has-groups{display:grid;gap:clamp(26px,3vw,40px)}
+  .flowstrip .fgroup{display:block}
+  .flowstrip .gname{margin:0 0 12px;font-family:var(--grot);font-size:11px;font-weight:700;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+    display:flex;align-items:center;gap:12px}
+  .flowstrip .gname::after{content:'';flex:1;height:1px;background:var(--line)}
+  /* 묶음 안에서 번호를 다시 01 부터 */
+  .flowstrip .fgroup ol{counter-reset:fs}
   .feats{display:grid;gap:clamp(48px,6vw,96px)}
   .feats figure{margin:0;position:relative;display:grid;gap:18px}
   /* 좌우 주석 칸을 넉넉히 준다. 목업이 폭을 다 먹으면 점선이 이미지 위로만 지나가
@@ -1357,17 +1366,32 @@ function draw(){
     return out;
   };
 
-  // 학습 흐름 컷: scenes 중 flow:true 인 것만 작은 띠로 늘어놓는다
+  // 학습 흐름 컷: scenes 중 flow:true 인 것만 작은 띠로 늘어놓는다.
+  // group 이 붙어 있으면(Class 1 / Class 2) 그 단위로 다시 묶어 보여 준다.
   const flowStrip=p=>{
     const cuts=(p.scenes||[]).filter(s=>s.flow);
     if(cuts.length<2) return '';
-    const items=cuts.map(s=>`<li>
+    const li=s=>`<li>
       <span class="cut"><img src="${s.src}" alt="${esc(s.label||'')}" loading="lazy" decoding="async"
         onerror="this.closest('li').remove()"></span>
       <span class="cap">${esc(s.label||'')}</span>
-    </li>`).join('');
-    return `<div class="flowstrip"><p class="k">${esc(L==='ko'?'학습 흐름':'Learning flow')}</p>
-      <ol style="--n:${cuts.length}">${items}</ol></div>`;
+    </li>`;
+    const head=`<p class="k">${esc(L==='ko'?'학습 흐름':'Learning flow')}</p>`;
+    // 묶음이 없으면 한 줄로 (기존 동작)
+    if(!cuts.some(s=>s.group))
+      return `<div class="flowstrip">${head}<ol style="--n:${cuts.length}">${cuts.map(li).join('')}</ol></div>`;
+    // 묶음별로 — 번호는 묶음 안에서 다시 01 부터 센다
+    const groups=[];
+    for(const s of cuts){
+      const g=s.group||'';
+      if(!groups.length||groups[groups.length-1].g!==g) groups.push({g, items:[]});
+      groups[groups.length-1].items.push(s);
+    }
+    return `<div class="flowstrip has-groups">${head}${groups.map(gr=>`
+      <div class="fgroup">
+        ${gr.g?`<p class="gname">${esc(gr.g)}</p>`:''}
+        <ol style="--n:${gr.items.length}">${gr.items.map(li).join('')}</ol>
+      </div>`).join('')}</div>`;
   };
 
   const featRow=(src,list)=>{

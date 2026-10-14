@@ -75,6 +75,8 @@ export function pick(p) {
       src: asset(s.src || `assets/shots/${p.id}--${s.id}.jpg`),
       // flow 컷은 큰 도판이 아니라 하단 띠에 작게 늘어놓는다
       flow: !!s.flow,
+      // 흐름 안에서 다시 묶이는 단위 (Story Studio 의 Class 1 / Class 2)
+      group: s.group || '',
       label: t(s.label),
       note: t(s.note),
       features: (s.features || []).map(feat),
