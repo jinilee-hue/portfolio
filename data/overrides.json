@@ -1261,24 +1261,24 @@
             "ko": "제출 수를 한 줄로 센다 (7/9)",
             "en": "Submissions counted in one line (7/9)",
             "at": [
-              93.5,
-              13.0
+              87.2,
+              14.0
             ]
           },
           {
             "ko": "아이 이름 아래 실제 결과물이 올라온다",
             "en": "The actual work sits under each name",
             "at": [
-              20,
-              30
+              18.3,
+              33.4
             ]
           },
           {
             "ko": "아직 안 낸 아이는 빈 칸으로 남는다",
             "en": "Who hasn't handed in stays an empty card",
             "at": [
-              30.0,
-              72.0
+              82.8,
+              56.2
             ]
           }
         ],
