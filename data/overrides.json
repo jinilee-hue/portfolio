@@ -333,24 +333,24 @@
             "ko": "지금 소리 나는 낱말이 가장 밝다",
             "en": "The word sounding now is the brightest",
             "at": [
-              74.2,
-              23.7
+              69.5,
+              32.9
             ]
           },
           {
             "ko": "지나온 낱말은 한 단계 흐려진다",
             "en": "Words already read step back one level",
             "at": [
-              70.0,
-              10.4
+              81.3,
+              10.2
             ]
           },
           {
             "ko": "아직 안 읽은 줄은 가장 흐리다",
             "en": "Lines not yet reached stay faintest",
             "at": [
-              70.0,
-              27.5
+              75.4,
+              37.0
             ]
           },
           {
