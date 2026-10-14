@@ -940,8 +940,8 @@
       "en": "AI tutor brand, character and a 64-screen prototype"
     },
     "summary": {
-      "ko": "i-LENS 안에서 학생을 실시간 코칭하는 AI Tutor 엔진 LIO. 워드마크와 컬러·타이포를 정하고, 아이가 매일 만날 사자 캐릭터를 직접 만들고, 49슬라이드 화면정의서를 클릭으로 넘어가는 64화면 프로토타입까지 혼자 이었다. 같은 흐름을 두 디자인으로 구현해 비교했고 채택된 B안으로 마무리했다.",
-      "en": "LIO is the AI tutor that coaches students inside i-LENS. One pair of hands took it from wordmark, palette and type, through the lion character a child meets every day, to a 49-slide spec rebuilt as a clickable 64-screen prototype. The same flow was built twice and Design B was chosen."
+      "ko": "i-LENS 안에서 학생을 실시간 코칭하는 AI Tutor, LIO. 이름과 얼굴을 정하는 브랜드 작업부터 아이가 매일 만날 사자 캐릭터, 클릭으로 끝까지 넘어가는 64화면 학습 흐름 프로토타입까지 혼자 만들었다.",
+      "en": "LIO, the AI tutor that coaches students inside i-LENS. One person took it from naming and branding through the lion the children meet every day, to a 64-screen prototype that clicks through the whole learning flow."
     },
     "role": {
       "ko": "브랜드 아이덴티티 · 캐릭터 · 프로토타입 설계 · 구현",
@@ -955,8 +955,8 @@
     ],
     "entry": "",
     "intent": {
-      "ko": "AI 튜터에 이름과 얼굴을 주는 일부터 시작했다. 학생이 매일 만나는 존재라 로고만으로는 부족했고 브랜드 방향이 정해지지 않은 채 화면을 그리면 나중에 전부 다시 그려야 했다. 그래서 브랜드 후보 5안을 먼저 눈에 보이게 만들어 결정을 앞으로 당기고 정해진 다음에 화면으로 내려갔다.",
-      "en": "It started with giving the AI tutor a name and a face. Students meet it daily, so a logo alone wasn't enough — and drawing screens before the brand was settled would have meant redrawing all of them. Five candidates were made visible first to pull the decision forward, and only then did the work descend into screens."
+      "ko": "AI 튜터에 이름과 얼굴을 주는 일부터 시작했다. 학생이 매일 만나는 존재라 로고만으로는 부족했고, 브랜드가 정해지지 않은 채 화면을 그리면 나중에 전부 다시 그려야 했다. 그래서 순서를 뒤집었다 — 브랜드 후보 5안을 먼저 눈에 보이게 만들어 결정을 앞으로 당기고, 정해진 다음에 화면으로 내려갔다.\n\n캐릭터는 사자다. 서비스 이름 LIO 에 가장 맞는 동물이 사자였고, 이름에서 캐릭터가 나오면 둘을 따로 외울 필요가 없다. 다만 위엄은 덜어냈다. 아이가 배우는 자리에서 평가받는 기분이 들면 안 되므로 머리를 크게, 갈기를 둥글려 친근함 쪽으로 비율을 잡고, 목에 LIO 밴드너를 둘러 브랜드와 캐릭터를 한 몸으로 묶었다.\n\n여기서 멈추지 않고 49슬라이드 화면정의서를 클릭으로 넘어가는 64화면 프로토타입으로 옮겼다. 정답 경로와 오답 경로, 막혔을 때의 scaffold 분기까지 실제로 눌러 확인할 수 있어야 흐름이 말이 되는지 알 수 있기 때문이다. 같은 흐름을 두 디자인으로 구현해 나란히 비교했다.",
+      "en": "It started with giving the tutor a name and a face. A logo alone would not do for something a student meets daily, and drawing screens before the brand was settled would have meant drawing them twice. So the order flipped: five brand candidates were built as a page first, the decision was pulled forward, and only then did the work move down into screens.\n\nThe character is a lion because the name is LIO — when the character comes out of the name, nobody has to remember them separately. The majesty was taken out, though. A child being taught should not feel judged, so the head went larger, the mane rounder, and a LIO bandana ties the character and the brand into one object.\n\nThe 49-slide screen spec then became a 64-screen clickable prototype. The correct path, the wrong path and the scaffold branches for a stuck student all have to be pressable before anyone can tell whether the flow holds. The same flow was built twice, in two designs, and compared side by side."
     },
     "flow": [
       {
@@ -1028,24 +1028,24 @@
     ],
     "decisions": [
       {
-        "ko": "브랜드 결정을 회의가 아니라 페이지로 옮겼다. 5안을 같은 조건으로 한 페이지에 놓고 투표 기능을 붙이니 목소리 큰 사람이 아니라 표가 방향을 정했다.",
+        "ko": "사자를 골랐다. 서비스 이름이 LIO 라 가장 맞는 동물이 사자였고, 이름에서 캐릭터가 나오면 둘을 따로 외울 필요가 없다. 대신 위엄은 덜어냈다 — 아이가 배우는 자리에서 평가받는 기분이 들면 안 되므로 머리를 크게, 갈기를 둥글려 친근함 쪽으로 비율을 잡았다.",
+        "en": "The character is a lion because the service is called LIO — when the character falls out of the name, nobody has to remember them separately. The majesty came out, though: a child being taught should not feel judged, so the head went larger and the mane rounder."
+      },
+      {
+        "ko": "브랜드 결정을 회의가 아니라 페이지로 옮겼다. 5안을 같은 조건으로 한 페이지에 놓고 투표 기능을 붙이니, 목소리 큰 사람이 아니라 표가 방향을 정했다.",
         "en": "The brand decision moved from a meeting into a page. Five candidates under identical conditions with voting attached meant the direction was set by tallies, not by whoever spoke loudest."
       },
       {
-        "ko": "캐릭터를 브랜드 확정 뒤로 미뤘다. 먼저 그리면 캐릭터가 예뻐서 브랜드가 끌려가고 나중에 색이 안 맞아 다시 그리게 된다.",
-        "en": "The character was deliberately drawn after the brand was locked. Draw it first and a likeable character drags the brand along, only to be redrawn when the palette doesn't fit."
+        "ko": "캐릭터를 브랜드 확정 뒤로 미뤘다. 먼저 그리면 캐릭터가 예뻐서 브랜드가 끌려가고, 나중에 색이 안 맞아 다시 그리게 된다.",
+        "en": "The character was deliberately drawn after the brand was locked. Draw it first and a likeable character drags the brand along, then the colours clash and it gets redrawn anyway."
       },
       {
-        "ko": "PPTX 슬라이드 번호를 URL에 그대로 노출했다(?s=46). 리뷰 중 '46번이요'라는 말이 그대로 주소가 되어 화면을 찾는 시간이 사라졌다.",
-        "en": "PPTX slide numbers are exposed in the URL (?s=46), so 'number 46' in a review becomes an address and the hunt for a screen disappears."
+        "ko": "B안을 채택했다. 같은 흐름을 A·B 두 벌로 끝까지 만들어 비교했고, 이 서비스를 쓰는 학년대에는 동화 세계보다 학습 도구의 얼굴이 맞았다. A안은 버리지 않았다 — 5세 전후의 더 어린 레벨에서 쓸 플랫폼으로 이어 간다.",
+        "en": "B was adopted. The same flow was built end to end in both and compared; for this age band a learning tool reads better than a fairy tale. A was not discarded — it carries on as the platform for younger learners, around five."
       },
       {
-        "ko": "같은 흐름을 A(Storybook)·B(App UI) 두 벌로 만들어 비교했고 B가 채택됐다. 흐름 자체는 한 글자도 다르지 않게 두어 '흐름이 이상한 것'과 '톤이 안 맞는 것'을 분리해 말할 수 있게 했다.",
-        "en": "The same flow was built twice — A (Storybook) and B (App UI) — and B was chosen. The flow itself was kept identical word for word so review could separate 'the flow is wrong' from 'the tone is wrong'."
-      },
-      {
-        "ko": "캐릭터를 그림으로 끝내지 않고 말하고 반응하는 상태로 만들었다. 지문에서 근거 문장을 짚으면 LIO 가 그 자리에서 답하고, 영어가 막히면 KR 버튼으로 같은 말을 한국어로 다시 듣는다. 정지된 시안으로는 '이 튜터가 곁에 있는 느낌'을 확인할 수 없어 프로토타입에서 직접 눌러 보게 했다.",
-        "en": "The character didn't stop at artwork — it speaks and reacts. Tap the sentence that supports the main idea and LIO answers on the spot; when the English stalls, KR replays the same line in Korean. A static mockup can't tell you whether a tutor feels present, so it had to be clickable."
+        "ko": "시안에서 멈추지 않고 64화면 프로토타입까지 갔다. 정답 경로와 오답 경로, 막혔을 때의 scaffold 분기를 실제로 눌러봐야 흐름이 말이 되는지 알 수 있다. 49슬라이드 화면정의서가 클릭으로 끝까지 넘어간다.",
+        "en": "It did not stop at mockups. The correct path, the wrong path and the scaffold branches for a stuck student all have to be pressable before anyone can tell whether the flow holds, so the 49-slide spec became 64 clickable screens."
       }
     ],
     "shot_path": "designB/index.html",
@@ -1067,6 +1067,37 @@
     },
     "scenes": [
       {
+        "id": "compare",
+        "src": "assets/shots/LIO_DESIGN-ab.jpg",
+        "device": "desktop",
+        "label": {
+          "ko": "A안 · B안 — 같은 흐름을 두 벌로",
+          "en": "A and B — the same flow built twice"
+        },
+        "note": {
+          "ko": "같은 학습 흐름을 두 디자인으로 끝까지 만들어 나란히 놓았다. A안은 숲속 스토리북 세계로 가고, B안은 앱 UI 로 간다. 채택된 쪽은 B안이다 — 이 서비스를 쓰는 학년대에는 동화 세계보다 학습 도구의 얼굴이 맞았다. A안은 버리지 않고 5세 전후의 더 어린 레벨에서 쓸 플랫폼으로 이어 가기로 했다.",
+          "en": "The same flow was built end to end in two designs and set side by side. A goes to a storybook forest, B to an app interface. B was chosen — for this age band a learning tool reads better than a fairy tale. A was not discarded: it carries on as the platform for younger learners, around five."
+        },
+        "features": [
+          {
+            "ko": "A안 — 숲속 스토리북, 더 어린 레벨로 이어 간다",
+            "en": "A — a storybook forest, carried on for younger learners",
+            "at": [
+              25.0,
+              50.0
+            ]
+          },
+          {
+            "ko": "B안 — 앱 UI, 이 학년대에 맞아 채택됐다",
+            "en": "B — an app interface, chosen for this age band",
+            "at": [
+              75.0,
+              50.0
+            ]
+          }
+        ]
+      },
+      {
         "id": "character",
         "device": "desktop",
         "wait": 4200,
@@ -1085,8 +1116,8 @@
             "ko": "머리를 크게, 갈기를 둥글려 위엄 대신 친근함",
             "en": "Bigger head, rounder mane — friendly over regal",
             "at": [
-              30,
-              34
+              21.4,
+              33.3
             ]
           },
           {
@@ -1101,125 +1132,140 @@
         "selector": "#stage"
       },
       {
-        "id": "game",
-        "device": "desktop",
-        "wait": 4200,
-        "path": "designB/index.html",
-        "eval": "(() => new Promise(r => { const i=document.querySelector('#pj-num,input[type=number],input'); if(i){ i.value=12; document.querySelector('#pj-go')?.click(); } setTimeout(r,2600); }))()",
-        "label": {
-          "ko": "확인 문제 — 읽은 직후에 바로",
-          "en": "Check — right after the reading"
-        },
-        "note": {
-          "ko": "읽기와 문제를 다른 화면으로 떼어 놓으면 아이가 지문을 잊은 채 문제를 푼다. 그래서 같은 흐름 안에서 읽은 직후에 확인 문제가 따라붙게 했다. 답을 고르면 정답 여부만 뜨는 게 아니라 LIO 가 그 선택을 근거로 되짚어준다. 틀린 답에도 반응을 준비해 둔 이유는, 오답 화면에서 아이가 가장 많이 이탈하기 때문이다.",
-          "en": "Split the reading and the questions across screens and the child answers with the passage already gone. So the check follows immediately, inside the same flow. Picking an answer doesn't just return right or wrong — LIO walks back through that choice. Wrong answers get a prepared response because that's the screen children abandon most."
-        },
-        "features": [],
-        "selector": "#stage"
-      },
-      {
-        "id": "compare",
-        "device": "desktop",
-        "wait": 3800,
-        "path": "index.html",
-        "label": {
-          "ko": "시안 비교 — 같은 흐름을 두 벌로",
-          "en": "Two builds of one flow"
-        },
-        "note": {
-          "ko": "A(Storybook)는 숲·우드사인·양피지 톤으로 그림책에 가깝고, B(App UI)는 로열블루·3D 마스코트·컬러 카드로 앱에 가깝다. 흐름 자체는 한 글자도 다르게 두지 않았다. 그래야 리뷰에서 '흐름이 이상한 것'과 '톤이 안 맞는 것'을 섞지 않고 말할 수 있다. 양쪽 다 실제로 열리는 프로토타입이라 회의에서 눌러 보고 B 안으로 정해졌다.",
-          "en": "Design A leans storybook — forest, wood signage, parchment. Design B leans app — royal blue, a 3D mascot, colour cards. The flow itself was kept identical, word for word, so reviewers could separate 'the flow is off' from 'the tone is off.' Both opened as working prototypes, and B was chosen in the room."
-        },
-        "features": [
-          {
-            "ko": "같은 Flow 를 두 디자인으로 구현했다",
-            "en": "One flow, two design systems",
-            "at": [
-              34,
-              50
-            ]
-          },
-          {
-            "ko": "양쪽을 실제로 열어 비교한다",
-            "en": "Both open as working prototypes",
-            "at": [
-              66,
-              50
-            ]
-          }
-        ]
-      },
-      {
         "id": "f1",
-        "device": "desktop",
-        "wait": 3600,
         "path": "designB/index.html",
-        "selector": "#stage",
-        "eval": "(() => new Promise(r => { const i=document.querySelector('#pj-num,input[type=number],input'); if(i){ i.value=5; document.querySelector('#pj-go')?.click(); } setTimeout(r,2400); }))()",
+        "device": "desktop",
         "flow": true,
         "label": {
-          "ko": "표지",
-          "en": "Cover"
+          "ko": "인트로",
+          "en": "Intro"
         },
         "note": {
-          "ko": "",
+          "ko": "사자가 손을 들어 인사하고 시작한다",
           "en": ""
         },
-        "features": []
+        "eval": "(() => new Promise(r => {const b=[...document.querySelectorAll('.jump-item')].find(x=>x.dataset.i==='0');if(b)b.click(); setTimeout(r, 2600);}))()",
+        "selector": "#stage",
+        "wait": 1200
       },
       {
         "id": "f2",
-        "device": "desktop",
-        "wait": 3600,
         "path": "designB/index.html",
-        "selector": "#stage",
-        "eval": "(() => new Promise(r => { const i=document.querySelector('#pj-num,input[type=number],input'); if(i){ i.value=7; document.querySelector('#pj-go')?.click(); } setTimeout(r,2400); }))()",
+        "device": "desktop",
         "flow": true,
         "label": {
-          "ko": "스킬 안내",
-          "en": "Skill card"
+          "ko": "스킬 선택",
+          "en": "Pick a skill"
         },
         "note": {
-          "ko": "",
+          "ko": "오늘 연습할 스킬을 고른다",
           "en": ""
         },
-        "features": []
+        "eval": "(() => new Promise(r => {const b=[...document.querySelectorAll('.jump-item')].find(x=>x.dataset.i==='3');if(b)b.click(); setTimeout(r, 2600);}))()",
+        "selector": "#stage",
+        "wait": 1200
       },
       {
         "id": "f3",
-        "device": "desktop",
-        "wait": 3600,
         "path": "designB/index.html",
-        "selector": "#stage",
-        "eval": "(() => new Promise(r => { const i=document.querySelector('#pj-num,input[type=number],input'); if(i){ i.value=9; document.querySelector('#pj-go')?.click(); } setTimeout(r,2400); }))()",
+        "device": "desktop",
         "flow": true,
         "label": {
-          "ko": "오늘의 순서",
-          "en": "Today's plan"
+          "ko": "토픽 선택",
+          "en": "Pick a topic"
         },
         "note": {
-          "ko": "",
+          "ko": "같은 스킬 안에서 읽을 소재를 고른다",
           "en": ""
         },
-        "features": []
+        "eval": "(() => new Promise(r => {const b=[...document.querySelectorAll('.jump-item')].find(x=>x.dataset.i==='4');if(b)b.click(); setTimeout(r, 2600);}))()",
+        "selector": "#stage",
+        "wait": 1200
       },
       {
         "id": "f4",
-        "device": "desktop",
-        "wait": 3600,
         "path": "designB/index.html",
-        "selector": "#stage",
-        "eval": "(() => new Promise(r => { const i=document.querySelector('#pj-num,input[type=number],input'); if(i){ i.value=19; document.querySelector('#pj-go')?.click(); } setTimeout(r,2400); }))()",
+        "device": "desktop",
         "flow": true,
         "label": {
-          "ko": "읽고 근거 짚기",
-          "en": "Read & tap"
+          "ko": "게임 인트로",
+          "en": "Game intro"
         },
         "note": {
-          "ko": "",
+          "ko": "몸풀기 게임을 소개한다",
           "en": ""
         },
-        "features": []
+        "eval": "(() => new Promise(r => {const b=[...document.querySelectorAll('.jump-item')].find(x=>x.dataset.i==='8');if(b)b.click(); setTimeout(r, 2600);}))()",
+        "selector": "#stage",
+        "wait": 1200
+      },
+      {
+        "id": "f5",
+        "path": "designB/index.html",
+        "device": "desktop",
+        "flow": true,
+        "label": {
+          "ko": "게임",
+          "en": "Game"
+        },
+        "note": {
+          "ko": "본문 읽기 전에 감각을 깨운다",
+          "en": ""
+        },
+        "eval": "(() => new Promise(r => {const b=[...document.querySelectorAll('.jump-item')].find(x=>x.dataset.i==='9');if(b)b.click(); setTimeout(r, 2600);}))()",
+        "selector": "#stage",
+        "wait": 1200
+      },
+      {
+        "id": "f6",
+        "path": "designB/index.html",
+        "device": "desktop",
+        "flow": true,
+        "label": {
+          "ko": "영상 인트로",
+          "en": "Video intro"
+        },
+        "note": {
+          "ko": "스킬을 영상으로 먼저 본다",
+          "en": ""
+        },
+        "eval": "(() => new Promise(r => {const b=[...document.querySelectorAll('.jump-item')].find(x=>x.dataset.i==='6');if(b)b.click(); setTimeout(r, 2600);}))()",
+        "selector": "#stage",
+        "wait": 1200
+      },
+      {
+        "id": "f7",
+        "path": "designB/index.html",
+        "device": "desktop",
+        "flow": true,
+        "label": {
+          "ko": "영상",
+          "en": "Video"
+        },
+        "note": {
+          "ko": "개념을 짧은 영상으로 익힌다",
+          "en": ""
+        },
+        "eval": "(() => new Promise(r => {const b=[...document.querySelectorAll('.jump-item')].find(x=>x.dataset.i==='7');if(b)b.click(); setTimeout(r, 2600);}))()",
+        "selector": "#stage",
+        "wait": 1200
+      },
+      {
+        "id": "f8",
+        "path": "designB/index.html",
+        "device": "desktop",
+        "flow": true,
+        "label": {
+          "ko": "학습",
+          "en": "Reading"
+        },
+        "note": {
+          "ko": "지문을 읽고 근거를 짚는다",
+          "en": ""
+        },
+        "eval": "(() => new Promise(r => {const b=[...document.querySelectorAll('.jump-item')].find(x=>x.dataset.i==='11');if(b)b.click(); setTimeout(r, 2600);}))()",
+        "selector": "#stage",
+        "wait": 1200
       }
     ],
     "shot_notes": {
