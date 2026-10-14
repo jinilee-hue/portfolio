@@ -35,8 +35,8 @@
       "en": "EFL reading · tablet prototype"
     },
     "summary": {
-      "ko": "1928년 퍼블릭 도메인 그림책을 장면 영상 위에서 읽는 태블릿 eBook. 글자만 있는 책이 부담스러운 아이를 위해 쪽마다 그 장면의 영상을 깔고, 읽기와 듣기를 버튼으로 골라 쓰게 했다. 모르는 단어나 문장을 누르면 발음을 들려주고 뜻을 보여 주며, 그렇게 모은 단어는 단어장에 쌓아 인쇄해 가져갈 수 있다.",
-      "en": "A tablet eBook that reads a 1928 public-domain picture book over scene video. For a child who finds a wall of text daunting, every page plays its own scene, and reading or listening is a button away. Tap a word or a sentence to hear it and see what it means; the words collected that way stack up in a notebook the child can print and take home."
+      "ko": "1928년 퍼블릭 도메인 그림책 『Millions of Cats』를 읽는 태블릿 eBook. 쪽마다 그 장면의 영상이 깔리고, 모르는 낱말과 문장은 누르면 그 자리에서 뜻과 발음을 준다. 11쪽, 초등 저·중학년 영어 학습자용.",
+      "en": "A tablet eBook of the 1928 public-domain picture book Millions of Cats. Each page runs its own film underneath, and any word or sentence gives up its meaning and its sound where it sits. Eleven pages, for young Korean readers of English."
     },
     "role": {
       "ko": "기획 · 화면 설계 · 구현 · 조판 검증",
@@ -50,8 +50,8 @@
     ],
     "entry": "",
     "intent": {
-      "ko": "영어 그림책을 혼자 읽다 막히는 자리는 대개 정해져 있다. 모르는 단어 하나, 구조가 꼬인 문장 하나. 사전을 찾으러 책을 덮는 순간 흐름이 끊긴다. 그래서 단어와 문장을 책 안에서 바로 듣고 뜻까지 볼 수 있게 두고, 배경에는 그 장면의 영상을 깔아 글자만 보는 부담을 덜었다.",
-      "en": "A child reading an English picture book alone gets stuck in predictable places — one unknown word, one tangled sentence. Closing the book to look it up breaks the thread. So the word and the sentence answer inside the book, spoken and translated, with the scene playing behind the page to soften a wall of text."
+      "ko": "의도는 '막히는 자리에서 책을 덮지 않게' 하는 데 두었다. 영어 그림책을 혼자 읽다 멈추는 자리는 대개 정해져 있다 — 모르는 낱말 하나, 구조가 꼬인 문장 하나. 사전을 찾으러 나가는 순간 읽던 흐름이 끊기고, 대개 거기서 끝난다. 그래서 낱말과 문장의 뜻·소리를 책 안으로 들여놓고, 쪽 전체를 번역해 주지는 않았다. 아이가 영어를 먼저 만나고, 막힐 때만 도움을 꺼내 쓰게 하려는 선택이다.",
+      "en": "The aim was to keep the book from being closed at the place it gets hard. Where a child stops reading an English picture book is predictable — one unknown word, one tangled sentence. Leaving for a dictionary breaks the thread, and that is usually the end of it. So meaning and sound were brought inside the book, while the page itself is never translated wholesale: the child meets the English first and reaches for help only where it is needed."
     },
     "flow": [
       {
@@ -214,17 +214,17 @@
       }
     ],
     "concept": {
-      "ko": "제어는 페이지 이동과 재생 정도만 남기고 학습 UI 를 걷어냈다. 문제를 푸는 화면이 아니라 책을 읽는 화면으로 보이는 것이 기준이었다.",
-      "en": "Controls are pared back to paging and playback; the study UI is gone. The test was simple — it should read as a book, not as a worksheet."
+      "ko": "디자인은 학습 UI 를 걷어내고 책으로 보이게 하는 것이 기준이었다. 화면에 남긴 제어는 쪽 이동과 재생, 그리고 책 접기뿐이다. 본문은 문해 학습용으로 설계된 Andika 를 자체 호스팅해 쓰고, 획이 가는 서체라 패널은 어둡게 두지 않고 종이색으로 밝혔다. 본문은 어떤 쪽에서도 18px 아래로 내려가지 않는다 — 태블릿을 팔 길이에서 보는 거리의 하한이다. 넘치면 글자를 줄이는 대신 쪽을 나눈다. 강조색은 진행·정답·선택에만 쓰고 장식으로는 쓰지 않았다.",
+      "en": "The design brief was to strip the learning UI until it reads as a book. What remains on screen is page movement, playback, and folding. The body is set in Andika, a typeface drawn for literacy learning and self-hosted here; its strokes are light, so the panel is paper-coloured rather than dark. Body text never drops below 18px on any page — the floor for a tablet at arm's length — and where a page overflows it is split rather than shrunk. The accent colour marks progress, correctness and selection, never decoration."
     },
     "shot_devices": [
-      "tablet-land",
-      "desktop"
+      "desktop",
+      "tablet-land"
     ],
     "shot_query": "dev=1",
-    "shot_click": "#gate",
-    "shot_eval": "(() => { const sw = document.querySelector('#psw'); if (!sw) return; const b = document.createElement('button'); b.dataset.p = '1'; sw.appendChild(b); b.click(); document.getElementById('fold')?.click(); document.getElementById('dev')?.remove(); document.getElementById('devtoggle')?.remove(); })()",
-    "shot_wait": 5500,
+    "shot_click": "",
+    "shot_eval": "(() => new Promise(async r => { const sleep=ms=>new Promise(x=>setTimeout(x,ms)); document.querySelector('#gate')?.click(); await sleep(1400); await new Promise(res => { const v=document.querySelector('#bg video');   if(!v){res();return;} v.muted=true;   const tick=()=>{ if(v.currentTime>=1.4){v.pause();res();return;}     if(v.ended){res();return;} requestAnimationFrame(tick); };   v.play().catch(()=>{}); requestAnimationFrame(tick);   setTimeout(()=>{try{v.pause()}catch(e){} res();}, 9400); }); const app=document.querySelector('#app'); if(app && app.dataset.read!=='off') document.querySelector('#fold')?.click(); await sleep(1600); r(); }))()",
+    "shot_wait": 4200,
     "contribution": {
       "plan": 100,
       "design": 100,
@@ -233,81 +233,75 @@
     },
     "scenes": [
       {
-        "id": "cottage",
+        "id": "dict",
         "device": "desktop",
-        "wait": 2800,
-        "eval": "(() => new Promise((resolve) => { const sw = document.querySelector('#psw'); if (sw) { const b = document.createElement('button'); b.dataset.p = '0'; sw.appendChild(b); b.click(); } document.getElementById('dev')?.remove(); document.getElementById('devtoggle')?.remove(); setTimeout(() => { document.querySelector('#body .wd.w')?.click(); resolve(); }, 1200);}))()",
+        "wait": 4200,
+        "flow": false,
+        "eval": "(() => new Promise(async r => { const sleep=ms=>new Promise(x=>setTimeout(x,ms)); document.querySelector('#gate')?.click(); await sleep(1400); await new Promise(res => { const v=document.querySelector('#bg video');   if(!v){res();return;} v.muted=true;   const tick=()=>{ if(v.currentTime>=1.4){v.pause();res();return;}     if(v.ended){res();return;} requestAnimationFrame(tick); };   v.play().catch(()=>{}); requestAnimationFrame(tick);   setTimeout(()=>{try{v.pause()}catch(e){} res();}, 9400); }); const ws=[...document.querySelectorAll('#body [data-w]')]; const pick=ws.find(e=>(e.dataset.w||'').toLowerCase()==='lonely')||ws[3]; if(pick) pick.click(); await sleep(1500); r(); }))()",
         "label": {
-          "ko": "단어 사전",
-          "en": "Word glossary"
+          "ko": "모르는 낱말 — 책을 덮지 않고 그 자리에서",
+          "en": "An unknown word, answered without closing the book"
         },
         "note": {
-          "ko": "본문에서 단어를 누르면 패널 안에 뜻 카드가 뜬다. 영단어와 한국어가 같이 보이고, 그 자리에서 발음도 들을 수 있다.",
-          "en": "Tap a word and a glossary card opens inside the text plate — English, Korean, and a speaker on the same card."
+          "ko": "영어 그림책을 혼자 읽다 막히는 자리는 대개 낱말 하나다. 사전을 찾으러 책을 덮는 순간 읽던 흐름이 끊긴다. 그래서 낱말을 누르면 본문 위에 작은 카드가 떠서 뜻과 발음을 같이 준다. 카드는 읽던 자리를 가리지 않는 크기로 두었다.",
+          "en": "What stops a child reading an English picture book is usually one word. Going to a dictionary means closing the book, and the thread is gone. So a tap puts a small card over the page with the meaning and the sound together — sized not to cover the line being read."
         },
         "features": [
           {
-            "ko": "단어를 누르면 사전 카드가 열린다",
-            "en": "Tap a word and a dictionary card opens",
+            "ko": "낱말을 누르면 그 자리에 카드가 뜬다",
+            "en": "Tap a word, the card opens there",
             "at": [
-              69.5,
-              12.8
+              78.0,
+              13.0
             ]
           },
           {
-            "ko": "영어 단어와 한국어 뜻을 함께 준다",
-            "en": "The English word with its Korean meaning",
+            "ko": "발음은 카드에서 바로 듣는다",
+            "en": "Hear it from the card",
             "at": [
-              74.5,
-              16.8
+              86.0,
+              13.0
             ]
           },
           {
-            "ko": "카드에서 바로 발음을 듣는다",
-            "en": "Hear it pronounced right from the card",
+            "ko": "한국어 뜻을 아래 붙인다",
+            "en": "The Korean meaning sits under it",
             "at": [
-              79.3,
-              14.3
+              76.5,
+              18.5
             ]
           }
         ]
       },
       {
-        "id": "kitten",
+        "id": "sentence",
         "device": "desktop",
-        "wait": 2800,
-        "eval": "(() => new Promise((resolve) => { const sw = document.querySelector('#psw'); if (sw) { const b = document.createElement('button'); b.dataset.p = '9'; sw.appendChild(b); b.click(); } document.getElementById('dev')?.remove(); document.getElementById('devtoggle')?.remove(); setTimeout(() => { document.querySelector('#body .sent')?.click(); resolve(); }, 1200);}))()",
+        "wait": 4200,
+        "flow": false,
+        "eval": "(() => new Promise(async r => { const sleep=ms=>new Promise(x=>setTimeout(x,ms)); document.querySelector('#gate')?.click(); await sleep(1400); {const sw=document.querySelector('#psw'); if(sw){const b=document.createElement('button'); b.dataset.p='9'; sw.appendChild(b); b.click();}} await sleep(1800); await new Promise(res => { const v=document.querySelector('#bg video');   if(!v){res();return;} v.muted=true;   const tick=()=>{ if(v.currentTime>=3.0){v.pause();res();return;}     if(v.ended){res();return;} requestAnimationFrame(tick); };   v.play().catch(()=>{}); requestAnimationFrame(tick);   setTimeout(()=>{try{v.pause()}catch(e){} res();}, 11000); }); const ss=[...document.querySelectorAll('#body .sent')]; const pick=ss[1]||ss[0]; if(pick) pick.click(); await sleep(1500); r(); }))()",
         "label": {
-          "ko": "문장 번역",
-          "en": "Sentence translation"
+          "ko": "문장이 꼬일 때 — 한 문장만 들어 올린다",
+          "en": "When the sentence tangles, lift just that one"
         },
         "note": {
-          "ko": "문장을 누르면 영어 원문과 한국어 번역이 카드로 같이 뜬다. 단어 사전과 같은 자리에서, 한 문장 단위로 뜻을 확인한다.",
-          "en": "Tap a sentence and the English line sits with its Korean translation on the same card."
+          "ko": "낱말을 다 알아도 문장 구조가 꼬이면 막힌다. 문장을 누르면 그 한 줄만 원문과 번역으로 들어 올려 보여 주고, 다시 듣기도 문장 단위다. 쪽 전체를 번역해 주지 않는 것은 아이가 영어를 먼저 읽게 하려는 선택이다.",
+          "en": "Knowing every word is not enough when the structure tangles. A tap lifts that one line out, original above translation, and the replay is per sentence too. The page is never translated wholesale — the child should meet the English first."
         },
         "features": [
           {
-            "ko": "문장을 누르면 번역 카드",
-            "en": "Tap a sentence for its translation",
+            "ko": "문장을 누르면 그 줄만 올라온다",
+            "en": "Tap a sentence, that line lifts out",
             "at": [
-              72.5,
-              8.8
+              82.0,
+              11.0
             ]
           },
           {
-            "ko": "영어 원문과 한국어",
-            "en": "English line with Korean",
+            "ko": "원문 아래 번역을 붙인다",
+            "en": "Translation sits under the original",
             "at": [
-              72.5,
-              13.0
-            ]
-          },
-          {
-            "ko": "문장 단위로 다시 듣기",
-            "en": "Replay the sentence from the card",
-            "at": [
-              90.0,
-              8.5
+              82.0,
+              21.5
             ]
           }
         ]
@@ -315,96 +309,89 @@
       {
         "id": "follow",
         "device": "desktop",
-        "wait": 2800,
-        "eval": "(() => new Promise(async r => { const sleep=ms=>new Promise(x=>setTimeout(x,ms)); document.querySelector('#gate')?.click(); await sleep(2200); document.querySelector('#hl')?.click(); await sleep(900); document.querySelector('#play')?.click(); await sleep(3400); r(); }))()",
+        "wait": 5200,
+        "flow": false,
+        "eval": "(() => new Promise(async r => { const sleep=ms=>new Promise(x=>setTimeout(x,ms)); document.querySelector('#gate')?.click(); await sleep(1400); await new Promise(res => { const v=document.querySelector('#bg video');   if(!v){res();return;} v.muted=true;   const tick=()=>{ if(v.currentTime>=1.4){v.pause();res();return;}     if(v.ended){res();return;} requestAnimationFrame(tick); };   v.play().catch(()=>{}); requestAnimationFrame(tick);   setTimeout(()=>{try{v.pause()}catch(e){} res();}, 9400); }); document.querySelector('#hl')?.click(); await sleep(400); document.querySelector('#play')?.click(); await sleep(7000); r(); }))()",
         "label": {
-          "ko": "TTS 따라 읽기",
-          "en": "Read-along highlight"
+          "ko": "따라 읽기 — 지금 읽는 낱말만 밝힌다",
+          "en": "Read-along — only the word being read stays lit"
         },
         "note": {
-          "ko": "미리 만든 gpt-4o-mini-tts 낭독을 Whisper로 단어 시각에 맞춰, 지금 읽는 낱말만 밝힌다. 파일이 없으면 브라우저 내장 음성으로 내려간다.",
-          "en": "Pre-made gpt-4o-mini-tts narration is aligned with Whisper word timings so the current word lights up. If the file is missing, it falls back to the browser voice."
+          "ko": "낭독 mp3 를 Whisper 로 낱말 시각에 맞춰, 지금 소리 나는 낱말만 밝히고 지나온 줄은 어둡게 둔다. 소리와 글자가 같은 속도로 움직여야 아이가 따라 짚을 수 있다. 파일이 없는 환경에서는 브라우저 내장 음성으로 내려가되, 같은 방식으로 짚는다.",
+          "en": "The narration mp3 is aligned to word timings with Whisper, so only the word currently sounding is lit and what has passed dims back. Sound and text have to move at one speed for a child to follow with a finger. Where the files are missing it falls back to the browser's own voice, pointing the same way."
         },
         "features": [
           {
-            "ko": "지금 읽는 단어 하이라이트",
-            "en": "The current word lights up",
+            "ko": "지금 소리 나는 낱말이 가장 밝다",
+            "en": "The word sounding now is brightest",
             "at": [
-              78.0,
-              23.0
+              63.0,
+              29.0
             ]
           },
           {
-            "ko": "지나온 단어는 중간 밝기",
-            "en": "Passed words stay half-lit",
+            "ko": "지나온 줄은 어둡게 물러난다",
+            "en": "What has passed dims back",
             "at": [
-              72.0,
-              35.0
+              63.0,
+              48.0
             ]
           },
           {
-            "ko": "아직 안 읽은 문장은 어둡게 둔다",
-            "en": "Sentences not yet read stay dim",
+            "ko": "따라 읽기를 켜고 끈다",
+            "en": "Read-along on and off",
             "at": [
-              80.0,
-              81.0
+              77.5,
+              96.0
+            ]
+          }
+        ]
+      },
+      {
+        "id": "fold",
+        "device": "desktop",
+        "wait": 4200,
+        "flow": false,
+        "eval": "(() => new Promise(async r => { const sleep=ms=>new Promise(x=>setTimeout(x,ms)); document.querySelector('#gate')?.click(); await sleep(1400); {const sw=document.querySelector('#psw'); if(sw){const b=document.createElement('button'); b.dataset.p='6'; sw.appendChild(b); b.click();}} await sleep(1800); await new Promise(res => { const v=document.querySelector('#bg video');   if(!v){res();return;} v.muted=true;   const tick=()=>{ if(v.currentTime>=5.0){v.pause();res();return;}     if(v.ended){res();return;} requestAnimationFrame(tick); };   v.play().catch(()=>{}); requestAnimationFrame(tick);   setTimeout(()=>{try{v.pause()}catch(e){} res();}, 13000); }); const app=document.querySelector('#app'); if(app && app.dataset.read!=='off') document.querySelector('#fold')?.click(); await sleep(1600); r(); }))()",
+        "label": {
+          "ko": "책 접기 — 글자를 걷고 그림만 남긴다",
+          "en": "Fold the book — the text clears, the picture stays"
+        },
+        "note": {
+          "ko": "쪽마다 그 장면의 영상이 깔려 있다. 글자를 걷으면 그 영상이 화면을 꽉 채운다. 읽기가 끝난 쪽을 한 번 더 보거나, 교사가 수업에서 한 장면을 크게 띄울 때 쓴다. 접힌 채로 쪽을 넘겨도 접힘은 유지된다.",
+          "en": "Every page carries its own film underneath. Clearing the text lets it fill the screen — for looking again at a page already read, or for a teacher putting one scene up in class. Turning the page keeps the book folded."
+        },
+        "features": [
+          {
+            "ko": "글자를 걷으면 영상이 꽉 찬다",
+            "en": "Text clears, the film fills the screen",
+            "at": [
+              40.0,
+              45.0
+            ]
+          },
+          {
+            "ko": "접은 채로 쪽을 넘길 수 있다",
+            "en": "Pages still turn while folded",
+            "at": [
+              65.0,
+              96.0
             ]
           }
         ]
       }
     ],
     "shot_notes": {
-      "tablet": {
+      "desktop": {
         "label": {
-          "ko": "자막 접기",
-          "en": "Captions folded"
+          "ko": "첫 쪽 — 글자를 걷으면 그림이 남는다",
+          "en": "Page one, with the text cleared away"
         },
         "note": {
-          "ko": "본문 패널을 접으면 영상이 전면이 된다. 쪽 넘김과 TTS는 아래 바에 남아 있다.",
-          "en": "Fold the text plate and the video fills the screen. Page-turn and TTS stay in the bar."
+          "ko": "쪽마다 그 장면의 영상이 깔려 있다. 글자를 걷으면 영상만 남아 그림책처럼 보인다. 아이가 읽기 전에 장면을 먼저 눈에 담고 시작할 수 있다.",
+          "en": "Every page runs its own film underneath. Clear the text and only the picture remains, so a child can take the scene in before starting to read."
         },
-        "features": [
-          {
-            "ko": "이전 · 다음으로 11쪽을 넘긴다",
-            "en": "Page through all eleven spreads",
-            "at": [
-              70.0,
-              75.2
-            ]
-          },
-          {
-            "ko": "단어장을 열어 모은 단어를 본다",
-            "en": "Open the word bank you've collected",
-            "at": [
-              73.9,
-              75.2
-            ]
-          },
-          {
-            "ko": "책을 접어 삽화만 크게 본다",
-            "en": "Fold the text away and keep the art",
-            "at": [
-              77.7,
-              75.2
-            ]
-          },
-          {
-            "ko": "따라 읽기로 읽는 단어를 짚는다",
-            "en": "Read-along highlights the word being spoken",
-            "at": [
-              81.6,
-              75.2
-            ]
-          },
-          {
-            "ko": "소리를 켜고 끈다",
-            "en": "Sound on or off",
-            "at": [
-              85.4,
-              75.2
-            ]
-          }
-        ]
+        "features": []
       }
     },
     "tools": [
@@ -418,7 +405,12 @@
       "Whisper"
     ],
     "shot_evals": {
-      "tablet": "(() => new Promise(async r => { const sleep=ms=>new Promise(x=>setTimeout(x,ms)); const pick=re=>{for(const el of document.querySelectorAll('button,[role=button],li,label,div,span')){   const t=(el.textContent||'').trim();   if(re.test(t) && t.length<60 && el.offsetHeight>18 && el.offsetHeight<110){     el.click(); let p=el.parentElement; for(let i=0;i<3&&p;i++,p=p.parentElement) p.click(); return true; }}   return false;}; const next=()=>{for(const n of document.querySelectorAll('button,a')){   if(/NEXT/i.test(n.textContent||'') && !n.disabled){n.click(); return true;}} return false;}; document.querySelector('#gate')?.click(); await sleep(2200); pick(/They were very lonely/i); await sleep(1800); next(); await sleep(2600); pick(/A long, long time/i);     await sleep(1800); next(); await sleep(3000); r();}))()"
+      "desktop": "(() => new Promise(async r => { const sleep=ms=>new Promise(x=>setTimeout(x,ms)); document.querySelector('#gate')?.click(); await sleep(1400); await new Promise(res => { const v=document.querySelector('#bg video');   if(!v){res();return;} v.muted=true;   const tick=()=>{ if(v.currentTime>=1.4){v.pause();res();return;}     if(v.ended){res();return;} requestAnimationFrame(tick); };   v.play().catch(()=>{}); requestAnimationFrame(tick);   setTimeout(()=>{try{v.pause()}catch(e){} res();}, 9400); }); const app=document.querySelector('#app'); if(app && app.dataset.read!=='off') document.querySelector('#fold')?.click(); await sleep(1600); r(); }))()",
+      "tablet": "(() => new Promise(async r => { const sleep=ms=>new Promise(x=>setTimeout(x,ms)); document.querySelector('#gate')?.click(); await sleep(1400); await new Promise(res => { const v=document.querySelector('#bg video');   if(!v){res();return;} v.muted=true;   const tick=()=>{ if(v.currentTime>=5.8){v.pause();res();return;}     if(v.ended){res();return;} requestAnimationFrame(tick); };   v.play().catch(()=>{}); requestAnimationFrame(tick);   setTimeout(()=>{try{v.pause()}catch(e){} res();}, 13800); }); const app=document.querySelector('#app'); if(app && app.dataset.read!=='off') document.querySelector('#fold')?.click(); await sleep(1600); r(); }))()"
+    },
+    "tech": {
+      "ko": "기술은 빌드 도구 없이 바닐라로 썼다. 쪽마다 배경 mp4 를 깔되 파일이 없으면 Canvas 2D 절차적 씬으로 내려가고, 낭독·발음 중에는 영상 소리가 0.6초에 걸쳐 서서히 줄어든다 — 계단처럼 끊으면 그 전환이 그대로 귀에 들린다. 따라 읽기는 낭독 mp3 를 Whisper 로 낱말 시각에 맞춘 정렬 데이터로 짚고, 없으면 브라우저 speechSynthesis 로 내려간다. 화면은 스크롤을 두지 않아, 넘치는 쪽은 폰트가 아니라 읽기 구간으로 나눈다. 모은 낱말은 단어장에 쌓여 그대로 인쇄된다.",
+      "en": "Built vanilla, with no toolchain. Each page lays down an mp4 and falls back to a procedural Canvas 2D scene when the file is missing; during narration the film's own sound ramps down over 0.6s, because cutting it in steps is audible as a step. Read-along points at words using alignment data built from the narration with Whisper, falling back to the browser's speechSynthesis. Nothing scrolls — a page that overflows is split into reading beats rather than shrunk — and the words a child collects stack into a wordbook that prints as it stands."
     }
   },
   "KCMS": {
