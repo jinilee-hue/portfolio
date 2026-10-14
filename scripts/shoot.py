@@ -65,6 +65,98 @@ def with_query(url: str, query: str) -> str:
     return url + sep + q
 
 
+def measure_pins(page, target, job: dict, dev: str) -> dict:
+    """핀 좌표를 찍는 순간의 DOM 에서 직접 잰다.
+
+    overrides.json 에 at_sel 로 CSS 선택자를 적어두면, 그 요소의 중심을
+    캡처 이미지 기준 % 로 돌려준다. 사람이 at:[x,y] 를 눈대중으로 적던
+    자리를 대신한다 — 화면이 바뀌어 다시 찍어도 좌표가 따라온다.
+
+    반환: {"<선택자>": [x%, y%]} — 못 찾은 선택자는 빠진다.
+    """
+    sels = [s for s in (job.get("pin_sels") or {}).get(dev, []) if s]
+    if not sels:
+        return {}
+    # 캡처 원점: 요소 캡처면 그 요소의 좌상단, 전체 캡처면 (0,0)
+    origin = {"x": 0.0, "y": 0.0}
+    if target is not page:
+        try:
+            box = target.bounding_box() or {}
+            origin = {"x": box.get("x", 0.0), "y": box.get("y", 0.0)}
+        except Exception:
+            pass
+    try:
+        return page.evaluate(
+            """([sels, origin, fullPage]) => {
+              const out = {};
+              const sx = fullPage ? 0 : window.scrollX;
+              const sy = fullPage ? 0 : window.scrollY;
+              for (const sel of sels) {
+                let el = null;
+                try { el = document.querySelector(sel); } catch (e) { continue; }
+                if (!el) continue;
+                const r = el.getBoundingClientRect();
+                if (!r.width && !r.height) continue;
+                out[sel] = [r.left + sx + r.width / 2 - origin.x,
+                            r.top + sy + r.height / 2 - origin.y];
+              }
+              return out;
+            }""",
+            [sels, origin, bool(job.get("full"))],
+        )
+    except Exception:
+        return {}
+
+
+def write_pins(measured: dict) -> int:
+    """실측한 핀 좌표를 overrides.json 의 at 에 적어 넣는다.
+
+    at_sel 이 붙은 항목만 건드린다. at_sel 이 없는 기존 핀은 사람이 적은
+    값이므로 그대로 둔다. 선택자를 못 찾아 좌표가 안 잡힌 항목도 건드리지
+    않는다 — 화면이 잠깐 안 뜬 것일 수 있어 멀쩡한 값을 지우면 안 된다.
+    """
+    src = ROOT / "data" / "overrides.json"
+    try:
+        data = json.loads(src.read_text(encoding="utf-8"))
+    except Exception:
+        return 0
+
+    n = 0
+
+    def apply(feats, coords):
+        nonlocal n
+        for ft in feats or []:
+            if not isinstance(ft, dict):
+                continue
+            sel = ft.get("at_sel")
+            if sel and sel in coords and ft.get("at") != coords[sel]:
+                ft["at"] = coords[sel]
+                n += 1
+
+    for (job_id, dev), coords in measured.items():
+        if not coords:
+            continue
+        pid, _, scene_id = job_id.partition("/")
+        proj = data.get(pid)
+        if not isinstance(proj, dict):
+            continue
+        if scene_id:
+            for sc in proj.get("scenes") or []:
+                if sc.get("id") == scene_id:
+                    apply(sc.get("features"), coords)
+        else:
+            key = "tablet" if dev in ("tablet", "tablet-land") else dev
+            note = (proj.get("shot_notes") or {}).get(key)
+            if isinstance(note, dict):
+                apply(note.get("features"), coords)
+
+    if n:
+        src.write_text(
+            json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+    return n
+
+
 def variance(png_bytes: bytes) -> float:
     """캡처가 사실상 단색인지 판정. 표준편차가 낮으면 빈 화면."""
     try:
@@ -127,6 +219,17 @@ def main() -> int:
             "shot_path": (p.get("shot_path") or "").strip(),
             "base": site_root,
             "dest": None,
+            # shot_notes 의 at_sel 들 — 기기별로 모아 촬영 중에 좌표를 잰다
+            "pin_sels": {
+                dev: [
+                    ft.get("at_sel", "")
+                    for ft in ((p.get("shot_notes") or {}).get(
+                        "tablet" if dev in ("tablet", "tablet-land") else dev
+                    ) or {}).get("features", [])
+                    if isinstance(ft, dict) and ft.get("at_sel")
+                ]
+                for dev in wanted
+            },
         })
         live = p["auto"].get("live") or ""
         for sc in p.get("scenes") or []:
@@ -146,6 +249,13 @@ def main() -> int:
                 "click": (sc.get("click") or p.get("shot_click") or "").strip(),
                 "eval": (sc.get("eval") or "").strip(),
                 "dest": f"{p['id']}--{sc['id']}.jpg",
+                "pin_sels": {
+                    (sc.get("device") or "desktop"): [
+                        ft.get("at_sel", "")
+                        for ft in (sc.get("features") or [])
+                        if isinstance(ft, dict) and ft.get("at_sel")
+                    ]
+                },
             })
 
     only = os.environ.get("ONLY", "").strip()
@@ -156,6 +266,7 @@ def main() -> int:
     ok = changed = 0
     blank: list[str] = []
     failed: list[tuple[str, str]] = []
+    measured: dict[tuple[str, str], dict] = {}
     total = sum(len(j["devices"]) for j in jobs)
 
     with sync_playwright() as pw:
@@ -219,6 +330,9 @@ def main() -> int:
                     opts = {"full_page": job["full"]} if target is page else {}
                     probe = target.screenshot(type="png", **opts)
                     shot = target.screenshot(type="jpeg", quality=84, **opts)
+                    # 핀 좌표는 눈대중으로 찍으면 거의 매번 어긋난다.
+                    # 찍는 순간 브라우저가 아는 좌표를 그대로 받아 적는다.
+                    pins = measure_pins(page, target, job, dev)
                 except Exception as e:
                     failed.append((f"{job['id']}/{dev}", str(e)[:70]))
                     ctx.close()
@@ -233,9 +347,28 @@ def main() -> int:
                 if not dest.exists() or dest.read_bytes() != shot:
                     dest.write_bytes(shot)
                     changed += 1
+                # 잰 좌표를 캡처 크기 기준 % 로 환산해 모아둔다.
+                if pins:
+                    try:
+                        import io
+
+                        from PIL import Image
+
+                        iw, ih = Image.open(io.BytesIO(probe)).size
+                        # device_scale_factor=2 로 찍으므로 CSS 픽셀로 되돌린다
+                        iw, ih = iw / 2, ih / 2
+                        measured[(job["id"], dev)] = {
+                            sel: [round(x / iw * 100, 1), round(y / ih * 100, 1)]
+                            for sel, (x, y) in pins.items()
+                            if iw and ih
+                        }
+                    except Exception:
+                        pass
         browser.close()
 
     print(f"촬영 성공 {ok}/{total} · 파일 갱신 {changed}")
+    if measured:
+        print(f"  핀 좌표 실측 {write_pins(measured)}개 갱신")
     if blank:
         print(f"  빈 화면으로 판정해 건너뜀(기존 유지): {', '.join(blank)}", file=sys.stderr)
     for name, err in failed:

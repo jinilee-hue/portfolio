@@ -1372,17 +1372,21 @@ function draw(){
     const notes=p.shotNotes||{};
     const seen=new Set();
     const out=[];
-    const primary=p.shots[0];
-    if(primary){
-      const n=notes[primary.device]||{};
+    // 기기별 컷마다 제 설명이 있으면 전부 도판으로 세운다.
+    // KCMS 처럼 desktop=A안 / tablet=B안으로 서로 다른 화면을 담는 경우,
+    // 첫 장만 쓰면 나머지 안의 설명이 통째로 사라진다.
+    for(const s of (p.shots||[])){
+      if(!s || seen.has(s.src)) continue;
+      const n=notes[s.device]||{};
+      if(out.length && !n.label && !n.note && !(n.features||[]).length) continue;
       out.push({
-        src:primary.src,
-        device:primary.device,
-        label:n.label||DEV_L[L][primary.device]||primary.device,
+        src:s.src,
+        device:s.device,
+        label:n.label||DEV_L[L][s.device]||s.device,
         note:n.note||'',
         features:n.features||[]
       });
-      seen.add(primary.src);
+      seen.add(s.src);
     }
     for(const s of (p.scenes||[])){
       if(seen.has(s.src)) continue;
@@ -1567,9 +1571,10 @@ function draw(){
       </div>
     </div>`+ps.map((p,i)=>{
       const d=desk(p), tab=p.shots.find(s=>s.device==='tablet'), mob=p.shots.find(s=>s.device==='mobile');
-      // 상세 도판 — 프로젝트마다 장수가 다르다. Story Studio 는 주요 화면이 다섯이라
-      // 4에서 자르면 마지막 한 장이 조용히 빠진다.
-      const gal=gallery(p).slice(0,6);
+      // 상세 도판 — 프로젝트마다 장수가 다르다. Story Studio 는 주요 화면이 다섯,
+      // KCMS 는 시안 3종 + 킷 4컷 + 적용 화면이라 여덟이다. 고정 상한을 두면
+      // 마지막 장이 조용히 빠지므로 자르지 않는다.
+      const gal=gallery(p);
       const line=stackLine(p);
       const facts=[
         p.period&&`<div><dt>${c.mDate}</dt><dd>${esc(p.period)}</dd></div>`,
