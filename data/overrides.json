@@ -896,27 +896,27 @@
         },
         "features": [
           {
+            "ko": "작업 탭은 본문 위에 알약으로 쌓인다",
+            "en": "Open screens stack as pills above the body",
+            "at": [
+              46.9,
+              13.9
+            ]
+          },
+          {
             "ko": "좌측 아코디언이 3depth를 모두 편다",
             "en": "The left accordion opens all three levels",
             "at": [
-              11.4,
-              40.0
+              11.5,
+              41.6
             ]
           },
           {
             "ko": "카드와 여백이 넉넉한 대신 행이 줄어든다",
             "en": "Roomier cards cost rows on screen",
             "at": [
-              61.0,
-              60.0
-            ]
-          },
-          {
-            "ko": "작업 탭은 본문 위에 알약으로 쌓인다",
-            "en": "Open screens stack as pills above the body",
-            "at": [
-              47.0,
-              12.9
+              60.2,
+              75.5
             ]
           }
         ]
@@ -926,7 +926,7 @@
       "Claude Code"
     ],
     "shot_paths": {
-      "tablet": "C타입-스틸블루/학생 등록.html"
+      "tablet": "B타입/학생 등록 (Horizon LEFT).dc.html"
     }
   },
   "LIO_DESIGN": {
