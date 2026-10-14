@@ -249,26 +249,26 @@
         "features": [
           {
             "ko": "낱말을 누르면 그 자리에 카드가 뜬다",
-            "en": "Tap a word, the card opens there",
+            "en": "Tap a word and the card opens there",
             "at": [
-              78.0,
-              13.0
+              75.5,
+              13.4
             ]
           },
           {
             "ko": "발음은 카드에서 바로 듣는다",
             "en": "Hear it from the card",
             "at": [
-              86.0,
-              13.0
+              81.2,
+              13.4
             ]
           },
           {
             "ko": "한국어 뜻을 아래 붙인다",
             "en": "The Korean meaning sits under it",
             "at": [
-              76.5,
-              18.5
+              75.2,
+              18.1
             ]
           }
         ]
@@ -290,18 +290,26 @@
         "features": [
           {
             "ko": "문장을 누르면 그 줄만 올라온다",
-            "en": "Tap a sentence, that line lifts out",
+            "en": "Tap a sentence and that line lifts out",
             "at": [
-              82.0,
-              11.0
+              80.0,
+              13.5
+            ]
+          },
+          {
+            "ko": "문장 단위로 다시 듣는다",
+            "en": "Replay one sentence at a time",
+            "at": [
+              90.8,
+              11.6
             ]
           },
           {
             "ko": "원문 아래 번역을 붙인다",
-            "en": "Translation sits under the original",
+            "en": "The translation sits under the original",
             "at": [
-              82.0,
-              21.5
+              80.0,
+              20.6
             ]
           }
         ]
@@ -323,26 +331,34 @@
         "features": [
           {
             "ko": "지금 소리 나는 낱말이 가장 밝다",
-            "en": "The word sounding now is brightest",
+            "en": "The word sounding now is the brightest",
             "at": [
-              63.0,
-              29.0
+              74.2,
+              23.7
             ]
           },
           {
-            "ko": "지나온 줄은 어둡게 물러난다",
-            "en": "What has passed dims back",
+            "ko": "지나온 낱말은 한 단계 흐려진다",
+            "en": "Words already read step back one level",
             "at": [
-              63.0,
-              48.0
+              70.0,
+              10.4
+            ]
+          },
+          {
+            "ko": "아직 안 읽은 줄은 가장 흐리다",
+            "en": "Lines not yet reached stay faintest",
+            "at": [
+              70.0,
+              27.5
             ]
           },
           {
             "ko": "따라 읽기를 켜고 끈다",
             "en": "Read-along on and off",
             "at": [
-              77.5,
-              96.0
+              85.7,
+              93.4
             ]
           }
         ]
@@ -354,17 +370,17 @@
         "flow": false,
         "eval": "(() => new Promise(async r => { const sleep=ms=>new Promise(x=>setTimeout(x,ms)); document.querySelector('#gate')?.click(); await sleep(1400); {const sw=document.querySelector('#psw'); if(sw){const b=document.createElement('button'); b.dataset.p='6'; sw.appendChild(b); b.click();}} await sleep(1800); await new Promise(res => { const v=document.querySelector('#bg video');   if(!v){res();return;} v.muted=true;   const tick=()=>{ if(v.currentTime>=5.0){v.pause();res();return;}     if(v.ended){res();return;} requestAnimationFrame(tick); };   v.play().catch(()=>{}); requestAnimationFrame(tick);   setTimeout(()=>{try{v.pause()}catch(e){} res();}, 13000); }); const app=document.querySelector('#app'); if(app && app.dataset.read!=='off') document.querySelector('#fold')?.click(); await sleep(1600); r(); }))()",
         "label": {
-          "ko": "책 접기 — 글자를 걷고 그림만 남긴다",
-          "en": "Fold the book — the text clears, the picture stays"
+          "ko": "접으면 듣기 — 글자를 걷으면 귀로 따라간다",
+          "en": "Folded, it listens — clear the text and the ear takes over"
         },
         "note": {
-          "ko": "쪽마다 그 장면의 영상이 깔려 있다. 글자를 걷으면 그 영상이 화면을 꽉 채운다. 읽기가 끝난 쪽을 한 번 더 보거나, 교사가 수업에서 한 장면을 크게 띄울 때 쓴다. 접힌 채로 쪽을 넘겨도 접힘은 유지된다.",
-          "en": "Every page carries its own film underneath. Clearing the text lets it fill the screen — for looking again at a page already read, or for a teacher putting one scene up in class. Turning the page keeps the book folded."
+          "ko": "펼친 화면은 읽기를 위한 것이고, 접은 화면은 듣기를 위한 것이다. 글자를 걷으면 그 쪽의 영상이 화면을 꽉 채우고, 아이는 글을 따라가는 대신 소리와 장면만으로 이야기를 듣는다. 같은 쪽을 읽고 나서 한 번 더 듣거나, 교사가 수업에서 한 장면을 크게 띄울 때 쓴다. 접은 채로 쪽을 넘겨도 접힘은 유지된다.",
+          "en": "Unfolded the page is for reading; folded it is for listening. Clearing the text lets the page's own film fill the screen, and the child follows the story by sound and picture instead of by line. It is for hearing a page again after reading it, or for a teacher putting one scene up in class. Turning the page keeps the book folded."
         },
         "features": [
           {
             "ko": "글자를 걷으면 영상이 꽉 찬다",
-            "en": "Text clears, the film fills the screen",
+            "en": "Text clears and the film fills the screen",
             "at": [
               40.0,
               45.0
@@ -374,8 +390,8 @@
             "ko": "접은 채로 쪽을 넘길 수 있다",
             "en": "Pages still turn while folded",
             "at": [
-              65.0,
-              96.0
+              94.2,
+              94.4
             ]
           }
         ]
@@ -384,12 +400,12 @@
     "shot_notes": {
       "desktop": {
         "label": {
-          "ko": "첫 쪽 — 글자를 걷으면 그림이 남는다",
-          "en": "Page one, with the text cleared away"
+          "ko": "읽기와 듣기, 같은 쪽의 두 얼굴",
+          "en": "Reading and listening, two faces of one page"
         },
         "note": {
-          "ko": "쪽마다 그 장면의 영상이 깔려 있다. 글자를 걷으면 영상만 남아 그림책처럼 보인다. 아이가 읽기 전에 장면을 먼저 눈에 담고 시작할 수 있다.",
-          "en": "Every page runs its own film underneath. Clear the text and only the picture remains, so a child can take the scene in before starting to read."
+          "ko": "쪽마다 그 장면의 영상이 깔려 있다. 글자를 펼치면 읽는 화면이 되고, 접으면 영상만 남아 듣는 화면이 된다. 한 쪽을 두 번 쓰는 셈이라, 처음에는 눈으로 읽고 다시 볼 때는 귀로 듣는다.",
+          "en": "Every page runs its own film underneath. Unfolded it is a page to read; folded, only the picture remains and it becomes a page to listen to. One page used twice — read with the eye first, heard with the ear on the way back."
         },
         "features": []
       }
