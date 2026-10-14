@@ -440,8 +440,8 @@
       "en": "Legacy overhaul · a kit six developers build on"
     },
     "summary": {
-      "ko": "2000년대에 멈춰 있던 ASP.NET 학원관리시스템의 전면 개편. 시안 3종 중 현업이 고른 것은 가장 새로워 보이는 안이 아니라 기존 구조를 지킨 안이었다. 그 선택을 그대로 받아 개발자가 복사해 쓰는 디자인 킷으로 묶어 사내에 배포했고, 현재 개발자 6명이 이 킷으로 화면을 만든다.",
-      "en": "A full overhaul of an ASP.NET academy management system frozen in the 2000s. Of three directions, the field chose the one that kept the existing structure over the one that looked newest. That choice was taken at face value and packaged into a copy-and-go design kit — six developers now build screens with it."
+      "ko": "전국 캠퍼스가 쓰는 학원관리시스템(ASP.NET 레거시)의 UI 전면 개편. 시안 3종을 현업 6명에게 돌려 방향을 정하고, 선택된 안을 개발자가 복사해 쓰는 디자인 킷으로 묶어 배포했다.",
+      "en": "A full UI redesign of the academy management system used across every campus. Three directions went to six staff who use it daily; the chosen one shipped as a copy-and-paste kit for developers."
     },
     "role": {
       "ko": "진단 · 리디자인 방향 설계 · 디자인 시스템 · 킷 제작 · 개발 인수인계",
@@ -455,8 +455,8 @@
     ],
     "entry": "",
     "intent": {
-      "ko": "현업 6명에게 시안 3종을 돌렸더니 표가 반씩 갈렸고, 고른 이유를 읽어보니 기준이 분명했다. 하루 종일 반복 조회를 하는 자리에서는 새 레이아웃보다 '다시 배울 것이 없는 구조'와 '한 화면에서 끝나는 조회'가 컸다. 그래서 구조는 건드리지 않고 폰트·간격·색·컴포넌트만 다시 세웠다. 그리고 시안에서 멈추지 않았다. 개발자가 각자 해석해 옮기면 화면마다 간격과 색이 달라지고 반년 뒤엔 다른 물건이 되므로, 복사해 쓸 수 있는 템플릿과 규칙까지 넘겨 해석의 여지를 줄였다.",
-      "en": "Three directions went to six people in the field and the vote split evenly — but the reasons were consistent. At a desk running lookups all day, a structure with nothing to relearn and a lookup that finishes on one screen mattered more than a new layout. So the structure stayed and type, spacing, colour and components were rebuilt instead. The work didn't stop at a mockup either: left to interpret a picture, each developer drifts, and in six months it's a different product — so a copyable template and rule set went with it."
+      "ko": "현업 6명에게 시안 3종을 돌렸다. 표는 갈렸지만 고른 이유는 한 줄로 모였다 — \"다시 배울 것이 없어야 한다\". 하루 수백 건을 조회하는 자리에서 새 레이아웃은 비용이고, 익숙한 구조는 자산이었다. 그래서 C안은 레거시의 화면 골격과 데이터 밀도를 그대로 두고 폰트·간격·색·컴포넌트만 다시 세운 안이다. 개편의 본질을 \"칠하기\"가 아니라 \"위계 세우기\"로 잡은 결과다.\n\n여기서 멈추면 반년 뒤 다시 흩어진다. 개발자 6명이 각자 해석해 옮기면 화면마다 간격과 색이 달라지기 때문이다. 그래서 시안을 킷으로 바꿨다. 토큰 1,556개를 실제 화면 CSS에서 역으로 뽑고, 컴포넌트 13종과 화면 골격 3종을 복사해 쓸 수 있는 HTML로 만들고, 규칙 65개를 문서가 아니라 검사 스크립트로 넘겼다. 색은 뿌리 7개만 hex로 두고 나머지는 color-mix로 파생시켜, 뿌리 하나를 바꾸면 계열 전체가 따라온다.",
+      "en": "Three directions went to six people who use the system all day. The votes split, but their reasons converged on one line: nothing should have to be relearned. For a desk that runs hundreds of lookups a day, a new layout is a cost and a familiar one is an asset. So option C keeps the legacy skeleton and its data density, and rebuilds only type, spacing, colour and components.\n\nStopping at a mockup would scatter it again within months, so the design shipped as a kit: 1,556 tokens pulled back out of the real screen CSS, 13 components and 3 page skeletons as copy-ready HTML, and 65 rules handed over as a checking script rather than a document."
     },
     "flow": [
       {
@@ -532,35 +532,27 @@
     ],
     "decisions": [
       {
-        "ko": "시안 3종을 돌려 현업 6명에게 받은 의견은 A안 3표, C안 3표로 갈렸다. C안으로 정한 근거는 심미성이 아니라 업무였다. 좌측 목록과 우측 상세가 한 화면에 같이 있어 클릭이나 화면 전환 없이 학생 정보를 확인할 수 있고, 기존 KCMS와 구조가 같아 캠퍼스·본사 직원이 다시 배울 것이 없다. 반복 조회가 하루 종일인 자리에서는 이 두 가지가 새 레이아웃보다 크다.",
-        "en": "Three directions went out to six people in the field and came back split — three for A, three for C. C won on work, not looks: list and detail sit on one screen, so a record is read without a click or a page change, and the structure matches the KCMS they already use, so nothing has to be relearned. For a desk that runs lookups all day, those two beat a new layout."
+        "ko": "C안 채택 — 가장 새로운 안이 아니라 가장 덜 바뀌는 안. 현업 6명이 고른 이유는 한 줄로 모였다. \"다시 배울 것이 없어야 한다.\" 하루 수백 건을 조회하는 자리에서 새 레이아웃은 학습 비용이고, 익숙한 구조는 자산이었다. A안의 상단 다단 내비와 B안의 좌측 아코디언은 둘 다 메뉴를 찾는 경로를 바꾼다.",
+        "en": "Option C won — not the newest, the least disruptive. Six daily users converged on one reason: nothing should have to be relearned. For a desk running hundreds of lookups a day, a new layout is a learning cost while a familiar one is an asset."
       },
       {
-        "ko": "C안의 약점도 그대로 안고 갔다. 레이아웃을 바꾸지 않아 '개편했다'는 체감이 약하고, 메모나 배정 이력이 쌓이면 고정 영역에 스크롤이 생긴다. 대신 폰트·간격·색·컴포넌트를 전부 다시 정리해 같은 구조 위에서 읽는 속도를 올렸다. 익숙함을 버리지 않으면서 고칠 수 있는 것을 고쳤다.",
-        "en": "C's weaknesses were taken on knowingly: keeping the layout means the redesign is less visible, and stacked memos or placement history will scroll inside fixed panes. In exchange, type, spacing, colour and components were rebuilt so the same structure reads faster — fixing what could be fixed without spending the familiarity."
+        "ko": "데이터 밀도를 낮추지 않았다. 한 화면에 더 적게 담는 쪽이 보기엔 쾌적하지만, 이 사용자들에게는 스크롤과 페이지 이동이 늘어나는 손해다. 행 높이·정렬·구분선·tabular 숫자로 스캔 가능한 고밀도를 만드는 쪽을 택했다.",
+        "en": "Density stayed. Fewer rows per screen looks calmer but costs these users scrolling and paging, so the work went into row height, alignment, rules and tabular figures — dense but scannable."
       },
       {
-        "ko": "시안이 아니라 킷을 최종 산출물로 잡았다. 개발자 6명이 각자 해석하는 대신 template.html 을 복사해 시작하므로 화면이 늘어나도 시스템이 흐트러지지 않는다.",
-        "en": "The deliverable was defined as the kit, not the mockups. Six developers copy template.html instead of each interpreting a picture, so the system holds as screen count grows."
+        "ko": "시안이 아니라 킷으로 넘겼다. 개발자 6명이 각자 해석해 옮기면 화면마다 간격과 색이 달라지고 반년 뒤엔 다른 물건이 된다. 토큰 1,556개는 실제 화면 CSS에서 역으로 뽑고, 규칙 65개는 문서가 아니라 검사 스크립트로 만들어 해석의 여지를 없앴다.",
+        "en": "The handoff was a kit, not a mockup. Six developers each interpreting a design drift apart within months, so 1,556 tokens were extracted back out of the real screen CSS and 65 rules shipped as a checking script rather than prose."
       },
       {
-        "ko": "컴포넌트 문서를 화면에 그려진 것과 같은 마크업으로 만들었다. 문서용 코드를 따로 쓰면 반드시 실제와 어긋난다. components.html 의 복사 버튼이 주는 코드가 곧 그 위에 렌더된 물건이다.",
-        "en": "Component docs render from the same markup they hand out. Maintaining separate example code guarantees drift; the copy button gives exactly the thing rendered above it."
-      },
-      {
-        "ko": "색을 hex 로 못 쓰게 막고 뿌리 7개의 color-mix 파생만 허용했다. 규칙을 말로 부탁하는 대신 감사 스크립트로 검사한다.",
-        "en": "Writing hex was disallowed in favour of color-mix derivations from seven roots — and the rule is enforced by an audit script rather than requested in prose."
-      },
-      {
-        "ko": "밀도를 낮추지 않았다. 4,770건을 다루는 파워유저 도구라 여백을 늘리는 흔한 처방은 오히려 업무를 느리게 만든다.",
-        "en": "Density was not reduced. For a power-user tool handling 4,770 records, the usual prescription of more whitespace makes the job slower, not easier."
+        "ko": "색은 뿌리 7개만 hex 로 둔다. 나머지는 전부 color-mix 파생이라 뿌리 하나를 바꾸면 그 계열이 통째로 따라온다. 캠퍼스 브랜드가 바뀌어도 토큰 한 줄로 끝난다.",
+        "en": "Only seven root colours are literal hex; everything else derives through color-mix, so changing one root carries its whole family. A brand shift is a one-line edit."
       }
     ],
     "shot_path": "A타입/학생 등록.dc.html",
     "shot_wait": 3000,
     "concept": {
-      "ko": "진단은 '기능이 부족하다'가 아니라 '위계·도구·시스템이 없다'였다. 검색폼·대용량 테이블·편집폼·메모가 같은 비중으로 한 화면에 있어 시선의 출발점이 없었다. 밀도는 파워유저 도구라 낮추지 않고 행 높이·정렬·구분선·tabular 숫자로 '스캔 가능한 고밀도'를 만들었다. 색은 뿌리 7개만 hex 로 두고 나머지는 color-mix 로 파생시켜 뿌리 하나를 바꾸면 계열 전체가 따라오게 했다.",
-      "en": "The diagnosis wasn't missing features but missing hierarchy, tools and system: search form, bulk table, edit form and memos all carried equal weight, leaving the eye no entry point. Density stayed high — it's a power-user tool — but became scannable through row height, alignment, rules and tabular figures. Only seven root colours are written as hex; everything else derives via color-mix, so changing one root carries its whole family."
+      "ko": "진단은 \"기능이 부족하다\"가 아니라 \"위계·도구·시스템이 없다\"였다. 검색폼·대용량 테이블·편집폼·메모가 같은 비중으로 한 화면에 있어 시선의 출발점이 없었다. 밀도는 파워유저 도구라 낮추지 않고, 행 높이·정렬·구분선·tabular 숫자로 스캔 가능한 고밀도를 만들었다. 상태는 텍스트 대신 배지로 옮기고, 동등하게 늘어선 버튼 8개는 주 액션 하나와 보조로 갈랐다.",
+      "en": "The diagnosis was not a lack of features but a lack of hierarchy, tooling and system. A search form, a large table, an edit form and notes all carried equal weight, so the eye had no entry point. Density stayed — this is a power tool — and the work went into row height, alignment, rules and tabular figures. Status moved from plain text into badges, and eight equal buttons split into one primary action and the rest."
     },
     "shot_devices": [
       "desktop",
@@ -573,6 +565,45 @@
       "qa": 70
     },
     "scenes": [
+      {
+        "id": "plan-c",
+        "path": "C타입-스틸블루/학생 등록.html",
+        "device": "desktop",
+        "label": {
+          "ko": "C안 — 현업이 고른 안",
+          "en": "Option C — the one the staff chose"
+        },
+        "note": {
+          "ko": "레거시의 화면 골격과 데이터 밀도를 그대로 두고 폰트·간격·색·컴포넌트만 다시 세웠다. 메뉴 위치가 그대로라 다시 배울 것이 없고, 한 화면에서 조회가 끝난다. 표는 갈렸지만 고른 이유는 여기로 모였다.",
+          "en": "The legacy skeleton and its density stay; type, spacing, colour and components are rebuilt. Menus sit where they always sat, so nothing has to be relearned and a lookup still finishes on one screen."
+        },
+        "features": [
+          {
+            "ko": "메뉴 자리가 기존 그대로다",
+            "en": "Menus stay exactly where they were",
+            "at": [
+              14.5,
+              3.4
+            ]
+          },
+          {
+            "ko": "상태는 텍스트가 아니라 배지로 말한다",
+            "en": "Status speaks as a badge, not plain text",
+            "at": [
+              39.4,
+              42.1
+            ]
+          },
+          {
+            "ko": "한 화면에서 조회가 끝난다",
+            "en": "A lookup finishes on one screen",
+            "at": [
+              26.6,
+              47.9
+            ]
+          }
+        ]
+      },
       {
         "id": "kit",
         "path": "kit/index.html",
@@ -589,26 +620,65 @@
         "features": [
           {
             "ko": "킷을 ZIP 하나로 내려받는다",
-            "en": "The whole kit downloads as one ZIP",
+            "en": "The whole kit downloads as one zip",
             "at": [
-              22.8,
-              50.6
+              22.0,
+              29.5
             ]
           },
           {
             "ko": "AI 에이전트용 규약 프롬프트가 같이 간다",
-            "en": "Ships with a UI-contract prompt for AI agents",
+            "en": "A spec prompt for AI agents ships with it",
             "at": [
-              27,
-              62
+              22.5,
+              57.6
             ]
           },
           {
-            "ko": "토큰·컴포넌트가 실제 화면 CSS에서 나왔다",
-            "en": "Tokens and components extracted from the live CSS",
+            "ko": "토큰 1,556개를 실제 화면 CSS에서 뽑았다",
+            "en": "1,556 tokens pulled from the real screen CSS",
             "at": [
-              48,
-              62
+              72.0,
+              62.5
+            ]
+          }
+        ]
+      },
+      {
+        "id": "kit-comp",
+        "path": "kit/components.html",
+        "device": "desktop",
+        "label": {
+          "ko": "킷에 담긴 것 — 컴포넌트 13종",
+          "en": "What's in the kit — 13 components"
+        },
+        "note": {
+          "ko": "버튼·탭·배지·표·스크롤·입력·체크·검색 필터·날짜/시간·모달·토스트·도움말이 각각 상태별로 들어 있고, 바로 아래 코드가 붙어 있다. 개발자는 보고 베끼는 대신 복사해서 붙인다.",
+          "en": "Buttons, tabs, badges, tables, scroll regions, inputs, checks, filters, date and time pickers, modals, toasts and help — each with its states and the code directly beneath it, ready to copy rather than reinterpret."
+        },
+        "features": [
+          {
+            "ko": "컴포넌트 13종이 왼쪽에 목록으로 선다",
+            "en": "Thirteen components stand as a list on the left",
+            "at": [
+              3.5,
+              46.0
+            ]
+          },
+          {
+            "ko": "컴포넌트 13 · 화면 골격 3 · 가이드 3",
+            "en": "13 components, 3 page skeletons, 3 guides",
+            "at": [
+              46.1,
+              20.3
+            ]
+          },
+          {
+            "ko": "기본·hover·비활성까지 상태별로 담았다",
+            "en": "Default, hover and disabled all ship as states",
+            "at": [
+              62.8,
+              94.2
             ]
           }
         ]
@@ -619,36 +689,36 @@
         "device": "desktop",
         "wait": 3500,
         "label": {
-          "ko": "입학 관리",
-          "en": "Admissions"
+          "ko": "입학 관리 — 킷으로 만든 첫 화면",
+          "en": "Admissions — the first screen built from the kit"
         },
         "note": {
-          "ko": "같은 킷으로 그린 두 번째 업무 화면.",
-          "en": "A second operations screen drawn from the same kit."
+          "ko": "킷의 토큰과 컴포넌트가 실제로 어디서 나왔는지 보여주는 화면이다. 충원·전환·신규를 도넛 셋으로 먼저 보여주고, 그 아래 지표 카드와 교시×요일 매트릭스로 좁혀 들어간다. 여기서 확정된 규격을 그대로 뽑아 킷으로 묶었다.",
+          "en": "The screen the kit was extracted from. Three donuts carry the headline rates, then metric cards and a period-by-weekday matrix narrow it down. What settled here became the kit."
         },
         "features": [
           {
             "ko": "충원·전환·신규를 도넛 셋으로 먼저 본다",
-            "en": "Three donuts read first: filled, converted, new",
+            "en": "Three donuts carry fill, conversion and new intake",
             "at": [
-              50.0,
-              15.0
+              43.7,
+              27.0
             ]
           },
           {
-            "ko": "목록 · 필터 · 액션이 킷과 같은 규칙",
-            "en": "List, filter and action follow the same kit rules",
+            "ko": "잔여 TO·가동률을 한 줄 카드로 좁힌다",
+            "en": "Open seats and room usage narrow into one card row",
             "at": [
-              16.0,
-              31.5
+              40.0,
+              55.0
             ]
           },
           {
-            "ko": "교시 × 요일 매트릭스로 가동률을 훑는다",
-            "en": "Period-by-weekday matrix scans utilisation",
+            "ko": "교시 × 요일 매트릭스로 빈 시간을 찾는다",
+            "en": "A period-by-weekday matrix finds the empty slots",
             "at": [
-              18.0,
-              34.6
+              28.0,
+              83.0
             ]
           }
         ]
@@ -657,52 +727,72 @@
     "shot_notes": {
       "desktop": {
         "label": {
-          "ko": "학생 등록",
-          "en": "Student registration"
+          "ko": "A안 — 상단 가로 내비 · 민트",
+          "en": "Option A — top nav, mint"
         },
         "note": {
-          "ko": "레거시에서 가져온 첫 업무 화면. 검색·목록·편집이 한 킷 규칙 아래에 놓인다.",
-          "en": "The first operations screen taken from the legacy system. Search, list and edit sit under one kit rule."
+          "ko": "1depth부터 3depth까지 전부 상단에 가로로 쌓고 본문을 넓게 비웠다. 셋 중 가장 새로워 보이지만, 메뉴를 찾는 경로가 기존과 달라진다.",
+          "en": "Every menu level stacks horizontally across the top, leaving the body wide. The newest-looking of the three, but the path to a menu changes."
         },
         "features": [
           {
-            "ko": "학번·이름으로 학생을 찾는다",
-            "en": "Find a student by ID or name",
+            "ko": "1·2·3depth가 모두 상단 가로 바에 있다",
+            "en": "All three menu levels live in the top bar",
             "at": [
-              37,
-              25
+              13.3,
+              3.0
             ]
           },
           {
-            "ko": "레벨·학급 필터로 목록을 좁힌다",
-            "en": "Level and class filters narrow the list",
+            "ko": "밀도는 표준·컴팩트로 바꾼다",
+            "en": "Density toggles between standard and compact",
             "at": [
-              8,
-              33
+              87.4,
+              8.8
             ]
           },
           {
-            "ko": "4,932명을 한 테이블에서 훑는다",
-            "en": "Scan 4,932 records in one table",
+            "ko": "본문은 목록과 편집을 좌우로 나눠 쓴다",
+            "en": "The body splits list and editor left to right",
             "at": [
-              14,
-              42
+              69.8,
+              67.5
+            ]
+          }
+        ]
+      },
+      "tablet": {
+        "label": {
+          "ko": "B안 — 좌측 아코디언 · 보라",
+          "en": "Option B — left accordion, indigo"
+        },
+        "note": {
+          "ko": "좌측에 3depth 아코디언을 세우고 카드와 여백을 넉넉히 줬다. 요즘 SaaS 문법에 가장 가깝지만, 같은 화면에 담기는 행 수가 줄어든다.",
+          "en": "A three-level accordion on the left with generous cards and spacing. Closest to current SaaS convention, but fewer rows fit on screen."
+        },
+        "features": [
+          {
+            "ko": "좌측 아코디언이 3depth를 모두 편다",
+            "en": "The left accordion opens all three levels",
+            "at": [
+              11.4,
+              40.0
             ]
           },
           {
-            "ko": "행을 고르면 오른쪽에서 바로 편집한다",
-            "en": "Pick a row and edit it in the right pane",
+            "ko": "카드와 여백이 넉넉한 대신 행이 줄어든다",
+            "en": "Roomier cards cost rows on screen",
             "at": [
-              78,
-              41
+              61.0,
+              60.0
             ]
           },
           {
-            "ko": "저장·수납·전환이 같은 줄에 있다",
-            "en": "Save, billing and transfer sit on one row",
+            "ko": "작업 탭은 본문 위에 알약으로 쌓인다",
+            "en": "Open screens stack as pills above the body",
             "at": [
-              78.0,
-              26.0
+              47.0,
+              12.9
             ]
           }
         ]
