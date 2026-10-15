@@ -304,6 +304,9 @@
   @media print{
     .shot.long{overflow:hidden}
     .ph.has-long .scrollhint{display:none}
+    /* 지면은 굴릴 수 없다. 첫 화면 밖 핀은 가리킬 데가 없으므로 접는다.
+       접어 두지 않으면 문구들이 같은 칸에 몰려 서로 겹친다. */
+    .feats .pins li.off,.feats .anns li.off{display:none!important}
   }
   .fly .d,.fly .t,.fly .m{padding:9px;border-radius:22px;background:#0e0e0e;
     box-shadow:0 24px 56px rgba(0,0,0,.48), inset 0 0 0 1px rgba(255,255,255,.14);
@@ -445,14 +448,12 @@
   .feats .ph .shot.long img{display:block;width:100%;max-width:none;height:auto;
     max-height:none;object-fit:fill}
   .feats .pins{position:absolute;inset:0;margin:0;padding:0;list-style:none;pointer-events:none}
-  /* 긴 화면 핀은 첫 화면(접힌 윗부분)을 가리키도록 찍혀 있다.
-     굴리는 동안에는 가리키던 자리가 사라지므로 핀·점선·라벨을 함께 숨기고,
-     맨 위로 돌아오면 되돌린다. 엉뚱한 곳을 가리키는 것보다 없는 편이 낫다. */
+  /* 긴 화면 핀은 이미지에 얹혀 스크롤과 함께 흐른다.
+     틀 밖으로 나간 핀은 가리킬 데가 없으므로 그 문구와 점선을 접는다. */
   .feats .shot.long .pins{inset:0 0 auto 0;height:auto;aspect-ratio:var(--shotar,16/10)}
-  figure.long-scrolled .pins,
-  figure.long-scrolled svg.wires,
-  figure.long-scrolled .anns{opacity:0;transition:opacity .2s ease}
-  figure.long-scrolled .anns{pointer-events:none}
+  .feats .pins li.off{opacity:0}
+  .feats .anns li.off{opacity:0;pointer-events:none}
+  .feats .pins li,.feats .anns li{transition:opacity .18s ease}
   .feats .pins li,.feats .pins li::marker{list-style:none}
   .feats .pins li::marker{content:none}
   .feats .pins li{position:absolute;width:10px;height:10px;transform:translate(-50%,-50%);
@@ -1494,8 +1495,9 @@ function draw(){
       <ol>${items}</ol></div>`;
   };
 
-  const featRow=(src,list)=>{
-    const items=(list||[]).slice(0,5).map((f,fi)=>{
+  const featRow=(src,list,long)=>{
+    // 한 화면에 5개가 한계지만, 굴러가는 도판은 구간을 나눠 보여 주므로 더 담는다.
+    const items=(list||[]).slice(0,long?8:5).map((f,fi)=>{
       if(typeof f==='string') return {text:f, at:null, i:fi};
       return {text:f.text||'', at:f.at||null, i:fi};
     });
@@ -1532,15 +1534,29 @@ function draw(){
         if(svg) svg.setAttribute('viewBox',`0 0 ${sr.width} ${sr.height}`);
         const ph=stage.querySelector('.ph');
         const pr0=ph?ph.getBoundingClientRect():sr;
+        // 긴 화면은 굴린 만큼 핀이 틀 밖으로 밀려난다. 지금 보이는 핀만 설명을 단다.
+        const longBox=stage.querySelector('.shot.long');
+        const lb=longBox?longBox.getBoundingClientRect():null;
+        const inView=pin=>{
+          if(!lb) return true;
+          const r=pin.getBoundingClientRect(), cy=r.top+r.height/2;
+          return cy>=lb.top+8 && cy<=lb.bottom-8;
+        };
         const paths=[];
         ['left','right'].forEach(side=>{
           const col=stage.querySelector(`.anns.${side}`);
           if(!col) return;
           // 핀의 세로 순서로 정렬 — 이 순서를 유지해야 선끼리 엇갈리지 않는다
-          const items=[...col.querySelectorAll('li[data-i]')].map(li=>{
+          const all=[...col.querySelectorAll('li[data-i]')].map(li=>{
             const pin=stage.querySelector(`.pins [data-i="${li.dataset.i}"]`);
             return pin?{li,pin,py:pin.getBoundingClientRect().top}:null;
-          }).filter(Boolean).sort((a,b)=>a.py-b.py);
+          }).filter(Boolean);
+          all.forEach(it=>{
+            it.off=!inView(it.pin);
+            it.li.classList.toggle('off', it.off);
+            it.pin.classList.toggle('off', it.off);
+          });
+          const items=all.filter(it=>!it.off).sort((a,b)=>a.py-b.py);
           if(!items.length) return;
 
           // 문구를 세로로 고르게 분산. 핀에 바짝 붙이면 서로 뭉쳐 선이 사선이 된다.
@@ -1605,6 +1621,7 @@ function draw(){
         if(svg) svg.innerHTML=paths.join('');
       };
       paint();
+      fig._repaint=paint;
       fig.querySelectorAll('img').forEach(im=>{
         if(!im.complete) im.addEventListener('load',()=>requestAnimationFrame(paint),{once:true});
       });
@@ -1627,8 +1644,10 @@ function draw(){
       };
       shot.addEventListener('scroll',()=>{
         const fig=ph.closest('figure');
-        if(shot.scrollTop>6){ ph.classList.add('scrolled'); fig&&fig.classList.add('long-scrolled'); }
-        else { ph.classList.remove('scrolled'); fig&&fig.classList.remove('long-scrolled'); }
+        if(shot.scrollTop>6) ph.classList.add('scrolled');
+        else ph.classList.remove('scrolled');
+        // 굴릴 때마다 지금 보이는 핀으로 설명을 다시 건다
+        if(fig && fig._repaint) requestAnimationFrame(fig._repaint);
       },{passive:true});
       const img=shot.querySelector('img');
       if(img && !img.complete) img.addEventListener('load',sync,{once:true});
@@ -1697,9 +1716,8 @@ function draw(){
             ${seasonReel(p)}
             ${flowStrip(p)}
             <div class="feats">${gal.map(s=>{
-              const ft=featRow(s.src, s.features);
-              // 긴 화면은 잘라 두면 아래 절반을 영영 못 본다. 목업 안에서 굴러가게 한다.
               const isLong=!!s.long;
+              const ft=featRow(s.src, s.features, isLong);
               return `<figure>
               <div class="stage">
                 <ul class="anns left">${ft.left}</ul>
@@ -1903,6 +1921,9 @@ window.addEventListener('beforeprint',()=>{
   document.querySelectorAll('.show[hidden]').forEach(el=>{
     el.dataset.printUnhid='1'; el.hidden=false;
   });
+  // 굴려 둔 목업은 지면에서 첫 화면만 나간다. 스크롤을 되감아 두지 않으면
+  // 핀 가시성 계산이 굴린 상태 기준이 되어 지면과 어긋난다.
+  document.querySelectorAll('.shot.long').forEach(s=>{ s.scrollTop=0; });
   window.__wireCallouts?.(document);
 });
 window.addEventListener('afterprint',()=>{
