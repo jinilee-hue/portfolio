@@ -567,39 +567,39 @@
     "scenes": [
       {
         "id": "plan-c",
-        "path": "C타입-스틸블루/학생 등록.html",
+        "path": "D타입/학생 등록.html",
         "device": "desktop",
         "label": {
           "ko": "C안 — 현업이 고른 안",
           "en": "Option C — the one the staff chose"
         },
         "note": {
-          "ko": "레거시의 화면 골격과 데이터 밀도를 그대로 두고 폰트·간격·색·컴포넌트만 다시 세웠다. 메뉴 위치가 그대로라 다시 배울 것이 없고, 한 화면에서 조회가 끝난다. 표는 갈렸지만 고른 이유는 여기로 모였다.",
-          "en": "The legacy skeleton and its density stay; type, spacing, colour and components are rebuilt. Menus sit where they always sat, so nothing has to be relearned and a lookup still finishes on one screen."
+          "ko": "레거시의 화면 골격과 데이터 밀도를 그대로 두고 폰트·간격·색·컴포넌트만 다시 세웠다. 메뉴 위치가 그대로라 다시 배울 것이 없고, 한 화면에서 조회가 끝난다. 의미 없이 번쩍이던 노란 하이라이트를 걷어내고 줄무늬 행으로 바꿔 4,000행을 눈으로 따라갈 수 있게 했다.",
+          "en": "The legacy skeleton and its density stay; type, spacing, colour and components are rebuilt. Menus sit where they always sat, so nothing has to be relearned and a lookup still finishes on one screen. The meaningless yellow highlight gave way to striped rows, so thousands of them can be followed by eye."
         },
         "features": [
           {
-            "ko": "메뉴 자리가 기존 그대로다",
-            "en": "Menus stay exactly where they were",
+            "ko": "메뉴 경로가 기존 그대로다",
+            "en": "The path to a screen is where it always was",
             "at": [
-              14.5,
-              3.4
+              10.7,
+              7.5
             ]
           },
           {
-            "ko": "상태는 텍스트가 아니라 배지로 말한다",
-            "en": "Status speaks as a badge, not plain text",
+            "ko": "노란 하이라이트 대신 줄무늬로 행을 따라간다",
+            "en": "Striped rows replace the yellow highlight",
             "at": [
-              39.4,
-              42.1
+              15.6,
+              60.8
             ]
           },
           {
-            "ko": "한 화면에서 조회가 끝난다",
-            "en": "A lookup finishes on one screen",
+            "ko": "하단에 집계가 한 줄로 선다",
+            "en": "The counts line up along the bottom",
             "at": [
-              26.6,
-              47.9
+              14.4,
+              93.6
             ]
           }
         ]
