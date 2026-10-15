@@ -2005,32 +2005,7 @@
           "ko": "게임을 등록하고 검수하고 게시하는 관리자 화면이다. 보라 계열에 텍스트 내비로, 학생 화면과 얼굴을 완전히 갈랐다. 등록은 기본정보 · 콘텐츠 소스 · 분류 세 단계로 끊어 한 번에 다 묻지 않는다.",
           "en": "The admin side where games are submitted, reviewed and published. A violet shell with text navigation, deliberately sharing nothing with the student view. Submission breaks into three steps rather than one long form."
         },
-        "features": [
-          {
-            "ko": "썸네일은 첫 화면에서 자동으로 딴다",
-            "en": "The thumbnail is captured from the first screen",
-            "at": [
-              16.7,
-              30.4
-            ]
-          },
-          {
-            "ko": "파일이냐 URL이냐부터 고른다",
-            "en": "File or URL comes first",
-            "at": [
-              26.6,
-              70.0
-            ]
-          },
-          {
-            "ko": "HTML · ZIP · 비디오를 모두 받는다",
-            "en": "HTML, ZIP and video all come in",
-            "at": [
-              18.8,
-              83.7
-            ]
-          }
-        ]
+        "features": []
       }
     },
     "tools": [
@@ -2149,6 +2124,46 @@
           }
         ],
         "full": true
+      },
+      {
+        "id": "register",
+        "src": "assets/shots/Phonics-Studio-register.jpg",
+        "full": true,
+        "device": "desktop",
+        "label": {
+          "ko": "콘텐츠 등록 — 한 번에 다 묻지 않는다",
+          "en": "Registration — not everything at once"
+        },
+        "note": {
+          "ko": "게임 하나를 올리는 화면이다. 기본 정보 · 콘텐츠 소스 · 분류를 세 단계로 끊어 한 화면에 다 쏟지 않는다. 만든 사람이 개발자가 아닐 수도 있어, 파일을 끌어다 놓는 쪽과 링크를 거는 쪽을 같은 자리에서 고르게 했다.",
+          "en": "Where a game gets uploaded. Basic info, source and classification are broken into three steps instead of one long form. Whoever submits may not be a developer, so dropping a file and pasting a link sit side by side as the same choice."
+        },
+        "features": [
+          {
+            "ko": "세 단계로 끊어 묻는다",
+            "en": "Asked in three steps",
+            "at": [
+              13.2,
+              13.2
+            ]
+          },
+          {
+            "ko": "썸네일은 직접 올리거나 자동으로 딴다",
+            "en": "Thumbnail uploaded, or grabbed automatically",
+            "at": [
+              22.3,
+              21.6
+            ]
+          },
+          {
+            "ko": "파일이든 링크든 같은 자리에서 받는다",
+            "en": "File or link, the same slot",
+            "at": [
+              18.4,
+              38.9
+            ]
+          }
+        ]
       },
       {
         "id": "review",
