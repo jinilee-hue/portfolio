@@ -1994,32 +1994,7 @@
           "ko": "게시된 게임이 모이는 학생 화면이다. 파스텔 바탕에 큰 라운드 카드와 캐릭터를 두고, 글자를 못 읽는 아이도 섬네일만 보고 고를 수 있게 했다. 관리 기능은 지우지 않고 헤더의 작은 아이콘 알약으로 접어 넣었다.",
           "en": "Where published games land for students: pastel ground, large rounded cards and characters, so a child who cannot yet read still picks by picture. Management tools were folded into small icon pills in the header rather than removed."
         },
-        "features": [
-          {
-            "ko": "섬네일 격자로 게임을 펼친다",
-            "en": "Games open as a grid of thumbnails",
-            "at": [
-              10.3,
-              18.3
-            ]
-          },
-          {
-            "ko": "별점과 플레이 수가 카드에 붙는다",
-            "en": "Rating and play count sit on the card",
-            "at": [
-              4.9,
-              30.8
-            ]
-          },
-          {
-            "ko": "레벨과 학습 종류를 칩으로 읽는다",
-            "en": "Level and skill read as chips",
-            "at": [
-              4.1,
-              42.3
-            ]
-          }
-        ]
+        "features": []
       },
       "tablet": {
         "label": {
@@ -2105,8 +2080,8 @@
           "en": "Gallery, cards — choosing by picture"
         },
         "note": {
-          "ko": "게임을 큰 섬네일 격자로 한 번에 펼친다. 제목을 읽지 않아도 그림과 별점만으로 고를 수 있어, 아직 글자가 느린 아이가 혼자 들어가는 길이 된다. 카드마다 레벨 칩과 학습 종류가 붙어 교사도 같은 화면에서 고를 수 있고, AI로 만든 콘텐츠는 배지로 드러난다.",
-          "en": "Every game opens at once as a grid of large thumbnails. A child who reads slowly can still choose on picture and rating alone, while the level chip and skill tag let a teacher pick from the same screen. AI-made content carries a badge."
+          "ko": "게임을 큰 섬네일 격자로 펼친다. 제목을 읽지 않아도 그림과 별점만으로 고를 수 있어, 아직 글자가 느린 아이가 혼자 들어가는 길이 된다. 카드마다 레벨 칩과 학습 종류가 붙어 교사도 같은 화면에서 고르고, AI로 만든 콘텐츠는 배지로 드러난다. 태블릿에서는 한 줄에 네 장으로 접히고 쪽 번호가 따라 늘어난다.",
+          "en": "Games open as a grid of large thumbnails. A child who cannot yet read the titles can still choose by picture and rating, while level and skill chips let a teacher pick from the same screen. AI-made content carries a badge. On a tablet the grid folds to four across and the pager grows to match."
         },
         "features": [
           {
@@ -2257,46 +2232,6 @@
             "at": [
               80.0,
               58.5
-            ]
-          }
-        ]
-      },
-      {
-        "id": "play",
-        "device": "tablet-land",
-        "wait": 3500,
-        "src": "assets/shots/Phonics-Playground--tablet.jpg",
-        "label": {
-          "ko": "학생 화면 — 어드민과 정반대 얼굴",
-          "en": "The student view — the opposite face"
-        },
-        "note": {
-          "ko": "같은 데이터를 쓰지만 얼굴은 완전히 다르다. 파스텔 배경에 큰 라운드 카드를 깔고 섬네일마다 재생 버튼을 올려, 글자를 읽지 않아도 누를 곳이 보인다. 카드가 많아져도 한 번에 쏟지 않고 P1~P4로 끊어, 고르다 지치지 않게 했다.",
-          "en": "Same data, a different face entirely. Pastel ground, large rounded cards and a play button on every thumbnail, so what to press is visible without reading. However many games arrive, they come four pages at a time rather than all at once."
-        },
-        "features": [
-          {
-            "ko": "섬네일마다 재생 버튼이 올라간다",
-            "en": "A play button sits on every thumbnail",
-            "at": [
-              12.8,
-              21.5
-            ]
-          },
-          {
-            "ko": "한 번에 쏟지 않고 쪽으로 끊는다",
-            "en": "Paged, not poured out all at once",
-            "at": [
-              84.1,
-              93.8
-            ]
-          },
-          {
-            "ko": "레벨과 학습 종류를 칩으로 읽는다",
-            "en": "Level and skill read as chips",
-            "at": [
-              5.6,
-              44.9
             ]
           }
         ]
