@@ -487,6 +487,16 @@
       justify-content:flex-start;text-align:left;flex-direction:row;order:var(--i,0)}
     .feats svg.wires{display:none}
   }
+  /* 두 앱 나란히 — 같은 크기 모니터 둘. 이미지 비율이 같아(16:10) 폭만 맞추면 높이·받침도 맞는다 */
+  .feats .duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:clamp(24px,3.4vw,56px);align-items:start}
+  .feats .duo .unit{display:flex;flex-direction:column;align-items:center;min-width:0}
+  .feats .duo .ph{align-self:stretch}
+  .feats .duo .ph .shot{width:100%}
+  .feats .duo .ph .shot img{width:100%;max-height:none}
+  .feats .duo .tag{font-family:var(--grot);font-size:12px;font-weight:700;letter-spacing:.04em;
+    color:rgba(233,241,238,.82);word-break:keep-all}
+  @media(max-width:599px){.feats .duo{grid-template-columns:1fr}}
 
 
   /* 3) 툴 · 반응형 */
@@ -1431,15 +1441,20 @@ function draw(){
       if(!s || seen.has(s.src)) continue;
       const n=notes[s.device]||{};
       if(out.length && !n.label && !n.note && !(n.features||[]).length) continue;
+      // pair 가 있으면 그 scene 을 옆자리 모니터로 데려온다 — 아래 scenes 루프에서는 건너뛴다
+      const mate=n.pair?(p.scenes||[]).find(x=>x.id===n.pair):null;
       out.push({
         src:s.src,
         device:s.device,
         long:!!s.long,
         label:n.label||DEV_L[L][s.device]||s.device,
         note:n.note||'',
-        features:n.features||[]
+        features:n.features||[],
+        tag:n.tag||'',
+        mate
       });
       seen.add(s.src);
+      if(mate) seen.add(mate.src);
     }
     for(const s of (p.scenes||[])){
       if(seen.has(s.src)) continue;
@@ -1447,6 +1462,23 @@ function draw(){
       out.push(s);
     }
     return out;
+  };
+
+  // 두 앱을 한 줄에 — 같은 크기 모니터 둘을 나란히 세우고 설명은 하나로 합친다.
+  // 핀·점선은 두지 않는다. 이 도판의 일은 '두 얼굴이 다르다'를 한눈에 보이는 것뿐이다.
+  const pairFig=s=>{
+    const unit=x=>`<div class="unit">
+      <span class="ph ph-desktop"><span class="shot"><img src="${x.src}" alt="${esc(x.tag||x.label||'')}" loading="lazy" decoding="async"
+        onerror="this.closest('.unit').remove()"></span></span>
+      ${x.tag?`<span class="tag">${esc(x.tag)}</span>`:''}
+    </div>`;
+    return `<figure class="pair">
+      <div class="duo">${unit(s)}${unit(s.mate)}</div>
+      <figcaption>
+        <b>${esc(s.label||'')}</b>
+        ${s.note?`<span class="note">${esc(s.note)}</span>`:''}
+      </figcaption>
+    </figure>`;
   };
 
   // 학습 흐름 컷: scenes 중 flow:true 인 것만 작은 띠로 늘어놓는다.
@@ -1716,6 +1748,7 @@ function draw(){
             ${seasonReel(p)}
             ${flowStrip(p)}
             <div class="feats">${gal.map(s=>{
+              if(s.mate) return pairFig(s);
               const isLong=!!s.long;
               const ft=featRow(s.src, s.features, isLong);
               return `<figure>

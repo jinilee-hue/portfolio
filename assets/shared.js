@@ -83,6 +83,7 @@ export function pick(p) {
       note: t(s.note),
       features: (s.features || []).map(feat),
       device: s.device || 'desktop',
+      tag: t(s.tag),         // 짝 도판에서 모니터 아래 붙는 짧은 이름
     })),
     // 기기별 '이 화면에서' 설명. {label, note, features[]} 또는 {ko,en} 문장만 와도 된다.
     shotNotes: Object.fromEntries(Object.entries(p.shot_notes || {}).map(([k, v]) => {
@@ -91,6 +92,8 @@ export function pick(p) {
       if (v.note || v.label || v.features) return [k, {
         label: t(v.label), note: t(v.note),
         features: (v.features || []).map(feat),
+        // pair: 옆에 같은 크기 모니터로 세울 scene id, tag: 모니터 아래 이름
+        pair: v.pair || '', tag: t(v.tag),
       }];
       return [k, { label: '', note: t(v), features: [] }];
     })),

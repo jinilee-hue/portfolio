@@ -21,7 +21,7 @@
     "contribution": "관여도 % {plan,design,build,qa} — 각 항목 0~100 독립. 혼자 다 했으면 100.",
     "shot_full": "true 면 전체 페이지를 찍는다. 목업 프레임 안에서 스크롤되어 보인다.",
     "scenes": "기능별 추가 컷 [{id,path,device,label{ko,en},note{ko,en},features[{ko,en,at:[x,y]}]}]. at 는 스크린샷 위 % 좌표. 촬영 파일은 assets/shots/<프로젝트>--<id>.jpg",
-    "shot_notes": "대표 화면(shot_devices 첫 기기)의 화면별 설명 {desktop|tablet|mobile: {label{ko,en}, note{ko,en}, features[{ko,en,at:[x,y]}]}}",
+    "shot_notes": "대표 화면(shot_devices 첫 기기)의 화면별 설명 {desktop|tablet|mobile: {label{ko,en}, note{ko,en}, features[{ko,en,at:[x,y]}]}} · pair: 이 컷 옆에 같은 크기 모니터로 나란히 세울 scenes id(그 scene 은 따로 그리지 않는다) · tag: 나란히 세울 때 모니터 아래 붙는 짧은 이름 {ko,en} — 짝 scene 에도 tag 를 둔다",
     "tools": "실제 사용한 AI 툴 배열. 사이트에 그대로 노출된다."
   },
   "eBOOK": {
@@ -1987,25 +1987,19 @@
     "shot_notes": {
       "desktop": {
         "label": {
-          "ko": "Poly Phonics — 학생이 만나는 쪽",
-          "en": "Poly Phonics — the student side"
+          "ko": "두 앱 — 같은 데이터, 다른 얼굴",
+          "en": "Two apps — shared data, separate faces"
         },
         "note": {
-          "ko": "게시된 게임이 모이는 학생 화면이다. 파스텔 바탕에 큰 라운드 카드와 캐릭터를 두고, 글자를 못 읽는 아이도 섬네일만 보고 고를 수 있게 했다. 관리 기능은 지우지 않고 헤더의 작은 아이콘 알약으로 접어 넣었다.",
-          "en": "Where published games land for students: pastel ground, large rounded cards and characters, so a child who cannot yet read still picks by picture. Management tools were folded into small icon pills in the header rather than removed."
+          "ko": "학생이 게임을 고르는 Poly Phonics와, 그 게임을 등록·검수·게시하는 관리자용 Studio다. 데이터는 하나지만 학생 쪽은 파스텔과 큰 카드로, 관리자 쪽은 보라 계열과 텍스트 내비로 얼굴을 갈랐다.",
+          "en": "Poly Phonics, where students pick games, and Studio, where admins submit, review and publish them. The data is shared, the faces are not: pastel and large cards for students, a violet shell with text navigation for admins."
         },
-        "features": []
-      },
-      "tablet": {
-        "label": {
-          "ko": "Studio — 관리자가 쓰는 쪽",
-          "en": "Studio — the admin side"
+        "features": [],
+        "tag": {
+          "ko": "Poly Phonics · 학생",
+          "en": "Poly Phonics · students"
         },
-        "note": {
-          "ko": "게임을 등록하고 검수하고 게시하는 관리자 화면이다. 보라 계열에 텍스트 내비로, 학생 화면과 얼굴을 완전히 갈랐다. 등록은 기본정보 · 콘텐츠 소스 · 분류 세 단계로 끊어 한 번에 다 묻지 않는다.",
-          "en": "The admin side where games are submitted, reviewed and published. A violet shell with text navigation, deliberately sharing nothing with the student view. Submission breaks into three steps rather than one long form."
-        },
-        "features": []
+        "pair": "studio"
       }
     },
     "tools": [
@@ -2046,6 +2040,17 @@
     },
     "shot_paths": {},
     "scenes": [
+      {
+        "id": "studio",
+        "device": "desktop",
+        "url": "https://jinilee-hue.github.io/Phonics-Studio",
+        "path": "/studio",
+        "wait": 3500,
+        "tag": {
+          "ko": "Studio · 관리자",
+          "en": "Studio · admins"
+        }
+      },
       {
         "id": "pg-card",
         "src": "assets/shots/Phonics-Playground-card.jpg",
