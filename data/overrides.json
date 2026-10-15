@@ -2163,7 +2163,9 @@
               38.9
             ]
           }
-        ]
+        ],
+        "path": "/studio",
+        "url": "https://jinilee-hue.github.io/Phonics-Studio"
       },
       {
         "id": "review",
@@ -2210,7 +2212,9 @@
               23.5
             ]
           }
-        ]
+        ],
+        "path": "/review",
+        "url": "https://jinilee-hue.github.io/Phonics-Studio"
       },
       {
         "id": "rules",
@@ -2249,7 +2253,9 @@
               58.5
             ]
           }
-        ]
+        ],
+        "path": "/ops/settings",
+        "url": "https://jinilee-hue.github.io/Phonics-Studio"
       }
     ],
     "shot_url": "https://jinilee-hue.github.io/Phonics-Playground/gallery",

@@ -235,8 +235,11 @@ def main() -> int:
         })
         live = p["auto"].get("live") or ""
         for sc in p.get("scenes") or []:
+            # 한 프로젝트가 저장소 두 곳에 걸쳐 있으면(Playground / Studio)
+            # live 하나로는 모자란다. scene 이 제 주소를 들고 있으면 그걸 쓴다.
+            base = (sc.get("url") or "").strip() or live
             su = with_query(
-                url_with_path(live, sc.get("path") or ""),
+                url_with_path(base, sc.get("path") or ""),
                 sc.get("query") or p.get("shot_query") or "",
             )
             if not su:
