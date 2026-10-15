@@ -1959,8 +1959,8 @@
       "en": "One pipeline, from upload to the student's screen"
     },
     "summary": {
-      "ko": "파닉스 콘텐츠를 등록하고 검수하고 게시하는 Studio, 게시된 것이 학생에게 닿는 Playground. 두 앱이 한 파이프라인의 앞뒤다. 창작자가 올리면 자동검수 다섯 단계가 근거를 만들고 사람이 승인하며, 운영자가 게시한 순간 Playground 갤러리에 뜬다. 학생이 남긴 별점과 플레이 기록은 다시 Studio 통계로 돌아온다.",
-      "en": "Studio takes phonics content through upload, review and publishing; Playground is where the published work reaches the student. Two apps, two ends of one pipeline. A creator uploads, five automatic stages build the evidence, a person approves, and the moment an operator publishes it appears in the Playground gallery. The ratings and play logs students leave flow back into Studio's dashboard."
+      "ko": "학생이 파닉스 게임을 하는 Playground, 그 게임들을 등록하고 검수하고 게시하는 관리자 화면 Studio. 두 앱이 한 파이프라인의 앞뒤다.",
+      "en": "Playground is where students play phonics games; Studio is the admin side where those games are submitted, reviewed and published. Two apps, one pipeline."
     },
     "role": {
       "ko": "역할별 화면 설계 · 프런트엔드",
@@ -1972,7 +1972,7 @@
       "Role-based"
     ],
     "entry": "",
-    "shot_path": "ops/stats",
+    "shot_path": "",
     "shot_wait": 3500,
     "shot_devices": [
       "desktop",
@@ -1987,36 +1987,72 @@
     "shot_notes": {
       "desktop": {
         "label": {
-          "ko": "운영 통계 — 파이프라인이 숫자로 보인다",
-          "en": "Operations — the pipeline as numbers"
+          "ko": "Playground — 학생이 만나는 쪽",
+          "en": "Playground — the student side"
         },
         "note": {
-          "ko": "등록·검수·게시가 어디서 막히는지 상태 분포로 본다. 학생 플레이 지표는 Playground에서 받아 온다.",
-          "en": "Where upload, review and publishing stall, read as a status split. Play metrics come back from Playground."
+          "ko": "게시된 게임이 모이는 학생 화면이다. 파스텔 바탕에 큰 라운드 카드와 캐릭터를 두고, 글자를 못 읽는 아이도 섬네일만 보고 고를 수 있게 했다. 관리 기능은 지우지 않고 헤더의 작은 아이콘 알약으로 접어 넣었다.",
+          "en": "Where published games land for students: pastel ground, large rounded cards and characters, so a child who cannot yet read still picks by picture. Management tools were folded into small icon pills in the header rather than removed."
         },
         "features": [
           {
-            "ko": "승인율로 검수가 얼마나 걸러내는지 본다",
-            "en": "The approval rate shows how much review filters",
+            "ko": "섬네일 격자로 게임을 펼친다",
+            "en": "Games open as a grid of thumbnails",
             "at": [
-              60,
-              24
+              10.3,
+              18.3
             ]
           },
           {
-            "ko": "OPEN·검수대기·반려를 도넛 한 장으로",
-            "en": "Open, pending and rejected in one donut",
+            "ko": "별점과 플레이 수가 카드에 붙는다",
+            "en": "Rating and play count sit on the card",
             "at": [
-              31,
-              55
+              4.9,
+              30.8
             ]
           },
           {
-            "ko": "상태마다 어떤 콘텐츠인지 바로 짚는다",
-            "en": "Each state names the content behind it",
+            "ko": "레벨과 학습 종류를 칩으로 읽는다",
+            "en": "Level and skill read as chips",
             "at": [
-              69,
-              55
+              4.1,
+              42.3
+            ]
+          }
+        ]
+      },
+      "tablet": {
+        "label": {
+          "ko": "Studio — 관리자가 쓰는 쪽",
+          "en": "Studio — the admin side"
+        },
+        "note": {
+          "ko": "게임을 등록하고 검수하고 게시하는 관리자 화면이다. 보라 계열에 텍스트 내비로, 학생 화면과 얼굴을 완전히 갈랐다. 등록은 기본정보 · 콘텐츠 소스 · 분류 세 단계로 끊어 한 번에 다 묻지 않는다.",
+          "en": "The admin side where games are submitted, reviewed and published. A violet shell with text navigation, deliberately sharing nothing with the student view. Submission breaks into three steps rather than one long form."
+        },
+        "features": [
+          {
+            "ko": "썸네일은 첫 화면에서 자동으로 딴다",
+            "en": "The thumbnail is captured from the first screen",
+            "at": [
+              16.7,
+              30.4
+            ]
+          },
+          {
+            "ko": "파일이냐 URL이냐부터 고른다",
+            "en": "File or URL comes first",
+            "at": [
+              26.6,
+              70.0
+            ]
+          },
+          {
+            "ko": "HTML · ZIP · 비디오를 모두 받는다",
+            "en": "HTML, ZIP and video all come in",
+            "at": [
+              18.8,
+              83.7
             ]
           }
         ]
@@ -2026,8 +2062,8 @@
       "Claude Code"
     ],
     "intent": {
-      "ko": "콘텐츠를 여러 사람이 만들기 시작하면 '올린 다음 무슨 일이 일어나는가'가 문제가 된다. 누가 보고, 무엇을 기준으로 통과시키고, 언제 학생에게 열리는지가 정해져 있지 않으면 품질이 사람마다 달라진다. 그래서 등록 화면보다 검수와 게시 화면을 먼저 설계했고, 게시 다음에 무엇이 보이는지까지를 같은 프로젝트로 묶었다.",
-      "en": "Once several people start making content, the real question is what happens after upload. Without a set answer to who looks at it, against what, and when it reaches students, quality drifts per person. The review and publish screens were designed before the upload form — and what students see after publishing was treated as part of the same project."
+      "ko": "콘텐츠를 여러 사람이 만들기 시작하면 \"올린 다음 무슨 일이 일어나는가\"가 문제가 된다. 누가 보고, 무엇을 기준으로 통과시키고, 언제 학생에게 열리는지가 정해져 있지 않으면 품질이 사람마다 달라진다. 그래서 등록 화면보다 검수와 게시 화면을 먼저 설계했고, 게시 다음에 무엇이 보이는지까지 같은 프로젝트로 묶었다.\n\n두 앱은 데이터를 공유하되 얼굴은 완전히 갈랐다. Studio는 보라 계열 어드민에 텍스트 내비, Playground는 파스텔에 큰 라운드 카드와 캐릭터다. 검수에서는 AI를 판정자가 아니라 근거 생산자로 두고, 다섯 단계가 통과·경고·참고만 표시하게 했다. 자동 반려는 형식·정적 검사에서만 나온다.",
+      "en": "Once several people are making content, the real question is what happens after upload. Without a stated reviewer, a stated standard and a stated moment of release, quality drifts person to person. So the review and publish screens were designed before the submission form, and what students see after release stayed in the same project.\n\nThe two apps share data but were given nothing in common to look at — Studio a violet admin with text navigation, Playground pastel with large rounded cards. In review, AI produces evidence rather than verdicts: five stages mark pass, warn or note, and automatic rejection comes only from format and static checks."
     },
     "concept": {
       "ko": "두 앱은 데이터를 공유하되 얼굴은 완전히 갈라야 했다. 학생은 어두운 어드민을 볼 이유가 없고, 운영자는 캐릭터 카드 사이에서 지표를 읽을 수 없다. Studio는 다크 네이비에 텍스트 내비, Playground는 파스텔에 큰 라운드 카드와 캐릭터다. 관리 기능은 지우지 않고 Playground 헤더의 작은 아이콘 알약으로 접어 넣어, 아이 화면을 방해하지 않으면서 운영자가 학생이 보는 그 자리에서 성과를 열 수 있게 했다.\n\n검수에서는 AI를 판정자가 아니라 근거 생산자로 뒀다. 형식·정적 스캔·메타데이터·품질평가·루브릭 다섯 단계가 통과·경고·참고를 표시하고, 화면에 'AI 점수는 참고용이며 최종 판정은 사람이 합니다'를 명시했다. 자동 반려는 형식·정적 검사에서만 나온다.",
@@ -2035,79 +2071,194 @@
     },
     "decisions": [
       {
-        "ko": "역할을 계정이 아니라 화면 묶음으로 나눴다. 창작자·검토자·운영자 메뉴가 한 내비게이션에 그룹으로 서 있어 권한이 늘어도 구조가 흔들리지 않는다.",
-        "en": "Roles are split by screen group, not by account. Creator, reviewer and operator menus stand as groups in one nav, so the structure holds as permissions grow."
+        "ko": "Playground에 올라간 게임 중 Sound Safari와 Word Mashup은 직접 만들었다. 파이프라인을 설계한 사람이 그 파이프라인을 실제로 통과시켜 보면 등록 폼에서 무엇을 묻는지가 달라진다 — 썸네일 자동 캡처와 레벨·학습종류 분류가 그렇게 들어갔다.",
+        "en": "Two of the games in Playground — Sound Safari and Word Mashup — were built by hand. Designing a pipeline is one thing; pushing your own work through it changes what the submission form asks for. Automatic thumbnail capture and the level and skill tagging came out of that."
       },
       {
-        "ko": "검수 화면에 책임 한계를 문장으로 박아뒀다. '판정은 사람이 합니다', 'AI 점수는 참고용입니다' — 도구가 자동으로 떨어뜨렸다고 오해하면 검토자가 판단을 멈춘다.",
-        "en": "The limits are written into the review screen: a person decides, AI scores are advisory. If reviewers think the tool already ruled, they stop judging."
+        "ko": "갤러리에 보기 방식을 둘 뒀다. 카드형은 큰 섬네일로 그림을 보고 고르게 하고, 리스트형은 히어로와 가로 띠로 오늘 할 것을 권한다. 글자가 아직 느린 아이와, 뭘 할지 모르겠는 아이가 서로 다른 길로 들어간다.",
+        "en": "The gallery has two views. Cards let a child choose on picture alone; the curated view leads with a hero and skill rows. A child who reads slowly and a child who does not know where to start take different routes in."
       },
       {
-        "ko": "콘텐츠 상태를 여섯 가지로 고정했다(OPEN·검수대기·승인완료·게시중단·반려·보관됨). 상태가 모호하면 '지금 이건 학생이 볼 수 있나'를 매번 물어봐야 한다.",
-        "en": "Six fixed states — open, pending, approved, unpublished, rejected, archived. Vague states mean asking every time whether students can see this yet."
+        "ko": "검수 화면에 책임 한계를 문장으로 박아뒀다. \"판정은 사람이 합니다\", \"AI 점수는 참고용입니다\". 자동 반려는 형식·정적 검사에서만 나오고, 품질 판단은 사람 손에 남겼다.",
+        "en": "The review screen states its own limits in plain sentences: a person decides, AI scores are advisory. Automatic rejection comes only from format and static checks; judgement of quality stays with people."
       },
       {
-        "ko": "콘텐츠를 iframe 안에 격리하고 이벤트만 주고받게 했다. 게임과 셸을 따로 배포할 수 있어 게임 하나 고치자고 앱 전체를 다시 올리지 않는다.",
-        "en": "Content is isolated in an iframe, exchanging only events. Games and shell deploy separately, so fixing one game doesn't mean shipping the whole app."
+        "ko": "검수 기준을 문서가 아니라 화면에 올렸다. 다섯 차원의 가중치 합을 1로 묶고 차원마다 하드게이트를 따로 걸 수 있게 해, 안전성만 올려 두면 나머지가 좋아도 통과하지 못한다.",
+        "en": "The standard lives on a screen, not in a document. Five weights must total one and each dimension can set its own hard gate, so raising safety alone stops anything that fails it."
       },
       {
-        "ko": "학생 평가를 별점만으로 받지 않고 '재밌어요/어려워요/또 하고 싶어요' 칩을 붙였다. 아이는 별 개수보다 말로 고르는 게 빠르다.",
-        "en": "Student feedback isn't stars alone — chips like fun, hard, again. Children pick words faster than they weigh stars."
-      },
-      {
-        "ko": "AI로 만든 콘텐츠는 등록 때 체크하게 하고 양쪽 목록 모두에 'AI' 배지로 드러냈다. 숨기면 나중에 신뢰 문제가 된다.",
-        "en": "AI-made content is declared at upload and carries an AI badge in both apps' lists. Hiding it becomes a trust problem later."
+        "ko": "두 앱의 얼굴을 완전히 갈랐다. 학생은 어두운 어드민을 볼 이유가 없고 운영자는 캐릭터 카드 사이에서 지표를 읽을 수 없다. 데이터는 공유하되 Studio는 보라 어드민, Playground는 파스텔 카드로 간다.",
+        "en": "The two apps were given nothing in common to look at. A student has no reason to see a dark admin, and an operator cannot read metrics between character cards — shared data, opposite surfaces."
       }
     ],
-    "shot_evals": {},
-    "shot_paths": {
-      "tablet": "studio"
+    "shot_evals": {
+      "desktop": "(() => new Promise(r => {const b = [...document.querySelectorAll('.app-settings')].find(e => e.getAttribute('aria-label') === '카드형');if (b) b.click();setTimeout(r, 2200);}))()"
     },
+    "shot_paths": {},
     "scenes": [
+      {
+        "id": "pg-card",
+        "src": "assets/shots/Phonics-Playground-card.jpg",
+        "device": "desktop",
+        "label": {
+          "ko": "갤러리 카드형 — 그림으로 고른다",
+          "en": "Gallery, cards — choosing by picture"
+        },
+        "note": {
+          "ko": "게임을 큰 섬네일 격자로 한 번에 펼친다. 제목을 읽지 않아도 그림과 별점만으로 고를 수 있어, 아직 글자가 느린 아이가 혼자 들어가는 길이 된다. 카드마다 레벨 칩과 학습 종류가 붙어 교사도 같은 화면에서 고를 수 있고, AI로 만든 콘텐츠는 배지로 드러난다.",
+          "en": "Every game opens at once as a grid of large thumbnails. A child who reads slowly can still choose on picture and rating alone, while the level chip and skill tag let a teacher pick from the same screen. AI-made content carries a badge."
+        },
+        "features": [
+          {
+            "ko": "섬네일만 보고도 고를 수 있다",
+            "en": "The thumbnail alone is enough to choose",
+            "at": [
+              10.3,
+              18.5
+            ]
+          },
+          {
+            "ko": "별점과 플레이 수가 카드에 붙는다",
+            "en": "Rating and play count sit on the card",
+            "at": [
+              4.9,
+              32.5
+            ]
+          },
+          {
+            "ko": "레벨 칩과 AI 배지로 걸러낸다",
+            "en": "Level chips and an AI badge narrow it down",
+            "at": [
+              6.1,
+              42.9
+            ]
+          }
+        ]
+      },
+      {
+        "id": "pg-list",
+        "src": "assets/shots/Phonics-Playground-list.jpg",
+        "device": "desktop",
+        "label": {
+          "ko": "갤러리 리스트형 — 골라 준 길로 간다",
+          "en": "Gallery, curated — following a chosen path"
+        },
+        "note": {
+          "ko": "같은 목록을 큐레이션으로 바꿔 보여준다. 히어로가 오늘 할 것을 먼저 권하고, 이달의 신규와 영역별 맞춤이 가로 띠로 이어진다. 고를 게 많아졌을 때 격자만으로는 어디부터 볼지 정하기 어려워 더한 화면이다.",
+          "en": "The same catalogue, curated. A hero suggests today first, then new arrivals and skill-matched rows run across. Added once the grid alone stopped telling a child where to begin."
+        },
+        "features": [
+          {
+            "ko": "오늘 할 것을 먼저 권한다",
+            "en": "Today’s pick comes first",
+            "at": [
+              24.3,
+              17.7
+            ]
+          },
+          {
+            "ko": "이달의 신규를 따로 띄운다",
+            "en": "New arrivals get their own row",
+            "at": [
+              14.6,
+              54.0
+            ]
+          },
+          {
+            "ko": "레벨별로 띠를 갈아 끼운다",
+            "en": "Each level swaps the row beneath",
+            "at": [
+              14.6,
+              82.3
+            ]
+          }
+        ]
+      },
       {
         "id": "review",
         "device": "desktop",
         "wait": 3500,
-        "path": "review",
         "label": {
           "ko": "검수 — 근거는 AI, 판정은 사람",
           "en": "Review — AI gives evidence, a person decides"
         },
         "note": {
-          "ko": "자동검수 다섯 단계가 통과·경고·참고로 결과를 쌓고, 루브릭 가중합과 함께 보여준다. 승인과 반려 버튼은 사람 몫이다.",
-          "en": "Five automatic stages stack up as pass, warning or reference alongside the weighted rubric score. Approve and reject stay in human hands."
+          "ko": "검수 대기 목록이다. 한 줄에 콘텐츠 종류(HTML·ZIP), AI 제작 여부, 제출 시각이 함께 서고 오른쪽에서 바로 승인하거나 반려한다. 자동검수 다섯 단계의 근거는 심사 콘솔에서 펼쳐 보고, 격리 미리보기로 실제 실행까지 확인한 뒤 판정한다. 화면 맨 위에 \"판정은 사람이 합니다\"를 문장으로 박아뒀다.",
+          "en": "The review queue. Each row carries the content type, whether AI made it and when it arrived, with approve and reject on the right. The five automated checks open as evidence in the console, and a sandboxed preview runs the thing itself before anyone decides. The line at the top says plainly that a person decides."
         },
-        "features": []
+        "features": [
+          {
+            "ko": "판정은 사람이 한다고 적어 뒀다",
+            "en": "It states that a person decides",
+            "at": [
+              31.4,
+              15.9
+            ]
+          },
+          {
+            "ko": "AI로 만든 건 배지로 드러난다",
+            "en": "AI-made content carries a badge",
+            "at": [
+              28.4,
+              43.0
+            ]
+          },
+          {
+            "ko": "격리 미리보기로 실행해 본다",
+            "en": "A sandboxed preview runs it",
+            "at": [
+              68.1,
+              23.5
+            ]
+          },
+          {
+            "ko": "승인과 반려가 같은 줄에 있다",
+            "en": "Approve and reject sit on the row",
+            "at": [
+              83.0,
+              23.5
+            ]
+          }
+        ]
       },
       {
         "id": "rules",
         "device": "desktop",
         "wait": 3200,
-        "path": "ops/settings",
         "label": {
           "ko": "검수 규칙 — 기준을 손에 쥐게",
           "en": "Rubric settings — the standard stays yours"
         },
         "note": {
-          "ko": "교육성·재미·기술완성도·사용성·안전성 다섯 축의 가중치와 하드게이트 임계를 운영자가 직접 조정한다.",
-          "en": "Operators tune the weights across five axes — pedagogy, fun, craft, usability, safety — and the hard-gate threshold themselves."
+          "ko": "검수 기준을 문서가 아니라 화면에서 손에 쥐게 했다. 교육성·재미·기술완성도·사용성·안전성 다섯 차원의 가중치를 합이 1이 되게 맞추고, 차원마다 하드게이트 최소점수를 따로 건다. 안전성만 2점으로 올려 두면 나머지가 아무리 좋아도 안전이 걸리면 통과하지 못한다.",
+          "en": "The review standard lives on a screen, not in a document. Five dimensions carry weights that must total one, and each can set its own hard-gate minimum. Raising safety to two means nothing clears on strong scores elsewhere if safety fails."
         },
-        "features": []
-      },
-      {
-        "id": "gallery",
-        "device": "desktop",
-        "wait": 3500,
-        "src": "assets/shots/Phonics-Playground.jpg",
-        "label": {
-          "ko": "Playground — 게시된 것이 학생에게",
-          "en": "Playground — published, and in front of a student"
-        },
-        "note": {
-          "ko": "게시한 순간 갤러리에 뜬다. 레벨과 스킬 두 축으로 골라 전체화면으로 실행하고, 끝나면 별점과 감상 칩을 남긴다.",
-          "en": "Publishing puts it in the gallery. Pick by level and skill, run it full-screen, then leave a rating and a reaction chip."
-        },
-        "features": []
+        "features": [
+          {
+            "ko": "다섯 차원을 한 장으로 본다",
+            "en": "Five dimensions in one shape",
+            "at": [
+              32.5,
+              46.0
+            ]
+          },
+          {
+            "ko": "가중치 합은 1로 맞춘다",
+            "en": "The weights must total one",
+            "at": [
+              67.0,
+              46.0
+            ]
+          },
+          {
+            "ko": "안전성에만 하드게이트를 건다",
+            "en": "Only safety carries a hard gate",
+            "at": [
+              80.0,
+              58.5
+            ]
+          }
+        ]
       },
       {
         "id": "play",
@@ -2116,15 +2267,44 @@
         "src": "assets/shots/Phonics-Playground--tablet.jpg",
         "label": {
           "ko": "학생 화면 — 어드민과 정반대 얼굴",
-          "en": "The student's face of it"
+          "en": "The student view — the opposite face"
         },
         "note": {
-          "ko": "같은 데이터 위에 파스텔과 캐릭터. 관리 기능은 헤더의 작은 아이콘으로 접혀 아이 화면을 방해하지 않는다.",
-          "en": "Same data, pastel and characters on top. Admin tools fold into small header icons and stay out of a child's way."
+          "ko": "같은 데이터를 쓰지만 얼굴은 완전히 다르다. 파스텔 배경에 큰 라운드 카드를 깔고 섬네일마다 재생 버튼을 올려, 글자를 읽지 않아도 누를 곳이 보인다. 카드가 많아져도 한 번에 쏟지 않고 P1~P4로 끊어, 고르다 지치지 않게 했다.",
+          "en": "Same data, a different face entirely. Pastel ground, large rounded cards and a play button on every thumbnail, so what to press is visible without reading. However many games arrive, they come four pages at a time rather than all at once."
         },
-        "features": []
+        "features": [
+          {
+            "ko": "섬네일마다 재생 버튼이 올라간다",
+            "en": "A play button sits on every thumbnail",
+            "at": [
+              12.8,
+              21.5
+            ]
+          },
+          {
+            "ko": "한 번에 쏟지 않고 쪽으로 끊는다",
+            "en": "Paged, not poured out all at once",
+            "at": [
+              84.1,
+              93.8
+            ]
+          },
+          {
+            "ko": "레벨과 학습 종류를 칩으로 읽는다",
+            "en": "Level and skill read as chips",
+            "at": [
+              5.6,
+              44.9
+            ]
+          }
+        ]
       }
-    ]
+    ],
+    "shot_url": "https://jinilee-hue.github.io/Phonics-Playground/gallery",
+    "shot_urls": {
+      "tablet": "https://jinilee-hue.github.io/Phonics-Studio/studio"
+    }
   },
   "Phonics-Playground": {
     "merge_into": "Phonics-Studio"
@@ -2353,8 +2533,8 @@
   },
   "phonics-wordmashup": {
     "title": {
-      "ko": "Prompt Crash — 합성어 게임",
-      "en": "Prompt Crash — Compound Word Game"
+      "ko": "Word Mashup — 합성어 게임",
+      "en": "Word Mashup — Compound Word Game"
     },
     "kicker": {
       "ko": "5~7세 복합어 퍼즐 게임",

@@ -280,9 +280,15 @@ def main() -> int:
                 sc["src"] = f"assets/shots/{p['id']}--{sc['id']}.jpg"
         # 썸네일 촬영 대상: shot_path 가 있으면 그 화면, 없으면 라이브 첫 화면.
         # 인트로·로그인 화면보다 실제 작업이 보이는 화면이 포트폴리오에서 훨씬 강하다.
+        # overrides 에 shot_url 을 직접 적었으면 그 값이 우선이다 — Phonics 처럼
+        # 대표 화면이 다른 저장소에 있는 경우가 있다.
         base = p["auto"]["live"]
         sp = (p.get("shot_path") or "").strip()
-        p["shot_url"] = (base.rstrip("/") + "/" + sp.lstrip("/")) if (base and sp) else base
+        manual_url = (o.get("shot_url") or "").strip()
+        if manual_url:
+            p["shot_url"] = manual_url
+        else:
+            p["shot_url"] = (base.rstrip("/") + "/" + sp.lstrip("/")) if (base and sp) else base
         merged.append(p)
 
     # 정렬: 기본은 마지막 커밋 최신순(= 마지막에 한 작업이 항상 맨 위).

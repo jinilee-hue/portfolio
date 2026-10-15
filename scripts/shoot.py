@@ -216,6 +216,8 @@ def main() -> int:
             # 기기별로 아예 다른 경로를 찍어야 할 때도 있다 — 긴 대시보드는 가로 태블릿에
             # 안 담기므로 그 기기만 짧은 화면으로 돌린다. shot_paths: {"tablet": "review"}
             "paths": {k: (v or "").strip() for k, v in (p.get("shot_paths") or {}).items()},
+            # 기기별로 다른 사이트를 찍을 때 — shot_urls: {"tablet": "https://..."}
+            "urls": {k: (v or "").strip() for k, v in (p.get("shot_urls") or {}).items()},
             "shot_path": (p.get("shot_path") or "").strip(),
             "base": site_root,
             "dest": None,
@@ -295,6 +297,12 @@ def main() -> int:
                         # base 를 그대로 쓴다.
                         root = (job.get("base") or job["url"]).split("?")[0]
                         target_url = root.rstrip("/") + "/" + quote(path_override.lstrip("/"))
+                    # 기기마다 아예 다른 사이트를 찍어야 할 때가 있다 — Phonics 는
+                    # desktop 이 Playground, tablet 이 Studio 로 저장소가 갈린다.
+                    url_override = (job.get("urls") or {}).get(dev) \
+                        or (job.get("urls") or {}).get(alias_dev)
+                    if url_override:
+                        target_url = url_override
                     page.goto(target_url, wait_until="load", timeout=30_000)
                     try:
                         page.wait_for_load_state("networkidle", timeout=NETWORK_IDLE_MS)
