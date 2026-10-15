@@ -1051,8 +1051,8 @@
     "shot_path": "designB/index.html",
     "shot_wait": 4200,
     "concept": {
-      "ko": "채택된 B안은 파랑 단색 배경에 흰 워드마크, 오른쪽 위 sparkle 하나로 '깨달음의 순간'을 표시한다. 캐릭터는 사자 — 아이가 배우는 자리에서 평가받는 기분이 들지 않도록 위엄보다 친근함 쪽으로 비율을 잡고 목에 LIO 밴드너를 둘러 브랜드와 캐릭터를 한 몸으로 묶었다. 화면은 같은 파랑을 배경으로 써서 캐릭터가 UI 위에 얹힌 스티커처럼 보이지 않게 했다.",
-      "en": "The chosen direction pairs a solid blue field with a white wordmark and a single sparkle for the moment of understanding. The character is a lion, proportioned toward friendliness rather than majesty so a learning child never feels judged, with a LIO bandana tying character and brand into one object. Screens reuse the same blue so the character never reads as a sticker pasted onto the UI."
+      "ko": "채택된 B안은 파랑 단색 배경에 흰 워드마크다. 알아들었을 때의 즐거움을 두 군데에 나눠 넣었다 — O 안쪽의 금색 호는 웃는 입이고, 오른쪽 위 sparkle 하나가 그 순간을 바깥에서 받는다. 캐릭터는 사자. 아이가 배우는 자리에서 평가받는 기분이 들지 않도록 위엄보다 친근함 쪽으로 비율을 잡고, 목에 LIO 밴드너를 둘러 브랜드와 캐릭터를 한 몸으로 묶었다. 화면은 같은 파랑을 배경으로 써서 캐릭터가 UI 위에 얹힌 스티커처럼 보이지 않게 했다.",
+      "en": "The chosen direction pairs a solid blue field with a white wordmark. The pleasure of understanding sits in two places — the gold arc inside the O is a smile, and a single sparkle above catches the same moment from outside. The character is a lion, proportioned toward friendliness rather than majesty so a learning child never feels judged, with a LIO bandana tying character and brand into one object. Screens reuse the same blue so the character never reads as a sticker pasted onto the UI."
     },
     "shot_devices": [
       "desktop",
@@ -1272,8 +1272,8 @@
       "desktop": {
         "features": [
           {
-            "ko": "워드마크의 O 에 갈기를 금색 호로 심었다",
-            "en": "The mane becomes a gold arc inside the O",
+            "ko": "워드마크의 O 가 웃는 입이 된다",
+            "en": "The O in the wordmark becomes a smile",
             "at": [
               77.4,
               43.4
@@ -1301,8 +1301,8 @@
           "en": "Brand — wordmark and character"
         },
         "note": {
-          "ko": "이름부터 지었다. LIO 는 Lion 과 i-LENS 의 i·o 를 겹친 말로, 학생이 부르기 쉬운 두 음절로 줄였다. 워드마크의 O 는 사자 갈기를 금색 호로 추상화해 글자 안에 캐릭터를 심었고, 오른쪽 위 sparkle 하나로 '막히던 문제가 풀리는 순간'을 표시한다. 컬러는 로열블루 단색 — 아동 서비스가 흔히 쓰는 원색 조합을 피해 화면이 오래 켜져 있어도 눈이 덜 피로하게 했다. 브랜드 후보는 5안을 같은 조건으로 한 페이지에 올려 투표로 좁혔고, 정해진 다음에야 화면 설계로 내려갔다.",
-          "en": "The name came first. LIO folds Lion into the i and o of i-LENS — two syllables a child can call out. The O in the wordmark abstracts the mane into a gold arc, planting the character inside the letters, and a single sparkle marks the moment a stuck problem gives way. One royal blue, no primary-colour pile-up, so the screen stays easy on the eyes. Five brand directions went on one page and were narrowed by vote before any screen was drawn."
+          "ko": "이름부터 지었다. LIO 는 Lion 과 i-LENS 의 i·o 를 겹친 말로, 학생이 부르기 쉬운 두 음절로 줄였다. 워드마크의 O 안에는 금색 호를 웃는 입으로 넣어 알아들었을 때의 즐거움을 글자 안에 담았고, 오른쪽 위 sparkle 하나가 '막히던 문제가 풀리는 순간'을 바깥에서 받는다. 컬러는 로열블루 단색 — 아동 서비스가 흔히 쓰는 원색 조합을 피해 화면이 오래 켜져 있어도 눈이 덜 피로하게 했다. 브랜드 후보는 5안을 같은 조건으로 한 페이지에 올려 투표로 좁혔고, 정해진 다음에야 화면 설계로 내려갔다.",
+          "en": "The name came first. LIO folds Lion into the i and o of i-LENS — two syllables a child can call out. Inside the O a gold arc curves into a smile, putting the pleasure of understanding into the letters themselves, while a single sparkle above catches the moment a stuck problem gives way. One royal blue, no primary-colour pile-up, so the screen stays easy on the eyes. Five brand directions went on one page and were narrowed by vote before any screen was drawn."
         }
       },
       "tablet": {
