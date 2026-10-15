@@ -1067,32 +1067,69 @@
     },
     "scenes": [
       {
-        "id": "compare",
-        "src": "assets/shots/LIO_DESIGN-ab.jpg",
+        "id": "plan-a",
+        "path": "designA/index.html",
         "device": "desktop",
+        "selector": "#stage",
+        "wait": 1500,
+        "eval": "(() => new Promise(r => {const st = document.querySelector('#stage');st.querySelectorAll('.play,.playbtn,.play-btn,[class*=play],button').forEach(e => {  e.style.display = 'none';});const v = st.querySelector('video');if (v) { v.controls = false; v.removeAttribute('controls'); }setTimeout(r, 3200);}))()",
         "label": {
-          "ko": "A안 · B안 — 같은 흐름을 두 벌로",
-          "en": "A and B — the same flow built twice"
+          "ko": "A안 — 숲속 스토리북",
+          "en": "A — a storybook forest"
         },
         "note": {
-          "ko": "같은 학습 흐름을 두 디자인으로 끝까지 만들어 나란히 놓았다. A안은 숲속 스토리북 세계로 가고, B안은 앱 UI 로 간다. 채택된 쪽은 B안이다 — 이 서비스를 쓰는 학년대에는 동화 세계보다 학습 도구의 얼굴이 맞았다. A안은 버리지 않고 5세 전후의 더 어린 레벨에서 쓸 플랫폼으로 이어 가기로 했다.",
-          "en": "The same flow was built end to end in two designs and set side by side. A goes to a storybook forest, B to an app interface. B was chosen — for this age band a learning tool reads better than a fairy tale. A was not discarded: it carries on as the platform for younger learners, around five."
+          "ko": "학습을 이야기 세계 안으로 넣은 안이다. 사자와 동물 친구들이 숲에서 맞이하고, 간판이 곧 타이틀이 된다. 이 학년대에는 세계관을 먼저 이해해야 하는 부담이 있어 채택되지 않았지만 버리지는 않았다 — 5세 전후의 더 어린 레벨에서 쓸 플랫폼으로 이어 간다.",
+          "en": "This direction puts the lesson inside a story world: the lion and his friends greet you in the forest and the signpost doubles as the title. For this age band it asks the child to learn a world before a skill, so it was not chosen — but it was not dropped either. It carries on as the platform for younger learners, around five."
         },
         "features": [
           {
-            "ko": "A안 — 숲속 스토리북, 더 어린 레벨로 이어 간다",
-            "en": "A — a storybook forest, carried on for younger learners",
+            "ko": "동물 친구들이 숲에서 맞이한다",
+            "en": "Animal friends greet you in the forest",
             "at": [
-              25.0,
-              50.0
+              50.0,
+              34.0
             ]
           },
           {
-            "ko": "B안 — 앱 UI, 이 학년대에 맞아 채택됐다",
-            "en": "B — an app interface, chosen for this age band",
+            "ko": "간판이 곧 타이틀이다",
+            "en": "The signpost doubles as the title",
             "at": [
-              75.0,
-              50.0
+              45.0,
+              78.0
+            ]
+          }
+        ]
+      },
+      {
+        "id": "plan-b",
+        "path": "designB/index.html",
+        "device": "desktop",
+        "selector": "#stage",
+        "wait": 1200,
+        "eval": "(() => new Promise(r => setTimeout(r, 5200)))()",
+        "label": {
+          "ko": "B안 — 앱 UI (채택)",
+          "en": "B — an app interface (adopted)"
+        },
+        "note": {
+          "ko": "같은 흐름을 학습 도구의 얼굴로 만든 안이다. 파랑 한 색 위에 워드마크와 캐릭터만 두고 Let's Go 하나로 들어간다. 이 학년대에는 동화 세계보다 이쪽이 맞아 채택됐고, 이후 64화면 프로토타입 전체가 이 디자인으로 구현됐다.",
+          "en": "The same flow built as a learning tool. One blue, the wordmark, the character, and a single Let's Go. For this age band it read better than the fairy tale, and the full 64-screen prototype was built in this design."
+        },
+        "features": [
+          {
+            "ko": "파랑 한 색 위에 워드마크와 캐릭터만",
+            "en": "One blue, the wordmark and the character",
+            "at": [
+              62.0,
+              30.0
+            ]
+          },
+          {
+            "ko": "버튼 하나로 학습에 들어간다",
+            "en": "A single button opens the lesson",
+            "at": [
+              62.0,
+              68.0
             ]
           }
         ]
