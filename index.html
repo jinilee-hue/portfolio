@@ -445,6 +445,14 @@
   .feats .ph .shot.long img{display:block;width:100%;max-width:none;height:auto;
     max-height:none;object-fit:fill}
   .feats .pins{position:absolute;inset:0;margin:0;padding:0;list-style:none;pointer-events:none}
+  /* 긴 화면 핀은 첫 화면(접힌 윗부분)을 가리키도록 찍혀 있다.
+     굴리는 동안에는 가리키던 자리가 사라지므로 핀·점선·라벨을 함께 숨기고,
+     맨 위로 돌아오면 되돌린다. 엉뚱한 곳을 가리키는 것보다 없는 편이 낫다. */
+  .feats .shot.long .pins{inset:0 0 auto 0;height:auto;aspect-ratio:var(--shotar,16/10)}
+  figure.long-scrolled .pins,
+  figure.long-scrolled svg.wires,
+  figure.long-scrolled .anns{opacity:0;transition:opacity .2s ease}
+  figure.long-scrolled .anns{pointer-events:none}
   .feats .pins li,.feats .pins li::marker{list-style:none}
   .feats .pins li::marker{content:none}
   .feats .pins li{position:absolute;width:10px;height:10px;transform:translate(-50%,-50%);
@@ -1613,10 +1621,14 @@ function draw(){
         const can=shot.scrollHeight - shot.clientHeight > 8;
         ph.classList.toggle('no-scroll', !can);
         if(!can) ph.classList.add('scrolled');
+        // 핀 레이어를 이미지와 같은 비율로 맞춰 둬야 스크롤할 때 함께 흐른다
+        const im=shot.querySelector('img');
+        if(im && im.naturalWidth) shot.style.setProperty('--shotar', im.naturalWidth+'/'+im.naturalHeight);
       };
       shot.addEventListener('scroll',()=>{
-        if(shot.scrollTop>6) ph.classList.add('scrolled');
-        else ph.classList.remove('scrolled');
+        const fig=ph.closest('figure');
+        if(shot.scrollTop>6){ ph.classList.add('scrolled'); fig&&fig.classList.add('long-scrolled'); }
+        else { ph.classList.remove('scrolled'); fig&&fig.classList.remove('long-scrolled'); }
       },{passive:true});
       const img=shot.querySelector('img');
       if(img && !img.complete) img.addEventListener('load',sync,{once:true});
