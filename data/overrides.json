@@ -1951,16 +1951,16 @@
   },
   "Phonics-Studio": {
     "title": {
-      "ko": "Phonics Studio · Playground",
-      "en": "Phonics Studio · Playground"
+      "ko": "Poly Phonics · Phonics Studio",
+      "en": "Poly Phonics · Phonics Studio"
     },
     "kicker": {
       "ko": "콘텐츠 등록부터 학생 화면까지 한 파이프라인",
       "en": "One pipeline, from upload to the student's screen"
     },
     "summary": {
-      "ko": "학생이 파닉스 게임을 하는 Playground, 그 게임들을 등록하고 검수하고 게시하는 관리자 화면 Studio. 두 앱이 한 파이프라인의 앞뒤다.",
-      "en": "Playground is where students play phonics games; Studio is the admin side where those games are submitted, reviewed and published. Two apps, one pipeline."
+      "ko": "학생이 파닉스 게임을 하는 Poly Phonics, 그 게임들을 등록하고 검수하고 게시하는 관리자 화면 Studio. 두 앱이 한 파이프라인의 앞뒤다.",
+      "en": "Poly Phonics is where students play phonics games; Studio is the admin side where those games are submitted, reviewed and published. Two apps, one pipeline."
     },
     "role": {
       "ko": "역할별 화면 설계 · 프런트엔드",
@@ -1987,8 +1987,8 @@
     "shot_notes": {
       "desktop": {
         "label": {
-          "ko": "Playground — 학생이 만나는 쪽",
-          "en": "Playground — the student side"
+          "ko": "Poly Phonics — 학생이 만나는 쪽",
+          "en": "Poly Phonics — the student side"
         },
         "note": {
           "ko": "게시된 게임이 모이는 학생 화면이다. 파스텔 바탕에 큰 라운드 카드와 캐릭터를 두고, 글자를 못 읽는 아이도 섬네일만 보고 고를 수 있게 했다. 관리 기능은 지우지 않고 헤더의 작은 아이콘 알약으로 접어 넣었다.",
@@ -2012,17 +2012,17 @@
       "Claude Code"
     ],
     "intent": {
-      "ko": "콘텐츠를 여러 사람이 만들기 시작하면 \"올린 다음 무슨 일이 일어나는가\"가 문제가 된다. 누가 보고, 무엇을 기준으로 통과시키고, 언제 학생에게 열리는지가 정해져 있지 않으면 품질이 사람마다 달라진다. 그래서 등록 화면보다 검수와 게시 화면을 먼저 설계했고, 게시 다음에 무엇이 보이는지까지 같은 프로젝트로 묶었다.\n\n두 앱은 데이터를 공유하되 얼굴은 완전히 갈랐다. Studio는 보라 계열 어드민에 텍스트 내비, Playground는 파스텔에 큰 라운드 카드와 캐릭터다. 검수에서는 AI를 판정자가 아니라 근거 생산자로 두고, 다섯 단계가 통과·경고·참고만 표시하게 했다. 자동 반려는 형식·정적 검사에서만 나온다.",
-      "en": "Once several people are making content, the real question is what happens after upload. Without a stated reviewer, a stated standard and a stated moment of release, quality drifts person to person. So the review and publish screens were designed before the submission form, and what students see after release stayed in the same project.\n\nThe two apps share data but were given nothing in common to look at — Studio a violet admin with text navigation, Playground pastel with large rounded cards. In review, AI produces evidence rather than verdicts: five stages mark pass, warn or note, and automatic rejection comes only from format and static checks."
+      "ko": "콘텐츠를 여러 사람이 만들기 시작하면 \"올린 다음 무슨 일이 일어나는가\"가 문제가 된다. 누가 보고, 무엇을 기준으로 통과시키고, 언제 학생에게 열리는지가 정해져 있지 않으면 품질이 사람마다 달라진다. 그래서 등록 화면보다 검수와 게시 화면을 먼저 설계했고, 게시 다음에 무엇이 보이는지까지 같은 프로젝트로 묶었다.\n\n두 앱은 데이터를 공유하되 얼굴은 완전히 갈랐다. Studio는 보라 계열 어드민에 텍스트 내비, Poly Phonics는 파스텔에 큰 라운드 카드와 캐릭터다. 검수에서는 AI를 판정자가 아니라 근거 생산자로 두고, 다섯 단계가 통과·경고·참고만 표시하게 했다. 자동 반려는 형식·정적 검사에서만 나온다.",
+      "en": "Once several people are making content, the real question is what happens after upload. Without a stated reviewer, a stated standard and a stated moment of release, quality drifts person to person. So the review and publish screens were designed before the submission form, and what students see after release stayed in the same project.\n\nThe two apps share data but were given nothing in common to look at — Studio a violet admin with text navigation, Poly Phonics pastel with large rounded cards. In review, AI produces evidence rather than verdicts: five stages mark pass, warn or note, and automatic rejection comes only from format and static checks."
     },
     "concept": {
-      "ko": "두 앱은 데이터를 공유하되 얼굴은 완전히 갈라야 했다. 학생은 어두운 어드민을 볼 이유가 없고, 운영자는 캐릭터 카드 사이에서 지표를 읽을 수 없다. Studio는 다크 네이비에 텍스트 내비, Playground는 파스텔에 큰 라운드 카드와 캐릭터다. 관리 기능은 지우지 않고 Playground 헤더의 작은 아이콘 알약으로 접어 넣어, 아이 화면을 방해하지 않으면서 운영자가 학생이 보는 그 자리에서 성과를 열 수 있게 했다.\n\n검수에서는 AI를 판정자가 아니라 근거 생산자로 뒀다. 형식·정적 스캔·메타데이터·품질평가·루브릭 다섯 단계가 통과·경고·참고를 표시하고, 화면에 'AI 점수는 참고용이며 최종 판정은 사람이 합니다'를 명시했다. 자동 반려는 형식·정적 검사에서만 나온다.",
-      "en": "The two apps share data but had to split faces. A child has no reason to see a dark admin; an operator can't read metrics between character cards. Studio is dark navy with text nav, Playground pastel with big rounded cards and characters. The admin tools aren't removed but folded into a small icon pill in Playground's header — out of a child's way, yet letting an operator open the numbers from the very screen students use.\n\nIn review, AI produces evidence rather than verdicts. Five stages — format, static scan, metadata, quality score, rubric — label each pass, warning or reference, and the screen states plainly that AI scores are advisory and a person decides. Only format and static checks can auto-reject."
+      "ko": "두 앱은 데이터를 공유하되 얼굴은 완전히 갈라야 했다. 학생은 어두운 어드민을 볼 이유가 없고, 운영자는 캐릭터 카드 사이에서 지표를 읽을 수 없다. Studio는 다크 네이비에 텍스트 내비, Poly Phonics는 파스텔에 큰 라운드 카드와 캐릭터다. 관리 기능은 지우지 않고 Poly Phonics 헤더의 작은 아이콘 알약으로 접어 넣어, 아이 화면을 방해하지 않으면서 운영자가 학생이 보는 그 자리에서 성과를 열 수 있게 했다.\n\n검수에서는 AI를 판정자가 아니라 근거 생산자로 뒀다. 형식·정적 스캔·메타데이터·품질평가·루브릭 다섯 단계가 통과·경고·참고를 표시하고, 화면에 'AI 점수는 참고용이며 최종 판정은 사람이 합니다'를 명시했다. 자동 반려는 형식·정적 검사에서만 나온다.",
+      "en": "The two apps share data but had to split faces. A child has no reason to see a dark admin; an operator can't read metrics between character cards. Studio is dark navy with text nav, Poly Phonics pastel with big rounded cards and characters. The admin tools aren't removed but folded into a small icon pill in Poly Phonics's header — out of a child's way, yet letting an operator open the numbers from the very screen students use.\n\nIn review, AI produces evidence rather than verdicts. Five stages — format, static scan, metadata, quality score, rubric — label each pass, warning or reference, and the screen states plainly that AI scores are advisory and a person decides. Only format and static checks can auto-reject."
     },
     "decisions": [
       {
-        "ko": "Playground에 올라간 게임 중 Sound Safari와 Word Mashup은 직접 만들었다. 파이프라인을 설계한 사람이 그 파이프라인을 실제로 통과시켜 보면 등록 폼에서 무엇을 묻는지가 달라진다 — 썸네일 자동 캡처와 레벨·학습종류 분류가 그렇게 들어갔다.",
-        "en": "Two of the games in Playground — Sound Safari and Word Mashup — were built by hand. Designing a pipeline is one thing; pushing your own work through it changes what the submission form asks for. Automatic thumbnail capture and the level and skill tagging came out of that."
+        "ko": "Poly Phonics에 올라간 게임 중 Sound Safari와 Word Mashup은 직접 만들었다. 파이프라인을 설계한 사람이 그 파이프라인을 실제로 통과시켜 보면 등록 폼에서 무엇을 묻는지가 달라진다 — 썸네일 자동 캡처와 레벨·학습종류 분류가 그렇게 들어갔다.",
+        "en": "Two of the games in Poly Phonics — Sound Safari and Word Mashup — were built by hand. Designing a pipeline is one thing; pushing your own work through it changes what the submission form asks for. Automatic thumbnail capture and the level and skill tagging came out of that."
       },
       {
         "ko": "갤러리에 보기 방식을 둘 뒀다. 카드형은 큰 섬네일로 그림을 보고 고르게 하고, 리스트형은 히어로와 가로 띠로 오늘 할 것을 권한다. 글자가 아직 느린 아이와, 뭘 할지 모르겠는 아이가 서로 다른 길로 들어간다.",
@@ -2037,7 +2037,7 @@
         "en": "The standard lives on a screen, not in a document. Five weights must total one and each dimension can set its own hard gate, so raising safety alone stops anything that fails it."
       },
       {
-        "ko": "두 앱의 얼굴을 완전히 갈랐다. 학생은 어두운 어드민을 볼 이유가 없고 운영자는 캐릭터 카드 사이에서 지표를 읽을 수 없다. 데이터는 공유하되 Studio는 보라 어드민, Playground는 파스텔 카드로 간다.",
+        "ko": "두 앱의 얼굴을 완전히 갈랐다. 학생은 어두운 어드민을 볼 이유가 없고 운영자는 캐릭터 카드 사이에서 지표를 읽을 수 없다. 데이터는 공유하되 Studio는 보라 어드민, Poly Phonics는 파스텔 카드로 간다.",
         "en": "The two apps were given nothing in common to look at. A student has no reason to see a dark admin, and an operator cannot read metrics between character cards — shared data, opposite surfaces."
       }
     ],
