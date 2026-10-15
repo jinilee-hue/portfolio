@@ -2152,27 +2152,28 @@
             "ko": "오늘 할 것을 먼저 권한다",
             "en": "Today’s pick comes first",
             "at": [
-              24.3,
-              17.7
+              21.0,
+              9.0
             ]
           },
           {
             "ko": "이달의 신규를 따로 띄운다",
             "en": "New arrivals get their own row",
             "at": [
-              14.6,
-              54.0
+              17.0,
+              18.5
             ]
           },
           {
             "ko": "레벨별로 띠를 갈아 끼운다",
             "en": "Each level swaps the row beneath",
             "at": [
-              14.6,
-              82.3
+              15.0,
+              24.5
             ]
           }
-        ]
+        ],
+        "full": true
       },
       {
         "id": "review",
