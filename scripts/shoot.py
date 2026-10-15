@@ -325,6 +325,21 @@ def main() -> int:
                         el = page.query_selector(job["selector"])
                         if el:
                             target = el          # 요소만 캡처 — 뷰어 셸과 여백이 빠진다
+                            # 요소에 border-radius 가 있으면 네 모서리가 깎여
+                            # 캡처에 페이지 배경이 삼각형으로 남는다. 목업 틀 안에
+                            # 넣었을 때 흰 여백처럼 보이므로 촬영 동안만 펴 둔다.
+                            try:
+                                el.evaluate(
+                                    "e => { e.style.borderRadius = '0'; "
+                                    "e.querySelectorAll('*').forEach(c => { "
+                                    "const r = getComputedStyle(c).borderRadius; "
+                                    "if (r && r !== '0px' && c.getBoundingClientRect().width "
+                                    ">= e.getBoundingClientRect().width - 2) "
+                                    "c.style.borderRadius = '0'; }); }"
+                                )
+                                page.wait_for_timeout(120)
+                            except Exception:
+                                pass
                     # ElementHandle.screenshot() 은 full_page 인자를 받지 않는다.
                     # 요소 캡처일 때 넘기면 TypeError 로 촬영이 통째로 실패한다.
                     opts = {"full_page": job["full"]} if target is page else {}
