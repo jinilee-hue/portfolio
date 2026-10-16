@@ -82,7 +82,8 @@ export function pick(p) {
       label: t(s.label),
       note: t(s.note),
       features: (s.features || []).map(feat),
-      device: s.device || 'desktop',
+      // tablet-land 는 가로로 찍은 태블릿 — 틀·클래스는 tablet 과 같고 비율만 이미지를 따른다
+      device: s.device === 'tablet-land' ? 'tablet' : (s.device || 'desktop'),
       tag: t(s.tag),         // 짝 도판에서 모니터 아래 붙는 짧은 이름
     })),
     // 기기별 '이 화면에서' 설명. {label, note, features[]} 또는 {ko,en} 문장만 와도 된다.

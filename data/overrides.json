@@ -2493,7 +2493,7 @@
       {
         "id": "eval",
         "path": "",
-        "device": "tablet",
+        "device": "tablet-land",
         "wait": 4200,
         "eval": "(() => new Promise(r => { document.getElementById('introScreen').click(); setTimeout(() => { document.getElementById('evalWord').textContent = 'cat'; document.querySelectorAll('#evalStars img').forEach((s, i) => { const on = i < 2; s.src = on ? 'assets/ic_star.png' : 'assets/ic_star_blank.png'; s.classList.toggle('on', on); }); document.getElementById('evalMarks').innerHTML = [['k',92,'ok'],['ae',54,'mid'],['t',88,'ok']].map(([p, s, c]) => '<span class=\"' + c + '\">/' + p + '/<small>' + s + '</small></span>').join(''); document.getElementById('evalHeard').textContent = '틀린 소리 : /ae/  (78점)'; document.getElementById('next').style.display = 'block'; document.getElementById('evalModal').className = 'on'; r(); }, 1600); }))()",
         "label": {
@@ -2509,33 +2509,36 @@
             "ko": "음소마다 점수를 매겨 색으로 가른다",
             "en": "Each phoneme gets a score, split by colour",
             "at": [
-              42,
-              50
-            ]
+              44.3,
+              53.6
+            ],
+            "at_sel": "#evalMarks span:first-child"
           },
           {
             "ko": "틀린 소리만 IPA로 집어 말해준다",
             "en": "Only the missed sound is named in IPA",
             "at": [
-              41.0,
-              56.8
+              51.1,
+              59.2
             ]
           },
           {
             "ko": "발음한 뒤에야 Next 가 열린다",
             "en": "Next opens only after you've spoken",
             "at": [
-              85,
-              63
-            ]
+              87.9,
+              78.9
+            ],
+            "at_sel": "#next"
           },
           {
             "ko": "다시 하기로 같은 단어를 또 말해본다",
             "en": "Try the same word again",
             "at": [
-              37.5,
-              67.8
-            ]
+              43.2,
+              78.4
+            ],
+            "at_sel": "#evalRetry"
           }
         ]
       }
