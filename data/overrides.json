@@ -2661,7 +2661,58 @@
     "tech": {
       "ko": "기술은 Phaser 3와 TypeScript로 짜고 Vite로 빌드해 GitHub Actions가 Pages에 올린다. 1280×720 기준 좌표를 화면 비율로 환산해 태블릿과 PC 어디서나 꽉 차게 그린다. 태블릿에서는 겹친 카드가 손가락에 잘 잡히지 않아, 터치 지점에서 가장 가까운 카드를 거리로 골라 잡는 방식으로 바꿨다. 보기 카드는 정답 조합이 하나뿐이 되도록 검증해 뽑고, 효과음은 Web Audio API로 합성해 음원 파일 없이 낸다. 모은 단어는 localStorage에 남아 서버 없이도 도감이 이어진다.",
       "en": "It is written in Phaser 3 and TypeScript, built with Vite and published to Pages by GitHub Actions. Coordinates are designed at 1280×720 and scaled to the screen, so it fills a tablet or a PC. On tablets overlapping cards were hard to pick up, so a touch now grabs whichever card is nearest by distance. The decoy cards are checked so only one valid pair is ever on screen, and sound effects are synthesised with the Web Audio API rather than played from files. Collected words stay in localStorage, so the book continues without a server."
-    }
+    },
+    "scenes": [
+      {
+        "id": "book",
+        "path": "",
+        "device": "tablet-land",
+        "wait": 4200,
+        "eval": "(() => new Promise(r => {\n  try { localStorage.setItem('phonics_collected_v1', JSON.stringify(['pancake','sunflower','rainbow','birthday','butterfly','baseball','waterfall','moonlight','seashell','cupcake','toothbrush'])); } catch (e) {}\n  const S = window.Phaser && Phaser.Scenes && Phaser.Scenes.Systems;\n  if (S && !S.prototype.__wm) { const st = S.prototype.step; S.prototype.step = function (t, d) { if (this.settings && this.settings.key === 'Game') window.__wmScene = this.scene; return st.call(this, t, d); }; S.prototype.__wm = 1; }\n  document.querySelector('#intro-overlay button')?.click();\n  const t0 = Date.now();\n  const poll = () => {\n    const sc = window.__wmScene;\n    const ok = sc && sc.sys && sc.sys.settings.status === Phaser.Scenes.RUNNING && sc.gw > 0\n      && sc.textures.exists('card_pancake') && sc.textures.exists('card_moonlight') && typeof sc.showCollection === 'function';\n    if (ok) { setTimeout(() => { sc.showCollection(); setTimeout(r, 1000); }, 1200); return; }\n    if (Date.now() - t0 > 25000) return r();\n    setTimeout(poll, 150);\n  };\n  poll();\n}))()",
+        "label": {
+          "ko": "Compound Book — 모은 합성어가 쌓이는 도감",
+          "en": "Compound Book — where every word you make is kept"
+        },
+        "note": {
+          "ko": "라운드를 맞힐 때마다 만든 합성어가 그림 카드로 이 책에 들어온다. 아직 못 모은 단어도 흐린 '?' 카드로 제자리를 지켜, 비어 있는 칸이 다음 판을 하게 만드는 이유가 된다. 게임 중에도 위쪽 Compound Book 버튼을 누르면 언제든 열린다.",
+          "en": "Each round you win drops the word you made into this book as a picture card. Words not yet found hold their place as faded '?' cards, so the empty slots become the reason to play again. The Compound Book button at the top opens it any time mid-game."
+        },
+        "features": [
+          {
+            "ko": "맞힌 단어는 그림 카드로 채워진다",
+            "en": "Each word you make fills in as its picture card",
+            "at": [
+              29.6,
+              35.9
+            ]
+          },
+          {
+            "ko": "못 모은 단어는 흐린 ? 카드로 남는다",
+            "en": "Words still missing stay as faded '?' cards",
+            "at": [
+              29.6,
+              65.9
+            ]
+          },
+          {
+            "ko": "30개 중 몇 개 모았는지 센다",
+            "en": "A running count out of all 30",
+            "at": [
+              67.7,
+              22.6
+            ]
+          },
+          {
+            "ko": "펼친 책처럼 쪽을 넘겨 본다",
+            "en": "Turn the pages like an open book",
+            "at": [
+              75.0,
+              77.0
+            ]
+          }
+        ]
+      }
+    ]
   },
   "poly-dashboard": {
     "title": {
