@@ -111,6 +111,7 @@ def targets(only: str):
                 "full": bool(sc.get("full")),
                 "click": (sc.get("click") or p.get("shot_click") or "").strip(),
                 "features": sc["features"],
+                "viewport": sc.get("viewport") or None,   # shoot.py 와 같은 화면 크기로 연다
             })
     return out
 
@@ -129,8 +130,9 @@ def main() -> int:
         browser = pw.chromium.launch()
         for job in jobs:
             spec = DEVICES[job["device"]]
+            vw, vh = job.get("viewport") or (spec["width"], spec["height"])
             ctx = browser.new_context(
-                viewport={"width": spec["width"], "height": spec["height"]},
+                viewport={"width": int(vw), "height": int(vh)},
                 device_scale_factor=1,
                 is_mobile=spec["mobile"],
                 has_touch=spec["mobile"],

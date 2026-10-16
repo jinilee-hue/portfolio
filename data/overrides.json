@@ -2683,7 +2683,7 @@
             "en": "Each word you make fills in as its picture card",
             "at": [
               29.6,
-              35.9
+              36.5
             ]
           },
           {
@@ -2691,25 +2691,29 @@
             "en": "Words still missing stay as faded '?' cards",
             "at": [
               29.6,
-              65.9
+              64.5
             ]
           },
           {
             "ko": "30개 중 몇 개 모았는지 센다",
             "en": "A running count out of all 30",
             "at": [
-              67.7,
-              22.6
+              69.6,
+              24.4
             ]
           },
           {
             "ko": "펼친 책처럼 쪽을 넘겨 본다",
             "en": "Turn the pages like an open book",
             "at": [
-              75.0,
-              77.0
+              75.5,
+              75.1
             ]
           }
+        ],
+        "viewport": [
+          1280,
+          720
         ]
       }
     ]

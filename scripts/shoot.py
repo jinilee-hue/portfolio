@@ -254,6 +254,10 @@ def main() -> int:
                 "click": (sc.get("click") or p.get("shot_click") or "").strip(),
                 "eval": (sc.get("eval") or "").strip(),
                 "dest": f"{p['id']}--{sc['id']}.jpg",
+                # 기기 기본 크기 대신 화면 크기를 직접 정할 때 [w, h]. 설계 비율이 정해진
+                # 게임은 그 비율로 찍어야 팝업이 눌리지 않는다 — Word Mashup 도감은
+                # 1280×720 기준이라 4:3 에서 찍으면 펼친 책이 거의 정사각형이 된다.
+                "viewport": sc.get("viewport") or None,
                 "pin_sels": {
                     (sc.get("device") or "desktop"): [
                         ft.get("at_sel", "")
@@ -281,8 +285,9 @@ def main() -> int:
             for dev in job["devices"]:
                 spec = DEVICES[dev]
                 dest = SHOTS / (job["dest"] if job.get("dest") else f"{job['id']}{spec['suffix']}.jpg")
+                vw, vh = job.get("viewport") or (spec["width"], spec["height"])
                 ctx = browser.new_context(
-                    viewport={"width": spec["width"], "height": spec["height"]},
+                    viewport={"width": int(vw), "height": int(vh)},
                     device_scale_factor=2,
                     is_mobile=spec["mobile"],
                     has_touch=spec["mobile"],
