@@ -2329,8 +2329,8 @@
       "en": "Pronunciation game · speech recognition"
     },
     "summary": {
-      "ko": "그림을 보고 알파벳 타일을 끌어 세 글자 단어를 만든 뒤, 그 단어를 직접 소리 내 발음까지 평가받는 파닉스 게임. 철자와 발음을 한 판 안에서 이어 붙였다.",
-      "en": "A phonics game: build a three-letter word by dragging alphabet tiles onto a picture, then say it aloud and get scored on the pronunciation. Spelling and speaking join inside one round."
+      "ko": "5~7세 아이가 영어 파닉스 소리를 익히는 정글 테마 단어 게임. 그림을 보고 글자 카드를 끌어 세 글자 단어를 만든 뒤, 그 단어를 직접 소리 내 발음 평가까지 받는다.",
+      "en": "A jungle-themed word game for children aged 5 to 7 learning English phonics sounds. A child drags letter cards to build the three-letter word in the picture, then says it aloud for a pronunciation check."
     },
     "role": {
       "ko": "게임 설계 · 아트 디렉션 · 구현",
@@ -2344,12 +2344,12 @@
     "entry": "",
     "featured": true,
     "concept": {
-      "ko": "마이크를 처음부터 열어두지 않고 단어를 완성해야 잠금이 풀리게 했다. 순서가 곧 학습 설계다 — 철자가 맞아야 발음할 대상이 생긴다. 발음 결과는 점수 대신 별 세 개와 글자별 색으로 보여줘 '어느 소리에서 막혔는지'가 숫자 없이 읽힌다. 사자 마스코트는 네 가지 표정으로 정답·오답을 말없이 알린다.",
-      "en": "The mic stays locked until the word is built. The order is the lesson — spelling right is what gives you something to pronounce. Results come back as three stars and per-letter colour rather than a score, so which sound broke down reads without numbers. A lion mascot signals right and wrong across four faces, wordlessly."
+      "ko": "디자인은 글을 읽지 못하는 아이도 다음에 할 일을 알 수 있게 잡았다. 마이크 버튼은 단어를 완성하기 전까지 잠가 두고, 완성되면 움직여 말할 차례가 왔음을 알린다. 결과는 별 세 개로 먼저 보여 주고 소리마다 초록·주황·빨강을 입혀, 숫자를 읽지 못해도 어느 소리에서 막혔는지 보이게 했다. 틀린 소리는 발음기호로 따로 짚는다. 사자 마스코트는 기다림·듣기·환호·칭찬 네 모습으로 바뀌어 지금 무슨 일이 일어나는지 말없이 알려 준다.",
+      "en": "The design lets a child who cannot read yet still know what to do next. The microphone stays locked until the word is complete, then moves to signal that it is time to speak. Results come first as three stars, with each sound coloured green, orange or red, so the sound that went wrong shows without reading a number; the missed sound is also named in phonetic symbols. The lion mascot switches between waiting, listening, cheering and praising to show what is happening without words."
     },
     "intent": {
-      "ko": "파닉스 앱은 대개 철자까지만 하고 끝난다. 아이는 단어를 맞게 조립하고도 소리 내 본 적이 없다. 읽기는 결국 입으로 나와야 해서, 한 판을 철자에서 끊지 않고 발음까지 끌고 가기로 했다.",
-      "en": "Most phonics apps stop at spelling — a child assembles the word correctly and never says it. Reading has to come out of the mouth eventually, so a round doesn't end at the letters; it carries through to speaking."
+      "ko": "의도는 철자 맞추기에서 끝나던 파닉스 연습을 소리 내기까지 잇는 데 두었다. 단어를 맞게 조립하고도 한 번도 말해 보지 않고 넘어가면 읽기로 이어지지 않는다. 그래서 한 판을 철자, 발음, 평가 순서로 묶었다. f와 p, v와 b, r과 l처럼 한국 아이가 자주 헷갈리는 짝은 오답 카드로 섞어, 글자를 고르는 단계부터 소리를 구별하게 했다. 목표는 아이가 그림에서 발음까지 혼자 끝내는 것이다.",
+      "en": "The aim was to carry phonics practice past spelling and into speaking. A child who builds a word correctly but never says it has not yet read it, so each round runs spelling, then speaking, then feedback. Pairs Korean children often confuse, such as f and p, v and b, r and l, appear as decoy cards, so telling the sounds apart starts while the letters are being chosen. The goal is a child going from picture to pronunciation alone."
     },
     "flow": [
       {
@@ -2542,7 +2542,11 @@
           }
         ]
       }
-    ]
+    ],
+    "tech": {
+      "ko": "기술은 빌드 도구 없이 HTML 파일 하나와 바닐라 JS로 썼다. 1280×720 무대를 비율 그대로 화면에 맞추고 드래그 좌표도 같은 배율로 환산해, 어느 화면에서도 카드가 정확한 칸에 놓인다. 발음은 Azure Pronunciation Assessment로 음소마다 채점하고, API 키는 Cloudflare Worker가 단기 토큰으로만 내줘 브라우저에 드러나지 않는다. Azure를 못 쓰면 Web Speech 인식 결과를 편집 거리로 정렬해 글자 단위로 채점한다. 녹음 중에는 배경음악과 읽어 주기를 멈춰 인식을 지킨다.",
+      "en": "It is one HTML file in vanilla JS with no build step. A 1280×720 stage scales to fit the screen without distortion and drag coordinates are converted at the same ratio, so a card lands in the right slot on any screen. Pronunciation is scored per phoneme by Azure Pronunciation Assessment; a Cloudflare Worker hands out short-lived tokens so the API key never reaches the browser. Without Azure, Web Speech results are aligned by edit distance and scored letter by letter. Music and read-aloud pause while recording to keep recognition clean."
+    }
   },
   "phonics-wordmashup": {
     "title": {
