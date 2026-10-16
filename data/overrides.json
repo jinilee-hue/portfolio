@@ -2558,8 +2558,8 @@
       "en": "Compound word puzzle, ages 5–7"
     },
     "summary": {
-      "ko": "영어 합성어를 두 조각을 직접 합쳐보며 익히는 퍼즐 게임. 규칙을 글로 설명하지 않고 카드를 끌어보게 해서 몸으로 익히게 했다. 30개 단어를 모으는 도감이 계속하게 만드는 장치다.",
-      "en": "A puzzle where English compound words are learned by slamming two halves together. No written rules — you drag a card and find out. A thirty-word collection book is what keeps a child going."
+      "ko": "떠다니는 영어 단어 카드 두 장을 가운데 링으로 끌어 합쳐 sunflower·weekend 같은 합성어를 만드는 게임. 한 판은 여섯 문제이고, 만든 단어는 30종 도감에 쌓인다.",
+      "en": "Children drag two floating English word cards into the ring at the centre to make compound words such as sunflower and weekend. A game is six rounds, and every word made joins a thirty-word collection book."
     },
     "role": {
       "ko": "게임 기획 · 화면 설계 · 구현",
@@ -2632,12 +2632,12 @@
       "Midjourney"
     ],
     "intent": {
-      "ko": "다섯 살은 게임 설명을 읽지 못한다. 읽어줄 어른이 옆에 있어야 시작되는 게임은 교실 밖에서 쓰이지 않는다. 성공 기준을 '아이가 혼자 6판을 완주하는 것'으로 잡고 그 기준에 맞춰 화면을 덜어냈다.",
-      "en": "A five-year-old can't read the rules. A game that needs an adult to start it doesn't get used outside the classroom. The bar was set at 'a child finishes six rounds alone,' and the screen was stripped back to meet it."
+      "ko": "의도는 합성어를 외우게 하는 대신 두 낱말을 직접 붙여 보며 익히게 하는 데 두었다. sun과 flower가 만나 sunflower가 되는 순간을 손으로 겪으면 규칙을 따로 설명할 필요가 없다. 다섯 살은 게임 설명을 읽지 못하므로, 성공 기준을 '어른 도움 없이 혼자 여섯 판을 끝내는 것'으로 잡고 화면에서 글 설명을 덜어냈다. 30종 도감은 한 판으로 끝내지 않고 다시 돌아오게 하는 장치다.",
+      "en": "The aim was to have compound words learned by joining two words by hand rather than memorising them. Feeling sun and flower become sunflower makes the rule need no explaining. A five-year-old cannot read instructions, so success was defined as finishing six rounds alone without an adult, and written explanation was stripped from the screen. The thirty-word collection book is what brings a child back after one game."
     },
     "concept": {
-      "ko": "카드에 글자를 넣지 않았다. 그림만 보고 week 와 end 를 끌어와 겹치면 weekend 일러스트가 터지며 단어가 처음 등장한다 — 글자는 답을 맞힌 뒤의 보상이다. 화면 중앙을 GRAVITY ZONE 이라는 빛나는 원으로 두어 '여기로 끌어와라'를 문장 없이 말했고, 틀려도 카드가 제자리로 돌아갈 뿐 벌점도 실패 화면도 없다.",
-      "en": "The cards carry no text. You drag week and end together on pictures alone, and the weekend illustration bursts out with the word appearing for the first time — letters are the reward for getting it right. A glowing circle called the gravity zone says 'drag here' without a sentence, and a wrong pair just floats back: no penalty, no fail screen."
+      "ko": "디자인은 글을 읽지 못해도 할 일이 보이게 했다. 화면 가운데 빛나는 링이 카드를 어디로 가져갈지 말없이 알려 주고, 카드는 둥둥 떠다녀 만져도 되는 물건처럼 보인다. 맞히면 합성어 그림 카드가 터져 나오며 발음 표기가 붙고, 틀리면 카드가 흔들린 뒤 제자리로 돌아갈 뿐 실패 화면은 없다. 힌트도 문장 대신 정답 두 장에 빛을 켠다. 여섯 판이 끝나면 책 모양 도감이 열리고, 아직 못 모은 단어는 회색 물음표로 남아 다음 목표가 된다.",
+      "en": "The design makes the next move visible without reading. A glowing ring at the centre says where cards go, and the cards float so they look like things to pick up. A right answer bursts into an illustrated card with its pronunciation; a wrong one just shakes and drifts back, with no failure screen. Even the hint lights up the two right cards instead of showing a sentence. After six rounds a book-shaped collection opens, and words not yet found stay as grey question marks to aim for next."
     },
     "decisions": [
       {
@@ -2657,6 +2657,10 @@
     "shot_evals": {
       "tablet": "(() => new Promise(r => { document.querySelector('#intro-overlay button')?.click(); const tap = () => { const c = document.querySelector('canvas'); if (!c) return; const b = c.getBoundingClientRect(), x = b.left + b.width / 2, y = b.top + b.height / 2; const o = {clientX:x, clientY:y, screenX:x, screenY:y, bubbles:true, cancelable:true, pointerId:1, isPrimary:true, pointerType:'mouse', button:0, buttons:1, pressure:0.5, view:window}; c.dispatchEvent(new PointerEvent('pointerdown', o)); c.dispatchEvent(new PointerEvent('pointerup', {...o, buttons:0, pressure:0})); c.dispatchEvent(new MouseEvent('click', o)); }; setTimeout(() => { tap(); setTimeout(() => { tap(); setTimeout(r, 2600); }, 2800); }, 2400); }))()",
       "desktop": "(() => new Promise(r => { const v = document.querySelector('#intro-overlay video'); if (!v) return r(); const b = document.querySelector('#intro-overlay button'); if (b) b.style.visibility = 'hidden'; v.style.objectPosition = '100% 50%'; const go = () => { v.pause(); v.currentTime = 0.6; v.addEventListener('seeked', () => setTimeout(r, 400), {once:true}); setTimeout(r, 3000); }; if (v.readyState >= 2) go(); else v.addEventListener('loadeddata', go, {once:true}); }))()"
+    },
+    "tech": {
+      "ko": "기술은 Phaser 3와 TypeScript로 짜고 Vite로 빌드해 GitHub Actions가 Pages에 올린다. 1280×720 기준 좌표를 화면 비율로 환산해 태블릿과 PC 어디서나 꽉 차게 그린다. 태블릿에서는 겹친 카드가 손가락에 잘 잡히지 않아, 터치 지점에서 가장 가까운 카드를 거리로 골라 잡는 방식으로 바꿨다. 보기 카드는 정답 조합이 하나뿐이 되도록 검증해 뽑고, 효과음은 Web Audio API로 합성해 음원 파일 없이 낸다. 모은 단어는 localStorage에 남아 서버 없이도 도감이 이어진다.",
+      "en": "It is written in Phaser 3 and TypeScript, built with Vite and published to Pages by GitHub Actions. Coordinates are designed at 1280×720 and scaled to the screen, so it fills a tablet or a PC. On tablets overlapping cards were hard to pick up, so a touch now grabs whichever card is nearest by distance. The decoy cards are checked so only one valid pair is ever on screen, and sound effects are synthesised with the Web Audio API rather than played from files. Collected words stay in localStorage, so the book continues without a server."
     }
   },
   "poly-dashboard": {
