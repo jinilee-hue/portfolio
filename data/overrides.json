@@ -2550,15 +2550,15 @@
   },
   "phonics-wordmashup": {
     "title": {
-      "ko": "Word Mashup — 합성어 게임",
-      "en": "Word Mashup — Compound Word Game"
+      "ko": "Word Mashup",
+      "en": "Word Mashup"
     },
     "kicker": {
-      "ko": "5~7세 복합어 퍼즐 게임",
+      "ko": "5~7세 합성어 퍼즐 게임",
       "en": "Compound word puzzle, ages 5–7"
     },
     "summary": {
-      "ko": "영어 복합어를 두 조각을 직접 합쳐보며 익히는 퍼즐 게임. 규칙을 글로 설명하지 않고 카드를 끌어보게 해서 몸으로 익히게 했다. 30개 단어를 모으는 도감이 계속하게 만드는 장치다.",
+      "ko": "영어 합성어를 두 조각을 직접 합쳐보며 익히는 퍼즐 게임. 규칙을 글로 설명하지 않고 카드를 끌어보게 해서 몸으로 익히게 했다. 30개 단어를 모으는 도감이 계속하게 만드는 장치다.",
       "en": "A puzzle where English compound words are learned by slamming two halves together. No written rules — you drag a card and find out. A thirty-word collection book is what keeps a child going."
     },
     "role": {
@@ -2655,7 +2655,8 @@
     ],
     "shot_wait": 5200,
     "shot_evals": {
-      "tablet": "(() => new Promise(r => { document.querySelector('#intro-overlay button')?.click(); const tap = () => { const c = document.querySelector('canvas'); if (!c) return; const b = c.getBoundingClientRect(), x = b.left + b.width / 2, y = b.top + b.height / 2; const o = {clientX:x, clientY:y, screenX:x, screenY:y, bubbles:true, cancelable:true, pointerId:1, isPrimary:true, pointerType:'mouse', button:0, buttons:1, pressure:0.5, view:window}; c.dispatchEvent(new PointerEvent('pointerdown', o)); c.dispatchEvent(new PointerEvent('pointerup', {...o, buttons:0, pressure:0})); c.dispatchEvent(new MouseEvent('click', o)); }; setTimeout(() => { tap(); setTimeout(() => { tap(); setTimeout(r, 2600); }, 2800); }, 2400); }))()"
+      "tablet": "(() => new Promise(r => { document.querySelector('#intro-overlay button')?.click(); const tap = () => { const c = document.querySelector('canvas'); if (!c) return; const b = c.getBoundingClientRect(), x = b.left + b.width / 2, y = b.top + b.height / 2; const o = {clientX:x, clientY:y, screenX:x, screenY:y, bubbles:true, cancelable:true, pointerId:1, isPrimary:true, pointerType:'mouse', button:0, buttons:1, pressure:0.5, view:window}; c.dispatchEvent(new PointerEvent('pointerdown', o)); c.dispatchEvent(new PointerEvent('pointerup', {...o, buttons:0, pressure:0})); c.dispatchEvent(new MouseEvent('click', o)); }; setTimeout(() => { tap(); setTimeout(() => { tap(); setTimeout(r, 2600); }, 2800); }, 2400); }))()",
+      "desktop": "(() => new Promise(r => { const v = document.querySelector('#intro-overlay video'); if (!v) return r(); const b = document.querySelector('#intro-overlay button'); if (b) b.style.visibility = 'hidden'; v.style.objectPosition = '100% 50%'; const go = () => { v.pause(); v.currentTime = 0.6; v.addEventListener('seeked', () => setTimeout(r, 400), {once:true}); setTimeout(r, 3000); }; if (v.readyState >= 2) go(); else v.addEventListener('loadeddata', go, {once:true}); }))()"
     }
   },
   "poly-dashboard": {
