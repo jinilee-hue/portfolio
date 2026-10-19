@@ -516,44 +516,40 @@
   .band{padding:clamp(48px,5vw,80px) 0}
   #career{margin-top:clamp(24px,4vw,56px)}
 
-  /* ── ARCHIVE — Figma·XD 시안 시기의 결과물.
-     연도별로 묶어 작은 썸네일을 한 줄에 늘어놓는다(가로 스크롤 없음, 남으면 다음 줄).
-     누르면 그 장을 크게 띄운다(.arclb). */
+  /* ── ARCHIVE — Figma·XD 시안 시기의 결과물(Behance 원본에서 고른 장).
+     누르면 그 장을 크게 띄운다(.arclb). 썸네일·팝업 모두 그림을 자르지 않는다. */
   .arc-note{margin:10px 0 0;max-width:56ch;color:var(--fg-55);font-size:.97rem;line-height:1.7;word-break:keep-all}
-  .arcyear{margin:clamp(26px,3vw,38px) 0 0}
-  .arcyear > h3{display:flex;align-items:center;gap:14px;margin:0 0 14px;
-    font-family:var(--grot);font-size:13px;font-weight:700;letter-spacing:.16em;color:var(--accent)}
-  .arcyear > h3::after{content:'';flex:1;height:1px;background:var(--line)}
-  .arcyear > h3 .n{color:var(--fg-28);font-size:11px;letter-spacing:.12em}
-  .arcgrid{list-style:none;margin:0;padding:0;display:grid;
-    /* 한 해가 한 줄에 들어가도록 작게 — 1440px에서 8칸 */
-    grid-template-columns:repeat(auto-fill,minmax(clamp(112px,10.2vw,150px),1fr));
-    gap:clamp(8px,.9vw,13px)}
-  .arcgrid button{display:block;width:100%;padding:0;border:0;cursor:pointer;background:none;
-    text-align:left;color:inherit;transition:transform .32s var(--ease)}
-  .arcgrid button:hover,.arcgrid button:focus-visible{transform:translateY(-3px);outline:none}
-  /* 그림 칸 — 비율이 제각각이라 같은 이미지를 흐리게 깔아 칸을 채운다 */
-  .arcgrid .ph{display:block;position:relative;aspect-ratio:4/3;border-radius:9px;overflow:hidden;background:#0d0d0d;
-    box-shadow:0 10px 24px rgba(0,0,0,.34),inset 0 0 0 1px rgba(255,255,255,.1);
-    transition:box-shadow .32s var(--ease)}
-  .arcgrid button:hover .ph,.arcgrid button:focus-visible .ph{
-    box-shadow:0 18px 36px rgba(0,0,0,.46),inset 0 0 0 1px #2AF0CE}
-  .arcgrid .bk{position:absolute;inset:-8%;background-position:center;background-size:cover;
-    filter:blur(22px) saturate(1.2) brightness(.5)}
-  .arcgrid img{position:absolute;inset:0;margin:auto;max-width:88%;max-height:88%;width:auto;height:auto;
-    object-fit:contain;display:block}
-  /* 이름은 그림 밖에 둔다 — 작은 썸네일 위에 얹으면 아이콘과 겹친다 */
-  .arcgrid figcaption{margin:7px 1px 0;font-family:var(--sans);font-size:11px;font-weight:600;
-    letter-spacing:-.01em;color:var(--fg-55);line-height:1.35;word-break:keep-all;
-    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .arcgrid button:hover figcaption,.arcgrid button:focus-visible figcaption{color:var(--fg)}
+  /* 틀 없이 흩어 놓는다(Studio Freight). 12칸 격자 위에 장마다 시작 칸·폭·위 여백을 따로
+     주고 빈 칸을 남긴다. 그림은 제 비율 그대로(width 100% · height auto) — 자르지 않는다. */
+  .arcfree{list-style:none;margin:clamp(30px,4vw,56px) 0 0;padding:0;display:grid;
+    grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(10px,1.4vw,22px);
+    row-gap:clamp(22px,3.2vw,52px);align-items:start}
+  .arcfree > li{grid-row:var(--r);grid-column:var(--c) / span var(--s);margin-top:calc(var(--o,0) * 1vw);min-width:0}
+  .arcfree button{display:block;width:100%;padding:0;border:0;cursor:zoom-in;background:none;
+    text-align:left;color:inherit}
+  .arcfree img{display:block;width:100%;height:auto;border-radius:3px;
+    transition:transform .5s var(--ease),filter .5s var(--ease)}
+  .arcfree button:hover img,.arcfree button:focus-visible img{transform:translateY(-4px)}
+  .arcfree button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+  .arcfree figcaption{margin:8px 0 0;display:flex;gap:8px;align-items:baseline;
+    font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:-.01em;line-height:1.35;
+    color:var(--fg-28);word-break:keep-all;transition:color .3s var(--ease)}
+  .arcfree figcaption b{font-family:var(--grot);font-weight:700;letter-spacing:.1em;color:var(--fg-28);flex:none}
+  .arcfree button:hover figcaption,.arcfree button:focus-visible figcaption{color:var(--fg)}
+  /* 좁은 화면 — 흩어 놓기를 풀고 두 칸으로. 가로로 긴 장은 두 칸을 다 쓴다 */
+  @media (max-width:879px){
+    .arcfree{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:row dense;row-gap:22px;column-gap:12px}
+    .arcfree > li{grid-row:auto;grid-column:auto / span 1;margin-top:0}
+    .arcfree > li.wide{grid-column:1 / -1}
+  }
 
   /* 크게 보기 */
   .arclb{border:0;padding:0;background:none;max-width:none;max-height:none;width:100%;height:100%}
   .arclb::backdrop{background:rgba(5,5,5,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-  .arclb-in{position:fixed;inset:0;display:grid;grid-template-rows:auto 1fr auto;gap:14px;
+  .arclb-in{position:fixed;inset:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;
+    grid-template-columns:minmax(0,1fr);gap:14px;
     padding:clamp(14px,2.4vw,30px);box-sizing:border-box}
-  .arclb-top{display:flex;align-items:center;justify-content:space-between;gap:16px;color:#F3F6F5}
+  .arclb-top{display:flex;align-items:center;justify-content:space-between;gap:16px;color:#F3F6F5;min-width:0}
   .arclb-t{display:flex;align-items:baseline;gap:12px;min-width:0}
   .arclb-t b{font-family:var(--grot);font-size:12px;font-weight:700;letter-spacing:.14em;color:#2AF0CE;flex:none}
   .arclb-t span{font-family:var(--sans);font-weight:600;font-size:clamp(.95rem,1.5vw,1.15rem);
@@ -566,25 +562,23 @@
   .arclb-nav button svg{width:17px;height:17px;display:block}
   .arclb-nav button:hover{background:#2AF0CE;border-color:#2AF0CE;color:#04120F}
   .arclb-nav button:focus-visible{outline:2px solid #2AF0CE;outline-offset:2px}
-  .arclb-fig{position:relative;min-height:0;display:grid;place-items:center}
-  .arclb-fig img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;
+  .arclb-fig{position:relative;min-height:0;margin:0}
+  /* 칸 안에 절대 배치해 max-height:100% 가 실제 칸 높이를 따르게 한다 — 그리드 칸 기준
+     % 높이는 풀리지 않아 세로로 긴 장(올잉 1066×2400)이 화면 밖으로 잘려 나갔다 */
+  .arclb-fig img{position:absolute;inset:0;margin:auto;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;
     border-radius:6px;box-shadow:0 24px 60px rgba(0,0,0,.6)}
   .arclb-foot{display:flex;justify-content:flex-end}
   .arclb-foot a{font-family:var(--grot);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
     color:rgba(243,246,245,.72);text-decoration:none;padding:8px 12px;border:1px solid rgba(243,246,245,.3);border-radius:999px}
   .arclb-foot a:hover{color:#04120F;background:#2AF0CE;border-color:#2AF0CE}
   @media print{
-    /* 인쇄 — 그리드 그대로, 그림자·흐린 바탕 없이 */
+    /* 인쇄 — 흩어 놓기 대신 한 면에 들어가는 고른 줄. 그림은 contain 으로 자르지 않는다 */
     #archive{break-inside:avoid;page-break-inside:avoid}
     .arclb{display:none!important}
-    /* A4 가로 한 면(210mm)에 맞춘다 — 칸을 더 작게, 여백을 줄인다 */
-    .arcyear{margin-top:5mm}
-    .arcyear > h3{margin-bottom:2.5mm;font-size:8pt}
-    .arcgrid{grid-template-columns:repeat(8,1fr);gap:2.4mm}
-    .arcgrid button{transform:none!important}
-    .arcgrid .ph{box-shadow:none;border:.3mm solid rgba(0,0,0,.18);background:#fff;aspect-ratio:4/3}
-    .arcgrid .bk{display:none}
-    .arcgrid figcaption{color:#000;font-size:5.4pt;margin-top:.8mm;line-height:1.25}
+    .arcfree{grid-template-columns:repeat(9,1fr)!important;gap:3mm!important;margin-top:5mm!important;align-items:end}
+    .arcfree > li{grid-row:auto!important;grid-column:auto / span 1!important;margin-top:0!important}
+    .arcfree img{width:auto;max-width:100%;max-height:44mm;object-fit:contain;transform:none!important}
+    .arcfree figcaption{color:var(--fg-55);font-size:5.4pt;margin-top:.8mm}
   }
   .band + .band{margin-top:0}
   .band h2{font-family:var(--disp);font-weight:400;font-size:clamp(1.6rem,4vw,2.8rem);
@@ -1827,38 +1821,39 @@ function draw(){
   });
   document.getElementById('car-h').textContent=c.carH;
 
-  // ── ARCHIVE — Figma·XD 시안 시기의 결과물. 연도순(오래된 것부터)으로 한 장씩 넘긴다.
+  // ── ARCHIVE — Figma·XD 시안 시기의 결과물(Behance 원본에서 그래픽이 강한 장만).
+  //   r: 줄, c: 시작 칸(12칸 격자), s: 폭(칸 수), o: 위 여백(vw) — 빈 칸을 남겨 흩어 놓는다.
+  //   그림은 제 비율 그대로 들어가고(자르지 않음), 크게 보기는 원본(-t 없는 파일)을 쓴다.
   const ARC=[
-    {f:'allin',       y:'2023', ko:'올잉 — 중등 영어문법',        en:'All-in — middle-school grammar', g:'166568683', bg:'#F6F2F8'},
-    {f:'startup',     y:'2023', ko:'스타트업 무료강의',            en:'Startup — free course launch',   g:'166568635', bg:'#2B3148'},
-    {f:'kgedu',       y:'2023', ko:'KGEDU 메인 개편',             en:'KGEDU — main page redesign',     g:'170173347', bg:'#EAF2FB'},
-    {f:'mpoly-icon',  y:'2024', ko:'MPOLY 학생앱 — 아이콘',        en:'MPOLY student app — icon',       g:'201835197', bg:'#0098D8'},
-    {f:'mpoly-phone', y:'2024', ko:'MPOLY 학생앱 — 표지',          en:'MPOLY student app — cover',      g:'201835197', bg:'#0088D8'},
-    {f:'mil-icon',    y:'2024', ko:'MIL 학부모앱 — 아이콘',        en:'MIL parent app — icon',          g:'201835923', bg:'#481870'},
-    {f:'mil-phone',   y:'2024', ko:'MIL 학부모앱 — 알림장',        en:'MIL parent app — daily log',     g:'201835923', bg:'#481870'},
-    {f:'mil-report',  y:'2024', ko:'MIL — 성적 리포트',            en:'MIL — grade report',             g:'201841581', bg:'#F0F0F0'},
-    {f:'pond-bubble', y:'2024', ko:'POND+ — 학습 허브',            en:'POND+ — learning hub',           g:'201838849', bg:'#D8E8F8'},
-    {f:'pond-dash',   y:'2024', ko:'POND+ — 대시보드',             en:'POND+ — dashboard',              g:'201838849', bg:'#003090'},
-    {f:'nac-icons',   y:'2024', ko:'NAC 학부모앱 — 아이콘 15종',   en:'NAC parent app — 15 icons',      g:'207113325', bg:'#F8F8F8'},
+    {f:'mpoly-cover',   y:'2024', ko:'MPOLY 학생앱 — 표지',          en:'MPOLY student app — cover',        g:'201835197', r:1, c:1,  s:2, o:0},
+    {f:'pond-bubble',   y:'2024', ko:'POND+ — 학습 허브',            en:'POND+ — learning hub',             g:'201838849', r:1, c:4,  s:5, o:6},
+    {f:'mil-icon',      y:'2024', ko:'MIL 학부모앱 — 아이콘',         en:'MIL parent app — icon',            g:'201835923', r:1, c:11, s:2, o:2},
+    {f:'startup',       y:'2023', ko:'스타트업 무료강의',             en:'Startup — free course launch',     g:'166568635', r:2, c:2,  s:3, o:0},
+    {f:'mil-love',      y:'2024', ko:'MIL — 커뮤니티 리액션',          en:'MIL — community reactions',        g:'201841581', r:2, c:6,  s:4, o:9},
+    {f:'mil-cover',     y:'2024', ko:'MIL 학부모앱 — 표지',          en:'MIL parent app — cover',           g:'201835923', r:2, c:11, s:2, o:0},
+    {f:'pond-logo',     y:'2024', ko:'POND+ — 로고',                en:'POND+ — logo',                     g:'201838849', r:3, c:1,  s:3, o:3},
+    {f:'mpoly-icon',    y:'2024', ko:'MPOLY 학생앱 — 아이콘',         en:'MPOLY student app — icon',         g:'201835197', r:3, c:5,  s:2, o:0},
+    {f:'allin',         y:'2023', ko:'올잉 — 중등 영어문법',          en:'All-in — middle-school grammar',   g:'166568683', r:3, c:8,  s:2, o:5},
+    {f:'pond-dash',     y:'2024', ko:'POND+ — 대시보드',             en:'POND+ — dashboard',                g:'201838849', r:3, c:10, s:3, o:14},
+    {f:'mpoly-screens', y:'2024', ko:'MPOLY 학생앱 — 로고 화면',       en:'MPOLY student app — logo screen',  g:'201835197', r:4, c:1,  s:2, o:0},
+    {f:'mil-report',    y:'2024', ko:'MIL — 성적 리포트',            en:'MIL — grade report',               g:'201841581', r:4, c:4,  s:4, o:4},
+    {f:'campus-icon',   y:'2024', ko:'MIL 캠퍼스앱 — 아이콘',         en:'MIL campus app — icon',            g:'201835923', r:4, c:9,  s:2, o:0},
+    {f:'kgedu',         y:'2023', ko:'KGEDU 메인 개편',              en:'KGEDU — main page redesign',       g:'170173347', r:4, c:11, s:2, o:7},
+    {f:'nac-icons',     y:'2024', ko:'NAC 학부모앱 — 아이콘 15종',    en:'NAC parent app — 15 icons',        g:'207113325', r:5, c:2,  s:2, o:0},
+    {f:'pond-login',    y:'2024', ko:'POND+ — 로그인',               en:'POND+ — sign-in',                  g:'201838849', r:5, c:5,  s:4, o:3},
+    {f:'mpoly-cal',     y:'2024', ko:'MPOLY 학생앱 — 학습 캘린더',     en:'MPOLY student app — calendar',     g:'201835197', r:5, c:10, s:2, o:10},
   ];
   document.getElementById('arc-h').textContent=c.arcH;
   document.getElementById('arc-note').textContent=c.arcNote;
   {
     const wrap=document.getElementById('arc-years');
-    const years=[...new Set(ARC.map(a=>a.y))];
     const lbl=a=>L==='ko'?a.ko:a.en;
-    wrap.innerHTML=years.map(y=>{
-      const items=ARC.map((a,i)=>({a,i})).filter(o=>o.a.y===y);
-      return `<section class="arcyear"><h3>${y}<span class="n">${items.length}</span></h3>
-        <ul class="arcgrid">${items.map(({a,i})=>`
-          <li><button type="button" data-i="${i}" title="${esc(lbl(a))}">
-            <span class="ph">
-              <i class="bk" style="background-image:url('archive/img/${a.f}.webp')"></i>
-              <img src="archive/img/${a.f}.webp" alt="${esc(lbl(a))}" loading="lazy" decoding="async">
-            </span>
-            <figcaption>${esc(lbl(a))}</figcaption>
-          </button></li>`).join('')}</ul></section>`;
-    }).join('');
+    wrap.innerHTML=`<ul class="arcfree">${ARC.map((a,i)=>`
+      <li class="${a.s>=4?'wide':''}" style="--r:${a.r};--c:${a.c};--s:${a.s};--o:${a.o}">
+        <button type="button" data-i="${i}" aria-label="${esc(lbl(a))}">
+          <img src="archive/img/${a.f}-t.webp" alt="${esc(lbl(a))}" loading="lazy" decoding="async">
+          <figcaption><b>${a.y}</b><span>${esc(lbl(a))}</span></figcaption>
+        </button></li>`).join('')}</ul>`;
 
     // 크게 보기 — 썸네일을 누르면 열리고, 좌우로 넘긴다
     const dlg=document.getElementById('arclb'), img=document.getElementById('alb-img'),
