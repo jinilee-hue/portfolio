@@ -531,11 +531,16 @@
     transition:transform .5s var(--ease),filter .5s var(--ease)}
   .arcfree button:hover img,.arcfree button:focus-visible img{transform:translateY(-4px)}
   .arcfree button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-  .arcfree figcaption{margin:8px 0 0;display:flex;gap:8px;align-items:baseline;
+  .arcfree .arc-cap{margin:8px 0 0;display:flex;gap:8px;align-items:baseline;
     font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:-.01em;line-height:1.35;
     color:var(--fg-28);word-break:keep-all;transition:color .3s var(--ease)}
-  .arcfree figcaption b{font-family:var(--grot);font-weight:700;letter-spacing:.1em;color:var(--fg-28);flex:none}
-  .arcfree button:hover figcaption,.arcfree button:focus-visible figcaption{color:var(--fg)}
+  .arcfree .arc-cap b{font-family:var(--grot);font-weight:700;letter-spacing:.1em;color:var(--fg-28);flex:none}
+  /* 이름 = 그 장이 속한 Behance 프로젝트 상세로 가는 링크. ↗ 로 바깥 링크임을 보인다 */
+  .arcfree .arc-cap a{color:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:5px;min-width:0}
+  .arcfree .arc-cap a svg{width:10px;height:10px;flex:none;transition:transform .3s var(--ease)}
+  .arcfree li:hover .arc-cap,.arcfree li:focus-within .arc-cap{color:var(--fg)}
+  .arcfree .arc-cap a:hover,.arcfree .arc-cap a:focus-visible{color:var(--accent);outline:none}
+  .arcfree .arc-cap a:hover svg,.arcfree .arc-cap a:focus-visible svg{transform:translate(2px,-2px)}
   /* 좁은 화면 — 흩어 놓기를 풀고 두 칸으로. 가로로 긴 장은 두 칸을 다 쓴다 */
   @media (max-width:879px){
     .arcfree{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:row dense;row-gap:22px;column-gap:12px}
@@ -568,9 +573,10 @@
   .arclb-fig img{position:absolute;inset:0;margin:auto;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;
     border-radius:6px;box-shadow:0 24px 60px rgba(0,0,0,.6)}
   .arclb-foot{display:flex;justify-content:flex-end}
-  .arclb-foot a{font-family:var(--grot);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  .arclb-foot a{display:inline-flex;align-items:center;gap:8px;font-family:var(--grot);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
     color:rgba(243,246,245,.72);text-decoration:none;padding:8px 12px;border:1px solid rgba(243,246,245,.3);border-radius:999px}
   .arclb-foot a:hover{color:#04120F;background:#2AF0CE;border-color:#2AF0CE}
+  .arclb-foot a svg{width:12px;height:12px;flex:none}
   @media print{
     /* 인쇄 — 흩어 놓기 대신 한 면에 들어가는 고른 줄. 그림은 contain 으로 자르지 않는다 */
     #archive{break-inside:avoid;page-break-inside:avoid}
@@ -578,7 +584,8 @@
     .arcfree{grid-template-columns:repeat(9,1fr)!important;gap:3mm!important;margin-top:5mm!important;align-items:end}
     .arcfree > li{grid-row:auto!important;grid-column:auto / span 1!important;margin-top:0!important}
     .arcfree img{width:auto;max-width:100%;max-height:44mm;object-fit:contain;transform:none!important}
-    .arcfree figcaption{color:var(--fg-55);font-size:5.4pt;margin-top:.8mm}
+    .arcfree .arc-cap{color:var(--fg-55);font-size:5.4pt;margin-top:.8mm}
+    .arcfree .arc-cap a svg{display:none}
   }
   .band + .band{margin-top:0}
   .band h2{font-family:var(--disp);font-weight:400;font-size:clamp(1.6rem,4vw,2.8rem);
@@ -1843,17 +1850,33 @@ function draw(){
     {f:'pond-login',    y:'2024', ko:'POND+ — 로그인',               en:'POND+ — sign-in',                  g:'201838849', r:5, c:5,  s:4, o:3},
     {f:'mpoly-cal',     y:'2024', ko:'MPOLY 학생앱 — 학습 캘린더',     en:'MPOLY student app — calendar',     g:'201835197', r:5, c:10, s:2, o:10},
   ];
+  // Behance 프로젝트 상세 — 각 장이 속한 원본 프로젝트(주소는 Behance 정식 주소 그대로)
+  const BEH={
+    '166568635':{u:'_',              ko:'스타트업 무료강의',            en:'Startup free course'},
+    '166568683':{u:'-_-',            ko:'중등 영어문법 올잉 메인시안',    en:'All-in grammar main comp'},
+    '170173347':{u:'KGEDU-',         ko:'KGEDU 메인개편',              en:'KGEDU main redesign'},
+    '201835197':{u:'MPOLY-APP-',     ko:'MPOLY 학생APP 고도화',         en:'MPOLY student app upgrade'},
+    '201835923':{u:'MIL-APP-',       ko:'MIL 학부모APP 구축',           en:'MIL parent app'},
+    '201838849':{u:'POND-Prototype', ko:'POND+ Prototype',            en:'POND+ prototype'},
+    '201841581':{u:'MIL_-',          ko:'MIL 학습플랫폼 커뮤니티 구축',   en:'MIL learning community'},
+    '207113325':{u:'NAC-APP_-',      ko:'NAC 학부모APP 메인 아이콘 개선', en:'NAC parent app icons'},
+  };
+  const behUrl=a=>`https://www.behance.net/gallery/${a.g}/${(BEH[a.g]||{}).u||'x'}`;
+  const behName=a=>{const b=BEH[a.g]; return b?(L==='ko'?b.ko:b.en):'';};
+  const ARROW='<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   document.getElementById('arc-h').textContent=c.arcH;
   document.getElementById('arc-note').textContent=c.arcNote;
   {
     const wrap=document.getElementById('arc-years');
     const lbl=a=>L==='ko'?a.ko:a.en;
+    // 그림 = 크게 보기(버튼), 이름 = Behance 프로젝트 상세(링크). 버튼 안에 링크를 넣을 수 없어 형제로 둔다.
     wrap.innerHTML=`<ul class="arcfree">${ARC.map((a,i)=>`
       <li class="${a.s>=4?'wide':''}" style="--r:${a.r};--c:${a.c};--s:${a.s};--o:${a.o}">
         <button type="button" data-i="${i}" aria-label="${esc(lbl(a))}">
           <img src="archive/img/${a.f}-t.webp" alt="${esc(lbl(a))}" loading="lazy" decoding="async">
-          <figcaption><b>${a.y}</b><span>${esc(lbl(a))}</span></figcaption>
-        </button></li>`).join('')}</ul>`;
+        </button>
+        <p class="arc-cap"><b>${a.y}</b><a href="${behUrl(a)}" target="_blank" rel="noopener"
+          title="${esc(behName(a))} — ${esc(c.arcAt)}"><span>${esc(lbl(a))}</span>${ARROW}</a></p></li>`).join('')}</ul>`;
 
     // 크게 보기 — 썸네일을 누르면 열리고, 좌우로 넘긴다
     const dlg=document.getElementById('arclb'), img=document.getElementById('alb-img'),
@@ -1866,7 +1889,8 @@ function draw(){
       img.src=`archive/img/${a.f}.webp`; img.alt=lbl(a);
       yEl.textContent=a.y; tEl.textContent=lbl(a);
       cEl.textContent=`${String(ai+1).padStart(2,'0')} / ${String(ARC.length).padStart(2,'0')}`;
-      srcEl.href=`https://www.behance.net/gallery/${a.g}/x`; srcEl.textContent=c.arcAt;
+      srcEl.href=behUrl(a);
+      srcEl.innerHTML=`${esc(behName(a))} · ${esc(c.arcAt)}${ARROW}`;
     };
     wrap.onclick=e=>{const b=e.target.closest('button[data-i]'); if(!b) return;
       show(+b.dataset.i); if(!dlg.open) dlg.showModal();};
