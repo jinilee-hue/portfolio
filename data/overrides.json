@@ -2548,7 +2548,7 @@
       "en": "It is one HTML file in vanilla JS with no build step. A 1280×720 stage scales to fit the screen without distortion and drag coordinates are converted at the same ratio, so a card lands in the right slot on any screen. Pronunciation is scored per phoneme by Azure Pronunciation Assessment; a Cloudflare Worker hands out short-lived tokens so the API key never reaches the browser. Without Azure, Web Speech results are aligned by edit distance and scored letter by letter. Music and read-aloud pause while recording to keep recognition clean."
     }
   },
-  "phonics-wordmashup": {
+  "phonics-wordmashup-3D": {
     "title": {
       "ko": "Word Mashup",
       "en": "Word Mashup"
@@ -2612,8 +2612,8 @@
             "ko": "설명 문장 대신 Hint 버튼 하나만 둔다",
             "en": "No instructions — just one Hint button",
             "at": [
-              56.5,
-              89.5
+              56.7,
+              93.0
             ]
           },
           {
@@ -2661,7 +2661,11 @@
     "tech": {
       "ko": "기술은 Phaser 3와 TypeScript로 짜고 Vite로 빌드해 GitHub Actions가 Pages에 올린다. 1280×720 기준 좌표를 화면 비율로 환산해 태블릿과 PC 어디서나 꽉 차게 그린다. 태블릿에서는 겹친 카드가 손가락에 잘 잡히지 않아, 터치 지점에서 가장 가까운 카드를 거리로 골라 잡는 방식으로 바꿨다. 보기 카드는 정답 조합이 하나뿐이 되도록 검증해 뽑고, 효과음은 Web Audio API로 합성해 음원 파일 없이 낸다. 모은 단어는 localStorage에 남아 서버 없이도 도감이 이어진다.",
       "en": "It is written in Phaser 3 and TypeScript, built with Vite and published to Pages by GitHub Actions. Coordinates are designed at 1280×720 and scaled to the screen, so it fills a tablet or a PC. On tablets overlapping cards were hard to pick up, so a touch now grabs whichever card is nearest by distance. The decoy cards are checked so only one valid pair is ever on screen, and sound effects are synthesised with the Web Audio API rather than played from files. Collected words stay in localStorage, so the book continues without a server."
-    }
+    },
+    "shot_query": "q=mid"
+  },
+  "phonics-wordmashup": {
+    "merge_into": "phonics-wordmashup-3D"
   },
   "poly-dashboard": {
     "title": {
@@ -3143,5 +3147,8 @@
   },
   "CANB": {
     "hidden": true
+  },
+  "Phonics-Halli-Galli": {
+    "merge_into": "Phonics-Halli-Galli-3D"
   }
 }
