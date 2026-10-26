@@ -3140,5 +3140,8 @@
   },
   "LIO": {
     "merge_into": "LIO_DESIGN"
+  },
+  "CANB": {
+    "hidden": true
   }
 }
