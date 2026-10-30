@@ -231,6 +231,17 @@ def main() -> int:
     if hidden_ids:
         projects = [p for p in projects if p["id"] not in hidden_ids]
 
+    # 카피를 쓰기 전의 저장소는 싣지 않는다(2026-10-30 요청). 새 저장소가 자동 갱신으로
+    # 설명·화면 없이 맨 앞에 붙어 첫 페이지가 비었고, '기존 내용이 날아갔다'고 보였다.
+    # overrides 에 사람이 쓴 title·summary 가 생기면 다음 갱신에 실린다.
+    # publish: true 는 카피 없이도 싣는다(이미 공개하기로 한 작업).
+    def has_copy(ov) -> bool:
+        return isinstance(ov, dict) and bool(ov.get("publish") or ov.get("title") or ov.get("summary"))
+    drafts = [p["id"] for p in projects if not has_copy(overrides.get(p["id"]))]
+    if drafts:
+        projects = [p for p in projects if p["id"] not in drafts]
+        print("카피 대기로 숨김:", ", ".join(drafts))
+
     for p in projects:
         parts = absorbed.get(p["id"]) or []
         if not parts:

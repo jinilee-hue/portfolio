@@ -16,7 +16,9 @@ GitHub API ──► scripts/build_data.py ──► data/projects.json ──�
 `.github/workflows/refresh.yml` 이 **매일 06:00 KST** 에 위 두 스크립트를 돌리고,
 변경이 있을 때만 커밋한 뒤 Pages 에 배포한다. 수동 실행은 Actions 탭 → refresh → Run workflow.
 
-새 프로젝트를 만들 때 해야 할 일은 **그 저장소에 GitHub Pages 를 켜는 것뿐**이다.
+새 프로젝트를 만들 때 해야 할 일은 **그 저장소에 GitHub Pages 를 켜고 `data/overrides.json` 에
+카피(title·summary)를 쓰는 것**이다. 카피가 없는 저장소는 자동으로 숨는다(빈 페이지가 맨 앞에
+붙지 않게). 카피 없이도 싣고 싶으면 `"publish": true`.
 다음 갱신에서 목록·썸네일·스택·갱신일이 알아서 붙는다.
 
 ## 자동값 vs 손으로 쓴 값

@@ -16,6 +16,8 @@
     "shot_wait": "촬영 전 추가 대기 ms (애니메이션·차트가 그려질 시간)",
     "concept": "디자인 컨셉 — 어떤 시각 언어를 택했고 왜 그렇게 정했나 {ko,en}",
     "merge_into": "이 저장소를 다른 프로젝트에 흡수시킨다(목록에서 사라지고 기간·언어·링크만 합쳐짐)",
+    "hidden": "true 면 저장소는 두고 포트폴리오에서만 뺀다.",
+    "publish": "카피(title·summary)가 없어도 싣는다. 카피 없는 저장소는 기본으로 숨는다(빈 페이지가 맨 앞에 붙지 않게).",
     "shot_devices": "촬영할 기기 목록 ['desktop','tablet','mobile']. 비우면 3종 전부. 주 사용 환경을 반영한다.",
     "shot_selector": "이 CSS 선택자에 해당하는 요소만 캡처한다. 프로토타입 뷰어 셸·여백을 제거할 때 쓴다.",
     "contribution": "관여도 % {plan,design,build,qa} — 각 항목 0~100 독립. 혼자 다 했으면 100.",
@@ -3150,5 +3152,8 @@
   },
   "Phonics-Halli-Galli": {
     "merge_into": "Phonics-Halli-Galli-3D"
+  },
+  "Phonics-Halli-Galli-3D": {
+    "publish": true
   }
 }
