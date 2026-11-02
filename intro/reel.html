@@ -176,16 +176,17 @@ html[lang=en] #vline{font-size:40px}
   <section id="S3" class="L">
     <div class="cut" id="c1"><img id="c1i" class="full" src="img/Sound-Safari.webp" alt=""></div>
     <div class="cut" id="c2"><img id="c2i" class="full" src="img/LIO_DESIGN.webp" alt=""></div>
-    <div class="cut" id="c3"><img id="c3bg" class="full" src="img/phonics-wordmashup.webp" alt="">
+    <div class="cut" id="c3"><img id="c3bg" class="full" src="img/phonics-wordmashup-3D--clash.webp" alt="">
       <div class="L grid"></div>
-      <div class="L tabw"><div class="tab" id="tab"><img src="img/phonics-wordmashup--tablet.webp" alt=""></div></div></div>
+      <div class="L tabw"><div class="tab" id="tab"><img src="img/phonics-wordmashup-3D--tablet.webp" alt=""></div></div></div>
     <div class="cut" id="c4"><img id="c4i" class="full" src="img/eBOOK--kitten.webp" alt=""><i class="lb" id="lbT"></i><i class="lb" id="lbB"></i></div>
     <div class="cut" id="c5"><div id="c5bp" class="L"><img id="c5bpi" class="full" src="img/AI-Studio--f8-bp.webp" alt=""></div>
       <div id="c5cw" class="L"><img id="c5ci" class="full" src="img/AI-Studio--f8.webp" alt=""></div><i id="scan"></i></div>
     <div class="cut" id="c6"><img id="c6i" class="full" src="img/Phonics-Playground.webp" alt=""></div>
     <div class="cut" id="c7"><img id="c7i" src="img/polyscoop.webp" alt=""></div>
-    <div class="cut" id="c8"><img id="c8i" class="full" src="img/poly-dashboard.webp" alt=""></div>
-    <div class="cut" id="c9"><img id="c9i" class="full" src="img/KCMS--admit.webp" alt=""></div>
+    <div class="cut" id="c8"><img id="c8i" class="full" src="img/Phonics-Halli-Galli-3D--ring.webp" alt=""></div>
+    <div class="cut" id="c9"><img id="c9i" class="full" src="img/poly-dashboard.webp" alt=""></div>
+    <div class="cut" id="c10"><img id="c10i" class="full" src="img/KCMS--admit.webp" alt=""></div>
     <div id="scrim" class="L"></div>
     <div id="lab"><div class="ln2"><i id="labLine"></i><b id="labNum"></b></div>
       <div class="nm"><span id="labName"></span></div><div id="labSub"></div></div>
@@ -197,9 +198,9 @@ html[lang=en] #vline{font-size:40px}
   </section>
 
   <section id="stats" class="L">
-    <div class="st" id="stA"><b class="big">9</b>
+    <div class="st" id="stA"><b class="big" id="nProj">10</b>
       <div class="lbl"><span class="en">LIVE PROJECTS</span><span class="ko" id="liveSub"></span></div></div>
-    <div class="st" id="stB"><b class="big" id="cnt">1,243</b>
+    <div class="st" id="stB"><b class="big" id="cnt">1,332</b>
       <div class="lbl"><span class="en">COMMITS</span><span class="ko">GitHub · 2026</span></div></div>
   </section>
 
@@ -256,29 +257,40 @@ const chunk=(s,cuts,u)=>{const n=u<=0?0:cuts[Math.min(cuts.length-1,Math.floor(u
 /* ---------- 카피 (사이트 COPY·projects.json 의 kicker 와 같은 말) ---------- */
 const COPY={
   ko:{h1:['스스로 만들어','<b class="em">증명하는</b>','디자이너.'],
-    sub:['발음 연습 게임 · 음성 인식','AI Tutor 브랜드 · 캐릭터 · 64화면 프로토타입','5~7세 복합어 퍼즐 게임',
+    sub:['발음 연습 게임 · 음성 인식','AI Tutor 브랜드 · 캐릭터 · 64화면 프로토타입','5~7세 합성어 퍼즐 게임',
       '영어 학습 · 태블릿 프로토타입','7세 대상 AI 스토리 인클래스 수업','콘텐츠 등록부터 학생 화면까지 한 파이프라인',
-      '학생 기자단 웹진','사내 배포 디자인 킷 · 두 브랜드','레거시 전면 개편 · 개발자 6명이 쓰는 킷'],
+      '학생 기자단 웹진','5~7세 복수형 -s 종치기 게임','사내 배포 디자인 킷 · 두 브랜드','레거시 전면 개편 · 개발자 6명이 쓰는 킷'],
     live:'기획부터 프론트 개발까지', line:'기획부터 프론트 개발까지 디자이너가 *직접* 만든다.'},
   en:{h1:['A designer who','<b class="em">proves it</b>','by building it.'],
     sub:['Pronunciation game · speech recognition','AI tutor brand, character and a 64-screen prototype',
       'Compound word puzzle, ages 5–7','EFL reading · tablet prototype','An in-class AI story lesson for seven-year-olds',
       'One pipeline, from upload to the student’s screen','Student reporters’ web magazine',
-      'In-house design kit · two brands','Legacy overhaul · a kit six developers build on'],
+      'Plural -s bell game, ages 5–7','In-house design kit · two brands','Legacy overhaul · a kit six developers build on'],
     live:'Planning through front end', line:'I take a product from planning through front-end development *myself.*'},
 }[LANG];
 $$('#S2 .ln>span').forEach((el,i)=>el.innerHTML=COPY.h1[i]);
 $('#liveSub').textContent=COPY.live;
 $('#vtext').innerHTML=COPY.line.split(' ').map(w=>w.startsWith('*')
   ?`<span class="w m">${w.replace(/\*/g,'')}</span>`:`<span class="w">${w}</span>`).join(' ');
-const NAMES=['Sound Safari','LIO','Prompt Crash','Millions of Cats','Story Studio','Phonics Studio','Poly Scoop','Dashboard Kit','KCMS'];
+const NAMES=['Sound Safari','LIO','Word Mashup','Millions of Cats','Story Studio','Phonics Studio','Poly Scoop','Halli Galli 3D','Dashboard Kit','KCMS'];
 const LAB=NAMES.map((n,i)=>[String(i+1).padStart(2,'0'),n,COPY.sub[i]]);
+
+/* ---------- 숫자 (라이브 프로젝트 수 · 커밋 합) — 사이트와 같은 data/projects.json 에서 ---------- */
+const STAT={n:10,c:1332};
+async function liveStats(){
+  try{const ac=new AbortController(),to=setTimeout(()=>ac.abort(),1500);
+    const d=await (await fetch('../data/projects.json',{signal:ac.signal})).json();clearTimeout(to);
+    const ps=d.projects||[],c=ps.reduce((a,p)=>a+(((p.auto||{}).span||{}).commits||0),0);
+    if(ps.length)STAT.n=ps.length;if(c)STAT.c=c;
+  }catch(e){}
+  $('#nProj').textContent=STAT.n;
+}
 
 /* ---------- 작업 벽 타일 (가운데 = KCMS, 마지막 컷과 이어진다) ---------- */
 const TILES=['t-Sound-Safari--tablet','t-AI-Studio--f6','t-LIO_DESIGN--game','t-eBOOK--cottage','t-Phonics-Playground--tablet',
-  't-polyscoop','t-phonics-wordmashup','KCMS--admit','t-AI-Studio--tablet','t-poly-dashboard--students',
-  't-LIO_DESIGN--character','t-eBOOK--kitten','t-Sound-Safari','t-poly-dashboard','t-AI-Studio--f8',
-  't-Phonics-Studio','t-KCMS--kit','t-phonics-wordmashup--tablet','t-canb-dashboard--teacher','t-LIO_DESIGN'];
+  't-polyscoop','t-phonics-wordmashup-3D','KCMS--admit','t-AI-Studio--tablet','t-poly-dashboard--students',
+  't-LIO_DESIGN--character','t-eBOOK--kitten','t-Sound-Safari','t-poly-dashboard','t-Phonics-Halli-Galli-3D',
+  't-Phonics-Studio','t-KCMS--kit','t-phonics-wordmashup-3D--tablet','t-canb-dashboard--teacher','t-Phonics-Halli-Galli-3D--turn'];
 const plane=$('#plane');
 TILES.forEach((n,k)=>{const c=k%5,r=Math.floor(k/5),im=new Image();im.className='tile';im.src=`img/${n}.webp`;im.alt='';
   im.style.left=c*588+'px';im.style.top=r*378+'px';im.dataset.d=Math.max(Math.abs(c-2),Math.abs(r-1));plane.appendChild(im)});
@@ -341,7 +353,7 @@ function layout(){
   const mL=960-w2/2, sL=mL+w2*0.5, gR=sL+pad+sw, shift=(mL+gR)/2-960;
   m2.style.left=(mL-shift)+'px';
   Object.assign(s2.style,{left:(sL-shift)+'px',top:(MY-4-(base-asc))+'px'});
-  const cnt=$('#cnt');cnt.textContent='1,243';cnt.style.minWidth=cnt.offsetWidth+'px';
+  const cnt=$('#cnt');cnt.textContent=STAT.c.toLocaleString('en-US');cnt.style.minWidth=cnt.offsetWidth+'px';
 }
 function rMark(t){
   if(!vis(mark,t<DROP))return;
@@ -387,7 +399,7 @@ function rS2(t){
 }
 
 /* ---------- S3 · 비트 컷 ---------- */
-const S3=$('#S3'),cuts=$$('#S3 .cut'),CUT=[DROP,B(11),B(12),B(13),B(14),B(15),B(16),B(17),B(17.5)];
+const S3=$('#S3'),cuts=$$('#S3 .cut'),CUT=[DROP,B(11),B(12),B(13),B(14),B(15),B(16),B(16.5),B(17),B(17.5)];
 const labNum=$('#labNum'),labName=$('#labName'),labSub=$('#labSub'),labLine=$('#labLine'),labBox=$('#lab');
 let labIdx=-1;
 const rgbR=$('#rgbR'),rgbB=$('#rgbB'),mbx=$('#mbxB'),mby=$('#mbyB');
@@ -428,8 +440,10 @@ function rS3(t){
   if(i===6){const e=E.expoOut(seg(t,CUT[6],CUT[6]+0.45)),b=(1-e)*70;
     $('#c7i').style.transform=`translateY(${lerp(-2700,0,e).toFixed(1)}px)`;
     mby.setAttribute('stdDeviation',`0 ${b.toFixed(2)}`);cuts[6].style.filter=b>0.6?'url(#mby)':'none';}
-  if(i===7){$('#c8i').style.transform=`scale(${lerp(1.16,1.0,E.expoOut(seg(t,CUT[7],CUT[7]+0.3))).toFixed(4)})`;}
-  if(i===8){$('#c9i').style.transform=`scale(${lerp(1.1,1.0,E.expoOut(seg(t,CUT[8],CUT[8]+0.2))).toFixed(4)})`;}
+  if(i===7){const l=t-CUT[7],w=4*Math.exp(-l*9)*Math.sin(l*2*Math.PI*6);   // 종을 친 듯 한 번 흔들린다
+    $('#c8i').style.transform=`scale(${lerp(1.14,1.02,E.expoOut(seg(l,0,0.3))).toFixed(4)}) rotate(${w.toFixed(3)}deg)`;}
+  if(i===8){$('#c9i').style.transform=`scale(${lerp(1.16,1.0,E.expoOut(seg(t,CUT[8],CUT[8]+0.3))).toFixed(4)})`;}
+  if(i===9){$('#c10i').style.transform=`scale(${lerp(1.1,1.0,E.expoOut(seg(t,CUT[9],CUT[9]+0.2))).toFixed(4)})`;}
 }
 
 /* ---------- S4 · 카메라 풀백 → 작업 벽 ---------- */
@@ -462,7 +476,7 @@ function rStats(t){
     stB.style.opacity=(Math.min(1,bi*4)*(1-bo)).toFixed(3);
     stB.style.transform=`translate(-50%,-50%) scale(${(lerp(1.5,1,E.backOut(bi,1.6))*lerp(1,1.35,bo)).toFixed(4)})`;
     stB.style.filter=blur((1-E.expoOut(bi))*16+bo*10);
-    cnt.textContent=Math.round(1243*E.expoOut(seg(t,B(20)+0.02,B(20)+0.28))).toLocaleString('en-US');}
+    cnt.textContent=Math.round(STAT.c*E.expoOut(seg(t,B(20)+0.02,B(20)+0.28))).toLocaleString('en-US');}
 }
 
 /* ---------- S5 · 벤다이어그램 + 한 줄 ---------- */
@@ -560,7 +574,8 @@ window.__dur=DUR;
     document.fonts.load('650 54px "Pretendard Variable"',strip(COPY.line)),
     document.fonts.load('600 25px "Pretendard Variable"',COPY.sub.join(' ')+COPY.live),
     document.fonts.load('700 200px "Reel Caveat"','Jinhee Lee'),
-    document.fonts.load('800 78px "Reel Archivo"','SOUND SAFARI PROMPT CRASH 1,243 LIVE PROJECTS COMMITS PLANNING DESIGN BUILD QA'),
+    document.fonts.load('800 78px "Reel Archivo"','SOUND SAFARI WORD MASHUP HALLI GALLI 3D 0123456789, LIVE PROJECTS COMMITS PLANNING DESIGN BUILD QA'),
+    liveStats(),
   ])}catch(e){console.warn('font preload',e)}
   await document.fonts.ready;
   await Promise.all($$('img').map(i=>i.decode().catch(()=>{})));
