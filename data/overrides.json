@@ -2784,8 +2784,8 @@
         },
         "features": [
           {
-            "ko": "정답 카드에 노란 점 고리가 깜박인다",
-            "en": "A ring of yellow dots blinks around each answer card",
+            "ko": "정답 두 장만 또렷하게 남는다",
+            "en": "Only the two answer cards stay sharp",
             "at": [
               72.0,
               50.4
