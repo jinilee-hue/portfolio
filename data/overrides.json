@@ -3154,6 +3154,34 @@
     "merge_into": "Phonics-Halli-Galli-3D"
   },
   "Phonics-Halli-Galli-3D": {
-    "publish": true
+    "title": {
+      "ko": "Phonics Halli Galli 3D",
+      "en": "Phonics Halli Galli 3D"
+    },
+    "kicker": {
+      "ko": "5~7세 복수형 -s 종치기 게임",
+      "en": "Plural -s bell game, ages 5–7"
+    },
+    "summary": {
+      "ko": "카드를 한 장씩 뒤집다가 그림이 여럿일 때만 종을 쳐서 복수형 -s를 귀로 익히는 5~7세 파닉스 게임. 상대 Coco보다 S 세 개를 먼저 모으면 이기고, 3D로 그린 판과 종, Coco가 손끝을 따라 움직인다.",
+      "en": "A 3D phonics game for ages 5–7: children flip cards and ring the bell only when the picture shows more than one, learning the plural -s by ear. The first to collect three S's beats Coco."
+    },
+    "tags": [
+      "Game",
+      "Kids UX",
+      "three.js"
+    ],
+    "intent": {
+      "ko": "의도는 복수형 -s를 규칙으로 외우게 하는 대신 소리로 먼저 알아채게 하는 데 두었다. 카드가 뒤집힐 때 낱말을 읽어 주고 여럿일 때만 종을 치게 해서, cat과 cats의 차이에 손이 먼저 반응하게 했다. 낱말은 교재에서 뽑아 5세는 -s 낱말, 6세는 단수·복수 짝, 7세는 -es 낱말과 s로 끝나는 단수 함정까지 단계를 나눴다. 안내 글 대신 노란 종이 짧은 영어로 말해 주고, 아이가 잘하면 말을 줄여 혼자 하게 둔다.",
+      "en": "The intent is to let children notice the plural -s by sound instead of memorising it as a rule. Each word is read aloud as its card flips, and the bell is rung only for more than one, so the hand reacts to the difference between cat and cats. Words come from the textbook and are staged by age: -s words at five, singular and plural pairs at six, and at seven -es words plus singular traps that end in s. Instead of written instructions, the yellow bell speaks short English lines, and it talks less as the child gets better."
+    },
+    "concept": {
+      "ko": "디자인은 탁자 위 보드게임을 만지는 손맛에 두었다. 탁자와 카드 더미에 두께를 주고 종은 무광 클레이로 빚었으며, 카드는 더미에서 집혀 뒤집히며 날아와 그림자와 함께 내려앉는다. 손가락이나 마우스를 따라 시점과 빛이 살짝 옮겨 가 판이 입체로 엇갈리고, 종과 Coco의 눈이 손을 따라온다. 판을 끌면 360°로 돌려 볼 수 있고 돌린 채로도 게임이 이어진다. 인트로는 영상 대신 실제 3D 종과 카드를 원래 영상의 박자에 맞춰 움직였다.",
+      "en": "The design aims for the feel of a board game on a real table. The table and card piles have thickness and the bell is modelled in matte clay; a card is picked off the pile, flips as it flies and lands with its shadow. The viewpoint and light shift slightly with a finger or mouse, so the pieces move in parallax, and the eyes of the bell and Coco follow the hand. Dragging the board turns it through 360°, and play carries on at any angle. Instead of playing a video, the intro moves the real 3D bell and cards to the beat of the original film."
+    },
+    "tech": {
+      "ko": "기술은 원래 HTML 게임을 고치지 않고 그 위에 three.js 층을 얹었다. 매 순간 HTML 판의 자리·크기·상태를 읽어 같은 자리에 3D로 그리고, 카메라를 CSS 원근과 똑같이 맞춰 누르는 자리와 말풍선이 원래 코드 그대로 맞는다. 그래픽 칩과 실제 속도를 재서 화질을 세 단계로 조절하고, 너무 느리거나 WebGL 오류가 나면 원래 판으로 돌아간다. 바뀐 것이 없으면 다시 그리지 않아 교실 태블릿의 배터리와 발열을 아낀다. 종 튜터는 게임 함수를 감싸 끼어들고, 낱말 소리가 끝난 틈에만 말한다.",
+      "en": "Technically, a three.js layer sits on top of the original HTML game, which is left unchanged. It keeps reading the position, size and state of the HTML board and draws the 3D version in the same place, with the camera matched to the CSS perspective so tap targets and speech bubbles still line up with the original code. It sets one of three quality tiers from the GPU and the measured speed, and falls back to the original board if it runs too slowly or WebGL fails. Nothing is redrawn when nothing changes, which saves battery and heat on classroom tablets. The bell tutor wraps the game's functions and speaks only in the gap after a word is read."
+    }
   }
 }
