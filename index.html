@@ -802,6 +802,10 @@
        줄당 글자를 늘리고 높이를 줄인다. */
     .splash-meta.m3{grid-template-columns:2.1fr 1fr .9fr!important}
     .splash-meta.m3 .overview{grid-column:auto!important}
+    /* 관여도가 없는 작업(m2)은 화면에서 Overview 를 한 줄 통째로 쓰지만, 지면에서 그대로 쌓으면
+       넘친다(할리갈리 3D 222mm). m3 처럼 Overview 옆에 Project info 를 세운다. */
+    .splash-meta.m2{grid-template-columns:2.1fr 1fr!important}
+    .splash-meta.m2 .overview{grid-column:auto!important}
     .overview p:not(.k){font-size:8.5pt;line-height:1.5;margin-bottom:.42em}
     .splash-meta .cgrid{max-width:80mm}
     .shot img{filter:none!important;transform:none!important}
