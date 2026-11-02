@@ -3169,6 +3169,7 @@
     "tags": [
       "Game",
       "Kids UX",
+      "WebGL",
       "three.js"
     ],
     "intent": {
@@ -3182,6 +3183,17 @@
     "tech": {
       "ko": "기술은 원래 HTML 게임을 고치지 않고 그 위에 three.js 층을 얹었다. 매 순간 HTML 판의 자리·크기·상태를 읽어 같은 자리에 3D로 그리고, 카메라를 CSS 원근과 똑같이 맞춰 누르는 자리와 말풍선이 원래 코드 그대로 맞는다. 그래픽 칩과 실제 속도를 재서 화질을 세 단계로 조절하고, 너무 느리거나 WebGL 오류가 나면 원래 판으로 돌아간다. 바뀐 것이 없으면 다시 그리지 않아 교실 태블릿의 배터리와 발열을 아낀다. 종 튜터는 게임 함수를 감싸 끼어들고, 낱말 소리가 끝난 틈에만 말한다.",
       "en": "Technically, a three.js layer sits on top of the original HTML game, which is left unchanged. It keeps reading the position, size and state of the HTML board and draws the 3D version in the same place, with the camera matched to the CSS perspective so tap targets and speech bubbles still line up with the original code. It sets one of three quality tiers from the GPU and the measured speed, and falls back to the original board if it runs too slowly or WebGL fails. Nothing is redrawn when nothing changes, which saves battery and heat on classroom tablets. The bell tutor wraps the game's functions and speaks only in the gap after a word is read."
+    },
+    "tools": [
+      "Claude Code"
+    ],
+    "stack_line": [
+      "WebGL · three.js",
+      "Vanilla JS"
+    ],
+    "period": {
+      "ko": "2026.10 · 작업 3일",
+      "en": "2026.10 · 3 working days"
     }
   }
 }
